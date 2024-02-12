@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://qpmqc8rwup0u"]
+
+[ext_resource type="MeshLibrary" uid="uid://cb7u7u0ijn13q" path="res://MeshesLibrary/test.tres" id="1_n2fxx"]
+[ext_resource type="PackedScene" uid="uid://b0gnd6djt5q6f" path="res://Templates/Player3d.tscn" id="2_mybtg"]
+
+[node name="World" type="Node3D"]
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_n2fxx")
+cell_size = Vector3(1, 1, 1)
+data = {
+"cells": PackedInt32Array(65535, 0, 786432, 0, 0, 786432, 1, 0, 786432, 1, 1, 786432, 1, 2, 786432, 0, 2, 786432, 65535, 2, 786432, 65534, 2, 786432, 65533, 2, 786432, 65533, 1, 786432, 65532, 1, 786432, 65533, 0, 786432, 65534, 0, 786432, 2, 0, 786432, 2, 1, 786432, 0, 1, 786432, 65535, 1, 786432, 65534, 1, 786432, 1, 3, 786432, 0, 3, 786432, 65535, 3, 786432, 65534, 3, 786432, 0, 65535, 786432, 65535, 65535, 786432, 65535, 65534, 786432, 0, 65534, 786432, 65532, 0, 786432, 65533, 65535, 786432, 65534, 65535, 786432, 65534, 65534, 786432, 1, 65534, 786432, 2, 65534, 786432, 2, 65535, 786432, 2, 2, 786432, 2, 3, 786432, 1, 65535, 786432, 65533, 65534, 786432, 65532, 65534, 786432, 65532, 65535, 786432, 65532, 2, 786432, 65532, 3, 786432, 65533, 3, 786432)
+}
+metadata/_edit_lock_ = true
+metadata/_editor_floor_ = Vector3(0, -1, 0)
+
+[node name="Player" parent="GridMap" instance=ExtResource("2_mybtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.69085, 0)

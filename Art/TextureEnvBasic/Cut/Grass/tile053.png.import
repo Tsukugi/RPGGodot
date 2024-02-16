@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dafb8dqneuhgh"
-path.s3tc="res://.godot/imported/TX Tileset Grass.png-f26883463774cf2bd10115290e85a128.s3tc.ctex"
+uid="uid://de4dmyk87dhum"
+path.s3tc="res://.godot/imported/tile053.png-16c3458e5ca33eee1f6cb22fee2f465a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Art/TextureEnvBasic/TX Tileset Grass.png"
-dest_files=["res://.godot/imported/TX Tileset Grass.png-f26883463774cf2bd10115290e85a128.s3tc.ctex"]
+source_file="res://Art/TextureEnvBasic/Cut/Grass/tile053.png"
+dest_files=["res://.godot/imported/tile053.png-16c3458e5ca33eee1f6cb22fee2f465a.s3tc.ctex"]
 
 [params]
 

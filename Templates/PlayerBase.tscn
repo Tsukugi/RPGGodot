@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6ajx743pvfx"]
+
+[ext_resource type="Script" path="res://Scripts/Player/PlayerBase.cs" id="1_it1pn"]
+
+[node name="Player" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+script = ExtResource("1_it1pn")

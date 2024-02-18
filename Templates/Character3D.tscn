@@ -1,14 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://b0gnd6djt5q6f"]
 
-[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_jsvo4"]
+[ext_resource type="Script" path="res://Scripts/Character.cs" id="1_8p0rt"]
 [ext_resource type="SpriteFrames" uid="uid://brxi6sc2re2r1" path="res://MeshesLibrary/Player.tres" id="2_yo2df"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgk2w"]
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
-script = ExtResource("1_jsvo4")
-speed = 2
-playerId = 1
+script = ExtResource("1_8p0rt")
+ActorOwnerId = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
@@ -17,7 +16,6 @@ shape = SubResource("BoxShape3D_cgk2w")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shaded = true
 sprite_frames = ExtResource("2_yo2df")
 animation = &"idleDown"

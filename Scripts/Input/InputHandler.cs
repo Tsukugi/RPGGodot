@@ -1,14 +1,13 @@
 
+using System;
 using Godot;
-public enum InputState
-{
+public enum InputState {
     Stop,
     Move,
     StartAnimation,
 }
 
-public enum InputFaceDirection
-{
+public enum InputFaceDirection {
     Down,
     Up,
     Left,
@@ -16,30 +15,32 @@ public enum InputFaceDirection
 }
 
 
-public partial class InputHandler
-{
+public partial class InputHandler {
 
-    InputState inputState = InputState.Stop;
-    InputFaceDirection inputFaceDirection = InputFaceDirection.Down;
-    Vector2 moveDirection = Vector2.Zero;
+    private InputState inputState = InputState.Stop;
+    private InputFaceDirection inputFaceDirection = InputFaceDirection.Down;
+    private Vector2 moveDirection = Vector2.Zero;
+    private EventHandler<Vector3> onRotationChange;
 
-    public InputState getInputState()
-    {
+    public InputHandler() {
+        onRotationChange = (sender, eventArgs) => {
+            GD.Print(eventArgs);
+        };
+    }
+
+    public InputState GetInputState() {
         return inputState;
     }
-    public InputFaceDirection getInputFaceDirection()
-    {
+    public InputFaceDirection GetInputFaceDirection() {
         return inputFaceDirection;
     }
 
-    public bool GetAxisChange()
-    {
+    public bool GetAxisChange() {
         Vector2 axis = GetAxis();
         return moveDirection != axis;
     }
 
-    public Vector2 GetAxis()
-    {
+    public Vector2 GetAxis() {
         Vector2 axis = Vector2.Zero;
 
         if (Input.IsActionPressed("ui_right")) { axis.X += 1; inputFaceDirection = InputFaceDirection.Right; }
@@ -50,12 +51,16 @@ public partial class InputHandler
         return axis;
     }
 
-    public void FrameUpdate()
-    {
+
+    public Vector2 GetRotatedAxis(float verticalRotation) {
+        return VectorUtils.Rotate(GetAxis(), verticalRotation);
+    }
+
+
+    public void FrameUpdate() {
         moveDirection = GetAxis();
         if (moveDirection.Length() > 0) inputState = InputState.Move;
         else inputState = InputState.Stop;
-        GD.Print(inputState);
     }
 
 }

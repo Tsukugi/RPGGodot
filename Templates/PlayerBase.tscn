@@ -1,7 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6ajx743pvfx"]
+[gd_scene load_steps=4 format=3 uid="uid://b6ajx743pvfx"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerBase.cs" id="1_it1pn"]
+[ext_resource type="Script" path="res://Scripts/Game/CameraBase.cs" id="2_7o631"]
+[ext_resource type="Script" path="res://Scripts/UI/InteractionPanel.cs" id="3_aodfl"]
 
 [node name="Player" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 script = ExtResource("1_it1pn")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("2_7o631")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="InteractionPanel" type="HBoxContainer" parent="CanvasLayer"]
+visible = false
+offset_top = 563.0
+offset_right = 1152.0
+offset_bottom = 648.0
+alignment = 1
+script = ExtResource("3_aodfl")
+
+[node name="Label" type="Label" parent="CanvasLayer/InteractionPanel"]
+layout_mode = 2
+text = "Talk"

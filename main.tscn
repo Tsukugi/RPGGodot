@@ -1,17 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://qpmqc8rwup0u"]
+[gd_scene load_steps=4 format=3 uid="uid://qpmqc8rwup0u"]
 
 [ext_resource type="MeshLibrary" uid="uid://7qiicm2ititx" path="res://MeshesLibrary/Grass.tres" id="1_ps7vd"]
 [ext_resource type="PackedScene" uid="uid://b0gnd6djt5q6f" path="res://Templates/Character3D.tscn" id="2_mybtg"]
 [ext_resource type="PackedScene" uid="uid://b6ajx743pvfx" path="res://Templates/PlayerBase.tscn" id="3_gsb7g"]
-[ext_resource type="Script" path="res://Scripts/Game/CameraBase.cs" id="4_u1uhj"]
 
 [node name="World" type="Node3D"]
-
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("selectedPlayerActor")]
-projection = 1
-size = 14.428
-script = ExtResource("4_u1uhj")
-selectedPlayerActor = NodePath("../Player/PlayerCharacter")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.837156, 0.04808, -0.544847, 0.491042, 0.372718, 0.787375, 0.240931, -0.926698, 0.288413, 0, 4.91587, 0)
@@ -38,12 +31,16 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Neutral" parent="." instance=ExtResource("3_gsb7g")]
 
-[node name="CharacterBody3D" parent="Neutral" instance=ExtResource("2_mybtg")]
+[node name="NPC1" parent="Neutral" instance=ExtResource("2_mybtg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.233, 0, 0.48)
 inputFaceDirection = 2
 
-[node name="CharacterBody3D2" parent="Neutral" instance=ExtResource("2_mybtg")]
+[node name="NPC2" parent="Neutral" instance=ExtResource("2_mybtg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.07132, 0, 0)
+inputFaceDirection = 3
+
+[node name="NPC3" parent="Neutral" instance=ExtResource("2_mybtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12368, 0, 3.16746)
 inputFaceDirection = 3
 
 [node name="Hostile" parent="." instance=ExtResource("3_gsb7g")]

@@ -20,13 +20,6 @@ public partial class InputHandler {
     private InputState inputState = InputState.Stop;
     private InputFaceDirection inputFaceDirection = InputFaceDirection.Down;
     private Vector2 moveDirection = Vector2.Zero;
-    private EventHandler<Vector3> onRotationChange;
-
-    public InputHandler() {
-        onRotationChange = (sender, eventArgs) => {
-            GD.Print(eventArgs);
-        };
-    }
 
     public InputState GetInputState() {
         return inputState;

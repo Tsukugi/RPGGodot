@@ -1,10 +1,11 @@
 using System;
+using System.Linq;
 using Godot;
 
 public partial class CameraBase : Camera3D {
 
     [Export]
-    private ActorBase selectedPlayerActor = null;
+    private ActorBase selectedActor = null;
     public event EventHandler<Vector3> OnRotationChange;
 
     // Offsets
@@ -13,39 +14,53 @@ public partial class CameraBase : Camera3D {
     private ProjectionType projectionType = ProjectionType.Orthogonal;
     private int cameraOrthogonalSize = 10;
 
-    public ActorBase SelectedPlayerActor {
-        get => selectedPlayerActor;
+    public ActorBase SelectedActor {
+        get => selectedActor;
         set {
-            selectedPlayerActor = value;
+            selectedActor = value;
             AttachToActor(value);
         }
     }
 
-
     public override void _Ready() {
-        AttachToActor(selectedPlayerActor);
+        base._Ready();
+        Node parent = GetParent();
+        GD.Print(parent.Name);
+        Current = SimpleGameManager.IsFirstPlayerControlled(parent);
+
+        ActorBase newActor = parent.GetChildren().OfType<ActorBase>().FirstOrDefault();
+        if (newActor == null) return;
+        SelectedActor = newActor;
     }
+
+    public override void _Process(double delta) {
+        base._Process(delta);
+        if (SelectedActor == null) return;
+        // Follow the selected actor
+        Reposition(cameraTransformOffset + SelectedActor.Transform.Origin, cameraRotationOffset + SelectedActor.RotationDegrees);
+    }
+
 
     public void AttachToActor(ActorBase actor) {
         if (actor == null) {
             GD.Print("[CameraBase.AttachToActor] Selected Player not found, not assigning camera");
         } else {
-            GD.Print("[CameraBase.AttachToActor] Assigning camera to " + selectedPlayerActor.Name);
-
-            CallDeferred("reparent", actor, true);
-            Reposition(cameraTransformOffset, cameraRotationOffset);
+            GD.Print("[CameraBase.AttachToActor] Assigning camera to " + SelectedActor.Name);
+            UpdateCameraProperties();
         }
     }
 
     public void Reposition(Vector3 offset, Vector3 rotation) {
         Position = offset;
         RotationDegrees = rotation;
+    }
+
+    public void UpdateCameraProperties() {
+        Reposition(cameraTransformOffset, cameraRotationOffset);
         Projection = projectionType;
         if (Projection == ProjectionType.Orthogonal) {
             Size = cameraOrthogonalSize;
         }
-
-        OnRotationChange(this, rotation);
     }
 
 }

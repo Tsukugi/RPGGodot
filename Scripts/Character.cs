@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public partial class Character : ActorBase {
@@ -6,33 +5,32 @@ public partial class Character : ActorBase {
     public delegate void HitEventHandler();
 
     [Export]
-    public int speed = 1; // How fast the player will move (piXels/sec).
+    public int speed = 3; // How fast the player will move (piXels/sec).
 
     public override void _Process(double delta) {
-        if (Player.Name != SimpleGameManager.Player) return;
+        if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
+        ManageInput(delta);
+    }
 
+    private void ManageInput(double delta) {
         Player.InputHandler.FrameUpdate();
 
-        Vector2 direction = Player.InputHandler.GetAxis();
+        Vector2 direction = Player.InputHandler.GetRotatedAxis(-Player.Camera.RotationDegrees.Y);
         switch (Player.InputHandler.GetInputState()) {
-            case InputState.Stop: {
-                    AnimationHandler.UpdateAnimationPrefix("idle");
-                    AnimationHandler.ApplyAnimation(Player.InputHandler.GetInputFaceDirection());
-                    break;
-                }
+            case InputState.Stop: AnimationHandler.UpdateAnimationPrefix("idle"); break;
             case InputState.Move: {
                     AnimationHandler.UpdateAnimationPrefix("running");
-                    AnimationHandler.ApplyAnimation(Player.InputHandler.GetInputFaceDirection());
                     MoveNode(Vector2To3(direction), (float)delta);
                     break;
                 }
         }
+        AnimationHandler.ApplyAnimation(Player.InputHandler.GetInputFaceDirection());
     }
 
     private void MoveNode(Vector3 direction, float delta) {
         // Apply velocity.
         direction = direction.Normalized() * speed;
-        Position += direction * (float)delta;
+        MoveAndCollide(direction * (float)delta);
     }
 
     private static Vector3 Vector2To3(Vector2 direction) {

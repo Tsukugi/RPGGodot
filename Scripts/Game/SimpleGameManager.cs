@@ -1,8 +1,10 @@
-
-
+using Godot;
 
 public static class SimpleGameManager {
-    public static string Player = "Player";
-    public static string Neutral = "Neutral";
-    public static string Hostile = "Hostile";
+    public static readonly string Player = "Player";
+    public static readonly string Neutral = "Neutral";
+    public static readonly string Hostile = "Hostile";
+    public static bool IsFirstPlayerControlled(Node player) {
+        return player.Name == Player;
+    }
 }

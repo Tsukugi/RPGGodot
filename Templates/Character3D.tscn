@@ -1,16 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0gnd6djt5q6f"]
+[gd_scene load_steps=5 format=3 uid="uid://b0gnd6djt5q6f"]
 
 [ext_resource type="Script" path="res://Scripts/Character.cs" id="1_8p0rt"]
 [ext_resource type="SpriteFrames" uid="uid://brxi6sc2re2r1" path="res://MeshesLibrary/Player.tres" id="2_yo2df"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k1dhj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgk2w"]
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_8p0rt")
-ActorOwnerId = null
+
+[node name="TalkArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TalkArea"]
+shape = SubResource("BoxShape3D_k1dhj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 shape = SubResource("BoxShape3D_cgk2w")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

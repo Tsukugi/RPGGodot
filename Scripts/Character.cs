@@ -7,16 +7,16 @@ public partial class Character : ActorBase {
     [Export]
     public int speed = 3; // How fast the player will move (piXels/sec).
 
-    public override void _Process(double delta) {
+    public override void _Input(InputEvent @event) {
         if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
-        ManageInput(delta);
+        Player.InputHandler.OnInputUpdate();
     }
 
-    private void ManageInput(double delta) {
-        Player.InputHandler.FrameUpdate();
-
+    public override void _Process(double delta) {
+        if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
         Vector2 direction = Player.InputHandler.GetRotatedAxis(-Player.Camera.RotationDegrees.Y);
         switch (Player.InputHandler.GetInputState()) {
+            case InputState.Attack: AnimationHandler.UpdateAnimationPrefix("running"); break;
             case InputState.Stop: AnimationHandler.UpdateAnimationPrefix("idle"); break;
             case InputState.Move: {
                     AnimationHandler.UpdateAnimationPrefix("running");
@@ -40,6 +40,5 @@ public partial class Character : ActorBase {
     public void Start(Vector2 direction) {
         Position = Vector2To3(direction);
     }
-
 
 }

@@ -1,11 +1,130 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0gnd6djt5q6f"]
+[gd_scene load_steps=22 format=3 uid="uid://b0gnd6djt5q6f"]
 
 [ext_resource type="Script" path="res://Scripts/Character.cs" id="1_8p0rt"]
 [ext_resource type="SpriteFrames" uid="uid://brxi6sc2re2r1" path="res://MeshesLibrary/Player.tres" id="2_yo2df"]
+[ext_resource type="Texture2D" uid="uid://bh1f3sqasqgue" path="res://Art/Retro Impact Effect Pack ALL/Retro Impact Effect Pack 2 A.png" id="3_irvvs"]
+[ext_resource type="Texture2D" uid="uid://dyh7j0robi0mi" path="res://Art/Retro Impact Effect Pack ALL/Retro Impact Effect Pack 3 C.png" id="4_6vqsm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k1dhj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgk2w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xa2nd"]
+atlas = ExtResource("3_irvvs")
+region = Rect2(576, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0oov8"]
+atlas = ExtResource("3_irvvs")
+region = Rect2(512, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46sxj"]
+atlas = ExtResource("3_irvvs")
+region = Rect2(448, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fifr"]
+atlas = ExtResource("3_irvvs")
+region = Rect2(384, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtuxn"]
+atlas = ExtResource("3_irvvs")
+region = Rect2(320, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nemko"]
+atlas = ExtResource("4_6vqsm")
+region = Rect2(160, 640, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8gam"]
+atlas = ExtResource("4_6vqsm")
+region = Rect2(128, 640, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvu5h"]
+atlas = ExtResource("4_6vqsm")
+region = Rect2(96, 640, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rar2e"]
+atlas = ExtResource("4_6vqsm")
+region = Rect2(64, 640, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_faty8"]
+atlas = ExtResource("4_6vqsm")
+region = Rect2(32, 640, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2ccn"]
+atlas = ExtResource("4_6vqsm")
+region = Rect2(0, 640, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5acxl"]
+atlas = ExtResource("4_6vqsm")
+region = Rect2(96, 608, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g58v2"]
+atlas = ExtResource("4_6vqsm")
+region = Rect2(128, 608, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvw3r"]
+atlas = ExtResource("4_6vqsm")
+region = Rect2(160, 608, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a2qyq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xa2nd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0oov8")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_46sxj")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_6fifr")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_rtuxn")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"AttackMelee",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_nemko")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_d8gam")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_fvu5h")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_rar2e")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_faty8")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_u2ccn")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_5acxl")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_g58v2")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_mvw3r")
+}],
+"loop": true,
+"name": &"Cast",
+"speed": 30.0
+}]
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_8p0rt")
@@ -22,6 +141,14 @@ shape = SubResource("BoxShape3D_cgk2w")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 0, 0, 0)
 shaded = true
 sprite_frames = ExtResource("2_yo2df")
 animation = &"idleDown"
+
+[node name="Effects" type="AnimatedSprite3D" parent="AnimatedSprite3D"]
+transform = Transform3D(2.297, 0, 0, 0, 3.515, 1.19209e-06, 0, -1.54972e-06, 3, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_a2qyq")
+animation = &"AttackMelee"
+frame = 6
+frame_progress = 1.0

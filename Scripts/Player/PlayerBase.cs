@@ -4,8 +4,7 @@ using Godot;
 
 public partial class PlayerBase : Node {
 
-    private InputHandler inputHandler = new();
-    private EventHandler<Vector3> onRotationChange;
+    private readonly InputHandler inputHandler = new();
     private CameraBase camera;
     private InteractionPanel interactionPanel;
 

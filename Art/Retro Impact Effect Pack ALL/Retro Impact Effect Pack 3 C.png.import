@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2r6okkfqt7sn"
-path.s3tc="res://.godot/imported/Attack_KG_1.png-8fbc781684b990df0fee6ba88d8ccc75.s3tc.ctex"
+uid="uid://dyh7j0robi0mi"
+path.s3tc="res://.godot/imported/Retro Impact Effect Pack 3 C.png-ac2afd49bcfaefdb430426a95ef479dd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Art/Knight_player/Attack_KG_1.png"
-dest_files=["res://.godot/imported/Attack_KG_1.png-8fbc781684b990df0fee6ba88d8ccc75.s3tc.ctex"]
+source_file="res://Art/Retro Impact Effect Pack ALL/Retro Impact Effect Pack 3 C.png"
+dest_files=["res://.godot/imported/Retro Impact Effect Pack 3 C.png-ac2afd49bcfaefdb430426a95ef479dd.s3tc.ctex"]
 
 [params]
 

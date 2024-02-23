@@ -4,6 +4,9 @@ using Godot;
 public enum InputState {
     Stop,
     Move,
+}
+public enum ActionState {
+    Idle,
     Attack,
 }
 
@@ -17,16 +20,15 @@ public enum InputFaceDirection {
 
 public partial class InputHandler {
 
-    private InputState inputState = InputState.Stop;
+    private InputState movementInputState = InputState.Stop;
+    private ActionState actionInputState = ActionState.Idle;
     private InputFaceDirection inputFaceDirection = InputFaceDirection.Down;
     private Vector2 moveDirection = Vector2.Zero;
 
-    public InputState GetInputState() {
-        return inputState;
-    }
-    public InputFaceDirection GetInputFaceDirection() {
-        return inputFaceDirection;
-    }
+    public InputState MovementInputState { get => movementInputState; }
+    public ActionState ActionInputState { get => actionInputState; }
+    public InputFaceDirection InputFaceDirection { get => inputFaceDirection; }
+
 
     public bool GetAxisChange() {
         Vector2 axis = GetAxis();
@@ -56,12 +58,11 @@ public partial class InputHandler {
     public void OnInputUpdate() {
         moveDirection = GetAxis();
 
-        if (IsAttacking()) {
-            inputState = InputState.Attack;
-            return;
-        }
-        if (moveDirection.Length() > 0) inputState = InputState.Move;
-        else inputState = InputState.Stop;
+        if (IsAttacking()) actionInputState = ActionState.Attack;
+        else actionInputState = ActionState.Idle;
+
+        if (moveDirection.Length() > 0) movementInputState = InputState.Move;
+        else movementInputState = InputState.Stop;
     }
 
 }

@@ -1,11 +1,22 @@
 using Godot;
 
 public partial class Character : ActorBase {
-    [Signal]
-    public delegate void HitEventHandler();
 
     [Export]
-    public int speed = 3; // How fast the player will move (piXels/sec).
+    public int speed = 3; // How fast the player will move (pixels/sec).
+    [Export]
+    public int maxHitPoints = 100;
+    [Export]
+    public int armor = 1;
+    [Export]
+    public int baseDamage = 100;
+
+    readonly CharacterAttributes attributes = new();
+
+    public override void _Ready() {
+        base._Ready();
+        UpdateCharacterAttributes();
+    }
 
     public override void _Input(InputEvent @event) {
         if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
@@ -14,17 +25,40 @@ public partial class Character : ActorBase {
 
     public override void _Process(double delta) {
         if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
+        ManageInput(delta);
+    }
+
+    private void UpdateCharacterAttributes() {
+        attributes.MaxHitPoints = maxHitPoints;
+        attributes.HitPoints = maxHitPoints;
+        attributes.Armor = armor;
+        attributes.BaseDamage = baseDamage;
+    }
+
+    private void ManageInput(double delta) {
         Vector2 direction = Player.InputHandler.GetRotatedAxis(-Player.Camera.RotationDegrees.Y);
-        switch (Player.InputHandler.GetInputState()) {
-            case InputState.Attack: AnimationHandler.UpdateAnimationPrefix("running"); break;
-            case InputState.Stop: AnimationHandler.UpdateAnimationPrefix("idle"); break;
+        switch (Player.InputHandler.MovementInputState) {
+
+            case InputState.Stop: {
+                    ActorAnimationHandler.AnimationPrefix = "idle";
+                    break;
+                }
             case InputState.Move: {
-                    AnimationHandler.UpdateAnimationPrefix("running");
+                    ActorAnimationHandler.AnimationPrefix = "running";
                     MoveNode(Vector2To3(direction), (float)delta);
                     break;
                 }
         }
-        AnimationHandler.ApplyAnimation(Player.InputHandler.GetInputFaceDirection());
+
+        switch (Player.InputHandler.ActionInputState) {
+            case ActionState.Attack: {
+                    // Do something
+                    break;
+                }
+
+        }
+        EffectAnimationHandler.ApplyAnimation(Player.InputHandler.ActionInputState);
+        ActorAnimationHandler.ApplyAnimation(Player.InputHandler.InputFaceDirection);
     }
 
     private void MoveNode(Vector3 direction, float delta) {

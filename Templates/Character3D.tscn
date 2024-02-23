@@ -90,7 +90,7 @@ animations = [{
 "texture": null
 }],
 "loop": false,
-"name": &"AttackMelee",
+"name": &"Attack",
 "speed": 30.0
 }, {
 "frames": [{
@@ -147,8 +147,6 @@ sprite_frames = ExtResource("2_yo2df")
 animation = &"idleDown"
 
 [node name="Effects" type="AnimatedSprite3D" parent="AnimatedSprite3D"]
-transform = Transform3D(2.297, 0, 0, 0, 3.515, 1.19209e-06, 0, -1.54972e-06, 3, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 1.07288e-06, 0, -1.43051e-06, 2, -0.00997709, -0.039884, 0.32163)
 sprite_frames = SubResource("SpriteFrames_a2qyq")
-animation = &"AttackMelee"
-frame = 6
-frame_progress = 1.0
+animation = &"Attack"

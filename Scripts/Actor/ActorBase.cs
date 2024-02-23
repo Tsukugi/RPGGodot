@@ -4,15 +4,16 @@ public partial class ActorBase : CharacterBody3D {
     [Export] // Initial animation direction
     public InputFaceDirection inputFaceDirection = InputFaceDirection.Down;
 
-
     private AnimatedSprite3D animatedSprite3D = null;
-    private AnimationHandler animationHandler = null;
+    private ActorAnimationHandler actorAnimationHandler = null;
+    private EffectAnimationHandler effectAnimationHandler = null;
     private Area3D talkArea = null;
     protected PlayerBase player = null;
 
 
     protected PlayerBase Player { get => player; }
-    protected AnimationHandler AnimationHandler { get => animationHandler; }
+    protected ActorAnimationHandler ActorAnimationHandler { get => actorAnimationHandler; }
+    protected EffectAnimationHandler EffectAnimationHandler { get => effectAnimationHandler; }
     protected Area3D TalkArea { get => talkArea; }
 
 
@@ -28,14 +29,15 @@ public partial class ActorBase : CharacterBody3D {
         // Animation Setup
 
         animatedSprite3D = GetNode<AnimatedSprite3D>("AnimatedSprite3D");
+        AnimatedSprite3D effectsSprite = GetNode<AnimatedSprite3D>("AnimatedSprite3D/Effects");
 
         if (animatedSprite3D == null) GD.PrintErr("[ActorBase._Ready] Could not find an Animated sprite 3D on this actor");
+        if (effectsSprite == null) GD.PrintErr("[ActorBase._Ready] Could not find an Animated sprite 3D for Effects on this actor");
 
-        animationHandler = new AnimationHandler(animatedSprite3D, "idle");
+        actorAnimationHandler = new ActorAnimationHandler(animatedSprite3D);
+        effectAnimationHandler = new EffectAnimationHandler(effectsSprite);
 
-        if (animationHandler == null) GD.PrintErr("[Player._Ready] Could not find an animationHandler");
-
-        animationHandler.ApplyAnimation(inputFaceDirection);
+        actorAnimationHandler.ApplyAnimation(inputFaceDirection);
     }
     public PlayerBase GetOwner() {
         GD.Print("[GetOwner] " + Name + " owner is " + GetParent().Name);

@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://b0gnd6djt5q6f"]
+[gd_scene load_steps=26 format=3 uid="uid://b0gnd6djt5q6f"]
 
 [ext_resource type="Script" path="res://Scripts/Character.cs" id="1_8p0rt"]
 [ext_resource type="SpriteFrames" uid="uid://brxi6sc2re2r1" path="res://MeshesLibrary/Player.tres" id="2_yo2df"]
 [ext_resource type="Texture2D" uid="uid://bh1f3sqasqgue" path="res://Art/Retro Impact Effect Pack ALL/Retro Impact Effect Pack 2 A.png" id="3_irvvs"]
 [ext_resource type="Texture2D" uid="uid://dyh7j0robi0mi" path="res://Art/Retro Impact Effect Pack ALL/Retro Impact Effect Pack 3 C.png" id="4_6vqsm"]
+[ext_resource type="Texture2D" uid="uid://o8dtytaqrbcf" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_0.png" id="5_hqfel"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k1dhj"]
 
@@ -126,6 +127,18 @@ animations = [{
 "speed": 30.0
 }]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_du2ya"]
+transparency = 1
+albedo_texture = ExtResource("5_hqfel")
+uv2_scale = Vector3(3, 2, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nkvd1"]
+lightmap_size_hint = Vector2i(12, 12)
+material = SubResource("StandardMaterial3D_du2ya")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o2hnm"]
+radius = 0.8
+
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_8p0rt")
 
@@ -140,13 +153,32 @@ shape = SubResource("BoxShape3D_cgk2w")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+[node name="StaticRotation" type="Node3D" parent="."]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="StaticRotation"]
 transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 0, 0, 0)
 shaded = true
 sprite_frames = ExtResource("2_yo2df")
 animation = &"idleDown"
 
-[node name="Effects" type="AnimatedSprite3D" parent="AnimatedSprite3D"]
-transform = Transform3D(2, 0, 0, 0, 2, 1.07288e-06, 0, -1.43051e-06, 2, -0.00997709, -0.039884, 0.32163)
+[node name="RotationAnchor" type="Node3D" parent="."]
+
+[node name="Effects" type="AnimatedSprite3D" parent="RotationAnchor"]
+transform = Transform3D(2.5573, 0, 0, 0, -9.23613e-08, -2.80875, 0, 2.11298, -1.22774e-07, 0.204003, 0.126274, 0.218113)
 sprite_frames = SubResource("SpriteFrames_a2qyq")
 animation = &"Attack"
+frame = 6
+frame_progress = 1.0
+
+[node name="FaceDirection" type="MeshInstance3D" parent="RotationAnchor"]
+transform = Transform3D(0.0480171, 0, 0, 0, 0.724436, 0, 0, 0, 0.656425, 0.673675, 0.00561327, -0.0036031)
+
+[node name="Floor" type="MeshInstance3D" parent="RotationAnchor"]
+transform = Transform3D(0.0897915, 0, 0, 0, 0.051505, 0, 0, 0, 0.233067, 0.397278, -0.325, 0)
+mesh = SubResource("PlaneMesh_nkvd1")
+
+[node name="MeleeAttackRange" type="Area3D" parent="RotationAnchor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationAnchor/MeleeAttackRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
+shape = SubResource("CapsuleShape3D_o2hnm")

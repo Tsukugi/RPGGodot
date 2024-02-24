@@ -8,15 +8,14 @@ public partial class ActorBase : CharacterBody3D {
     private ActorAnimationHandler actorAnimationHandler = null;
     private EffectAnimationHandler effectAnimationHandler = null;
     private Area3D talkArea = null;
-    protected PlayerBase player = null;
-
+    private Node3D rotationAnchor = null;
+    private PlayerBase player = null;
 
     protected PlayerBase Player { get => player; }
     protected ActorAnimationHandler ActorAnimationHandler { get => actorAnimationHandler; }
     protected EffectAnimationHandler EffectAnimationHandler { get => effectAnimationHandler; }
     protected Area3D TalkArea { get => talkArea; }
-
-
+    protected Node3D RotationAnchor { get => rotationAnchor; }
 
     public override void _Ready() {
         player = GetOwner();
@@ -27,14 +26,18 @@ public partial class ActorBase : CharacterBody3D {
         talkArea.AreaExited += OnInteractionAreaExitedHandler;
 
         // Animation Setup
+        rotationAnchor = GetNode<Node3D>("RotationAnchor");
+        animatedSprite3D = GetNode<AnimatedSprite3D>("StaticRotation/AnimatedSprite3D");
+        AnimatedSprite3D effectsSprite = GetNode<AnimatedSprite3D>("RotationAnchor/Effects");
 
-        animatedSprite3D = GetNode<AnimatedSprite3D>("AnimatedSprite3D");
-        AnimatedSprite3D effectsSprite = GetNode<AnimatedSprite3D>("AnimatedSprite3D/Effects");
+        if (rotationAnchor == null) GD.PrintErr("[ActorBase._Ready] Could not find an Rotation Anchor for this Actor");
+        if (animatedSprite3D == null) GD.PrintErr("[ActorBase._Ready] Could not find an Animated sprite 3D on this Actor");
+        if (effectsSprite == null) GD.PrintErr("[ActorBase._Ready] Could not find an Animated sprite 3D for Effects on this Actor");
 
-        if (animatedSprite3D == null) GD.PrintErr("[ActorBase._Ready] Could not find an Animated sprite 3D on this actor");
-        if (effectsSprite == null) GD.PrintErr("[ActorBase._Ready] Could not find an Animated sprite 3D for Effects on this actor");
+        actorAnimationHandler = new ActorAnimationHandler(animatedSprite3D) {
+            AnimationPrefix = "idle"
+        };
 
-        actorAnimationHandler = new ActorAnimationHandler(animatedSprite3D);
         effectAnimationHandler = new EffectAnimationHandler(effectsSprite);
 
         actorAnimationHandler.ApplyAnimation(inputFaceDirection);

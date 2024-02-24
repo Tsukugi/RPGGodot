@@ -13,4 +13,16 @@ public static class VectorUtils {
         float sinA = (float)Math.Sin(radians);
         return new Vector2(cosA * vector.X - sinA * vector.Y, sinA * vector.X + cosA * vector.Y);
     }
+
+    public static float GetRotationFromDirection(Vector2 direction) {
+        float angleRadians;
+
+        float atan2Result = (float)Math.Atan2(direction.X, direction.Y);
+        angleRadians = atan2Result / 2;
+        if (angleRadians < 0.0f)
+            angleRadians += (float)Math.PI;
+
+        angleRadians *= 2;
+        return (float)MathUtils.ToDegrees(angleRadians);
+    }
 }

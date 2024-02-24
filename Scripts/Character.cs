@@ -21,11 +21,12 @@ public partial class Character : ActorBase {
     public override void _Input(InputEvent @event) {
         if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
         Player.InputHandler.OnInputUpdate();
+
     }
 
     public override void _Process(double delta) {
         if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
-        ManageInput(delta);
+        OnFrameUpdate(delta);
     }
 
     private void UpdateCharacterAttributes() {
@@ -35,8 +36,9 @@ public partial class Character : ActorBase {
         attributes.BaseDamage = baseDamage;
     }
 
-    private void ManageInput(double delta) {
+    private void OnFrameUpdate(double delta) {
         Vector2 direction = Player.InputHandler.GetRotatedAxis(-Player.Camera.RotationDegrees.Y);
+
         switch (Player.InputHandler.MovementInputState) {
 
             case InputState.Stop: {
@@ -46,6 +48,8 @@ public partial class Character : ActorBase {
             case InputState.Move: {
                     ActorAnimationHandler.AnimationPrefix = "running";
                     MoveNode(Vector2To3(direction), (float)delta);
+                    float rotation = VectorUtils.GetRotationFromDirection(direction);
+                    RotationAnchor.RotationDegrees = new Vector3(0, rotation - 90, 0);
                     break;
                 }
         }

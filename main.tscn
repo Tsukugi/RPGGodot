@@ -34,6 +34,9 @@ inputFaceDirection = 1
 
 [node name="Hostile" parent="." instance=ExtResource("3_gsb7g")]
 
+[node name="Character" parent="Hostile" instance=ExtResource("2_mybtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.37569, 0, 0)
+
 [node name="NPC4" parent="Hostile" instance=ExtResource("2_mybtg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.40395, 0, 3.16746)
 inputFaceDirection = 1

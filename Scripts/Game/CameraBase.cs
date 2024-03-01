@@ -25,7 +25,6 @@ public partial class CameraBase : Camera3D {
     public override void _Ready() {
         base._Ready();
         Node parent = GetParent();
-        GD.Print(parent.Name);
         Current = SimpleGameManager.IsFirstPlayerControlled(parent);
 
         ActorBase newActor = parent.GetChildren().OfType<ActorBase>().FirstOrDefault();
@@ -36,16 +35,21 @@ public partial class CameraBase : Camera3D {
     public override void _Process(double delta) {
         base._Process(delta);
         if (SelectedActor == null) return;
-        // Follow the selected actor
-        Reposition(cameraTransformOffset + SelectedActor.Transform.Origin, cameraRotationOffset + SelectedActor.RotationDegrees);
+        try {
+            // Follow the selected actor
+            Reposition(cameraTransformOffset + SelectedActor.Transform.Origin, cameraRotationOffset + SelectedActor.RotationDegrees);
+        } catch (ObjectDisposedException) {
+            // We will reset camera if the selectedActor was removed in the meanwhile.
+            SelectedActor = null;
+        }
     }
 
 
     public void AttachToActor(ActorBase actor) {
         if (actor == null) {
-            GD.Print("[CameraBase.AttachToActor] Selected Player not found, not assigning camera");
+            GD.Print("[CameraBase.AttachToActor] There is not a Character available to attach");
         } else {
-            GD.Print("[CameraBase.AttachToActor] Assigning camera to " + SelectedActor.Name);
+            GD.Print("[CameraBase.AttachToActor] Attaching camera to " + SelectedActor.Name);
             UpdateCameraProperties();
         }
     }

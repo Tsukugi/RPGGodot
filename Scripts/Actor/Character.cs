@@ -36,7 +36,8 @@ public partial class Character : ActorBase {
 
     public override void _Process(double delta) {
         if (!Visible && Attributes.CanBeKilled()) {
-            // TODO: Kill the Character without errors.
+            // Kill the Character 
+            QueueFree();
             return;
         }
 
@@ -55,7 +56,9 @@ public partial class Character : ActorBase {
         attackedCharacter.Attributes.ApplyDamage(attackedCharacter.Attributes.BaseDamage);
         GD.Print("[OnMeleeAttackAreaEnteredHandler] HP: " + attackedCharacter.Attributes.HitPoints + " / " + attackedCharacter.Attributes.MaxHitPoints);
 
-        if (attackedCharacter.Attributes.CanBeKilled()) attackedCharacter.Visible = false;
+        if (attackedCharacter.Attributes.CanBeKilled()) {
+            attackedCharacter.Visible = false;
+        }
     }
 
     void OnMeleeAttackAreaExitedHandler(Area3D area) {
@@ -106,7 +109,7 @@ public partial class Character : ActorBase {
         switch (Player.InputHandler.ActionInputState) {
             case ActionState.Attack: {
                     if (attackHandler.OnAttackCooldownTimer != null && attackHandler.OnAttackCooldownTimer.Enabled) break;
-                    GD.Print("[StartAttack]" + AttackArea.Monitoring);
+                    GD.Print("[StartAttack]");
                     CallDeferred("DeferredUpdateAreaMonitoring", true);
                     attackHandler.StartAttack(AttackAnimationEndHandler, OnAttackCooldownEndHandler, Attributes.AttackDuration, Attributes.AttackSpeed);
                     EffectAnimationHandler.ApplyAnimation(Player.InputHandler.ActionInputState);

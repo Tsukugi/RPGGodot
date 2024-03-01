@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://b0gnd6djt5q6f"]
+[gd_scene load_steps=27 format=3 uid="uid://b0gnd6djt5q6f"]
 
-[ext_resource type="Script" path="res://Scripts/Character.cs" id="1_8p0rt"]
+[ext_resource type="Script" path="res://Scripts/Actor/Character.cs" id="1_nufnl"]
 [ext_resource type="SpriteFrames" uid="uid://brxi6sc2re2r1" path="res://MeshesLibrary/Player.tres" id="2_yo2df"]
 [ext_resource type="Texture2D" uid="uid://bh1f3sqasqgue" path="res://Art/Retro Impact Effect Pack ALL/Retro Impact Effect Pack 2 A.png" id="3_irvvs"]
 [ext_resource type="Texture2D" uid="uid://dyh7j0robi0mi" path="res://Art/Retro Impact Effect Pack ALL/Retro Impact Effect Pack 3 C.png" id="4_6vqsm"]
 [ext_resource type="Texture2D" uid="uid://o8dtytaqrbcf" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_0.png" id="5_hqfel"]
+[ext_resource type="Script" path="res://Scripts/Actor/AttackCollisionArea.cs" id="6_5c4ra"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k1dhj"]
 
@@ -136,15 +137,14 @@ uv2_scale = Vector3(3, 2, 1)
 lightmap_size_hint = Vector2i(12, 12)
 material = SubResource("StandardMaterial3D_du2ya")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o2hnm"]
-radius = 0.8
+[sub_resource type="BoxShape3D" id="BoxShape3D_qm7j3"]
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
-script = ExtResource("1_8p0rt")
+[node name="Character" type="CharacterBody3D"]
+script = ExtResource("1_nufnl")
 
-[node name="TalkArea" type="Area3D" parent="."]
+[node name="InteractionArea" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TalkArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
 shape = SubResource("BoxShape3D_k1dhj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -154,12 +154,19 @@ shape = SubResource("BoxShape3D_cgk2w")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
 [node name="StaticRotation" type="Node3D" parent="."]
+transform = Transform3D(0.707107, -0.183013, 0.683013, 0, 0.965926, 0.258819, -0.707107, -0.183013, 0.683013, 0, 0, 0)
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="StaticRotation"]
-transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)
 shaded = true
 sprite_frames = ExtResource("2_yo2df")
 animation = &"idleDown"
+
+[node name="OverheadLabel" type="Label3D" parent="StaticRotation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712326, 0)
+outline_modulate = Color(0.341176, 0.709804, 0.972549, 1)
+text = "Test
+"
 
 [node name="RotationAnchor" type="Node3D" parent="."]
 
@@ -177,8 +184,10 @@ transform = Transform3D(0.0480171, 0, 0, 0, 0.724436, 0, 0, 0, 0.656425, 0.67367
 transform = Transform3D(0.0897915, 0, 0, 0, 0.051505, 0, 0, 0, 0.233067, 0.397278, -0.325, 0)
 mesh = SubResource("PlaneMesh_nkvd1")
 
-[node name="MeleeAttackRange" type="Area3D" parent="RotationAnchor"]
+[node name="AttackArea" type="Area3D" parent="RotationAnchor"]
+monitoring = false
+script = ExtResource("6_5c4ra")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationAnchor/MeleeAttackRange"]
+[node name="MeleeCollisionArea" type="CollisionShape3D" parent="RotationAnchor/AttackArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
-shape = SubResource("CapsuleShape3D_o2hnm")
+shape = SubResource("BoxShape3D_qm7j3")

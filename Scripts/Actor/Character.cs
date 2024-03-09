@@ -17,6 +17,8 @@ public partial class Character : ActorBase {
     Label3D label;
     public override void _Ready() {
         base._Ready();
+        
+        // ! DebugOverheadLabel
         label = GetNode<Label3D>("StaticRotation/OverheadLabel");
 
         InteractionArea.AreaEntered += OnInteractionAreaEnteredHandler;
@@ -110,21 +112,21 @@ public partial class Character : ActorBase {
             case ActionState.Attack: {
                     if (attackHandler.OnAttackCooldownTimer != null && attackHandler.OnAttackCooldownTimer.Enabled) break;
                     GD.Print("[StartAttack]");
-                    CallDeferred("DeferredUpdateAreaMonitoring", true);
+                    CallDeferred("DeferredUpdateAttackAreaMonitoring", true);
                     attackHandler.StartAttack(AttackAnimationEndHandler, OnAttackCooldownEndHandler, Attributes.AttackDuration, Attributes.AttackSpeed);
                     EffectAnimationHandler.ApplyAnimation(Player.InputHandler.ActionInputState);
                     break;
                 }
-        }
+        }   
     }
 
     /* This Function is supposed to be called with CallDeferred */
-    private void DeferredUpdateAreaMonitoring(bool value) {
+    private void DeferredUpdateAttackAreaMonitoring(bool value) {
         AttackArea.Monitoring = value;
     }
 
     private void AttackAnimationEndHandler(System.Object source, System.Timers.ElapsedEventArgs e) {
-        CallDeferred("DeferredUpdateAreaMonitoring", false);
+        CallDeferred("DeferredUpdateAttackAreaMonitoring", false);
         GD.Print("[AttackAnimationEndHandler]");
     }
 

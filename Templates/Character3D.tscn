@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b0gnd6djt5q6f"]
+[gd_scene load_steps=28 format=3 uid="uid://b0gnd6djt5q6f"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/Character.cs" id="1_nufnl"]
 [ext_resource type="SpriteFrames" uid="uid://brxi6sc2re2r1" path="res://MeshesLibrary/Player.tres" id="2_yo2df"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dyh7j0robi0mi" path="res://Art/Retro Impact Effect Pack ALL/Retro Impact Effect Pack 3 C.png" id="4_6vqsm"]
 [ext_resource type="Texture2D" uid="uid://o8dtytaqrbcf" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_0.png" id="5_hqfel"]
 [ext_resource type="Script" path="res://Scripts/Actor/AttackCollisionArea.cs" id="6_5c4ra"]
+[ext_resource type="Texture2D" uid="uid://b8n51425dpvj7" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_50.png" id="7_3g54y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k1dhj"]
 
@@ -140,6 +141,7 @@ material = SubResource("StandardMaterial3D_du2ya")
 [sub_resource type="BoxShape3D" id="BoxShape3D_qm7j3"]
 
 [node name="Character" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_nufnl")
 
 [node name="InteractionArea" type="Area3D" parent="."]
@@ -150,8 +152,6 @@ shape = SubResource("BoxShape3D_k1dhj")
 [node name="BodyCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 shape = SubResource("BoxShape3D_cgk2w")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
 [node name="StaticRotation" type="Node3D" parent="."]
 transform = Transform3D(0.707107, -0.183013, 0.683013, 0, 0.965926, 0.258819, -0.707107, -0.183013, 0.683013, 0, 0, 0)
@@ -191,3 +191,10 @@ script = ExtResource("6_5c4ra")
 [node name="MeleeCollisionArea" type="CollisionShape3D" parent="RotationAnchor/AttackArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
 shape = SubResource("BoxShape3D_qm7j3")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="NavigationTarget" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.15, 0)
+visible = false
+texture = ExtResource("7_3g54y")

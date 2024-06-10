@@ -9,6 +9,8 @@ public partial class CameraBase : Camera3D {
     public event EventHandler<Vector3> OnRotationChange;
 
     // Offsets
+    //private Vector3 cameraTransformOffset = new(0, 12, 0);
+    //private Vector3 cameraRotationOffset = new(-90, 0, 0);
     private Vector3 cameraTransformOffset = new(8, 7, 8);
     private Vector3 cameraRotationOffset = new(-30, 45, 0);
     private ProjectionType projectionType = ProjectionType.Orthogonal;

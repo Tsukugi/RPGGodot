@@ -25,11 +25,15 @@ public partial class InputHandler {
     private ActionState actionInputState = ActionState.Idle;
     private InputFaceDirection inputFaceDirection = InputFaceDirection.Down;
     private Vector2 moveDirection = Vector2.Zero;
+    public Vector3 worldMouseNavigationTargetCoordinates = Vector3.Zero;
 
     public InputState MovementInputState { get => movementInputState; }
     public ActionState ActionInputState { get => actionInputState; }
     public InputFaceDirection InputFaceDirection { get => inputFaceDirection; }
 
+    public Vector3 WorldMouseNavigationTargetCoordinates {
+        get => worldMouseNavigationTargetCoordinates;
+    }
 
     public bool GetAxisChange() {
         Vector2 axis = GetAxis();
@@ -45,6 +49,10 @@ public partial class InputHandler {
         if (Input.IsActionPressed("ui_left")) { axis.X -= 1; inputFaceDirection = InputFaceDirection.Left; }
 
         return axis;
+    }
+
+    public void OnNavigationMovement(InputEvent @event, CameraBase camera) {
+
     }
 
     public bool IsAttacking() {

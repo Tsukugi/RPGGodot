@@ -1,9 +1,8 @@
 using Godot;
 
 public partial class Character : ActorBase {
-
     [Export]
-    int speed = 3; // How fast the player will move (pixels/sec).
+    int movementSpeed = 3; // How fast the player will move (pixels/sec).
     [Export]
     int maxHitPoints = 100;
     [Export]
@@ -13,12 +12,10 @@ public partial class Character : ActorBase {
 
     public readonly CharacterAttributes Attributes = new();
     readonly AttackHandler attackHandler = new();
-
     Label3D label;
     public override void _Ready() {
         base._Ready();
-        
-        // ! DebugOverheadLabel
+        // ! Debug elements
         label = GetNode<Label3D>("StaticRotation/OverheadLabel");
 
         InteractionArea.AreaEntered += OnInteractionAreaEnteredHandler;
@@ -33,7 +30,17 @@ public partial class Character : ActorBase {
     public override void _Input(InputEvent @event) {
         if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
         Player.InputHandler.OnInputUpdate();
+        if (@event is InputEventMouseButton eventMouseButton && eventMouseButton.Pressed && eventMouseButton.ButtonIndex == MouseButton.Right) {
 
+            Vector2 mousePosition = Player.Camera.GetViewport().GetMousePosition();
+            Vector3 origin = Player.Camera.ProjectRayOrigin(mousePosition);
+            Vector3 direction = Player.Camera.ProjectRayNormal(mousePosition);
+            var plane = new Plane(0, -1, 0, 0);
+            var position = plane.IntersectsRay(origin, direction);
+            if (position == null) return;
+            GD.Print((Vector3)position);
+            Player.InputHandler.worldMouseNavigationTargetCoordinates = (Vector3)position;
+        }
     }
 
     public override void _Process(double delta) {
@@ -47,6 +54,27 @@ public partial class Character : ActorBase {
 
         if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
         OnFrameUpdate(delta);
+    }
+
+    public override void _PhysicsProcess(double delta) {
+        base._PhysicsProcess(delta);
+        if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
+        OnPhysicsUpdate(delta);
+    }
+    private void OnPhysicsUpdate(double delta) {
+        if (NavigationMovementTarget != Player.InputHandler.WorldMouseNavigationTargetCoordinates) {
+            NavigationMovementTarget = Player.InputHandler.WorldMouseNavigationTargetCoordinates;
+            NavigationTarget.Visible = true;
+        } else if (NavigationAgent.IsNavigationFinished()) {
+            NavigationTarget.Visible = false;
+        } else {
+            NavigationTarget.GlobalPosition = NavigationMovementTarget;
+            Vector3 currentAgentPosition = GlobalTransform.Origin;
+            Vector3 nextPathPosition = NavigationAgent.GetNextPathPosition();
+            Vector3 Velocity = currentAgentPosition.DirectionTo(nextPathPosition) * movementSpeed;
+            MoveNode(Velocity, (float)delta);
+        }
+
     }
 
     void OnMeleeAttackAreaEnteredHandler(Area3D area) {
@@ -117,7 +145,7 @@ public partial class Character : ActorBase {
                     EffectAnimationHandler.ApplyAnimation(Player.InputHandler.ActionInputState);
                     break;
                 }
-        }   
+        }
     }
 
     /* This Function is supposed to be called with CallDeferred */
@@ -136,7 +164,7 @@ public partial class Character : ActorBase {
 
     private void MoveNode(Vector3 direction, float delta) {
         // Apply velocity.
-        direction = direction.Normalized() * speed;
+        direction = direction.Normalized() * movementSpeed;
         MoveAndCollide(direction * (float)delta);
     }
 

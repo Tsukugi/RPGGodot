@@ -13,6 +13,8 @@ public static class Constants {
     public static readonly string EffectsPath = "RotationAnchor/Effects";
     public static readonly string MeleeAttackAreaPath = "RotationAnchor/AttackArea";
     public static readonly string ActorSpritePath = "StaticRotation/AnimatedSprite3D";
+    public static readonly string NavigationAgentPath = "NavigationAgent3D";
+    public static readonly string NavigationTarget = "NavigationTarget";
 
     /** Animation **/
     public static readonly string AnimationPrefixIdle = "idle";

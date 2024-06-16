@@ -1,21 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6ajx743pvfx"]
+[gd_scene load_steps=5 format=3 uid="uid://b6ajx743pvfx"]
 
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategyPlayer.cs" id="1_416j5"]
 [ext_resource type="Script" path="res://Scripts/Game/CameraBase.cs" id="2_7o631"]
 [ext_resource type="Script" path="res://Scripts/UI/InteractionPanel.cs" id="3_aodfl"]
 [ext_resource type="Script" path="res://Scripts/UI/SelectionPanel.cs" id="4_co5sg"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7ch5"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.141176)
-
-[sub_resource type="BoxMesh" id="BoxMesh_7lt2b"]
-material = SubResource("StandardMaterial3D_c7ch5")
-
 [node name="Player" type="Node3D"]
 script = ExtResource("1_416j5")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+size = 19.367
 script = ExtResource("2_7o631")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -51,11 +45,3 @@ layout_mode = 2
 offset_right = 10.0
 offset_bottom = 10.0
 script = ExtResource("4_co5sg")
-
-[node name="StartBox" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_7lt2b")
-
-[node name="EndBox" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("BoxMesh_7lt2b")
-skeleton = NodePath("../StartBox")

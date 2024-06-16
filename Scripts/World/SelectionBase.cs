@@ -26,7 +26,6 @@ public static class SelectionBase {
 
                 if (!isInArea) continue;
                 list.Add(actor);
-                GD.Print(actor.Name);
             }
         }
 
@@ -35,12 +34,10 @@ public static class SelectionBase {
 
     public static void ApplyGroupPosition(List<NavigationCharacter> group, Vector3 targetPosition, float gapDistance, float rowLimit) {
         for (int i = 0; i < group.Count; i++) {
-            group[i].NavigationTargetPosition = targetPosition;
-
-            group[i].NavigationTargetPosition.X +=
-                i * gapDistance % rowLimit;
-            group[i].NavigationTargetPosition.Z +=
-                i * gapDistance / rowLimit;
+            group[i].NavigationTargetPosition = new Vector3(
+                targetPosition.X + i * gapDistance % rowLimit,
+                targetPosition.Y,
+                targetPosition.Z + i * gapDistance / rowLimit);
         }
     }
 

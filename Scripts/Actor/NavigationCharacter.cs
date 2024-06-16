@@ -21,6 +21,7 @@ public partial class NavigationCharacter : Character {
         Callable.From(ActorSetup).CallDeferred();
 
         navigationTarget = GetNode<Node3D>(Constants.NavigationTarget);
+
     }
 
     public override void _PhysicsProcess(double delta) {
@@ -28,24 +29,24 @@ public partial class NavigationCharacter : Character {
         OnNavigationMovement();
     }
 
-    public override void _Input(InputEvent @event) {
-        if (!isSelected) return;
-
-    }
-
 
     private void OnNavigationMovement() {
         if (navigationAgent.TargetPosition != NavigationTargetPosition) {
+            // * On Start
             navigationAgent.TargetPosition = NavigationTargetPosition;
-            NavigationTarget.Visible = true;
-            NavigationAgent.DebugEnabled = true;
-        } else if (NavigationAgent.IsNavigationFinished()) {
-            NavigationTarget.Visible = false;
-            NavigationAgent.DebugEnabled = false;
+            navigationAgent.DebugEnabled = true;
+            navigationTarget.Visible = true;
+            BodyCollision.Disabled = true;
+        } else if (navigationAgent.IsNavigationFinished()) {
+            // * On Finish
+            navigationAgent.DebugEnabled = false;
+            navigationTarget.Visible = false;
+            BodyCollision.Disabled = false;
         } else {
-            NavigationTarget.GlobalPosition = NavigationTargetPosition;
+            // * Else on EveryIteration
+            navigationTarget.GlobalPosition = NavigationTargetPosition;
             Vector3 currentAgentPosition = GlobalTransform.Origin;
-            Vector3 nextPathPosition = NavigationAgent.GetNextPathPosition();
+            Vector3 nextPathPosition = navigationAgent.GetNextPathPosition();
             Vector3 Velocity = currentAgentPosition.DirectionTo(nextPathPosition) * movementSpeed;
             MoveAndSlide(Velocity);
         }

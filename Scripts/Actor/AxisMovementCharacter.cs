@@ -17,8 +17,8 @@ public partial class AxisMovementCharacter : Character {
 
         AnimatedSprite3D effectsSprite = GetNode<AnimatedSprite3D>(Constants.EffectsPath);
 
-        if (rotationAnchor == null) GD.PrintErr("[ActorBase._Ready] Could not find an Rotation Anchor for this Actor");
-        if (effectsSprite == null) GD.PrintErr("[ActorBase._Ready] Could not find an Animated sprite 3D for Effects on this Actor");
+        if (rotationAnchor == null) GD.PrintErr("[AxisMovementCharacter._Ready] Could not find an Rotation Anchor for this Actor");
+        if (effectsSprite == null) GD.PrintErr("[AxisMovementCharacter._Ready] Could not find an Animated sprite 3D for Effects on this Actor");
 
         effectAnimationHandler = new EffectAnimationHandler(effectsSprite);
         attackArea = GetNode<AttackCollisionArea>(Constants.MeleeAttackAreaPath);

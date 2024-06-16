@@ -4,21 +4,24 @@ public partial class ActorBase : CharacterBody3D {
 
     [Export] // Initial animation direction
     public InputFaceDirection inputFaceDirection = InputFaceDirection.Down;
-    
+
     private PlayerBase player = null;
 
     private AnimatedSprite3D animatedSprite3D = null;
     private ActorAnimationHandler actorAnimationHandler = null;
     private Area3D interactionArea = null;
+    private CollisionShape3D bodyCollision = null;
 
     protected PlayerBase Player { get => player; }
     protected ActorAnimationHandler ActorAnimationHandler { get => actorAnimationHandler; }
     protected Area3D InteractionArea { get => interactionArea; }
+    protected CollisionShape3D BodyCollision { get => bodyCollision; }
 
     public override void _Ready() {
         player = GetOwner();
 
         interactionArea = GetNode<Area3D>(Constants.InteractionArea);
+        bodyCollision = GetNode<CollisionShape3D>(Constants.BodyCollision);
         animatedSprite3D = GetNode<AnimatedSprite3D>(Constants.ActorSpritePath);
         if (animatedSprite3D == null) GD.PrintErr("[ActorBase._Ready] Could not find an Animated sprite 3D on this Actor");
 

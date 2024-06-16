@@ -42,7 +42,6 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         base._Input(@event);
         if (!SimpleGameManager.IsFirstPlayerControlled(this)) return;
 
-
         if (@event is InputEventMouseMotion && isSelecting) {
             selectionAreaEnd = Camera.GetViewport().GetMousePosition();
             selectionPanel.ApplySelectionTransform(selectionAreaStart, selectionAreaEnd);
@@ -50,19 +49,25 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         }
 
         if (@event is InputEventMouseButton eventMouseButton) {
+            if (eventMouseButton.ButtonIndex == MouseButton.WheelDown) {
+                Camera.Zoom(CameraZoomDirection.ZoomOut, 1);
+            } else if (eventMouseButton.ButtonIndex == MouseButton.WheelUp) {
+                Camera.Zoom(CameraZoomDirection.ZoomIn, 1);
+            }
+
             if (eventMouseButton.ButtonIndex == MouseButton.Left) {
                 isSelecting = eventMouseButton.Pressed;
                 if (eventMouseButton.Pressed) {
                     selectionAreaEnd = Camera.GetViewport().GetMousePosition();
                     selectionAreaStart = Camera.GetViewport().GetMousePosition();
-                    GD.Print("Start Selection");
+                    GD.Print("[RealTimeStrategyPlayer._Input]: Start Selection");
                 } else {
                     SelectedActors = actorsTargetedForSelection;
                     // Reset
                     selectionAreaEnd = Vector2.Zero;
                     selectionAreaStart = Vector2.Zero;
                     selectionPanel.ResetPosition();
-                    GD.Print("Selection Finished");
+                    GD.Print("[RealTimeStrategyPlayer._Input]: Selection Finished");
                 }
             }
             if (eventMouseButton.ButtonIndex == MouseButton.Right) {
@@ -80,8 +85,13 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
         Vector2 axis = NavigationInputHandler.GetAxis();
-        Camera.AxisMove(axis, (float)delta); 
-        GD.Print(Performance.GetMonitor(Performance.Monitor.TimeFps)); // Prints the FPS to the console.
+        Camera.AxisMove(axis, (float)delta);
+        GD.Print("TimeFps: " + Performance.GetMonitor(Performance.Monitor.TimeFps)); 
+        GD.Print("RenderTotalObjectsInFrame: " + Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame)); 
+        GD.Print("NavigationAgentCount: " + Performance.GetMonitor(Performance.Monitor.NavigationAgentCount)); 
+        GD.Print("TimeNavigationProcess: " + Performance.GetMonitor(Performance.Monitor.TimeNavigationProcess)); 
+        GD.Print("TimeProcess: " + Performance.GetMonitor(Performance.Monitor.TimeProcess));  
+        GD.Print("RenderVideoMemUsed: " + Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed)); 
     }
 
 

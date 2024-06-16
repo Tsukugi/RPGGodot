@@ -8,6 +8,8 @@ public partial class CameraBase : Camera3D {
     private ActorBase selectedActor = null;
     [Export]
     private float cameraVelocity = 3;
+    [Export]
+    private float cameraZoomVelocity = 0.5f;
     public event EventHandler<Vector3> OnRotationChange;
 
     // Offsets 
@@ -64,6 +66,18 @@ public partial class CameraBase : Camera3D {
             Position.Y,
             Position.Z + axis.Y * cameraVelocity * delta);
     }
+    public void Zoom(CameraZoomDirection value, float delta) {
+        if (value == 0) return;
+        Vector3 newOffset = new(
+            Position.X,
+            Position.Y + (float)value * cameraZoomVelocity * delta,
+            Position.Z);
+
+        Position = newOffset;
+        cameraTransformOffset.Y = newOffset.Y;
+
+        GD.Print(Position);
+    }
 
     public void AttachToActor(ActorBase actor) {
         if (actor == null) {
@@ -87,4 +101,7 @@ public partial class CameraBase : Camera3D {
         }
     }
 
+    internal void AxisMove(CameraZoomDirection zoomIn, int v) {
+        throw new NotImplementedException();
+    }
 }

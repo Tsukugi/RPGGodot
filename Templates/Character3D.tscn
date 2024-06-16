@@ -10,7 +10,10 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k1dhj"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_cgk2w"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4qoob"]
+margin = 0.45
+radius = 0.3
+height = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xa2nd"]
 atlas = ExtResource("3_irvvs")
@@ -144,6 +147,9 @@ material = SubResource("StandardMaterial3D_du2ya")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 2
 collision_mask = 3
+wall_min_slide_angle = 3.14159
+floor_stop_on_slope = false
+floor_block_on_wall = false
 platform_wall_layers = 1
 script = ExtResource("1_7fe2h")
 
@@ -153,8 +159,7 @@ script = ExtResource("1_7fe2h")
 shape = SubResource("BoxShape3D_k1dhj")
 
 [node name="BodyCollision" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-shape = SubResource("BoxShape3D_cgk2w")
+shape = SubResource("CapsuleShape3D_4qoob")
 
 [node name="StaticRotation" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
@@ -196,6 +201,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
 shape = SubResource("BoxShape3D_qm7j3")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+path_max_distance = 0.01
+keep_y_velocity = false
+debug_enabled = true
 
 [node name="NavigationTarget" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.15, 0)

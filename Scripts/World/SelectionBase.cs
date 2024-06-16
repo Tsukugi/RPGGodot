@@ -33,6 +33,18 @@ public static class SelectionBase {
         return list;
     }
 
+    public static void ApplyGroupPosition(List<NavigationCharacter> group, Vector3 targetPosition, float gapDistance, float rowLimit) {
+        for (int i = 0; i < group.Count; i++) {
+            group[i].NavigationTargetPosition = targetPosition;
+
+            group[i].NavigationTargetPosition.X +=
+                i * gapDistance % rowLimit;
+            group[i].NavigationTargetPosition.Z +=
+                i * gapDistance / rowLimit;
+        }
+    }
+
+
     public static bool IsInArea(Vector3 position, Vector3 start, Vector3 end) {
         return IsInAreaAxis(position.X, start.X, end.X)
             && IsInAreaAxis(position.Z, start.Z, end.Z);

@@ -12,7 +12,7 @@ public partial class CameraBase : Camera3D {
 
     // Offsets 
 
-    private Vector3 cameraTransformOffset = new(0, 12, 0);
+    private Vector3 cameraTransformOffset = new(0, 8, 0);
     private Vector3 cameraRotationOffset = new(-90, 0, 0);
     private ProjectionType projectionType = ProjectionType.Perspective;
 

@@ -15,6 +15,9 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
     private Vector2 selectionAreaStart = Vector2.Zero;
     private Vector2 selectionAreaEnd = Vector2.Zero;
 
+    private int navigationGroupRowLimit = 5;
+    private int navigationGroupGapDistance = 1;
+
     public List<NavigationCharacter> SelectedActors {
         get => selectedActors;
         set {
@@ -63,7 +66,13 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
                 }
             }
             if (eventMouseButton.ButtonIndex == MouseButton.Right) {
-                GD.Print(SelectedActors.ToArray());
+                if (eventMouseButton.Pressed) {
+                    Vector3? targetPosition = NavigationBase.GetNavigationTargetPosition(Camera);
+                    if (targetPosition is not Vector3 targetPositionInWorld) return;
+
+                    NavigationInputHandler.worldMouseNavigationTargetCoordinates = targetPositionInWorld;
+                    SelectionBase.ApplyGroupPosition(SelectedActors, targetPositionInWorld, navigationGroupGapDistance, navigationGroupRowLimit);
+                }
             }
         }
     }
@@ -71,15 +80,19 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
         Vector2 axis = NavigationInputHandler.GetAxis();
-        Camera.AxisMove(axis, (float)delta);
+        Camera.AxisMove(axis, (float)delta); 
+        GD.Print(Performance.GetMonitor(Performance.Monitor.TimeFps)); // Prints the FPS to the console.
     }
 
 
     private List<NavigationCharacter> SelectActors() {
         Vector3? startWorldArea = NavigationBase.Get3DWorldPosition(Camera, selectionAreaStart);
         Vector3? endWorldArea = NavigationBase.Get3DWorldPosition(Camera, selectionAreaEnd);
-        if (startWorldArea == null || endWorldArea == null) return new List<NavigationCharacter>();
-        return SelectionBase.SelectActors((Vector3)startWorldArea, (Vector3)endWorldArea, GetChildren());
+        if (startWorldArea is not Vector3 foundStartWorldArea
+            || endWorldArea is not Vector3 foundEndWorldArea) {
+            return new List<NavigationCharacter>();
+        }
+        return SelectionBase.SelectActors(foundStartWorldArea, foundEndWorldArea, GetChildren());
     }
 
     private static Vector3 Vector2To3(Vector2 direction) {

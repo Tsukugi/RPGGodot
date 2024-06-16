@@ -3,11 +3,24 @@ using Godot;
 public partial class AxisMovementCharacter : Character {
     private AttackCollisionArea attackArea = null;
     readonly private AttackHandler attackHandler = new();
+    private Node3D rotationAnchor = null;
+    private EffectAnimationHandler effectAnimationHandler = null;
 
+    protected Node3D RotationAnchor { get => rotationAnchor; }
+
+    protected EffectAnimationHandler EffectAnimationHandler { get => effectAnimationHandler; }
     protected AttackCollisionArea AttackArea { get => attackArea; }
     public override void _Ready() {
         base._Ready();
+        // Animation Setup
+        rotationAnchor = GetNode<Node3D>(Constants.RotationAnchor);
 
+        AnimatedSprite3D effectsSprite = GetNode<AnimatedSprite3D>(Constants.EffectsPath);
+
+        if (rotationAnchor == null) GD.PrintErr("[ActorBase._Ready] Could not find an Rotation Anchor for this Actor");
+        if (effectsSprite == null) GD.PrintErr("[ActorBase._Ready] Could not find an Animated sprite 3D for Effects on this Actor");
+
+        effectAnimationHandler = new EffectAnimationHandler(effectsSprite);
         attackArea = GetNode<AttackCollisionArea>(Constants.MeleeAttackAreaPath);
         attackArea.AreaEntered += OnMeleeAttackAreaEnteredHandler;
         attackArea.AreaExited += OnMeleeAttackAreaExitedHandler;

@@ -6,7 +6,6 @@ public class NavigationBase {
     public Vector3? GetNavigationTargetPosition(CameraBase camera) {
         Vector2 mousePosition = camera.GetViewport().GetMousePosition();
         Vector3? position = Get3DWorldPosition(camera, mousePosition);
-        GD.Print((Vector3)position);
         return position;
     }
 

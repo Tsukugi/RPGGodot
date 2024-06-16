@@ -61,5 +61,10 @@ public partial class Character : ActorBase {
         MoveAndCollide(direction * (float)delta);
     }
 
-
+    protected void MoveAndSlide(Vector3 direction) {
+        // Apply velocity.
+        direction = direction.Normalized() * movementSpeed;
+        Velocity = direction;
+        MoveAndSlide();
+    }
 }

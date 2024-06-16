@@ -28,6 +28,29 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="PlayerCharacter" parent="Player" instance=ExtResource("2_mybtg")]
 
+[node name="PlayerCharacter2" parent="Player" instance=ExtResource("2_mybtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="PlayerCharacter3" parent="Player" instance=ExtResource("2_mybtg")]
+
+[node name="PlayerCharacter4" parent="Player" instance=ExtResource("2_mybtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="PlayerCharacter5" parent="Player" instance=ExtResource("2_mybtg")]
+
+[node name="PlayerCharacter6" parent="Player" instance=ExtResource("2_mybtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="PlayerCharacter7" parent="Player" instance=ExtResource("2_mybtg")]
+
+[node name="PlayerCharacter8" parent="Player" instance=ExtResource("2_mybtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="PlayerCharacter9" parent="Player" instance=ExtResource("2_mybtg")]
+
+[node name="PlayerCharacter10" parent="Player" instance=ExtResource("2_mybtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
 [node name="Neutral" parent="." instance=ExtResource("3_gsb7g")]
 
 [node name="NPC1" parent="Neutral" instance=ExtResource("2_mybtg")]

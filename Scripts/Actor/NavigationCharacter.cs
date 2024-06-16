@@ -3,9 +3,9 @@
 using Godot;
 
 public partial class NavigationCharacter : Character {
-
     private NavigationAgent3D navigationAgent = null;
     private Node3D navigationTarget;
+    private new RealTimeStrategyPlayer Player;
 
     protected Vector3 NavigationMovementTarget {
         get { return navigationAgent.TargetPosition; }
@@ -13,7 +13,7 @@ public partial class NavigationCharacter : Character {
     }
     public NavigationAgent3D NavigationAgent { get => navigationAgent; }
     public Node3D NavigationTarget { get => navigationTarget; }
-    private new RealTimeStrategyPlayer Player;
+    public bool isSelected = false;
 
     public override void _Ready() {
         base._Ready();
@@ -33,12 +33,11 @@ public partial class NavigationCharacter : Character {
 
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-        if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
         OnNavigationMovement(delta);
     }
 
     public override void _Input(InputEvent @event) {
-        if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
+        if (!isSelected) return;
         if (@event is InputEventMouseButton eventMouseButton && eventMouseButton.Pressed && eventMouseButton.ButtonIndex == MouseButton.Right) {
             Vector3? targetPosition = Player.NavigationBase.GetNavigationTargetPosition(Player.Camera);
             if (targetPosition == null) return;

@@ -143,8 +143,7 @@ material = SubResource("StandardMaterial3D_du2ya")
 [node name="Character" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 2
-floor_stop_on_slope = false
-floor_block_on_wall = false
+collision_mask = 3
 platform_wall_layers = 1
 script = ExtResource("1_7fe2h")
 
@@ -158,7 +157,7 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 shape = SubResource("BoxShape3D_cgk2w")
 
 [node name="StaticRotation" type="Node3D" parent="."]
-transform = Transform3D(0.707107, -0.183013, 0.683013, 0, 0.965926, 0.258819, -0.707107, -0.183013, 0.683013, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="StaticRotation"]
 transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)

@@ -17,10 +17,4 @@ public class NavigationBase {
         Vector3? position = plane.IntersectsRay(origin, direction);
         return position;
     }
-
-    public void PickActorsInPosition(CameraBase camera) {
-        Rect2 rect2 = new();
-
-    }
-
 }

@@ -35,7 +35,7 @@ public partial class Main : Node
 
 		var player = GetNode<Character>("Player");
 		var startPosition = GetNode<Marker2D>("StartPosition");
-		player.Start(startPosition.Position);
+		//player.Start(startPosition.Position);
 
 		GetNode<Timer>("StartTimer").Start();
 

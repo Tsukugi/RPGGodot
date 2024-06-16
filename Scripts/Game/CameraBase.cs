@@ -6,15 +6,24 @@ public partial class CameraBase : Camera3D {
 
     [Export]
     private ActorBase selectedActor = null;
+    [Export]
+    private float cameraVelocity = 3;
     public event EventHandler<Vector3> OnRotationChange;
 
-    // Offsets
-    //private Vector3 cameraTransformOffset = new(0, 12, 0);
-    //private Vector3 cameraRotationOffset = new(-90, 0, 0);
+    // Offsets 
+
+    private Vector3 cameraTransformOffset = new(0, 12, 0);
+    private Vector3 cameraRotationOffset = new(-90, 0, 0);
+    private ProjectionType projectionType = ProjectionType.Perspective;
+
+
+    /*
     private Vector3 cameraTransformOffset = new(8, 7, 8);
     private Vector3 cameraRotationOffset = new(-30, 45, 0);
     private ProjectionType projectionType = ProjectionType.Orthogonal;
+    */
     private int cameraOrthogonalSize = 10;
+
 
     public ActorBase SelectedActor {
         get => selectedActor;
@@ -46,6 +55,15 @@ public partial class CameraBase : Camera3D {
         }
     }
 
+    public void AxisMove(Vector2 axis, float delta) {
+        if (axis == Vector2.Zero) return;
+        if (SelectedActor != null) SelectedActor = null;
+
+        Position = new Vector3(
+            Position.X + axis.X * cameraVelocity * delta,
+            Position.Y,
+            Position.Z + axis.Y * cameraVelocity * delta);
+    }
 
     public void AttachToActor(ActorBase actor) {
         if (actor == null) {

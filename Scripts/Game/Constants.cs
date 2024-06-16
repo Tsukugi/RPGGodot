@@ -15,8 +15,16 @@ public static class Constants {
     public static readonly string ActorSpritePath = "StaticRotation/AnimatedSprite3D";
     public static readonly string NavigationAgentPath = "NavigationAgent3D";
     public static readonly string NavigationTarget = "NavigationTarget";
+    public static readonly string PlayerUISelectionPanelPath = "CanvasLayer/Control/SelectionPanel";
+    public static readonly string PlayerUIInteractionPanelPath = "CanvasLayer/Control/InteractionPanel";
 
     /** Animation **/
     public static readonly string AnimationPrefixIdle = "idle";
     public static readonly string AnimationPrefixRunning = "running";
+}
+
+
+public enum CollisionMasks {
+    Terrain = 1,
+    Actor = 2,
 }

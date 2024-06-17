@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bv8jsrl5gu5r0" path="res://Templates/NavigationCharacter.tscn" id="3_28b0r"]
 [ext_resource type="PackedScene" uid="uid://b6ajx743pvfx" path="res://Templates/PlayerBase.tscn" id="3_gsb7g"]
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_14t4f"]
-vertices = PackedVector3Array(3.25, 1.5, -13.75, 3.75, 1.5, -13.5, 4, 1.5, -14.25, 3.5, 1.5, -14.5, 4, 1.5, -14.25, 5.5, 1.5, -14, 5.5, 1.5, -14.5, 3.5, 1.5, -14.5, 5.5, 1.5, -13.75, 5.5, 1.5, -13.25, 9.75, 1.5, -13.25, -9, 1.5, -13.25, -7.25, 1.5, -13.25, -9.5, 1.5, -13.5, -9.75, 1.5, -12.5, -10.75, 1.5, -12.5, -9.25, 1.5, -12.25, -9, 1.5, -13.25, -9.5, 1.5, -13.5, -9.75, 1.5, -12.5, -9.25, 1.5, -12.25, 15.5, 1.5, -13.5, 12.25, 1.5, -13.5, 14.5, 1.5, -13, 15.5, 1.5, -11.75, 15.5, 1.5, -13.5, 14.5, 1.5, -13, 14.5, 1.5, -6.5, 15.5, 1.5, -6.25, 15.5, 1.5, -8.25, 15.5, 1.5, -8.25, 16.5, 1.5, -8.5, 16.5, 1.5, -11.5, 15.5, 1.5, -11.75, 14.5, 1.5, -13, 14.5, 1.5, -6.5, 15.5, 1.5, -8.25, 15.5, 1.5, -11.75, -13.25, 1.5, -12, -12.25, 1.5, -12.5, -14.5, 1.5, -12.5, -11, 1.5, 14.5, -11.5, 1.5, 12.5, -12.5, 1.5, 12.25, -14.5, 1.5, 14.5, -15.5, 1.5, 8.5, -14.5, 1.5, 8.75, -13.5, 1.5, 6.25, -14.5, 1.5, 1.25, -15.5, 1.5, 1.5, -12.5, 1.5, 12.25, -12.25, 1.5, 9.5, -13.25, 1.5, 9.25, -14.5, 1.5, 8.75, -14.5, 1.5, 14.5, -12.5, 1.5, 12.25, -13.25, 1.5, 9.25, -13.25, 1.5, -12, -14.5, 1.5, -12.5, -14.5, 1.5, 1.25, -13.5, 1.5, 6.25, -14.5, 1.5, 8.75, -13.25, 1.5, 9.25, -13.5, 1.5, 6.25, 13.5, 0.5, -4.25, 14.5, 0.5, -4.5, 14.5, 0.5, -5.25, 13.5, 0.5, -5.5, 5.75, 0.5, -5.25, 5.75, 0.5, -3.75, 12.5, 0.5, -2, 12.75, 0.5, -2.5, 13.5, 0.5, -2.5, 13.5, 0.5, -4.25, 12.5, 0.5, -2, 12.75, 0.5, -2.5, 13.5, 0.5, -4.25, 13.5, 0.5, -5.5, 5.75, 0.5, -5.25, 12.5, 0.5, -2, 13.5, 0.5, -5.5, 13.5, 0.5, -12.25, 4.25, 0.5, -12.25, 5.75, 0.5, -3.75, 5.25, 0.5, -3.25, 12.5, 0.5, -2, 4.25, 0.5, -12.25, 4, 0.5, -5.5, 5.75, 0.5, -5.25, -3.5, 0.5, -10.5, -3.5, 0.5, -12.25, -8.25, 0.5, -12.25, -2.5, 0.5, -5.5, -2.5, 0.5, -10.25, -3.5, 0.5, -10.5, -5.25, 0.5, -5.5, -2.5, 0.5, -5.5, -3.5, 0.5, -10.5, -8.25, 0.5, -12.25, -8.75, 0.5, -11.25, -12.25, 0.5, -3.75, -5.5, 0.5, -3.75, -5.25, 0.5, -5.5, -8.75, 0.5, -11.25, -12.25, 0.5, -11.25, -1.25, 0.5, -10.75, -2.5, 0.5, -10.25, -2.5, 0.5, -5.5, 4, 0.5, -5.5, 4.25, 0.5, -12.25, 4.25, 0.5, -12.25, -1.25, 0.5, -12.25, -1.25, 0.5, -10.75, 16.5, 1.5, -5.5, 15.5, 1.5, -5.75, 15.5, 1.5, -3.75, 16.5, 1.5, -3.5, 14.25, 1.5, -1.75, 14.5, 1.5, -0.25, 15.75, 1.5, -0.25, 15.5, 1.5, -3.25, 14.5, 1.5, -3.5, 15.5, 1.5, -3.25, 16.5, 1.5, -3.5, 15.5, 1.5, -3.75, 14.5, 1.5, -3.5, 0.5, 1.5, -3.5, 3.5, 1.5, -3.5, 3.75, 1.5, -4.25, 0.25, 1.5, -4.5, -5.5, 0.5, 3.75, -4.25, 0.5, 3.5, -4.5, 0.5, -2.25, -5.5, 0.5, -2.5, -12.25, 0.5, -3.75, -12.25, 0.5, 5, -5.5, 0.5, -2.5, -5.5, 0.5, -3.75, -12.25, 0.5, -3.75, -12.25, 0.5, 5, -5.5, 0.5, 5.25, -5.5, 0.5, 3.75, -0.25, 0.5, -2.25, -0.5, 0.5, -3.25, -3.25, 0.5, -3.25, -3.75, 0.5, -2.25, -4.25, 0.5, 3.5, -1.5, 0.5, 3.5, -3.75, 0.5, -2.25, -4.5, 0.5, -2.25, -4.25, 0.5, 3.5, -1.5, 0.5, 3.5, -1.25, 0.5, 4.5, 3, 0.5, 4.5, 2.75, 0.5, -2.25, -0.25, 0.5, -2.25, 5.25, 0.5, -3.25, 4.75, 0.5, -3.25, 4.25, 0.5, -2.25, 13.75, 0.5, 0.75, 13.5, 0.5, -0.25, 12.5, 0.5, -0.5, 13.75, 0.5, 1.5, 12.5, 0.5, 3.75, 13.5, 0.5, 3.5, 13.75, 0.5, 1.5, 16.5, 0.5, 1.5, 16.75, 0.5, 2.5, 20.5, 0.5, 2.5, 20.5, 0.5, -0.5, 16.75, 0.5, -0.5, 16.25, 0.5, 0.75, 16.5, 0.5, 1.5, 20.5, 0.5, 2.5, 5.5, 0.5, 4.5, 5.75, 0.5, 6.25, 12.5, 0.5, 6, 12.5, 0.5, 3.75, 12.5, 0.5, -0.5, 5.25, 0.5, -3.25, 4.25, 0.5, -2.25, 5.5, 0.5, 4.5, 12.5, 0.5, 3.75, 13.75, 0.5, 1.5, 13.75, 0.5, 1.5, 16.5, 0.5, 1.5, 16.25, 0.5, 0.75, 13.75, 0.5, 0.75, 4.25, 0.5, -2.25, 2.75, 0.5, -2.25, 3, 0.5, 4.5, 5.5, 0.5, 4.5, 12.5, 0.5, -0.5, 12.5, 0.5, -2, 5.25, 0.5, -3.25, 16.5, 1.5, 4.5, 16.5, 1.5, 3.5, 15.75, 1.5, 3.25, 15.75, 1.5, 3.25, 15.75, 1.5, 2.5, 14.5, 1.5, 2.5, 15.5, 1.5, 4.75, 16.5, 1.5, 4.5, 15.75, 1.5, 3.25, 14.5, 1.5, 2.5, 14.5, 1.5, 4.25, 15.5, 1.5, 8.75, 16.5, 1.5, 8.5, 16.5, 1.5, 7.5, 15.5, 1.5, 7.25, 15.5, 1.5, 8.75, 15.5, 1.5, 7.25, 13.5, 1.5, 4.5, 15.5, 1.5, 4.75, 14.5, 1.5, 4.25, 13.5, 1.5, 4.5, 15.5, 1.5, 7.25, 13.25, 1.5, 14.25, 15.5, 1.5, 14.5, 15.5, 1.5, 8.75, 13.5, 1.5, 4.5, -2.25, 1.5, 5.5, -2.5, 1.5, 4.5, -4.5, 1.5, 4.5, -4.5, 1.5, 7, 4.75, 1.5, 6.75, 4.75, 1.5, 5.5, -2.25, 1.5, 5.5, -4.5, 1.5, 7, -12.25, 0.5, 5, -12.25, 0.5, 8.5, -11.25, 0.5, 8.75, -5.5, 0.5, 10, -5.5, 0.5, 5.25, -11.25, 0.5, 8.75, -11.25, 0.5, 10.25, -5.5, 0.5, 10, 5.75, 0.5, 10.25, 4.5, 0.5, 10.75, 4.5, 0.5, 13.5, 12.5, 0.5, 13.5, 5.75, 0.5, 10.25, 12.5, 0.5, 13.5, 12.5, 0.5, 6, 5.75, 0.5, 6.25, -11.25, 0.5, 10.25, -11.25, 0.5, 11.5, -10.25, 0.5, 11.75, -5.25, 0.5, 10.75, -5.5, 0.5, 10, -2.5, 0.5, 9.5, -2.5, 0.5, 7.75, -3.25, 0.5, 7.75, -3.25, 0.5, 10.25, -2, 0.5, 13.5, -3.75, 0.5, 10.75, -5.25, 0.5, 10.75, -10.25, 0.5, 11.75, -10.25, 0.5, 13.5, -2, 0.5, 9.75, -2.5, 0.5, 9.5, -3.25, 0.5, 10.25, -2, 0.5, 9.75, -3.25, 0.5, 10.25, -3.75, 0.5, 10.75, -2, 0.5, 13.5, 4.5, 0.5, 13.5, 4.5, 0.5, 10.75, 3.5, 0.5, 10.5, -0.75, 0.5, 9.75, -2, 0.5, 9.75, -2, 0.5, 13.5, 3.5, 0.5, 7.75, -0.25, 0.5, 7.75, -0.25, 0.5, 9.25, 3.5, 0.5, 10.5, 3.5, 0.5, 10.5, -0.25, 0.5, 9.25, -0.75, 0.5, 9.75, -2, 0.5, 13.5, 4.5, 0.5, 13.5, -1.5, 1.5, 15.5, -0.5, 1.5, 15.5, -0.25, 1.5, 14.75, -1.75, 1.5, 14.5)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(10, 9, 8), PackedInt32Array(13, 12, 11), PackedInt32Array(16, 15, 14), PackedInt32Array(20, 19, 17), PackedInt32Array(17, 19, 18), PackedInt32Array(22, 21, 23), PackedInt32Array(26, 25, 24), PackedInt32Array(29, 28, 27), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 33), PackedInt32Array(37, 36, 34), PackedInt32Array(34, 36, 35), PackedInt32Array(40, 39, 38), PackedInt32Array(42, 41, 43), PackedInt32Array(43, 41, 44), PackedInt32Array(46, 45, 47), PackedInt32Array(47, 45, 49), PackedInt32Array(47, 49, 48), PackedInt32Array(52, 51, 50), PackedInt32Array(56, 55, 53), PackedInt32Array(53, 55, 54), PackedInt32Array(58, 57, 59), PackedInt32Array(59, 57, 60), PackedInt32Array(63, 62, 61), PackedInt32Array(65, 64, 66), PackedInt32Array(66, 64, 67), PackedInt32Array(70, 69, 68), PackedInt32Array(73, 72, 71), PackedInt32Array(75, 74, 76), PackedInt32Array(76, 74, 77), PackedInt32Array(79, 78, 80), PackedInt32Array(80, 78, 81), PackedInt32Array(81, 78, 82), PackedInt32Array(85, 84, 83), PackedInt32Array(88, 87, 86), PackedInt32Array(91, 90, 89), PackedInt32Array(94, 93, 92), PackedInt32Array(98, 97, 99), PackedInt32Array(99, 97, 95), PackedInt32Array(95, 97, 96), PackedInt32Array(101, 100, 102), PackedInt32Array(102, 100, 103), PackedInt32Array(103, 100, 104), PackedInt32Array(106, 105, 107), PackedInt32Array(107, 105, 108), PackedInt32Array(108, 105, 109), PackedInt32Array(112, 111, 110), PackedInt32Array(116, 115, 113), PackedInt32Array(113, 115, 114), PackedInt32Array(121, 120, 117), PackedInt32Array(117, 120, 118), PackedInt32Array(118, 120, 119), PackedInt32Array(125, 124, 122), PackedInt32Array(122, 124, 123), PackedInt32Array(127, 126, 128), PackedInt32Array(128, 126, 129), PackedInt32Array(132, 131, 133), PackedInt32Array(133, 131, 130), PackedInt32Array(133, 130, 135), PackedInt32Array(133, 135, 134), PackedInt32Array(138, 137, 136), PackedInt32Array(141, 140, 139), PackedInt32Array(143, 142, 144), PackedInt32Array(144, 142, 145), PackedInt32Array(145, 142, 147), PackedInt32Array(145, 147, 146), PackedInt32Array(150, 149, 148), PackedInt32Array(152, 151, 153), PackedInt32Array(153, 151, 155), PackedInt32Array(153, 155, 154), PackedInt32Array(158, 157, 156), PackedInt32Array(159, 162, 160), PackedInt32Array(160, 162, 161), PackedInt32Array(165, 164, 163), PackedInt32Array(168, 167, 166), PackedInt32Array(171, 170, 172), PackedInt32Array(172, 170, 169), PackedInt32Array(172, 169, 173), PackedInt32Array(175, 174, 176), PackedInt32Array(176, 174, 177), PackedInt32Array(183, 182, 178), PackedInt32Array(178, 182, 181), PackedInt32Array(178, 181, 180), PackedInt32Array(178, 180, 179), PackedInt32Array(187, 186, 184), PackedInt32Array(184, 186, 185), PackedInt32Array(189, 188, 190), PackedInt32Array(190, 188, 191), PackedInt32Array(194, 193, 192), PackedInt32Array(197, 196, 195), PackedInt32Array(200, 199, 198), PackedInt32Array(202, 201, 203), PackedInt32Array(203, 201, 205), PackedInt32Array(203, 205, 204), PackedInt32Array(207, 206, 208), PackedInt32Array(208, 206, 209), PackedInt32Array(212, 211, 210), PackedInt32Array(214, 213, 215), PackedInt32Array(215, 213, 216), PackedInt32Array(218, 217, 219), PackedInt32Array(219, 217, 220), PackedInt32Array(222, 221, 223), PackedInt32Array(223, 221, 224), PackedInt32Array(226, 225, 227), PackedInt32Array(227, 225, 228), PackedInt32Array(230, 229, 231), PackedInt32Array(231, 229, 233), PackedInt32Array(231, 233, 232), PackedInt32Array(236, 235, 234), PackedInt32Array(238, 237, 239), PackedInt32Array(239, 237, 240), PackedInt32Array(244, 243, 241), PackedInt32Array(241, 243, 242), PackedInt32Array(246, 245, 247), PackedInt32Array(247, 245, 249), PackedInt32Array(247, 249, 248), PackedInt32Array(251, 250, 252), PackedInt32Array(252, 250, 253), PackedInt32Array(255, 254, 256), PackedInt32Array(256, 254, 257), PackedInt32Array(257, 254, 258), PackedInt32Array(260, 259, 261), PackedInt32Array(263, 262, 264), PackedInt32Array(264, 262, 265), PackedInt32Array(268, 267, 266), PackedInt32Array(271, 270, 269), PackedInt32Array(273, 272, 274), PackedInt32Array(274, 272, 275), PackedInt32Array(277, 276, 278), PackedInt32Array(278, 276, 280), PackedInt32Array(278, 280, 279), PackedInt32Array(282, 281, 283), PackedInt32Array(283, 281, 284)]
+[sub_resource type="NavigationMesh" id="NavigationMesh_2qvq2"]
+vertices = PackedVector3Array(3.25, 1.5, -13.75, 3.75, 1.5, -13.5, 4, 1.5, -14.25, 3.5, 1.5, -14.5, 4, 1.5, -14.25, 5.5, 1.5, -14, 5.5, 1.5, -14.5, 3.5, 1.5, -14.5, 5.5, 1.5, -13.75, 5.5, 1.5, -13.25, 9.75, 1.5, -13.25, -9, 1.5, -13.25, -7.25, 1.5, -13.25, -9.5, 1.5, -13.5, -9.75, 1.5, -12.5, -10.75, 1.5, -12.5, -9.25, 1.5, -12.25, -9, 1.5, -13.25, -9.5, 1.5, -13.5, -9.75, 1.5, -12.5, -9.25, 1.5, -12.25, 15.5, 1.5, -13.5, 12.25, 1.5, -13.5, 14.5, 1.5, -13, 15.5, 1.5, -11.75, 15.5, 1.5, -13.5, 14.5, 1.5, -13, 14.5, 1.5, -6.25, 15.5, 1.5, -6, 15.5, 1.5, -8.25, 15.5, 1.5, -8.25, 16.5, 1.5, -8.5, 16.5, 1.5, -11.5, 15.5, 1.5, -11.75, 14.5, 1.5, -13, 14.5, 1.5, -6.25, 15.5, 1.5, -8.25, 15.5, 1.5, -11.75, -13.25, 1.5, -12, -12.25, 1.5, -12.5, -14.5, 1.5, -12.5, -11, 1.5, 14.5, -11.5, 1.5, 12.5, -12.5, 1.5, 12.25, -14.5, 1.5, 14.5, -15.5, 1.5, 8.5, -14.5, 1.5, 8.75, -13.5, 1.5, 6.25, -14.5, 1.5, 1.25, -15.5, 1.5, 1.5, -12.5, 1.5, 12.25, -12.25, 1.5, 9.5, -13.25, 1.5, 9.25, -14.5, 1.5, 8.75, -14.5, 1.5, 14.5, -12.5, 1.5, 12.25, -13.25, 1.5, 9.25, -13.25, 1.5, -12, -14.5, 1.5, -12.5, -14.5, 1.5, 1.25, -13.5, 1.5, 6.25, -14.5, 1.5, 8.75, -13.25, 1.5, 9.25, -13.5, 1.5, 6.25, 13.5, 0.5, -4.25, 14.5, 0.5, -4.5, 14.5, 0.5, -5.25, 13.5, 0.5, -5.5, 5.75, 0.5, -5.25, 5.75, 0.5, -3.75, 12.5, 0.5, -2, 12.75, 0.5, -2.5, 13.5, 0.5, -2.5, 13.5, 0.5, -4.25, 12.5, 0.5, -2, 12.75, 0.5, -2.5, 13.5, 0.5, -4.25, 13.5, 0.5, -5.5, 5.75, 0.5, -5.25, 12.5, 0.5, -2, 13.5, 0.5, -5.5, 13.5, 0.5, -12.25, 4.25, 0.5, -12.25, 5.75, 0.5, -3.75, 5.25, 0.5, -3.25, 12.5, 0.5, -2, 4.25, 0.5, -12.25, 4, 0.5, -5.5, 5.75, 0.5, -5.25, -3.5, 0.5, -10.5, -3.5, 0.5, -12.25, -8.25, 0.5, -12.25, -2.5, 0.5, -5.5, -2.5, 0.5, -10.25, -3.5, 0.5, -10.5, -5.25, 0.5, -5.5, -2.5, 0.5, -5.5, -3.5, 0.5, -10.5, -8.25, 0.5, -12.25, -8.75, 0.5, -11.25, -12.25, 0.5, -3.75, -5.5, 0.5, -3.75, -5.25, 0.5, -5.5, -8.75, 0.5, -11.25, -12.25, 0.5, -11.25, -1.25, 0.5, -10.75, -2.5, 0.5, -10.25, -2.5, 0.5, -5.5, 4, 0.5, -5.5, 4.25, 0.5, -12.25, 4.25, 0.5, -12.25, -1.25, 0.5, -12.25, -1.25, 0.5, -10.75, 16.75, 1.5, -3.25, 16.5, 1.5, -5.5, 15.5, 1.5, -5.75, 15.5, 1.5, -3.75, 15.75, 1.5, -3, 14.5, 1.5, -3.5, 14.25, 1.5, -1.75, 14.5, 1.5, -0.25, 15.75, 1.5, -0.25, 15.75, 1.5, -3, 15.5, 1.5, -3.75, 0.5, 1.5, -3.5, 3.5, 1.5, -3.5, 3.75, 1.5, -4.25, 0.25, 1.5, -4.5, -5.5, 0.5, 3.75, -4.25, 0.5, 3.5, -4.5, 0.5, -2.25, -5.5, 0.5, -2.5, -12.25, 0.5, -3.75, -12.25, 0.5, 5, -5.5, 0.5, -2.5, -5.5, 0.5, -3.75, -12.25, 0.5, -3.75, -12.25, 0.5, 5, -5.5, 0.5, 5.25, -5.5, 0.5, 3.75, 18.5, 0.5, -3.5, 17.75, 0.5, -3.5, 17.75, 0.5, -2.75, 18.5, 0.5, -0.75, 5.25, 0.5, -3.25, 4.75, 0.5, -3.25, 4.25, 0.5, -2.25, 13.75, 0.5, 0.75, 13.5, 0.5, -0.25, 12.5, 0.5, -0.5, 13.75, 0.5, 1.5, 13.75, 0.5, 1.5, 16.5, 0.5, 1.5, 16.25, 0.5, 0.75, 13.75, 0.5, 0.75, 18.5, 0.5, -0.75, 17.75, 0.5, -2.75, 16.75, 0.5, -2.25, 16.75, 0.5, 0.25, 12.5, 0.5, 3.75, 13.75, 0.5, 1.5, 12.5, 0.5, -0.5, 5.25, 0.5, -3.25, 4.25, 0.5, -2.25, 5.5, 0.5, 4.5, 12.5, 0.5, 3.75, 13.5, 0.5, 3.5, 13.75, 0.5, 1.5, 18.5, 0.5, -0.75, 16.75, 0.5, 0.25, 16.25, 0.5, 0.75, 16.5, 0.5, 1.5, 16.75, 0.5, 2.5, 20.5, 0.5, 2.5, 20.5, 0.5, -0.5, 18.5, 0.5, -0.75, 16.5, 0.5, 1.5, 5.5, 0.5, 4.5, 5.75, 0.5, 6.25, 12.5, 0.5, 6, 12.5, 0.5, 3.75, 12.5, 0.5, -0.5, 12.5, 0.5, -2, 5.25, 0.5, -3.25, 4.25, 0.5, -2.25, 2.75, 0.5, -2.25, 3, 0.5, 4.5, 5.5, 0.5, 4.5, -0.25, 0.5, -2.25, -0.5, 0.5, -3.25, -3.25, 0.5, -3.25, -3.75, 0.5, -2.25, -4.25, 0.5, 3.5, -1.5, 0.5, 3.5, -3.75, 0.5, -2.25, -4.5, 0.5, -2.25, -4.25, 0.5, 3.5, -1.5, 0.5, 3.5, -1.25, 0.5, 4.5, 3, 0.5, 4.5, 2.75, 0.5, -2.25, -0.25, 0.5, -2.25, 16.5, 1.5, 4.5, 16.5, 1.5, 3.5, 15.75, 1.5, 3.25, 15.75, 1.5, 3.25, 15.75, 1.5, 2.5, 14.5, 1.5, 2.5, 15.5, 1.5, 4.75, 16.5, 1.5, 4.5, 15.75, 1.5, 3.25, 14.5, 1.5, 2.5, 14.5, 1.5, 4.25, 15.5, 1.5, 8.75, 16.5, 1.5, 8.5, 16.5, 1.5, 7.5, 15.5, 1.5, 7.25, 15.5, 1.5, 8.75, 15.5, 1.5, 7.25, 13.5, 1.5, 4.5, 15.5, 1.5, 4.75, 14.5, 1.5, 4.25, 13.5, 1.5, 4.5, 15.5, 1.5, 7.25, 13.25, 1.5, 14.25, 15.5, 1.5, 14.5, 15.5, 1.5, 8.75, 13.5, 1.5, 4.5, -2.25, 1.5, 5.5, -2.5, 1.5, 4.5, -4.5, 1.5, 4.5, -4.5, 1.5, 7, 4.75, 1.5, 6.75, 4.75, 1.5, 5.5, -2.25, 1.5, 5.5, -4.5, 1.5, 7, -12.25, 0.5, 5, -12.25, 0.5, 8.5, -11.25, 0.5, 8.75, -5.5, 0.5, 10, -5.5, 0.5, 5.25, -11.25, 0.5, 8.75, -11.25, 0.5, 10.25, -5.5, 0.5, 10, 5.75, 0.5, 10.25, 4.5, 0.5, 10.75, 4.5, 0.5, 13.5, 12.5, 0.5, 13.5, 5.75, 0.5, 10.25, 12.5, 0.5, 13.5, 12.5, 0.5, 6, 5.75, 0.5, 6.25, -11.25, 0.5, 10.25, -11.25, 0.5, 11.5, -10.25, 0.5, 11.75, -5.25, 0.5, 10.75, -5.5, 0.5, 10, -2.5, 0.5, 9.5, -2.5, 0.5, 7.75, -3.25, 0.5, 7.75, -3.25, 0.5, 10.25, -2, 0.5, 13.5, -3.75, 0.5, 10.75, -5.25, 0.5, 10.75, -10.25, 0.5, 11.75, -10.25, 0.5, 13.5, -2, 0.5, 9.75, -2.5, 0.5, 9.5, -3.25, 0.5, 10.25, -2, 0.5, 9.75, -3.25, 0.5, 10.25, -3.75, 0.5, 10.75, -2, 0.5, 13.5, 4.5, 0.5, 13.5, 4.5, 0.5, 10.75, 3.5, 0.5, 10.5, -0.75, 0.5, 9.75, -2, 0.5, 9.75, -2, 0.5, 13.5, 3.5, 0.5, 7.75, -0.25, 0.5, 7.75, -0.25, 0.5, 9.25, 3.5, 0.5, 10.5, 3.5, 0.5, 10.5, -0.25, 0.5, 9.25, -0.75, 0.5, 9.75, -2, 0.5, 13.5, 4.5, 0.5, 13.5, -1.5, 1.5, 15.5, -0.5, 1.5, 15.5, -0.25, 1.5, 14.75, -1.75, 1.5, 14.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(10, 9, 8), PackedInt32Array(13, 12, 11), PackedInt32Array(16, 15, 14), PackedInt32Array(20, 19, 17), PackedInt32Array(17, 19, 18), PackedInt32Array(22, 21, 23), PackedInt32Array(26, 25, 24), PackedInt32Array(29, 28, 27), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 33), PackedInt32Array(37, 36, 34), PackedInt32Array(34, 36, 35), PackedInt32Array(40, 39, 38), PackedInt32Array(42, 41, 43), PackedInt32Array(43, 41, 44), PackedInt32Array(46, 45, 47), PackedInt32Array(47, 45, 49), PackedInt32Array(47, 49, 48), PackedInt32Array(52, 51, 50), PackedInt32Array(56, 55, 53), PackedInt32Array(53, 55, 54), PackedInt32Array(58, 57, 59), PackedInt32Array(59, 57, 60), PackedInt32Array(63, 62, 61), PackedInt32Array(65, 64, 66), PackedInt32Array(66, 64, 67), PackedInt32Array(70, 69, 68), PackedInt32Array(73, 72, 71), PackedInt32Array(75, 74, 76), PackedInt32Array(76, 74, 77), PackedInt32Array(79, 78, 80), PackedInt32Array(80, 78, 81), PackedInt32Array(81, 78, 82), PackedInt32Array(85, 84, 83), PackedInt32Array(88, 87, 86), PackedInt32Array(91, 90, 89), PackedInt32Array(94, 93, 92), PackedInt32Array(98, 97, 99), PackedInt32Array(99, 97, 95), PackedInt32Array(95, 97, 96), PackedInt32Array(101, 100, 102), PackedInt32Array(102, 100, 103), PackedInt32Array(103, 100, 104), PackedInt32Array(106, 105, 107), PackedInt32Array(107, 105, 108), PackedInt32Array(108, 105, 109), PackedInt32Array(112, 111, 110), PackedInt32Array(117, 116, 113), PackedInt32Array(113, 116, 114), PackedInt32Array(114, 116, 115), PackedInt32Array(123, 122, 118), PackedInt32Array(118, 122, 119), PackedInt32Array(119, 122, 120), PackedInt32Array(120, 122, 121), PackedInt32Array(125, 124, 126), PackedInt32Array(126, 124, 127), PackedInt32Array(130, 129, 131), PackedInt32Array(131, 129, 128), PackedInt32Array(131, 128, 133), PackedInt32Array(131, 133, 132), PackedInt32Array(136, 135, 134), PackedInt32Array(139, 138, 137), PackedInt32Array(141, 140, 142), PackedInt32Array(142, 140, 143), PackedInt32Array(146, 145, 144), PackedInt32Array(147, 150, 148), PackedInt32Array(148, 150, 149), PackedInt32Array(154, 153, 151), PackedInt32Array(151, 153, 152), PackedInt32Array(156, 155, 157), PackedInt32Array(157, 155, 158), PackedInt32Array(160, 159, 161), PackedInt32Array(161, 159, 164), PackedInt32Array(161, 164, 163), PackedInt32Array(161, 163, 162), PackedInt32Array(167, 166, 165), PackedInt32Array(170, 169, 171), PackedInt32Array(171, 169, 168), PackedInt32Array(176, 175, 172), PackedInt32Array(172, 175, 174), PackedInt32Array(172, 174, 173), PackedInt32Array(178, 177, 179), PackedInt32Array(179, 177, 180), PackedInt32Array(183, 182, 181), PackedInt32Array(185, 184, 186), PackedInt32Array(186, 184, 187), PackedInt32Array(189, 188, 190), PackedInt32Array(190, 188, 191), PackedInt32Array(191, 188, 193), PackedInt32Array(191, 193, 192), PackedInt32Array(196, 195, 194), PackedInt32Array(198, 197, 199), PackedInt32Array(199, 197, 201), PackedInt32Array(199, 201, 200), PackedInt32Array(204, 203, 202), PackedInt32Array(207, 206, 205), PackedInt32Array(209, 208, 210), PackedInt32Array(210, 208, 212), PackedInt32Array(210, 212, 211), PackedInt32Array(214, 213, 215), PackedInt32Array(215, 213, 216), PackedInt32Array(219, 218, 217), PackedInt32Array(221, 220, 222), PackedInt32Array(222, 220, 223), PackedInt32Array(225, 224, 226), PackedInt32Array(226, 224, 227), PackedInt32Array(229, 228, 230), PackedInt32Array(230, 228, 231), PackedInt32Array(233, 232, 234), PackedInt32Array(234, 232, 235), PackedInt32Array(237, 236, 238), PackedInt32Array(238, 236, 240), PackedInt32Array(238, 240, 239), PackedInt32Array(243, 242, 241), PackedInt32Array(245, 244, 246), PackedInt32Array(246, 244, 247), PackedInt32Array(251, 250, 248), PackedInt32Array(248, 250, 249), PackedInt32Array(253, 252, 254), PackedInt32Array(254, 252, 256), PackedInt32Array(254, 256, 255), PackedInt32Array(258, 257, 259), PackedInt32Array(259, 257, 260), PackedInt32Array(262, 261, 263), PackedInt32Array(263, 261, 264), PackedInt32Array(264, 261, 265), PackedInt32Array(267, 266, 268), PackedInt32Array(270, 269, 271), PackedInt32Array(271, 269, 272), PackedInt32Array(275, 274, 273), PackedInt32Array(278, 277, 276), PackedInt32Array(280, 279, 281), PackedInt32Array(281, 279, 282), PackedInt32Array(284, 283, 285), PackedInt32Array(285, 283, 287), PackedInt32Array(285, 287, 286), PackedInt32Array(289, 288, 290), PackedInt32Array(290, 288, 291)]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0q4rx"]
 friction = 0.0
@@ -14,7 +14,8 @@ friction = 0.0
 [node name="World" type="Node3D"]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
-navigation_mesh = SubResource("NavigationMesh_14t4f")
+navigation_mesh = SubResource("NavigationMesh_2qvq2")
+use_edge_connections = false
 navigation_layers = 3
 
 [node name="GridMap" type="GridMap" parent="NavigationRegion3D"]
@@ -32,688 +33,169 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0102634, 0.0390453, -0.0869083)
 
 [node name="Character4" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.566, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character5" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.7271, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25383, 0.5, 0)
 
 [node name="Character6" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8247, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character7" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.07112, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character8" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.16872, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character9" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.36506, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character10" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.46266, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character11" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.70907, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25383, 0.5, 0)
 
 [node name="Character12" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80667, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character13" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96778, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character14" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.06538, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character15" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3118, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character16" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409401, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
+
+[node name="Character17" parent="Player" instance=ExtResource("3_28b0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25383, 0.5, 0)
+
+[node name="Character18" parent="Player" instance=ExtResource("3_28b0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
+
+[node name="Character19" parent="Player" instance=ExtResource("3_28b0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character20" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.566, 0.5, 0.986675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character21" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.7271, 0.5, 0.986675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character22" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8247, 0.5, 0.986675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character23" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.07112, 0.5, 0.986675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25383, 0.5, 0)
 
 [node name="Character24" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.16872, 0.5, 0.986675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character25" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.36506, 0.5, 0.986675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character26" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.46266, 0.5, 0.986675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character27" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.70907, 0.5, 0.986675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character28" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80667, 0.5, 0.986675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character29" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96778, 0.5, 0.986675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25383, 0.5, 0)
 
 [node name="Character30" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.06538, 0.5, 0.986675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character31" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3118, 0.5, 0.986675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character32" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409401, 0.5, 0.986675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
+
+[node name="Character33" parent="Player" instance=ExtResource("3_28b0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
+
+[node name="Character34" parent="Player" instance=ExtResource("3_28b0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
+
+[node name="Character35" parent="Player" instance=ExtResource("3_28b0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25383, 0.5, 0)
 
 [node name="Character36" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.566, 0.5, 2.08345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character37" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.7271, 0.5, 2.08345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25383, 0.5, 0)
 
 [node name="Character38" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8247, 0.5, 2.08345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character39" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.07112, 0.5, 2.08345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character40" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.16872, 0.5, 2.08345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character41" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.36506, 0.5, 2.08345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character42" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.46266, 0.5, 2.08345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character43" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.70907, 0.5, 2.08345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25383, 0.5, 0)
 
 [node name="Character44" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80667, 0.5, 2.08345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character45" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96778, 0.5, 2.08345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character46" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.06538, 0.5, 2.08345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character47" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3118, 0.5, 2.08345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character48" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409401, 0.5, 2.08345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character49" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275476, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25383, 0.5, 0)
 
 [node name="Character50" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17788, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character51" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.93146, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character52" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.83386, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character53" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.67275, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character54" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57515, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character55" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.32873, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25383, 0.5, 0)
 
 [node name="Character56" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.23113, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character57" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03479, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Character58" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.93719, 0.5, 0)
-
-[node name="Character59" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69078, 0.5, 0)
-
-[node name="Character60" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.59318, 0.5, 0)
-
-[node name="Character61" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4321, 0.5, 0)
-
-[node name="Character65" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275476, 0.5, 0.986675)
-
-[node name="Character66" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17788, 0.5, 0.986675)
-
-[node name="Character67" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.93146, 0.5, 0.986675)
-
-[node name="Character68" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.83386, 0.5, 0.986675)
-
-[node name="Character69" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.67275, 0.5, 0.986675)
-
-[node name="Character70" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57515, 0.5, 0.986675)
-
-[node name="Character71" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.32873, 0.5, 0.986675)
-
-[node name="Character72" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.23113, 0.5, 0.986675)
-
-[node name="Character73" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03479, 0.5, 0.986675)
-
-[node name="Character74" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.93719, 0.5, 0.986675)
-
-[node name="Character75" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69078, 0.5, 0.986675)
-
-[node name="Character76" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.59318, 0.5, 0.986675)
-
-[node name="Character77" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4321, 0.5, 0.986675)
-
-[node name="Character81" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275476, 0.5, 2.08345)
-
-[node name="Character82" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17788, 0.5, 2.08345)
-
-[node name="Character83" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.93146, 0.5, 2.08345)
-
-[node name="Character84" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.83386, 0.5, 2.08345)
-
-[node name="Character85" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.67275, 0.5, 2.08345)
-
-[node name="Character86" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57515, 0.5, 2.08345)
-
-[node name="Character87" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.32873, 0.5, 2.08345)
-
-[node name="Character88" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.23113, 0.5, 2.08345)
-
-[node name="Character89" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03479, 0.5, 2.08345)
-
-[node name="Character90" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.93719, 0.5, 2.08345)
-
-[node name="Character91" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69078, 0.5, 2.08345)
-
-[node name="Character92" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.59318, 0.5, 2.08345)
-
-[node name="Character93" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4321, 0.5, 2.08345)
-
-[node name="Character100" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.566, 0.5, -9.19652)
-
-[node name="Character101" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.7271, 0.5, -9.19652)
-
-[node name="Character102" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8247, 0.5, -9.19652)
-
-[node name="Character103" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.07112, 0.5, -9.19652)
-
-[node name="Character104" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.16872, 0.5, -9.19652)
-
-[node name="Character105" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.36506, 0.5, -9.19652)
-
-[node name="Character106" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.46266, 0.5, -9.19652)
-
-[node name="Character107" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.70907, 0.5, -9.19652)
-
-[node name="Character108" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80667, 0.5, -9.19652)
-
-[node name="Character109" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96778, 0.5, -9.19652)
-
-[node name="Character110" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.06538, 0.5, -9.19652)
-
-[node name="Character111" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3118, 0.5, -9.19652)
-
-[node name="Character112" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409401, 0.5, -9.19652)
-
-[node name="Character116" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.566, 0.5, -8.20985)
-
-[node name="Character117" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.7271, 0.5, -8.20985)
-
-[node name="Character118" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8247, 0.5, -8.20985)
-
-[node name="Character119" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.07112, 0.5, -8.20985)
-
-[node name="Character120" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.16872, 0.5, -8.20985)
-
-[node name="Character121" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.36506, 0.5, -8.20985)
-
-[node name="Character122" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.46266, 0.5, -8.20985)
-
-[node name="Character123" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.70907, 0.5, -8.20985)
-
-[node name="Character124" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80667, 0.5, -8.20985)
-
-[node name="Character125" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96778, 0.5, -8.20985)
-
-[node name="Character126" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.06538, 0.5, -8.20985)
-
-[node name="Character127" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3118, 0.5, -8.20985)
-
-[node name="Character128" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409401, 0.5, -8.20985)
-
-[node name="Character132" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.566, 0.5, -7.11307)
-
-[node name="Character133" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.7271, 0.5, -7.11307)
-
-[node name="Character134" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8247, 0.5, -7.11307)
-
-[node name="Character135" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.07112, 0.5, -7.11307)
-
-[node name="Character136" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.16872, 0.5, -7.11307)
-
-[node name="Character137" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.36506, 0.5, -7.11307)
-
-[node name="Character138" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.46266, 0.5, -7.11307)
-
-[node name="Character139" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.70907, 0.5, -7.11307)
-
-[node name="Character140" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.80667, 0.5, -7.11307)
-
-[node name="Character141" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96778, 0.5, -7.11307)
-
-[node name="Character142" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.06538, 0.5, -7.11307)
-
-[node name="Character143" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3118, 0.5, -7.11307)
-
-[node name="Character144" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409401, 0.5, -7.11307)
-
-[node name="Character145" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275476, 0.5, -9.19652)
-
-[node name="Character146" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17788, 0.5, -9.19652)
-
-[node name="Character147" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.93146, 0.5, -9.19652)
-
-[node name="Character148" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.83386, 0.5, -9.19652)
-
-[node name="Character149" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.67275, 0.5, -9.19652)
-
-[node name="Character150" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57515, 0.5, -9.19652)
-
-[node name="Character151" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.32873, 0.5, -9.19652)
-
-[node name="Character152" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.23113, 0.5, -9.19652)
-
-[node name="Character153" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03479, 0.5, -9.19652)
-
-[node name="Character154" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.93719, 0.5, -9.19652)
-
-[node name="Character155" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69078, 0.5, -9.19652)
-
-[node name="Character156" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.59318, 0.5, -9.19652)
-
-[node name="Character157" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4321, 0.5, -9.19652)
-
-[node name="Character161" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275476, 0.5, -8.20985)
-
-[node name="Character162" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17788, 0.5, -8.20985)
-
-[node name="Character163" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.93146, 0.5, -8.20985)
-
-[node name="Character164" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.83386, 0.5, -8.20985)
-
-[node name="Character165" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.67275, 0.5, -8.20985)
-
-[node name="Character166" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57515, 0.5, -8.20985)
-
-[node name="Character167" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.32873, 0.5, -8.20985)
-
-[node name="Character168" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.23113, 0.5, -8.20985)
-
-[node name="Character169" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03479, 0.5, -8.20985)
-
-[node name="Character170" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.93719, 0.5, -8.20985)
-
-[node name="Character171" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69078, 0.5, -8.20985)
-
-[node name="Character172" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.59318, 0.5, -8.20985)
-
-[node name="Character173" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4321, 0.5, -8.20985)
-
-[node name="Character177" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275476, 0.5, -7.11307)
-
-[node name="Character178" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17788, 0.5, -7.11307)
-
-[node name="Character179" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.93146, 0.5, -7.11307)
-
-[node name="Character180" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.83386, 0.5, -7.11307)
-
-[node name="Character181" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.67275, 0.5, -7.11307)
-
-[node name="Character182" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57515, 0.5, -7.11307)
-
-[node name="Character183" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.32873, 0.5, -7.11307)
-
-[node name="Character184" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.23113, 0.5, -7.11307)
-
-[node name="Character185" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03479, 0.5, -7.11307)
-
-[node name="Character186" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.93719, 0.5, -7.11307)
-
-[node name="Character187" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69078, 0.5, -7.11307)
-
-[node name="Character188" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.59318, 0.5, -7.11307)
-
-[node name="Character189" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4321, 0.5, -7.11307)
-
-[node name="Character198" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.71601, 0.5, 10.3808)
-
-[node name="Character199" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.96242, 0.5, 10.3808)
-
-[node name="Character200" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.06002, 0.5, 10.3808)
-
-[node name="Character201" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.25636, 0.5, 10.3808)
-
-[node name="Character202" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.35396, 0.5, 10.3808)
-
-[node name="Character203" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.60038, 0.5, 10.3808)
-
-[node name="Character204" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.69798, 0.5, 10.3808)
-
-[node name="Character205" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85909, 0.5, 10.3808)
-
-[node name="Character206" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95669, 0.5, 10.3808)
-
-[node name="Character207" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2031, 0.5, 10.3808)
-
-[node name="Character208" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300703, 0.5, 10.3808)
-
-[node name="Character214" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.71601, 0.5, 11.3675)
-
-[node name="Character215" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.96242, 0.5, 11.3675)
-
-[node name="Character216" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.06002, 0.5, 11.3675)
-
-[node name="Character217" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.25636, 0.5, 11.3675)
-
-[node name="Character218" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.35396, 0.5, 11.3675)
-
-[node name="Character219" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.60038, 0.5, 11.3675)
-
-[node name="Character220" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.69798, 0.5, 11.3675)
-
-[node name="Character221" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85909, 0.5, 11.3675)
-
-[node name="Character222" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95669, 0.5, 11.3675)
-
-[node name="Character223" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2031, 0.5, 11.3675)
-
-[node name="Character224" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300703, 0.5, 11.3675)
-
-[node name="Character230" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.71601, 0.5, 12.4643)
-
-[node name="Character231" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.96242, 0.5, 12.4643)
-
-[node name="Character232" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.06002, 0.5, 12.4643)
-
-[node name="Character233" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.25636, 0.5, 12.4643)
-
-[node name="Character234" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.35396, 0.5, 12.4643)
-
-[node name="Character235" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.60038, 0.5, 12.4643)
-
-[node name="Character236" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.69798, 0.5, 12.4643)
-
-[node name="Character237" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85909, 0.5, 12.4643)
-
-[node name="Character238" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95669, 0.5, 12.4643)
-
-[node name="Character239" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2031, 0.5, 12.4643)
-
-[node name="Character240" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300703, 0.5, 12.4643)
-
-[node name="Character241" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384174, 0.5, 10.3808)
-
-[node name="Character242" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28657, 0.5, 10.3808)
-
-[node name="Character243" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.04016, 0.5, 10.3808)
-
-[node name="Character244" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94256, 0.5, 10.3808)
-
-[node name="Character245" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.78145, 0.5, 10.3808)
-
-[node name="Character246" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.68385, 0.5, 10.3808)
-
-[node name="Character247" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.43743, 0.5, 10.3808)
-
-[node name="Character248" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.33983, 0.5, 10.3808)
-
-[node name="Character249" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14349, 0.5, 10.3808)
-
-[node name="Character250" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04589, 0.5, 10.3808)
-
-[node name="Character251" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.79948, 0.5, 10.3808)
-
-[node name="Character252" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70188, 0.5, 10.3808)
-
-[node name="Character253" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5408, 0.5, 10.3808)
-
-[node name="Character257" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384174, 0.5, 11.3675)
-
-[node name="Character258" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28657, 0.5, 11.3675)
-
-[node name="Character259" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.04016, 0.5, 11.3675)
-
-[node name="Character260" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94256, 0.5, 11.3675)
-
-[node name="Character261" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.78145, 0.5, 11.3675)
-
-[node name="Character262" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.68385, 0.5, 11.3675)
-
-[node name="Character263" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.43743, 0.5, 11.3675)
-
-[node name="Character264" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.33983, 0.5, 11.3675)
-
-[node name="Character265" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14349, 0.5, 11.3675)
-
-[node name="Character266" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04589, 0.5, 11.3675)
-
-[node name="Character267" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.79948, 0.5, 11.3675)
-
-[node name="Character268" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70188, 0.5, 11.3675)
-
-[node name="Character269" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5408, 0.5, 11.3675)
-
-[node name="Character273" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384174, 0.5, 12.4643)
-
-[node name="Character274" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28657, 0.5, 12.4643)
-
-[node name="Character275" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.04016, 0.5, 12.4643)
-
-[node name="Character276" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94256, 0.5, 12.4643)
-
-[node name="Character277" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.78145, 0.5, 12.4643)
-
-[node name="Character278" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.68385, 0.5, 12.4643)
-
-[node name="Character279" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.43743, 0.5, 12.4643)
-
-[node name="Character280" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.33983, 0.5, 12.4643)
-
-[node name="Character281" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14349, 0.5, 12.4643)
-
-[node name="Character282" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04589, 0.5, 12.4643)
-
-[node name="Character283" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.79948, 0.5, 12.4643)
-
-[node name="Character284" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70188, 0.5, 12.4643)
-
-[node name="Character285" parent="Player" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5408, 0.5, 12.4643)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6143, 0.5, 0)
 
 [node name="Neutral" parent="." instance=ExtResource("3_gsb7g")]
 

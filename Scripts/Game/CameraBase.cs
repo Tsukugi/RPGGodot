@@ -66,6 +66,8 @@ public partial class CameraBase : Camera3D {
             Position.Y,
             Position.Z + axis.Y * cameraVelocity * delta);
     }
+
+    
     public void Zoom(CameraZoomDirection value, float delta) {
         if (value == 0) return;
         Vector3 newOffset = new(

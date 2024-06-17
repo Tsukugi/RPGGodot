@@ -42,6 +42,7 @@ script = ExtResource("3_aodfl")
 layout_mode = 2
 
 [node name="SelectionPanel" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 0
 offset_right = 10.0
 offset_bottom = 10.0
 script = ExtResource("4_co5sg")

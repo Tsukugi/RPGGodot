@@ -6,17 +6,27 @@ public partial class NavigationCharacter : Character {
     private NavigationAgent3D navigationAgent = null;
     private Node3D navigationTarget;
     private new RealTimeStrategyPlayer Player;
+    private bool isSelected = false;
+    private Sprite3D selectedIndicator = null;
 
     public NavigationAgent3D NavigationAgent { get => navigationAgent; }
     public Node3D NavigationTarget { get => navigationTarget; }
+
     public Vector3 NavigationTargetPosition;
-    public bool isSelected = false;
+    public bool IsSelected {
+        get => isSelected;
+        set {
+            isSelected = value;
+            selectedIndicator.Visible = isSelected;
+        }
+    }
 
     public override void _Ready() {
         base._Ready();
         Player = (RealTimeStrategyPlayer)GetOwner();
 
         navigationAgent = GetNode<NavigationAgent3D>(Constants.NavigationAgentPath);
+        selectedIndicator = GetNode<Sprite3D>("StaticRotation/SelectedIndicator");
         // Make sure to not await during _Ready.
         Callable.From(ActorSetup).CallDeferred();
 

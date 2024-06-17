@@ -25,4 +25,22 @@ public static class VectorUtils {
         angleRadians *= 2;
         return (float)MathUtils.ToDegrees(angleRadians);
     }
+
+    public static readonly Vector3 FarAway = Vector3.One * -9999;
+
+    public static Vector2 GetDistanceVector(Vector2 start, Vector2 end) {
+        return new Vector2(
+                  Math.Abs(end.X - start.X),
+                  Math.Abs(end.Y - start.Y));
+    }
+    public static Vector3 GetDistanceVector(Vector3 start, Vector3 end) {
+        return new Vector3(
+                  Math.Abs(end.X - start.X),
+                  Math.Abs(end.Y - start.Y),
+                  Math.Abs(end.Z - start.Z));
+    }
+    public static float GetDistanceFromVectors(Vector2 start, Vector2 end) {
+        Vector2 vectorDistance = GetDistanceVector(start, end);
+        return (float)Math.Sqrt(Math.Pow(vectorDistance.X, 2) + Math.Pow(vectorDistance.Y, 2));
+    }
 }

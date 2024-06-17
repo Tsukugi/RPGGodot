@@ -1,10 +1,21 @@
 
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using Godot;
 using Godot.Collections;
 
 public static class SelectionBase {
+
+    public static List<NavigationCharacter> SelectActor(
+       Vector3 worldPointPosition) {
+
+
+        /* We assume that every valid actor is a direct children of the player */
+        List<NavigationCharacter> list = new();
+
+
+        return list;
+    }
     public static List<NavigationCharacter> SelectActors(
         Vector3 startWorldArea,
         Vector3 endWorldArea,
@@ -37,7 +48,7 @@ public static class SelectionBase {
             group[i].NavigationTargetPosition = new Vector3(
                 targetPosition.X + i * gapDistance % rowLimit,
                 targetPosition.Y,
-                targetPosition.Z + i * gapDistance / rowLimit);
+                targetPosition.Z + i * (gapDistance / rowLimit));
         }
     }
 
@@ -50,4 +61,10 @@ public static class SelectionBase {
     public static bool IsInAreaAxis(float position, float start, float end) {
         return position >= start && position <= end;
     }
+}
+
+public enum SelectionPhase {
+    Idle,
+    SingleSelection,
+    MultipleSelection
 }

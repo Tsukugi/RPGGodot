@@ -2,8 +2,6 @@
 
 using Godot;
 public partial class NavigationInputHandler : InputBase {
-    public Vector3 worldMouseNavigationTargetCoordinates = Vector3.Zero;
-
 
     public static Vector2 GetAxis() {
         Vector2 axis = Vector2.Zero;

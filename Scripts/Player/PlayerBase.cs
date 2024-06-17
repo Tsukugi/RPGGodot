@@ -2,7 +2,7 @@
 using System;
 using Godot;
 
-public partial class PlayerBase : Node {
+public partial class PlayerBase : Node3D {
     private CameraBase camera;
     private InteractionPanel interactionPanel;
 

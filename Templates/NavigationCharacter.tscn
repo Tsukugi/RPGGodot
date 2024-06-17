@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bv8jsrl5gu5r0"]
+[gd_scene load_steps=7 format=3 uid="uid://bv8jsrl5gu5r0"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/NavigationCharacter.cs" id="1_b0u44"]
 [ext_resource type="SpriteFrames" uid="uid://brxi6sc2re2r1" path="res://MeshesLibrary/Player.tres" id="2_8yxj2"]
+[ext_resource type="Texture2D" uid="uid://cl7pjrsu3sfyg" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_44.png" id="3_0m470"]
 [ext_resource type="Texture2D" uid="uid://b8n51425dpvj7" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_50.png" id="7_xobwt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k1dhj"]
@@ -44,6 +45,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712326, 0)
 outline_modulate = Color(0.341176, 0.709804, 0.972549, 1)
 text = "Test
 "
+
+[node name="SelectedIndicator" type="Sprite3D" parent="StaticRotation"]
+transform = Transform3D(2, 0, 0, 0, 2, -1.08728e-08, 0, 1.08728e-08, 2, 0, 0, -0.1)
+visible = false
+double_sided = false
+texture = ExtResource("3_0m470")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.1

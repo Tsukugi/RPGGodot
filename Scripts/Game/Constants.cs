@@ -9,23 +9,27 @@ public static class Constants {
     public static readonly string MeleeCollisionArea = "MeleeCollisionArea";
     public static readonly string RotationAnchor = "RotationAnchor";
 
-    // Node Paths
-
-    // Character
-    public static readonly string EffectsPath = "RotationAnchor/Effects";
-    public static readonly string MeleeAttackAreaPath = "RotationAnchor/AttackArea";
-    public static readonly string ActorSpritePath = "StaticRotation/AnimatedSprite3D";
-    public static readonly string SelectedIndicatorPath = "StaticRotation/SelectedIndicator";
-    public static readonly string NavigationAgentPath = "NavigationAgent3D";
-    public static readonly string NavigationTargetPath = "NavigationTarget";
-    public static readonly string BodyCollisionPath = "BodyCollision";
-    // Player  
-    public static readonly string PlayerUISelectionPanelPath = "CanvasLayer/Control/SelectionPanel";
-    public static readonly string PlayerUIInteractionPanelPath = "CanvasLayer/Control/InteractionPanel";
-
     /** Animation **/
     public static readonly string AnimationPrefixIdle = "idle";
     public static readonly string AnimationPrefixRunning = "running";
+}
+
+public static class StaticNodePaths {
+    // Unit
+    public static readonly string Effects = "RotationAnchor/Effects";
+    public static readonly string MeleeAttackArea = "RotationAnchor/AttackArea";
+    public static readonly string ActorSprite = "StaticRotation/AnimatedSprite3D";
+    public static readonly string SelectedIndicator = "StaticRotation/SelectedIndicator";
+    public static readonly string OverheadLabel = "StaticRotation/OverheadLabel";
+    public static readonly string NavigationAgent = "NavigationAgent3D";
+    public static readonly string NavigationTarget = "NavigationTarget";
+    public static readonly string BodyCollision = "BodyCollision";
+    public static readonly string InteractionPanel_Label = "Label";
+    // Player  
+
+    public static readonly string PlayerCamera = "Camera3D";
+    public static readonly string PlayerUISelectionPanel = "CanvasLayer/Control/SelectionPanel";
+    public static readonly string PlayerUIInteractionPanel = "CanvasLayer/Control/InteractionPanel";
 }
 
 

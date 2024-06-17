@@ -1,6 +1,5 @@
 
 using System.Collections.Generic;
-using System.Linq;
 using Godot;
 using Godot.Collections;
 
@@ -13,8 +12,8 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
     public readonly NavigationBase NavigationBase = new();
 
     // Selection
-    private List<NavigationCharacter> selectedActors = new();
-    private List<NavigationCharacter> actorsTargetedForSelection = new();
+    private List<NavigationUnit> selectedActors = new();
+    private List<NavigationUnit> actorsTargetedForSelection = new();
     private SelectionPanel selectionPanel;
     private Vector2 selectionAreaStart = Vector2.Zero;
     private Vector2 selectionAreaEnd = Vector2.Zero;
@@ -26,7 +25,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         },
         CollisionMask = (uint)CollisionMasks.Actor,
     };
-    public List<NavigationCharacter> SelectedActors {
+    public List<NavigationUnit> SelectedActors {
         get => selectedActors;
         set {
             // TODO: Please improve me, i worry about this performance
@@ -51,7 +50,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
 
     public override void _Ready() {
         base._Ready();
-        selectionPanel = GetNode<SelectionPanel>(Constants.PlayerUISelectionPanelPath);
+        selectionPanel = GetNodeOrNull<SelectionPanel>(StaticNodePaths.PlayerUISelectionPanel);
         AddChild(selectionShapeCast3D);
     }
 
@@ -106,7 +105,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
                         Vector3? worldSelectionPoint = NavigationBase.Get3DWorldPosition(Camera, selectionAreaStart);
                         if (worldSelectionPoint is not Vector3 foundWorldSelectionPoint) return;
                         selectionShapeCast3D.GlobalPosition = foundWorldSelectionPoint;
-                        SelectedActors = new List<NavigationCharacter>();
+                        SelectedActors = new List<NavigationUnit>();
                         GD.Print("[RealTimeStrategyPlayer._Input]: SelectedActorsCleared");
                     } else {
                         SelectedActors = actorsTargetedForSelection;
@@ -144,16 +143,15 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
             Camera.AxisMove((cameraDragCurrentPosition - cameraDragStartPosition).Normalized(), (float)delta);
         }
 
-
         // Single Selection 
         Array collisions = selectionShapeCast3D.CollisionResult;
         if (collisions.Count > 0) {
             actorsTargetedForSelection.Clear();
             foreach (Variant item in collisions) {
-                // We know that item.collider is a NavigationCharacter 
-                var collider = item.AsGodotDictionary()["collider"].As<NavigationCharacter>();
-                if (collider is NavigationCharacter navigationCharacter) {
-                    actorsTargetedForSelection.Add(navigationCharacter);
+                // We know that item.collider is a NavigationUnit 
+                var collider = item.AsGodotDictionary()["collider"].As<NavigationUnit>();
+                if (collider is NavigationUnit navigationUnit) {
+                    actorsTargetedForSelection.Add(navigationUnit);
                 }
             }
             SelectedActors = actorsTargetedForSelection;
@@ -161,21 +159,21 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         }
 
         /*
-                GD.Print("TimeFps: " + Performance.GetMonitor(Performance.Monitor.TimeFps));
-                GD.Print("RenderTotalObjectsInFrame: " + Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame));
-                GD.Print("NavigationAgentCount: " + Performance.GetMonitor(Performance.Monitor.NavigationAgentCount));
-                GD.Print("TimeNavigationProcess: " + Performance.GetMonitor(Performance.Monitor.TimeNavigationProcess));
-                GD.Print("TimeProcess: " + Performance.GetMonitor(Performance.Monitor.TimeProcess));
-                GD.Print("RenderVideoMemUsed: " + Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed));
+            GD.Print("TimeFps: " + Performance.GetMonitor(Performance.Monitor.TimeFps));
+            GD.Print("RenderTotalObjectsInFrame: " + Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame));
+            GD.Print("NavigationAgentCount: " + Performance.GetMonitor(Performance.Monitor.NavigationAgentCount));
+            GD.Print("TimeNavigationProcess: " + Performance.GetMonitor(Performance.Monitor.TimeNavigationProcess));
+            GD.Print("TimeProcess: " + Performance.GetMonitor(Performance.Monitor.TimeProcess));
+            GD.Print("RenderVideoMemUsed: " + Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed));
         */
     }
 
-    private List<NavigationCharacter> SelectActorsInArea() {
+    private List<NavigationUnit> SelectActorsInArea() {
         Vector3? startWorldArea = NavigationBase.Get3DWorldPosition(Camera, selectionAreaStart);
         Vector3? endWorldArea = NavigationBase.Get3DWorldPosition(Camera, selectionAreaEnd);
         if (startWorldArea is not Vector3 foundStartWorldArea
             || endWorldArea is not Vector3 foundEndWorldArea) {
-            return new List<NavigationCharacter>();
+            return new List<NavigationUnit>();
         }
         return SelectionBase.SelectActors(foundStartWorldArea, foundEndWorldArea, GetChildren());
     }

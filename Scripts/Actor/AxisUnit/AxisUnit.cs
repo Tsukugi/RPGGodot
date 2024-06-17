@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class AxisMovementCharacter : Character {
+public partial class AxisUnit : Unit {
     private AttackCollisionArea attackArea = null;
     readonly private AttackHandler attackHandler = new();
     private Node3D rotationAnchor = null;
@@ -13,15 +13,10 @@ public partial class AxisMovementCharacter : Character {
     public override void _Ready() {
         base._Ready();
         // Animation Setup
-        rotationAnchor = GetNode<Node3D>(Constants.RotationAnchor);
-
-        AnimatedSprite3D effectsSprite = GetNode<AnimatedSprite3D>(Constants.EffectsPath);
-
-        if (rotationAnchor == null) GD.PrintErr("[AxisMovementCharacter._Ready] Could not find an Rotation Anchor for this Actor");
-        if (effectsSprite == null) GD.PrintErr("[AxisMovementCharacter._Ready] Could not find an Animated sprite 3D for Effects on this Actor");
-
+        rotationAnchor = GetNodeOrNull<Node3D>(Constants.RotationAnchor);
+        AnimatedSprite3D effectsSprite = GetNodeOrNull<AnimatedSprite3D>(StaticNodePaths.Effects);
         effectAnimationHandler = new EffectAnimationHandler(effectsSprite);
-        attackArea = GetNode<AttackCollisionArea>(Constants.MeleeAttackAreaPath);
+        attackArea = GetNodeOrNull<AttackCollisionArea>(StaticNodePaths.MeleeAttackArea);
         attackArea.AreaEntered += OnMeleeAttackAreaEnteredHandler;
         attackArea.AreaExited += OnMeleeAttackAreaExitedHandler;
     }
@@ -47,7 +42,7 @@ public partial class AxisMovementCharacter : Character {
                 }
             case InputState.Move: {
                     ActorAnimationHandler.AnimationPrefix = Constants.AnimationPrefixRunning;
-                    MoveCharacter(Vector2To3(direction), (float)delta);
+                    MoveUnit(Vector2To3(direction), (float)delta);
                     float rotation = VectorUtils.GetRotationFromDirection(direction);
                     RotationAnchor.RotationDegrees = new Vector3(0, rotation - 90, 0);
                     break;
@@ -70,22 +65,22 @@ public partial class AxisMovementCharacter : Character {
     void OnMeleeAttackAreaEnteredHandler(Area3D area) {
         if (area.Name != Constants.AttackArea) return;
         if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
-        Character attackedCharacter = (Character)area.GetParent().GetParent();
-        GD.Print("[OnMeleeAttackAreaEnteredHandler] " + attackedCharacter.Name);
-        GD.Print("[OnMeleeAttackAreaEnteredHandler] Applying " + attackedCharacter.Attributes.BaseDamage + " of base damage to " + attackedCharacter.Name);
-        attackedCharacter.Attributes.ApplyDamage(attackedCharacter.Attributes.BaseDamage);
-        GD.Print("[OnMeleeAttackAreaEnteredHandler] HP: " + attackedCharacter.Attributes.HitPoints + " / " + attackedCharacter.Attributes.MaxHitPoints);
+        Unit attackedUnit = (Unit)area.GetParent().GetParent();
+        GD.Print("[OnMeleeAttackAreaEnteredHandler] " + attackedUnit.Name);
+        GD.Print("[OnMeleeAttackAreaEnteredHandler] Applying " + attackedUnit.Attributes.BaseDamage + " of base damage to " + attackedUnit.Name);
+        attackedUnit.Attributes.ApplyDamage(attackedUnit.Attributes.BaseDamage);
+        GD.Print("[OnMeleeAttackAreaEnteredHandler] HP: " + attackedUnit.Attributes.HitPoints + " / " + attackedUnit.Attributes.MaxHitPoints);
 
-        if (attackedCharacter.Attributes.CanBeKilled()) {
-            attackedCharacter.Visible = false;
+        if (attackedUnit.Attributes.CanBeKilled()) {
+            attackedUnit.Visible = false;
         }
     }
 
     void OnMeleeAttackAreaExitedHandler(Area3D area) {
         if (area.Name != Constants.AttackArea) return;
         if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
-        Character attackedCharacter = (Character)area.GetParent().GetParent();
-        GD.Print("[OnMeleeAttackAreaExitedHandler] " + attackedCharacter.Name);
+        Unit attackedUnit = (Unit)area.GetParent().GetParent();
+        GD.Print("[OnMeleeAttackAreaExitedHandler] " + attackedUnit.Name);
     }
 
     /* This Function is supposed to be called with CallDeferred */

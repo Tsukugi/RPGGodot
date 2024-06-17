@@ -83,7 +83,7 @@ public partial class CameraBase : Camera3D {
 
     public void AttachToActor(ActorBase actor) {
         if (actor == null) {
-            GD.Print("[CameraBase.AttachToActor] There is not a Character available to attach");
+            GD.Print("[CameraBase.AttachToActor] There is not a Unit available to attach");
         } else {
             GD.Print("[CameraBase.AttachToActor] Attaching camera to " + SelectedActor.Name);
             UpdateCameraProperties();

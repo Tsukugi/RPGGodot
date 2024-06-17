@@ -6,17 +6,17 @@ using Godot.Collections;
 
 public static class SelectionBase {
 
-    public static List<NavigationCharacter> SelectActor(
+    public static List<NavigationUnit> SelectActor(
        Vector3 worldPointPosition) {
 
 
         /* We assume that every valid actor is a direct children of the player */
-        List<NavigationCharacter> list = new();
+        List<NavigationUnit> list = new();
 
 
         return list;
     }
-    public static List<NavigationCharacter> SelectActors(
+    public static List<NavigationUnit> SelectActors(
         Vector3 startWorldArea,
         Vector3 endWorldArea,
         Array<Node> actorList) {
@@ -27,9 +27,9 @@ public static class SelectionBase {
             SelectionPanel.GetStartPosition((Vector3)startWorldArea, (Vector3)endWorldArea);
 
         /* We assume that every valid actor is a direct children of the player */
-        List<NavigationCharacter> list = new();
+        List<NavigationUnit> list = new();
         foreach (Node item in actorList) {
-            if (item is NavigationCharacter actor) {
+            if (item is NavigationUnit actor) {
                 bool isInArea = IsInArea(
                  actor.GlobalPosition,
                  selectionWorldStart,
@@ -43,7 +43,7 @@ public static class SelectionBase {
         return list;
     }
 
-    public static void ApplyGroupPosition(List<NavigationCharacter> group, Vector3 targetPosition, float gapDistance, float rowLimit) {
+    public static void ApplyGroupPosition(List<NavigationUnit> group, Vector3 targetPosition, float gapDistance, float rowLimit) {
         for (int i = 0; i < group.Count; i++) {
             group[i].NavigationTargetPosition = new Vector3(
                 targetPosition.X + i * gapDistance % rowLimit,

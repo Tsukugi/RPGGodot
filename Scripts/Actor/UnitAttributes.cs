@@ -1,4 +1,4 @@
-public partial class CharacterAttributes {
+public partial class UnitAttributes {
     int maxHitPoints = 1;
     int hitPoints = 1;
 

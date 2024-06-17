@@ -1,6 +1,7 @@
 
 using Godot;
 
+// ? Deprecated
 public partial class SpriteHandler : Node2D
 {
     public void Animate(Vector2 direction)

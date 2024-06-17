@@ -2,7 +2,7 @@
 
 using Godot;
 
-public partial class NavigationCharacter : Character {
+public partial class NavigationUnit : Unit {
     private NavigationAgent3D navigationAgent = null;
     private Sprite3D selectedIndicator = null;
     private Node3D navigationTarget = null;
@@ -25,12 +25,12 @@ public partial class NavigationCharacter : Character {
         base._Ready();
         Player = (RealTimeStrategyPlayer)GetOwner();
 
-        navigationAgent = GetNode<NavigationAgent3D>(Constants.NavigationAgentPath);
+        navigationAgent = GetNodeOrNull<NavigationAgent3D>(StaticNodePaths.NavigationAgent);
         // Make sure to not await during _Ready.
         Callable.From(ActorSetup).CallDeferred();
 
-        selectedIndicator = GetNode<Sprite3D>(Constants.SelectedIndicatorPath);
-        navigationTarget = GetNode<Node3D>(Constants.NavigationTargetPath);
+        selectedIndicator = GetNodeOrNull<Sprite3D>(StaticNodePaths.SelectedIndicator);
+        navigationTarget = GetNodeOrNull<Node3D>(StaticNodePaths.NavigationTarget);
 
     }
 

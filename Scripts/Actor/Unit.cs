@@ -1,7 +1,10 @@
 using Godot;
 
-public partial class Character : ActorBase {
+public partial class Unit : ActorBase {
 
+    private Label3D overheadLabel;
+    private ActorAnimationHandler actorAnimationHandler = null;
+    private Area3D interactionArea = null;
     // These are attributes handy enough to be fast modified on the editor
     [Export]
     protected int movementSpeed = 3; // How fast the player will move (pixels/sec).
@@ -11,28 +14,35 @@ public partial class Character : ActorBase {
     protected int armor = 1;
     [Export]
     protected int baseDamage = 100;
+    protected ActorAnimationHandler ActorAnimationHandler { get => actorAnimationHandler; }
+    protected Area3D InteractionArea { get => interactionArea; }
 
-    public readonly CharacterAttributes Attributes = new();
-    Label3D label;
+    public readonly UnitAttributes Attributes = new();
+
     public override void _Ready() {
         base._Ready();
-        // ! Debug elements
-        label = GetNode<Label3D>("StaticRotation/OverheadLabel");
+        overheadLabel = GetNodeOrNull<Label3D>(StaticNodePaths.OverheadLabel);
+        interactionArea = GetNodeOrNull<Area3D>(Constants.InteractionArea);
+
+        actorAnimationHandler = new ActorAnimationHandler(Sprite) {
+            AnimationPrefix = "idle"
+        };
+        actorAnimationHandler.ApplyAnimation(inputFaceDirection);
 
         InteractionArea.AreaEntered += OnInteractionAreaEnteredHandler;
         InteractionArea.AreaExited += OnInteractionAreaExitedHandler;
 
-        UpdateCharacterAttributes();
+        UpdateUnitAttributes();
     }
 
     public override void _Process(double delta) {
         if (!Visible && Attributes.CanBeKilled()) {
-            // Kill the Character 
+            // Kill the Unit 
             QueueFree();
             return;
         }
 
-        label.Text = "HP: " + Attributes.HitPoints + " / " + Attributes.MaxHitPoints;
+        overheadLabel.Text = "HP: " + Attributes.HitPoints + " / " + Attributes.MaxHitPoints;
     }
 
     void OnInteractionAreaEnteredHandler(Area3D area) {
@@ -48,14 +58,14 @@ public partial class Character : ActorBase {
         Player.InteractionPanel.Visible = false;
     }
 
-    private void UpdateCharacterAttributes() {
+    private void UpdateUnitAttributes() {
         Attributes.MaxHitPoints = maxHitPoints;
         Attributes.HitPoints = maxHitPoints;
         Attributes.Armor = armor;
         Attributes.BaseDamage = baseDamage;
     }
 
-    protected void MoveCharacter(Vector3 direction, float delta) {
+    protected void MoveUnit(Vector3 direction, float delta) {
         // Apply velocity.
         direction = direction.Normalized() * movementSpeed;
         MoveAndCollide(direction * (float)delta);

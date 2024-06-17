@@ -1,5 +1,4 @@
 
-using System;
 using Godot;
 
 public partial class PlayerBase : Node3D {
@@ -12,8 +11,7 @@ public partial class PlayerBase : Node3D {
     public CameraBase Camera { get => camera; }
     public InteractionPanel InteractionPanel { get => interactionPanel; }
     public override void _Ready() {
-        camera = GetNode<CameraBase>("Camera3D");
-        interactionPanel = GetNode<InteractionPanel>(Constants.PlayerUIInteractionPanelPath);
+        camera = GetNodeOrNull<CameraBase>(StaticNodePaths.PlayerCamera);
+        interactionPanel = GetNodeOrNull<InteractionPanel>(StaticNodePaths.PlayerUIInteractionPanel);
     }
-
 }

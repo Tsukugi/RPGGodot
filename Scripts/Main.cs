@@ -33,7 +33,7 @@ public partial class Main : Node
 		GetTree().CallGroup("mobs", "queue_free");
 		score = 0;
 
-		var player = GetNode<Character>("Player");
+		var player = GetNode<Unit>("Player");
 		var startPosition = GetNode<Marker2D>("StartPosition");
 		//player.Start(startPosition.Position);
 

@@ -21,7 +21,7 @@ public partial class ActorBase : CharacterBody3D {
         player = GetOwner();
 
         interactionArea = GetNode<Area3D>(Constants.InteractionArea);
-        bodyCollision = GetNode<CollisionShape3D>(Constants.BodyCollision);
+        bodyCollision = GetNode<CollisionShape3D>(Constants.BodyCollisionPath);
         animatedSprite3D = GetNode<AnimatedSprite3D>(Constants.ActorSpritePath);
         if (animatedSprite3D == null) GD.PrintErr("[ActorBase._Ready] Could not find an Animated sprite 3D on this Actor");
 

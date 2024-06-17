@@ -15,9 +15,10 @@ public static class Constants {
     public static readonly string EffectsPath = "RotationAnchor/Effects";
     public static readonly string MeleeAttackAreaPath = "RotationAnchor/AttackArea";
     public static readonly string ActorSpritePath = "StaticRotation/AnimatedSprite3D";
+    public static readonly string SelectedIndicatorPath = "StaticRotation/SelectedIndicator";
     public static readonly string NavigationAgentPath = "NavigationAgent3D";
-    public static readonly string NavigationTarget = "NavigationTarget";
-    public static readonly string BodyCollision = "BodyCollision";
+    public static readonly string NavigationTargetPath = "NavigationTarget";
+    public static readonly string BodyCollisionPath = "BodyCollision";
     // Player  
     public static readonly string PlayerUISelectionPanelPath = "CanvasLayer/Control/SelectionPanel";
     public static readonly string PlayerUIInteractionPanelPath = "CanvasLayer/Control/InteractionPanel";

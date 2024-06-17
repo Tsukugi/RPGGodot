@@ -4,10 +4,10 @@ using Godot;
 
 public partial class NavigationCharacter : Character {
     private NavigationAgent3D navigationAgent = null;
-    private Node3D navigationTarget;
+    private Sprite3D selectedIndicator = null;
+    private Node3D navigationTarget = null;
     private new RealTimeStrategyPlayer Player;
     private bool isSelected = false;
-    private Sprite3D selectedIndicator = null;
 
     public NavigationAgent3D NavigationAgent { get => navigationAgent; }
     public Node3D NavigationTarget { get => navigationTarget; }
@@ -26,11 +26,11 @@ public partial class NavigationCharacter : Character {
         Player = (RealTimeStrategyPlayer)GetOwner();
 
         navigationAgent = GetNode<NavigationAgent3D>(Constants.NavigationAgentPath);
-        selectedIndicator = GetNode<Sprite3D>("StaticRotation/SelectedIndicator");
         // Make sure to not await during _Ready.
         Callable.From(ActorSetup).CallDeferred();
 
-        navigationTarget = GetNode<Node3D>(Constants.NavigationTarget);
+        selectedIndicator = GetNode<Sprite3D>(Constants.SelectedIndicatorPath);
+        navigationTarget = GetNode<Node3D>(Constants.NavigationTargetPath);
 
     }
 
@@ -48,12 +48,12 @@ public partial class NavigationCharacter : Character {
             navigationTarget.Visible = true;
             BodyCollision.Disabled = true;
         } else if (navigationAgent.IsNavigationFinished()) {
-            // * On Finish
+            // * On Finish and EveryIteration while Idle
             navigationAgent.DebugEnabled = false;
             navigationTarget.Visible = false;
             BodyCollision.Disabled = false;
         } else {
-            // * Else on EveryIteration
+            // * On EveryIteration while moving
             navigationTarget.GlobalPosition = NavigationTargetPosition;
             Vector3 currentAgentPosition = GlobalTransform.Origin;
             Vector3 nextPathPosition = navigationAgent.GetNextPathPosition();

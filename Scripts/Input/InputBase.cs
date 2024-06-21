@@ -1,7 +1,7 @@
 
 public partial class InputBase {
-    protected InputFaceDirection inputFaceDirection = InputFaceDirection.Down;
-    public InputFaceDirection InputFaceDirection { get => inputFaceDirection; }
+    protected UnitRenderDirection renderDirection = UnitRenderDirection.Down;
+    public UnitRenderDirection RenderDirection { get => renderDirection; }
 
 }
 
@@ -10,17 +10,4 @@ public enum InputState {
     Move,
     Cast,
     Attack,
-}
-
-public enum ActionState {
-    Idle,
-    Attack,
-    Cast,
-}
-
-public enum InputFaceDirection {
-    Down,
-    Up,
-    Left,
-    Right
 }

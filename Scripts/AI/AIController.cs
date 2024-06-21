@@ -37,7 +37,7 @@ public partial class AIController : Node {
                 unit.NavigationTargetPosition = nextPosition;
                 GD.Print("[OnBehaviourCheck] Set next WayPoint to " + unit.NavigationTargetPosition);
             } else if (distance < waypointDistanceSafeRadius) {
-                if (!unit.NavigationAgent.IsNavigationFinished()) {
+                if (!unit.IsMoving) {
                     unit.NavigationTargetPosition = unit.GlobalPosition;
                 }
                 Node3D usedPoint = wayPoints.Pop();

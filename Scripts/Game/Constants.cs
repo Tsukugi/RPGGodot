@@ -25,9 +25,10 @@ public static class StaticNodePaths {
     public static readonly string NavigationTarget = "NavigationTarget";
     public static readonly string AIController = "AIController";
     public static readonly string BodyCollision = "BodyCollision";
+    public static readonly string CombatArea = "CombatArea";
     public static readonly string InteractionPanel_Label = "Label";
+    
     // Player  
-
     public static readonly string PlayerCamera = "Camera3D";
     public static readonly string PlayerUISelectionPanel = "CanvasLayer/Control/SelectionPanel";
     public static readonly string PlayerUIInteractionPanel = "CanvasLayer/Control/InteractionPanel";

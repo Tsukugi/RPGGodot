@@ -50,10 +50,10 @@ public partial class AxisUnit : Unit {
                     break;
                 }
         }
-        ActorAnimationHandler.ApplyAnimation(Player.AxisInputHandler.InputFaceDirection);
+        ActorAnimationHandler.ApplyAnimation(Player.AxisInputHandler.RenderDirection);
 
         switch (Player.AxisInputHandler.ActionInputState) {
-            case ActionState.Attack: {
+            case UnitActionState.Attack: {
                     if (attackHandler.OnAttackCooldownTimer != null && attackHandler.OnAttackCooldownTimer.Enabled) break;
                     GD.Print("[StartAttack]");
                     CallDeferred("DeferredUpdateAttackAreaMonitoring", true);

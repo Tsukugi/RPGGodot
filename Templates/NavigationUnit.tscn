@@ -66,3 +66,9 @@ texture = ExtResource("7_xobwt")
 
 [node name="AIController" type="Node" parent="."]
 script = ExtResource("5_ngwae")
+
+[node name="CombatRange" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CombatRange"]
+shape = SubResource("BoxShape3D_k1dhj")
+disabled = true

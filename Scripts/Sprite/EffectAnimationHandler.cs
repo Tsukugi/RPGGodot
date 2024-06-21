@@ -6,9 +6,9 @@ public class EffectAnimationHandler : AnimationHandlerBase {
         animatedSprite = sprite;
     }
 
-    public void ApplyAnimation(ActionState state) {
+    public void ApplyAnimation(UnitActionState state) {
         switch (state) {
-            case ActionState.Attack: animatedSprite.Play("Attack"); break;
+            case UnitActionState.Attack: animatedSprite.Play("Attack"); break;
         }
     }
 

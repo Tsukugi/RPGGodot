@@ -1,70 +1,94 @@
 
 
+using System.Timers;
 using Godot;
+using Godot.Collections;
 
 public partial class NavigationUnit : Unit {
-    NavigationAgent3D navigationAgent = null;
-    Sprite3D selectedIndicator = null;
-    Node3D navigationTarget = null;
-    RealTimeStrategyPlayer player;
-    bool isSelected = false;
-    AIController aiController = null;
 
-    public NavigationAgent3D NavigationAgent { get => navigationAgent; }
-    public Node3D NavigationTarget { get => navigationTarget; }
+	// Dependencies
+	RealTimeStrategyPlayer player;
+	AIController aiController = null;
+	Area3D combatArea = null;
+	public AIController AiController { get => aiController; }
+	public new RealTimeStrategyPlayer Player { get => player; }
+	public Area3D CombatArea { get => combatArea; }
+	// State
+	AlertState alertState = AlertState.Safe;
 
-    public Vector3 NavigationTargetPosition;
-    public bool IsSelected {
-        get => isSelected;
-        set {
-            isSelected = value;
-            selectedIndicator.Visible = isSelected;
-        }
-    }
-    public AIController AiController { get => aiController; }
-    public new RealTimeStrategyPlayer Player { get => player; }
+	// Navigation
+	NavigationAgent3D navigationAgent = null;
+	Node3D navigationTarget = null;
+	public Node3D NavigationTarget { get => navigationTarget; }
+	public Vector3 NavigationTargetPosition;
+	public bool IsMoving { get => navigationAgent.IsNavigationFinished(); }
 
-    public override void _Ready() {
-        base._Ready();
-        player = (RealTimeStrategyPlayer)GetOwner();
+	// Selection
+	Sprite3D selectedIndicator = null;
+	bool isSelected = false;
+	public bool IsSelected {
+		get => isSelected;
+		set {
+			isSelected = value;
+			selectedIndicator.Visible = isSelected;
+		}
+	}
 
-        navigationAgent = GetNodeOrNull<NavigationAgent3D>(StaticNodePaths.NavigationAgent);
-        aiController = GetNodeOrNull<AIController>(StaticNodePaths.AIController);
-        // Make sure to not await during _Ready.
-        Callable.From(ActorSetup).CallDeferred();
+	public override void _Ready() {
+		base._Ready();
+		player = (RealTimeStrategyPlayer)GetOwner();
 
-        selectedIndicator = GetNodeOrNull<Sprite3D>(StaticNodePaths.SelectedIndicator);
-        navigationTarget = GetNodeOrNull<Node3D>(StaticNodePaths.NavigationTarget);
+		navigationAgent = GetNodeOrNull<NavigationAgent3D>(StaticNodePaths.NavigationAgent);
+		aiController = GetNodeOrNull<AIController>(StaticNodePaths.AIController);
+		combatArea = GetNodeOrNull<Area3D>(StaticNodePaths.CombatArea);
+		// Make sure to not await during _Ready.
+		Callable.From(ActorSetupProcess).CallDeferred();
 
-    }
+		selectedIndicator = GetNodeOrNull<Sprite3D>(StaticNodePaths.SelectedIndicator);
+		navigationTarget = GetNodeOrNull<Node3D>(StaticNodePaths.NavigationTarget);
+		navigationAgent.WaypointReached += UpdateRenderDirection;
+	}
 
-    public override void _PhysicsProcess(double delta) {
-        base._PhysicsProcess(delta);
-        OnNavigationMovement();
-    }
+	public override void _PhysicsProcess(double delta) {
+		base._PhysicsProcess(delta);
+		OnNavigationMovement();
+	}
 
+	void UpdateRenderDirection(Dictionary details) {
+		Vector3 distance = VectorUtils.GetDistanceVector(GlobalPosition, navigationAgent.GetNextPathPosition());
 
-    void OnNavigationMovement() {
-        if (navigationAgent.TargetPosition != NavigationTargetPosition) {
-            // * On Start
-            navigationAgent.TargetPosition = NavigationTargetPosition;
-            navigationTarget.Visible = true;
-        } else if (navigationAgent.IsNavigationFinished()) {
-            // * On Finish and EveryIteration while Idle
-            navigationTarget.Visible = false;
-        } else {
-            // * On EveryIteration while moving
-            navigationTarget.GlobalPosition = NavigationTargetPosition;
-            Vector3 currentAgentPosition = GlobalTransform.Origin;
-            Vector3 nextPathPosition = navigationAgent.GetNextPathPosition();
-            Vector3 Velocity = currentAgentPosition.DirectionTo(nextPathPosition) * movementSpeed;
-            MoveAndSlide(Velocity);
-        }
+		ActorAnimationHandler.ApplyAnimation(
+			ActorAnimationHandler.GetRenderDirectionFromVector(
+				new Vector2(distance.X, distance.Z)));
+	}
 
-    }
-    async void ActorSetup() {
-        // Wait for the first physics frame so the NavigationServer can sync.
-        await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
-    }
+	void OnNavigationMovement() {
+		if (navigationAgent.TargetPosition != NavigationTargetPosition) {
+			// * On Start
+			navigationAgent.TargetPosition = NavigationTargetPosition;
+			navigationTarget.Visible = true;
+		} else if (navigationAgent.IsNavigationFinished()) {
+			// * On Finish and EveryIteration while Idle
+			navigationTarget.Visible = false;
+		} else {
+			// * On EveryIteration while moving
+			navigationTarget.GlobalPosition = NavigationTargetPosition;
+			Vector3 currentAgentPosition = GlobalTransform.Origin;
+			Vector3 nextPathPosition = navigationAgent.GetNextPathPosition();
+			Vector3 Velocity = currentAgentPosition.DirectionTo(nextPathPosition) * movementSpeed;
+			MoveAndSlide(Velocity);
+		}
+	}
 
+	async void ActorSetupProcess() {
+		// Wait for the first physics frame so the NavigationServer can sync.
+		await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
+	}
+
+}
+
+enum AlertState {
+	Safe,
+	Hide,
+	Combat,
 }

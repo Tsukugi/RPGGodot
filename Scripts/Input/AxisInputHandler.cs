@@ -7,12 +7,12 @@ using System;
 public partial class AxisInputHandler : InputBase {
 
     InputState movementInputState = InputState.Stop;
-    ActionState actionInputState = ActionState.Idle;
+    UnitActionState actionInputState = UnitActionState.Idle;
     Vector2 moveDirection = Vector2.Zero;
 
 
     public InputState MovementInputState { get => movementInputState; }
-    public ActionState ActionInputState { get => actionInputState; }
+    public UnitActionState ActionInputState { get => actionInputState; }
 
 
     public bool GetAxisChange() {
@@ -23,10 +23,10 @@ public partial class AxisInputHandler : InputBase {
     public Vector2 GetAxis() {
         Vector2 axis = Vector2.Zero;
 
-        if (Input.IsActionPressed("ui_down")) { axis.Y += 1; inputFaceDirection = InputFaceDirection.Down; }
-        if (Input.IsActionPressed("ui_up")) { axis.Y -= 1; inputFaceDirection = InputFaceDirection.Up; }
-        if (Input.IsActionPressed("ui_right")) { axis.X += 1; inputFaceDirection = InputFaceDirection.Right; }
-        if (Input.IsActionPressed("ui_left")) { axis.X -= 1; inputFaceDirection = InputFaceDirection.Left; }
+        if (Input.IsActionPressed("ui_down")) { axis.Y += 1; renderDirection = UnitRenderDirection.Down; }
+        if (Input.IsActionPressed("ui_up")) { axis.Y -= 1; renderDirection = UnitRenderDirection.Up; }
+        if (Input.IsActionPressed("ui_right")) { axis.X += 1; renderDirection = UnitRenderDirection.Right; }
+        if (Input.IsActionPressed("ui_left")) { axis.X -= 1; renderDirection = UnitRenderDirection.Left; }
 
         return axis;
     }
@@ -43,8 +43,8 @@ public partial class AxisInputHandler : InputBase {
     public void OnInputUpdate() {
         moveDirection = GetAxis();
 
-        if (IsAttacking()) actionInputState = ActionState.Attack;
-        else actionInputState = ActionState.Idle;
+        if (IsAttacking()) actionInputState = UnitActionState.Attack;
+        else actionInputState = UnitActionState.Idle;
 
         if (moveDirection.Length() > 0) movementInputState = InputState.Move;
         else movementInputState = InputState.Stop;

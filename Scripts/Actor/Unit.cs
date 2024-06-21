@@ -1,5 +1,19 @@
 using Godot;
 
+public enum UnitActionState {
+    Idle,
+	Move,
+    Attack,
+    Cast,
+}
+
+public enum UnitRenderDirection {
+    Down,
+    Up,
+    Left,
+    Right
+}
+
 public partial class Unit : ActorBase {
 
 	private Label3D overheadLabel;

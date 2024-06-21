@@ -3,10 +3,9 @@ using Godot;
 public partial class ActorBase : CharacterBody3D {
 
     [Export] // Initial animation direction
-    public InputFaceDirection inputFaceDirection = InputFaceDirection.Down;
+    public UnitRenderDirection inputFaceDirection = UnitRenderDirection.Down;
 
     PlayerBase player = null;
-
     AnimatedSprite3D animatedSprite3D = null;
     CollisionShape3D bodyCollision = null;
 

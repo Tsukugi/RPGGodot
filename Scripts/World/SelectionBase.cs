@@ -20,9 +20,9 @@ public static class SelectionBase {
         Array<Node> actorList) {
 
         Vector3 selectionWorldDistance =
-            SelectionPanel.GetSize((Vector3)startWorldArea, (Vector3)endWorldArea);
+            SelectionPanel.GetSize(startWorldArea, endWorldArea);
         Vector3 selectionWorldStart =
-            SelectionPanel.GetStartPosition((Vector3)startWorldArea, (Vector3)endWorldArea);
+            SelectionPanel.GetStartPosition(startWorldArea, endWorldArea);
 
         /* We assume that every valid actor is a direct children of the player */
         List<NavigationUnit> list = new();
@@ -43,6 +43,7 @@ public static class SelectionBase {
 
     public static void ApplyGroupPosition(List<NavigationUnit> group, Vector3 targetPosition, float gapDistance, float rowLimit) {
         for (int i = 0; i < group.Count; i++) {
+            if (!SimpleGameManager.IsFirstPlayerControlled(group[i].Player)) continue;
             group[i].NavigationTargetPosition = new Vector3(
                 targetPosition.X + i * gapDistance % rowLimit,
                 targetPosition.Y,

@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/SelectionPanel.cs" id="4_co5sg"]
 
 [node name="Player" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 script = ExtResource("1_416j5")
 
 [node name="Camera3D" type="Camera3D" parent="."]

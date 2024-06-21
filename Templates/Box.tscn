@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdb43rk0bbcpy"]
+[gd_scene load_steps=7 format=3 uid="uid://bdb43rk0bbcpy"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/Unit.cs" id="1_g5rk2"]
 [ext_resource type="Texture2D" uid="uid://bkikmt1pknv4g" path="res://Art/TextureEnvBasic/Cut/Props/box.png" id="2_lcnwf"]
@@ -9,6 +9,17 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4qoob"]
 radius = 0.001
 height = 1.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3d8bo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lcnwf")
+}],
+"loop": true,
+"name": &"idleDown",
+"speed": 5.0
+}]
 
 [node name="Box" type="CharacterBody3D"]
 collision_layer = 2
@@ -30,10 +41,11 @@ shape = SubResource("CapsuleShape3D_4qoob")
 [node name="StaticRotation" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 
-[node name="AnimatedSprite3D" type="Sprite3D" parent="StaticRotation"]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="StaticRotation"]
 transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0, 0, 0.1)
 shaded = true
-texture = ExtResource("2_lcnwf")
+sprite_frames = SubResource("SpriteFrames_3d8bo")
+animation = &"idleDown"
 
 [node name="OverheadLabel" type="Label3D" parent="StaticRotation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712326, 0)

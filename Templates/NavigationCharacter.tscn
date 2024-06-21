@@ -36,22 +36,22 @@ disabled = true
 shape = SubResource("CapsuleShape3D_4qoob")
 
 [node name="StaticRotation" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.0174524, 0.999848, 0, -0.999848, 0.0174524, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="StaticRotation"]
-transform = Transform3D(1, 0, 0, 0, 0.996194, -0.0871556, 0, 0.0871556, 0.996194, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.996194, -0.0871557, 0, 0.0871557, 0.996194, 0, 0.25, 0.01)
 shaded = true
 sprite_frames = ExtResource("2_8yxj2")
 animation = &"idleDown"
 
 [node name="OverheadLabel" type="Label3D" parent="StaticRotation"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712326, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 outline_modulate = Color(0.341176, 0.709804, 0.972549, 1)
 text = "Test
 "
 
 [node name="SelectedIndicator" type="Sprite3D" parent="StaticRotation"]
-transform = Transform3D(2, 0, 0, 0, 2, -1.08728e-08, 0, 1.08728e-08, 2, 0, 0, -0.1)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 visible = false
 double_sided = false
 texture = ExtResource("3_0m470")

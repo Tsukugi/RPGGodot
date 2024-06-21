@@ -6,9 +6,9 @@ using System;
 
 public partial class AxisInputHandler : InputBase {
 
-    private InputState movementInputState = InputState.Stop;
-    private ActionState actionInputState = ActionState.Idle;
-    private Vector2 moveDirection = Vector2.Zero;
+    InputState movementInputState = InputState.Stop;
+    ActionState actionInputState = ActionState.Idle;
+    Vector2 moveDirection = Vector2.Zero;
 
 
     public InputState MovementInputState { get => movementInputState; }

@@ -1,7 +1,7 @@
 using Godot;
 
 public partial class InteractionPanel : HBoxContainer {
-    private Label message;
+    Label message;
 
     public Label Message { get => message; }
 

@@ -1,18 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://denbdue5thqbf"]
+[gd_scene load_steps=5 format=3 uid="uid://bjsvvdltjtkp"]
 
-[ext_resource type="Texture2D" uid="uid://cglbwwof5cb5n" path="res://Art/TextureEnvBasic/Cut/Grass/tile061.png" id="1_26kgo"]
+[ext_resource type="Texture2D" uid="uid://cglbwwof5cb5n" path="res://Art/TextureEnvBasic/Cut/Grass/tile061.png" id="1_1afkj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lk8f0"]
 shading_mode = 2
-albedo_texture = ExtResource("1_26kgo")
+albedo_texture = ExtResource("1_1afkj")
 uv1_scale = Vector3(3, 2, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_w2wln"]
 material = SubResource("StandardMaterial3D_lk8f0")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wse3h"]
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_nntxt"]
 
 [node name="Grass" type="MeshInstance3D"]
 mesh = SubResource("BoxMesh_w2wln")
@@ -21,6 +19,4 @@ mesh = SubResource("BoxMesh_w2wln")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_wse3h")
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
-navigation_mesh = SubResource("NavigationMesh_nntxt")
+disabled = true

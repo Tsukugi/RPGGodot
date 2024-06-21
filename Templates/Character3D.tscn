@@ -1,11 +1,11 @@
 [gd_scene load_steps=28 format=3 uid="uid://b0gnd6djt5q6f"]
 
-[ext_resource type="Script" path="res://Scripts/Actor/NavigationCharacter.cs" id="1_7fe2h"]
+[ext_resource type="Script" path="res://Scripts/Actor/AxisUnit/AxisUnit.cs" id="1_7fe2h"]
 [ext_resource type="SpriteFrames" uid="uid://brxi6sc2re2r1" path="res://MeshesLibrary/Player.tres" id="2_yo2df"]
 [ext_resource type="Texture2D" uid="uid://bh1f3sqasqgue" path="res://Art/Retro Impact Effect Pack ALL/Retro Impact Effect Pack 2 A.png" id="3_irvvs"]
 [ext_resource type="Texture2D" uid="uid://dyh7j0robi0mi" path="res://Art/Retro Impact Effect Pack ALL/Retro Impact Effect Pack 3 C.png" id="4_6vqsm"]
 [ext_resource type="Texture2D" uid="uid://o8dtytaqrbcf" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_0.png" id="5_hqfel"]
-[ext_resource type="Script" path="res://Scripts/Actor/AttackCollisionArea.cs" id="6_5c4ra"]
+[ext_resource type="Script" path="res://Scripts/Actor/AxisUnit/AttackCollisionArea.cs" id="6_5c4ra"]
 [ext_resource type="Texture2D" uid="uid://b8n51425dpvj7" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_50.png" id="7_3g54y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k1dhj"]

@@ -7,4 +7,5 @@ public static class SimpleGameManager {
     public static bool IsFirstPlayerControlled(Node player) {
         return player.Name == Player;
     }
+
 }

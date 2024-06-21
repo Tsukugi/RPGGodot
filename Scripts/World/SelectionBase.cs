@@ -9,10 +9,8 @@ public static class SelectionBase {
     public static List<NavigationUnit> SelectActor(
        Vector3 worldPointPosition) {
 
-
-        /* We assume that every valid actor is a direct children of the player */
+        // TODO: Implement me
         List<NavigationUnit> list = new();
-
 
         return list;
     }

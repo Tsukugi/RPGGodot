@@ -5,10 +5,10 @@ public partial class ActorBase : CharacterBody3D {
     [Export] // Initial animation direction
     public InputFaceDirection inputFaceDirection = InputFaceDirection.Down;
 
-    private PlayerBase player = null;
+    PlayerBase player = null;
 
-    private AnimatedSprite3D animatedSprite3D = null;
-    private CollisionShape3D bodyCollision = null;
+    AnimatedSprite3D animatedSprite3D = null;
+    CollisionShape3D bodyCollision = null;
 
     protected PlayerBase Player { get => player; }
 

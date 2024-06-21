@@ -1,10 +1,11 @@
 using Godot;
 
 public partial class AxisUnit : Unit {
-    private AttackCollisionArea attackArea = null;
-    readonly private AttackHandler attackHandler = new();
-    private Node3D rotationAnchor = null;
-    private EffectAnimationHandler effectAnimationHandler = null;
+    readonly AttackHandler attackHandler = new();
+    AttackCollisionArea attackArea = null;
+    Node3D rotationAnchor = null;
+    EffectAnimationHandler effectAnimationHandler = null;
+    new AxisPlayer Player;
 
     protected Node3D RotationAnchor { get => rotationAnchor; }
 
@@ -12,6 +13,7 @@ public partial class AxisUnit : Unit {
     protected AttackCollisionArea AttackArea { get => attackArea; }
     public override void _Ready() {
         base._Ready();
+        Player = (AxisPlayer)GetOwner();
         // Animation Setup
         rotationAnchor = GetNodeOrNull<Node3D>(Constants.RotationAnchor);
         AnimatedSprite3D effectsSprite = GetNodeOrNull<AnimatedSprite3D>(StaticNodePaths.Effects);
@@ -32,7 +34,7 @@ public partial class AxisUnit : Unit {
         Player.AxisInputHandler.OnInputUpdate();
     }
 
-    private void OnManualInput(double delta) {
+    void OnManualInput(double delta) {
         Vector2 direction = Player.AxisInputHandler.GetRotatedAxis(-Player.Camera.RotationDegrees.Y);
 
         switch (Player.AxisInputHandler.MovementInputState) {
@@ -84,21 +86,21 @@ public partial class AxisUnit : Unit {
     }
 
     /* This Function is supposed to be called with CallDeferred */
-    private void DeferredUpdateAttackAreaMonitoring(bool value) {
+    void DeferredUpdateAttackAreaMonitoring(bool value) {
         AttackArea.Monitoring = value;
     }
 
-    private static Vector3 Vector2To3(Vector2 direction) {
+    static Vector3 Vector2To3(Vector2 direction) {
         return new Vector3(direction.X, 0, direction.Y);
     }
 
 
-    private void AttackAnimationEndHandler(System.Object source, System.Timers.ElapsedEventArgs e) {
+    void AttackAnimationEndHandler(System.Object source, System.Timers.ElapsedEventArgs e) {
         CallDeferred("DeferredUpdateAttackAreaMonitoring", false);
         GD.Print("[AttackAnimationEndHandler]");
     }
 
-    private void OnAttackCooldownEndHandler(System.Object source, System.Timers.ElapsedEventArgs e) {
+    void OnAttackCooldownEndHandler(System.Object source, System.Timers.ElapsedEventArgs e) {
         GD.Print("[OnAttackCooldownEndHandler]");
     }
 }

@@ -1,24 +1,24 @@
 
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
 public partial class RealTimeStrategyPlayer : PlayerBase {
 
     // Navigation
-    private int navigationGroupRowLimit = 5;
-    private float navigationGroupGapDistance = 1;
+    float navigationGroupGapDistance = 1;
     public readonly NavigationInputHandler NavigationInputHandler = new();
     public readonly NavigationBase NavigationBase = new();
 
     // Selection
-    private List<NavigationUnit> selectedActors = new();
-    private List<NavigationUnit> actorsTargetedForSelection = new();
-    private SelectionPanel selectionPanel;
-    private Vector2 selectionAreaStart = Vector2.Zero;
-    private Vector2 selectionAreaEnd = Vector2.Zero;
-    private float minSelectionAreaForMultiSelection = 25;
-    private ShapeCast3D selectionShapeCast3D = new() {
+    List<NavigationUnit> selectedActors = new();
+    List<NavigationUnit> actorsTargetedForSelection = new();
+    SelectionPanel selectionPanel;
+    Vector2 selectionAreaStart = Vector2.Zero;
+    Vector2 selectionAreaEnd = Vector2.Zero;
+    float minSelectionAreaForMultiSelection = 25;
+    ShapeCast3D selectionShapeCast3D = new() {
         Position = VectorUtils.FarAway,
         Shape = new SphereShape3D() {
             Radius = 0.5f,
@@ -42,16 +42,36 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         }
     }
 
-
     // Camera
-    private Vector2 cameraDragStartPosition = Vector2.Zero;
-    private Vector2 cameraDragCurrentPosition = Vector2.Zero;
+    Vector2 cameraDragStartPosition = Vector2.Zero;
+    Vector2 cameraDragCurrentPosition = Vector2.Zero;
 
 
     public override void _Ready() {
         base._Ready();
         selectionPanel = GetNodeOrNull<SelectionPanel>(StaticNodePaths.PlayerUISelectionPanel);
         AddChild(selectionShapeCast3D);
+
+
+        var children = GetChildren();
+
+        Node areas = GetNodeOrNull("../NavigationRegion3D/GridMap");
+        var waypoints = areas.GetChildren();
+
+
+        foreach (var child in children) {
+            if (child is NavigationUnit unit) {
+                var shuffledWaypoints = waypoints;
+                waypoints.Shuffle();
+                Stack<Node3D> WayPoints = new();
+                foreach (var item in shuffledWaypoints) {
+                    if (item is not Node3D waypoint) continue;
+                    WayPoints.Push(waypoint);
+                }
+                unit.AiController.WayPoints = WayPoints;
+                GD.Print(WayPoints.ToArray());
+            }
+        }
     }
 
     public override void _Input(InputEvent @event) {
@@ -158,17 +178,10 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
             selectionShapeCast3D.GlobalPosition = VectorUtils.FarAway;
         }
 
-        /*
-            GD.Print("TimeFps: " + Performance.GetMonitor(Performance.Monitor.TimeFps));
-            GD.Print("RenderTotalObjectsInFrame: " + Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame));
-            GD.Print("NavigationAgentCount: " + Performance.GetMonitor(Performance.Monitor.NavigationAgentCount));
-            GD.Print("TimeNavigationProcess: " + Performance.GetMonitor(Performance.Monitor.TimeNavigationProcess));
-            GD.Print("TimeProcess: " + Performance.GetMonitor(Performance.Monitor.TimeProcess));
-            GD.Print("RenderVideoMemUsed: " + Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed));
-        */
+
     }
 
-    private List<NavigationUnit> SelectActorsInArea() {
+    List<NavigationUnit> SelectActorsInArea() {
         Vector3? startWorldArea = NavigationBase.Get3DWorldPosition(Camera, selectionAreaStart);
         Vector3? endWorldArea = NavigationBase.Get3DWorldPosition(Camera, selectionAreaEnd);
         if (startWorldArea is not Vector3 foundStartWorldArea
@@ -178,8 +191,12 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         return SelectionBase.SelectActors(foundStartWorldArea, foundEndWorldArea, GetChildren());
     }
 
-    private static Vector3 Vector2To3(Vector2 direction) {
-        return new Vector3(direction.X, 10, direction.Y);
+
+    static bool IsNavigationUnit(Node node) {
+        return node is NavigationUnit;
     }
 
+    public List<NavigationUnit> GetAllUnits() {
+        return (List<NavigationUnit>)GetChildren().ToList().Where(IsNavigationUnit);
+    }
 }

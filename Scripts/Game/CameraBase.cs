@@ -5,26 +5,26 @@ using Godot;
 public partial class CameraBase : Camera3D {
 
     [Export]
-    private ActorBase selectedActor = null;
+    ActorBase selectedActor = null;
     [Export]
-    private float cameraVelocity = 3;
+    float cameraVelocity = 3;
     [Export]
-    private float cameraZoomVelocity = 0.5f;
+    float cameraZoomVelocity = 0.5f;
     public event EventHandler<Vector3> OnRotationChange;
 
     // Offsets 
 
-    private Vector3 cameraTransformOffset = new(0, 8, 0);
-    private Vector3 cameraRotationOffset = new(-90, 0, 0);
-    private ProjectionType projectionType = ProjectionType.Perspective;
+    Vector3 cameraTransformOffset = new(0, 8, 0);
+    Vector3 cameraRotationOffset = new(-90, 0, 0);
+    ProjectionType projectionType = ProjectionType.Perspective;
 
 
     /*
-    private Vector3 cameraTransformOffset = new(8, 7, 8);
-    private Vector3 cameraRotationOffset = new(-30, 45, 0);
-    private ProjectionType projectionType = ProjectionType.Orthogonal;
+     Vector3 cameraTransformOffset = new(8, 7, 8);
+     Vector3 cameraRotationOffset = new(-30, 45, 0);
+     ProjectionType projectionType = ProjectionType.Orthogonal;
     */
-    private int cameraOrthogonalSize = 10;
+    int cameraOrthogonalSize = 10;
 
 
     public ActorBase SelectedActor {
@@ -67,7 +67,7 @@ public partial class CameraBase : Camera3D {
             Position.Z + axis.Y * cameraVelocity * delta);
     }
 
-    
+
     public void Zoom(CameraZoomDirection value, float delta) {
         if (value == 0) return;
         Vector3 newOffset = new(

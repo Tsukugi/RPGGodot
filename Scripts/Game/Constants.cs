@@ -23,6 +23,7 @@ public static class StaticNodePaths {
     public static readonly string OverheadLabel = "StaticRotation/OverheadLabel";
     public static readonly string NavigationAgent = "NavigationAgent3D";
     public static readonly string NavigationTarget = "NavigationTarget";
+    public static readonly string AIController = "AIController";
     public static readonly string BodyCollision = "BodyCollision";
     public static readonly string InteractionPanel_Label = "Label";
     // Player  

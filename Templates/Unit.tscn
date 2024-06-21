@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://jyguhl8y20qx"]
+
+[ext_resource type="Script" path="res://Scripts/Actor/Unit.cs" id="1_exb1c"]
+[ext_resource type="Texture2D" uid="uid://bkikmt1pknv4g" path="res://Art/TextureEnvBasic/Cut/Props/box.png" id="2_03m24"]
+[ext_resource type="Texture2D" uid="uid://b8n51425dpvj7" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_50.png" id="3_68pyo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k1dhj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4qoob"]
+margin = 0.45
+radius = 0.3
+height = 1.0
+
+[node name="Unit" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 2
+collision_mask = 3
+wall_min_slide_angle = 3.14159
+floor_stop_on_slope = false
+floor_block_on_wall = false
+platform_wall_layers = 1
+script = ExtResource("1_exb1c")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_k1dhj")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_4qoob")
+
+[node name="StaticRotation" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="AnimatedSprite3D" type="Sprite3D" parent="StaticRotation"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0.1)
+shaded = true
+texture = ExtResource("2_03m24")
+
+[node name="OverheadLabel" type="Label3D" parent="StaticRotation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712326, 0)
+visible = false
+outline_modulate = Color(0.341176, 0.709804, 0.972549, 1)
+text = "Test
+"
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+path_max_distance = 0.01
+keep_y_velocity = false
+debug_enabled = true
+
+[node name="NavigationTarget" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.15, 0)
+visible = false
+texture = ExtResource("3_68pyo")

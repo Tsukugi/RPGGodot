@@ -11,7 +11,7 @@ script = ExtResource("1_416j5")
 [node name="Camera3D" type="Camera3D" parent="."]
 size = 19.367
 script = ExtResource("2_7o631")
-cameraVelocity = 4.99
+cameraVelocity = 5.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true

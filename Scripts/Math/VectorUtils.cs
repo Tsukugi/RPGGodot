@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 public static class VectorUtils {
-    private const float DegToRad = (float)Math.PI / 180;
+    const float DegToRad = (float)Math.PI / 180;
 
     public static Vector2 Rotate(this Vector2 vector, float degrees) {
         return vector.RotateRadians(degrees * DegToRad);
@@ -42,5 +42,9 @@ public static class VectorUtils {
     public static float GetDistanceFromVectors(Vector2 start, Vector2 end) {
         Vector2 vectorDistance = GetDistanceVector(start, end);
         return (float)Math.Sqrt(Math.Pow(vectorDistance.X, 2) + Math.Pow(vectorDistance.Y, 2));
+    }
+    public static float GetDistanceFromVectors(Vector3 start, Vector3 end) {
+        Vector3 vectorDistance = GetDistanceVector(start, end);
+        return (float)Math.Sqrt(Math.Pow(vectorDistance.X, 2) + Math.Pow(vectorDistance.X, 2) + Math.Pow(vectorDistance.Z, 2));
     }
 }

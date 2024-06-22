@@ -23,7 +23,6 @@ public partial class AIController : Node {
         unit = GetParentOrNull<NavigationUnit>();
 
         AddChild(behaviourCheckTimer);
-        GD.Print(behaviourCheckTimer.WaitTime);
         behaviourCheckTimer.Timeout += OnBehaviourCheck;
         behaviourCheckTimer.Start();
 
@@ -49,7 +48,7 @@ public partial class AIController : Node {
                     GD.Print("[OnBehaviourCheck] Final destination reached");
                 }
             } else {
-                GD.Print(distance);
+                // Is moving
             }
         }
     }

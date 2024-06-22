@@ -47,4 +47,11 @@ public static class VectorUtils {
         Vector3 vectorDistance = GetDistanceVector(start, end);
         return (float)Math.Sqrt(Math.Pow(vectorDistance.X, 2) + Math.Pow(vectorDistance.X, 2) + Math.Pow(vectorDistance.Z, 2));
     }
+
+    public static Vector2 ToVector2(this Vector3 worldVector) {
+        return new Vector2(worldVector.X, worldVector.Z);
+    }
+    public static Vector3 ToVector3(this Vector2 worldVector) {
+        return new Vector3(worldVector.X, 0, worldVector.Y);
+    }
 }

@@ -1,4 +1,5 @@
 
+using System;
 using Godot;
 
 public class ActorAnimationHandler : AnimationHandlerBase {
@@ -6,16 +7,16 @@ public class ActorAnimationHandler : AnimationHandlerBase {
         animatedSprite = sprite;
     }
 
-    public static UnitRenderDirection GetRenderDirectionFromVector (Vector2 direction) {
+    public static UnitRenderDirection GetRenderDirectionFromVector(Vector2 direction) {
         UnitRenderDirection unitRenderDirection;
-        
-        if (direction.X > direction.Y) {
+
+        if (Math.Abs(direction.X) > Math.Abs(direction.Y)) {
             if (direction.X > 0) unitRenderDirection = UnitRenderDirection.Right;
-			else unitRenderDirection = UnitRenderDirection.Left;
+            else unitRenderDirection = UnitRenderDirection.Left;
         } else {
-			if (direction.Y > 0) unitRenderDirection = UnitRenderDirection.Up;
-            else unitRenderDirection = UnitRenderDirection.Down;
-		} 
+            if (direction.Y > 0) unitRenderDirection = UnitRenderDirection.Down;
+            else unitRenderDirection = UnitRenderDirection.Up;
+        }
 
         return unitRenderDirection;
     }

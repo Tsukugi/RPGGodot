@@ -21,6 +21,7 @@ public static class StaticNodePaths {
     public static readonly string ActorSprite = "StaticRotation/AnimatedSprite3D";
     public static readonly string SelectedIndicator = "StaticRotation/SelectedIndicator";
     public static readonly string OverheadLabel = "StaticRotation/OverheadLabel";
+    public static readonly string StaticRotation = "StaticRotation";
     public static readonly string NavigationAgent = "NavigationAgent3D";
     public static readonly string NavigationTarget = "NavigationTarget";
     public static readonly string AIController = "AIController";

@@ -18,12 +18,13 @@ public partial class CameraBase : Camera3D {
     Vector3 cameraRotationOffset = new(-90, 0, 0);
     ProjectionType projectionType = ProjectionType.Perspective;
 
+/*
 
-    /*
      Vector3 cameraTransformOffset = new(8, 7, 8);
      Vector3 cameraRotationOffset = new(-30, 45, 0);
      ProjectionType projectionType = ProjectionType.Orthogonal;
-    */
+   
+   */
     int cameraOrthogonalSize = 10;
 
 
@@ -77,8 +78,6 @@ public partial class CameraBase : Camera3D {
 
         Position = newOffset;
         cameraTransformOffset.Y = newOffset.Y;
-
-        GD.Print(Position);
     }
 
     public void AttachToActor(ActorBase actor) {

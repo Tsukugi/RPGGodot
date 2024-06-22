@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://cmuu6ddxk83gj"]
+
+[ext_resource type="Script" path="res://Scripts/Actor/NavigationUnit.cs" id="1_plhnm"]
+[ext_resource type="SpriteFrames" uid="uid://brxi6sc2re2r1" path="res://MeshesLibrary/Player.tres" id="2_8yxj2"]
+[ext_resource type="Texture2D" uid="uid://cl7pjrsu3sfyg" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_44.png" id="3_0m470"]
+[ext_resource type="Script" path="res://Scripts/AI/AIController.cs" id="5_ngwae"]
+[ext_resource type="Texture2D" uid="uid://b8n51425dpvj7" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_50.png" id="7_xobwt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k1dhj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4qoob"]
+margin = 0.2
+radius = 0.3
+height = 0.7
+
+[node name="Character" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+floor_stop_on_slope = false
+floor_block_on_wall = false
+platform_wall_layers = 1
+safe_margin = 0.5
+script = ExtResource("1_plhnm")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_k1dhj")
+disabled = true
+
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_4qoob")
+
+[node name="StaticRotation" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="StaticRotation"]
+transform = Transform3D(1, 0, 0, 0, 0.996194, -0.0871557, 0, 0.0871557, 0.996194, 0, 0.25, 0.01)
+shaded = true
+sprite_frames = ExtResource("2_8yxj2")
+animation = &"idleDown"
+
+[node name="OverheadLabel" type="Label3D" parent="StaticRotation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+outline_modulate = Color(0.341176, 0.709804, 0.972549, 1)
+text = "Test
+"
+
+[node name="SelectedIndicator" type="Sprite3D" parent="StaticRotation"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+visible = false
+double_sided = false
+texture = ExtResource("3_0m470")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+keep_y_velocity = false
+
+[node name="NavigationTarget" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.15, 0)
+texture = ExtResource("7_xobwt")
+
+[node name="AIController" type="Node" parent="."]
+script = ExtResource("5_ngwae")

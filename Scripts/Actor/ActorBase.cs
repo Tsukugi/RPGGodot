@@ -7,15 +7,18 @@ public partial class ActorBase : CharacterBody3D {
 
     PlayerBase player = null;
     AnimatedSprite3D animatedSprite3D = null;
+    Node3D staticRotation = null;
     CollisionShape3D bodyCollision = null;
 
     protected PlayerBase Player { get => player; }
 
     protected CollisionShape3D BodyCollision { get => bodyCollision; }
     protected AnimatedSprite3D Sprite { get => animatedSprite3D; }
+    protected Node3D StaticRotation { get => staticRotation; }
 
     public override void _Ready() {
         player = GetOwner();
+        staticRotation = GetNodeOrNull<AnimatedSprite3D>(StaticNodePaths.StaticRotation);
         animatedSprite3D = GetNodeOrNull<AnimatedSprite3D>(StaticNodePaths.ActorSprite);
         bodyCollision = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.BodyCollision);
 

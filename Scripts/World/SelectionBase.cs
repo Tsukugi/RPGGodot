@@ -1,18 +1,23 @@
 
-using System;
 using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
 
 public static class SelectionBase {
 
-    public static List<NavigationUnit> SelectActor(
-       Vector3 worldPointPosition) {
+    public static void SelectActor(
+    RealTimeStrategyPlayer player, Array collisions) {
+        NavigationUnit selectedUnit = null;
+        foreach (Variant item in collisions) {
+            // We know that item.collider is a Variant but can be a NavigationUnit 
+            NavigationUnit collider = item.AsGodotDictionary()["collider"].As<NavigationUnit>();
+            if (collider is not NavigationUnit navigationUnit || selectedUnit != null) continue;
 
-        // TODO: Implement me
-        List<NavigationUnit> list = new();
-
-        return list;
+            selectedUnit = navigationUnit;
+            player.SelectedActors = new() { selectedUnit };
+            player.SelectionShapeCast3D.GlobalPosition = VectorUtils.FarAway;
+            return;
+        }
     }
     public static List<NavigationUnit> SelectActors(
         Vector3 startWorldArea,
@@ -29,9 +34,9 @@ public static class SelectionBase {
         foreach (Node item in actorList) {
             if (item is NavigationUnit actor) {
                 bool isInArea = IsInArea(
-                 actor.GlobalPosition,
-                 selectionWorldStart,
-                 selectionWorldStart + selectionWorldDistance);
+                    actor.GlobalPosition,
+                    selectionWorldStart,
+                    selectionWorldStart + selectionWorldDistance);
 
                 if (!isInArea) continue;
                 list.Add(actor);

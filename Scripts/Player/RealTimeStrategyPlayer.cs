@@ -41,6 +41,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
             GD.Print("[SelectedActors.set] Added actors: " + selectedActors.Count);
         }
     }
+    public ShapeCast3D SelectionShapeCast3D { get => selectionShapeCast3D; }
 
     // Camera
     Vector2 cameraDragStartPosition = Vector2.Zero;
@@ -71,7 +72,6 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
                         WayPoints.Push(waypoint);
                     }
                     unit.AiController.WayPoints = WayPoints;
-                    GD.Print(WayPoints.ToArray());
                 }
             }
         }
@@ -171,16 +171,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         // Single Selection 
         Array collisions = selectionShapeCast3D.CollisionResult;
         if (collisions.Count > 0) {
-            actorsTargetedForSelection.Clear();
-            foreach (Variant item in collisions) {
-                // We know that item.collider is a NavigationUnit 
-                var collider = item.AsGodotDictionary()["collider"].As<NavigationUnit>();
-                if (collider is NavigationUnit navigationUnit) {
-                    actorsTargetedForSelection.Add(navigationUnit);
-                }
-            }
-            SelectedActors = actorsTargetedForSelection;
-            selectionShapeCast3D.GlobalPosition = VectorUtils.FarAway;
+            SelectionBase.SelectActor(this, collisions);
         }
     }
 

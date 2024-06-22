@@ -36,15 +36,14 @@ public partial class Unit : ActorBase {
     public override void _Ready() {
         base._Ready();
         overheadLabel = GetNodeOrNull<Label3D>(StaticNodePaths.OverheadLabel);
-        interactionArea = GetNodeOrNull<Area3D>(Constants.InteractionArea);
+        interactionArea = GetNodeOrNull<Area3D>(StaticNodePaths.InteractionArea);
+        interactionArea.BodyEntered += OnInteractionAreaEnteredHandler;
+        interactionArea.BodyExited += OnInteractionAreaExitedHandler;
 
         actorAnimationHandler = new ActorAnimationHandler(Sprite) {
             AnimationPrefix = "idle"
         };
         actorAnimationHandler.ApplyAnimation(inputFaceDirection);
-
-        InteractionArea.AreaEntered += OnInteractionAreaEnteredHandler;
-        InteractionArea.AreaExited += OnInteractionAreaExitedHandler;
 
         UpdateUnitAttributes();
     }
@@ -59,16 +58,18 @@ public partial class Unit : ActorBase {
         overheadLabel.Text = "HP: " + Attributes.HitPoints + " / " + Attributes.MaxHitPoints;
     }
 
-    void OnInteractionAreaEnteredHandler(Area3D area) {
-        if (area.Name != Constants.InteractionArea) return;
-        if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
-        Player.InteractionPanel.Message.Text = "Talk to " + area.GetParent().Name;
+    void OnInteractionAreaEnteredHandler(Node3D body) {
+        if (!Player.IsFirstPlayer() || body is not Unit unit || unit.Player.IsFirstPlayer()) return;
+        if (unit.Player.Name != "Environment") {
+            Player.InteractionPanel.Message.Text = "Talk to " + body.Name;
+        } else {
+            Player.InteractionPanel.Message.Text = "Interact with " + body.Name;
+        }
         Player.InteractionPanel.Visible = true;
     }
 
-    void OnInteractionAreaExitedHandler(Area3D area) {
-        if (area.Name != Constants.InteractionArea) return;
-        if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
+    void OnInteractionAreaExitedHandler(Node3D body) {
+        if (!Player.IsFirstPlayer() || body is not Unit unit || unit.Player.IsFirstPlayer()) return;
         Player.InteractionPanel.Visible = false;
     }
 

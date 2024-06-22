@@ -31,12 +31,12 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
             // TODO: Please improve me, i worry about this performance
             // Clear old and assign new selected state
             selectedActors.ForEach(actor => {
-                actor.IsSelected = false;
+                actor.UnitSelection.IsSelected = false;
             });
             GD.Print("[SelectedActors.set] Cleared actors: " + selectedActors.Count);
             selectedActors = value;
             selectedActors.ForEach(actor => {
-                actor.IsSelected = true;
+                actor.UnitSelection.IsSelected = true;
             });
             GD.Print("[SelectedActors.set] Added actors: " + selectedActors.Count);
         }
@@ -55,7 +55,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
 
 
         // !Debug
-        if (!SimpleGameManager.IsFirstPlayerControlled(this)) {
+        if (!this.IsFirstPlayer()) {
             var children = GetChildren();
 
             Node areas = GetNodeOrNull("../NavigationRegion3D/Areas");
@@ -80,7 +80,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
 
     public override void _Input(InputEvent @event) {
         base._Input(@event);
-        if (!SimpleGameManager.IsFirstPlayerControlled(this)) return;
+        if (!this.IsFirstPlayer()) return;
 
         if (@event is InputEventMouseMotion) {
             if (Input.IsMouseButtonPressed(MouseButton.Left)) {
@@ -158,12 +158,15 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
 
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-        if (!SimpleGameManager.IsFirstPlayerControlled(this)) return;
+        if (!SimpleGameManager.IsFirstPlayer(this)) return;
+
+        // Camera WASD move
         Vector2 axis = NavigationInputHandler.GetAxis();
         if (axis != Vector2.Zero) {
             Camera.AxisMove(axis, (float)delta);
         }
 
+        // Camera Middle mouse button drag move
         if (cameraDragCurrentPosition != Vector2.Zero) {
             Camera.AxisMove((cameraDragCurrentPosition - cameraDragStartPosition).Normalized(), (float)delta);
         }

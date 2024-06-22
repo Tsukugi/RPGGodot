@@ -1,38 +1,35 @@
 
 public static class Constants {
-
-    /** Actor **/
-
-    // Nodes
-    public static readonly string InteractionArea = "InteractionArea";
-    public static readonly string AttackArea = "AttackArea";
-    public static readonly string MeleeCollisionArea = "MeleeCollisionArea";
-    public static readonly string RotationAnchor = "RotationAnchor";
-
     /** Animation **/
     public static readonly string AnimationPrefixIdle = "idle";
     public static readonly string AnimationPrefixRunning = "running";
 }
 
 public static class StaticNodePaths {
-    // Unit
-    public static readonly string Effects = "RotationAnchor/Effects";
-    public static readonly string MeleeAttackArea = "RotationAnchor/AttackArea";
-    public static readonly string ActorSprite = "StaticRotation/AnimatedSprite3D";
-    public static readonly string SelectedIndicator = "StaticRotation/SelectedIndicator";
-    public static readonly string OverheadLabel = "StaticRotation/OverheadLabel";
-    public static readonly string StaticRotation = "StaticRotation";
-    public static readonly string NavigationAgent = "NavigationAgent3D";
-    public static readonly string NavigationTarget = "NavigationTarget";
+    /** Unit **/
+    public static readonly string NavigationAgent = "Navigation/NavigationAgent";
+    public static readonly string NavigationTarget = "Navigation/NavigationTarget";
+    public static readonly string Selection = "Selection";
+    public static readonly string SelectedIndicator = "Selection/SelectedIndicator";
     public static readonly string AIController = "AIController";
     public static readonly string BodyCollision = "BodyCollision";
-    public static readonly string CombatArea = "CombatArea";
-    public static readonly string InteractionPanel_Label = "Label";
-    
-    // Player  
+
+    // StaticRotation
+    public static readonly string StaticRotation = "StaticRotation";
+    public static readonly string ActorSprite = "StaticRotation/AnimatedSprite3D";
+    public static readonly string OverheadLabel = "StaticRotation/OverheadLabel";
+
+    // Areas
+    public static readonly string InteractionArea = "Areas/Interaction";
+    public static readonly string CombatArea = "Areas/Combat";
+    public static readonly string AlertArea = "Areas/Alert";
+    public static readonly string Area_CollisionShape = "CollisionShape";
+
+    /** Player **/
     public static readonly string PlayerCamera = "Camera3D";
     public static readonly string PlayerUISelectionPanel = "CanvasLayer/Control/SelectionPanel";
     public static readonly string PlayerUIInteractionPanel = "CanvasLayer/Control/InteractionPanel";
+    public static readonly string InteractionPanel_Label = "Label";
 }
 
 

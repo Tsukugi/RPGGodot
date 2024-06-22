@@ -17,7 +17,7 @@ public partial class CameraBase : Camera3D {
     public static readonly Vector3 CameraTransformOffset = new(0, 8, 0);
     public static readonly Vector3 CameraRotationOffset = new(-90, 0, 0);
     ProjectionType projectionType = ProjectionType.Perspective;
-    
+
     /* public static readonly Vector3 CameraTransformOffset = new(-8, 7, 8);
      public static readonly Vector3 CameraRotationOffset = new(-30, -45, 0); 
      ProjectionType projectionType = ProjectionType.Orthogonal;*/
@@ -35,7 +35,9 @@ public partial class CameraBase : Camera3D {
     public override void _Ready() {
         base._Ready();
         Node parent = GetParent();
-        Current = SimpleGameManager.IsFirstPlayerControlled(parent);
+        if (parent is not PlayerBase player) throw new Exception("[CameraBase._Ready] Parent is not player, it is" + parent);
+
+        Current = player.IsFirstPlayer();
 
         ActorBase newActor = parent.GetChildren().OfType<ActorBase>().FirstOrDefault();
         if (newActor == null) return;

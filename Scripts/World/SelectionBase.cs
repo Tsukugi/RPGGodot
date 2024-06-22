@@ -48,8 +48,8 @@ public static class SelectionBase {
 
     public static void ApplyGroupPosition(List<NavigationUnit> group, Vector3 targetPosition, float gapDistance, float rowLimit) {
         for (int i = 0; i < group.Count; i++) {
-            if (!SimpleGameManager.IsFirstPlayerControlled(group[i].Player)) continue;
-            group[i].NavigationTargetPosition = new Vector3(
+            if (!group[i].Player.IsFirstPlayer()) continue;
+            group[i].NavigationAgent.NavigationTargetPosition = new Vector3(
                 targetPosition.X + i * gapDistance % rowLimit,
                 targetPosition.Y,
                 targetPosition.Z + i * (gapDistance / rowLimit));
@@ -65,10 +65,4 @@ public static class SelectionBase {
     public static bool IsInAreaAxis(float position, float start, float end) {
         return position >= start && position <= end;
     }
-}
-
-public enum SelectionPhase {
-    Idle,
-    SingleSelection,
-    MultipleSelection
 }

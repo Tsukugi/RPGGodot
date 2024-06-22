@@ -1,5 +1,15 @@
 using Godot;
 
+static class AxisNodeNames {
+    public static readonly string AttackArea = "AttackArea";
+    public static readonly string MeleeCollisionArea = "MeleeCollisionArea";
+}
+static class AxisNodePaths {
+    public static readonly string MeleeAttackArea = "RotationAnchor/AttackArea";
+    public static readonly string Effects = "RotationAnchor/Effects";
+    public static readonly string RotationAnchor = "RotationAnchor";
+}
+
 public partial class AxisUnit : Unit {
     readonly AttackHandler attackHandler = new();
     AttackCollisionArea attackArea = null;
@@ -11,26 +21,27 @@ public partial class AxisUnit : Unit {
 
     protected EffectAnimationHandler EffectAnimationHandler { get => effectAnimationHandler; }
     protected AttackCollisionArea AttackArea { get => attackArea; }
+
     public override void _Ready() {
         base._Ready();
         Player = (AxisPlayer)GetOwner();
         // Animation Setup
-        rotationAnchor = GetNodeOrNull<Node3D>(Constants.RotationAnchor);
-        AnimatedSprite3D effectsSprite = GetNodeOrNull<AnimatedSprite3D>(StaticNodePaths.Effects);
+        rotationAnchor = GetNodeOrNull<Node3D>(AxisNodePaths.RotationAnchor);
+        AnimatedSprite3D effectsSprite = GetNodeOrNull<AnimatedSprite3D>(AxisNodePaths.Effects);
         effectAnimationHandler = new EffectAnimationHandler(effectsSprite);
-        attackArea = GetNodeOrNull<AttackCollisionArea>(StaticNodePaths.MeleeAttackArea);
+        attackArea = GetNodeOrNull<AttackCollisionArea>(AxisNodePaths.MeleeAttackArea);
         attackArea.AreaEntered += OnMeleeAttackAreaEnteredHandler;
         attackArea.AreaExited += OnMeleeAttackAreaExitedHandler;
     }
 
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-        if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
+        if (!Player.IsFirstPlayer()) return;
         OnManualInput(delta);
     }
 
     public override void _Input(InputEvent @event) {
-        if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
+        if (!Player.IsFirstPlayer()) return;
         Player.AxisInputHandler.OnInputUpdate();
     }
 
@@ -65,8 +76,8 @@ public partial class AxisUnit : Unit {
     }
 
     void OnMeleeAttackAreaEnteredHandler(Area3D area) {
-        if (area.Name != Constants.AttackArea) return;
-        if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
+        if (area.Name != AxisNodeNames.AttackArea) return;
+        if (!Player.IsFirstPlayer()) return;
         Unit attackedUnit = (Unit)area.GetParent().GetParent();
         GD.Print("[OnMeleeAttackAreaEnteredHandler] " + attackedUnit.Name);
         GD.Print("[OnMeleeAttackAreaEnteredHandler] Applying " + attackedUnit.Attributes.BaseDamage + " of base damage to " + attackedUnit.Name);
@@ -79,8 +90,8 @@ public partial class AxisUnit : Unit {
     }
 
     void OnMeleeAttackAreaExitedHandler(Area3D area) {
-        if (area.Name != Constants.AttackArea) return;
-        if (!SimpleGameManager.IsFirstPlayerControlled(Player)) return;
+        if (area.Name != AxisNodeNames.AttackArea) return;
+        if (!Player.IsFirstPlayer()) return;
         Unit attackedUnit = (Unit)area.GetParent().GetParent();
         GD.Print("[OnMeleeAttackAreaExitedHandler] " + attackedUnit.Name);
     }

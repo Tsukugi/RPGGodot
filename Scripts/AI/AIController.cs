@@ -25,19 +25,18 @@ public partial class AIController : Node {
         AddChild(behaviourCheckTimer);
         behaviourCheckTimer.Timeout += OnBehaviourCheck;
         behaviourCheckTimer.Start();
-
     }
 
     void OnBehaviourCheck() {
         if (wayPoints.Count > 0) {
             Vector3 nextPosition = wayPoints.First().GlobalPosition;
             float distance = VectorUtils.GetDistanceFromVectors(unit.GlobalPosition, nextPosition);
-            if (unit.NavigationTargetPosition != nextPosition) {
-                unit.NavigationTargetPosition = nextPosition;
-                GD.Print("[OnBehaviourCheck] Set next WayPoint to " + unit.NavigationTargetPosition);
+            if (unit.NavigationAgent.NavigationTargetPosition != nextPosition) {
+                unit.NavigationAgent.NavigationTargetPosition = nextPosition;
+                GD.Print("[OnBehaviourCheck] Set next WayPoint to " + unit.NavigationAgent.NavigationTargetPosition);
             } else if (distance < waypointDistanceSafeRadius) {
-                if (!unit.IsMoving) {
-                    unit.NavigationTargetPosition = unit.GlobalPosition;
+                if (!unit.NavigationAgent.IsMoving) {
+                    unit.NavigationAgent.NavigationTargetPosition = unit.GlobalPosition;
                 }
                 Node3D usedPoint = wayPoints.Pop();
                 GD.Print("[OnBehaviourCheck] Waypoint Reached");

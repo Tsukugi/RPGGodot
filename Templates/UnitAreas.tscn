@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bh5lo8eo1jyfg"]
+
+[ext_resource type="Script" path="res://Scripts/Actor/NavigationUnit/AlertArea.cs" id="1_h54t7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_umy0v"]
+height = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_icdh6"]
+height = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_51qei"]
+height = 1.0
+
+[node name="Areas" type="Node3D"]
+
+[node name="Combat" type="Area3D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Combat"]
+shape = SubResource("CapsuleShape3D_umy0v")
+disabled = true
+
+[node name="Interaction" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Interaction"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_icdh6")
+disabled = true
+
+[node name="Alert" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_h54t7")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Alert"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_51qei")
+disabled = true

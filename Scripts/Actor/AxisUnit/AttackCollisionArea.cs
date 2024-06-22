@@ -8,7 +8,7 @@ public partial class AttackCollisionArea : Area3D {
     public CollisionShape3D MeleeCollisionArea { get => meleeCollisionArea; }
 
     public override void _Ready() {
-        meleeCollisionArea = GetNode<CollisionShape3D>(Constants.MeleeCollisionArea);
+        meleeCollisionArea = GetNode<CollisionShape3D>(AxisNodeNames.MeleeCollisionArea);
     }
 
 }

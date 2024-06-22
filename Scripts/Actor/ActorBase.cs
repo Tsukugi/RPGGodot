@@ -18,13 +18,19 @@ public partial class ActorBase : CharacterBody3D {
 
     public override void _Ready() {
         player = GetOwner();
-        staticRotation = GetNodeOrNull<AnimatedSprite3D>(StaticNodePaths.StaticRotation);
+        staticRotation = GetNodeOrNull<Node3D>(StaticNodePaths.StaticRotation);
         animatedSprite3D = GetNodeOrNull<AnimatedSprite3D>(StaticNodePaths.ActorSprite);
         bodyCollision = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.BodyCollision);
+        // Make sure to not await during _Ready.
+        Callable.From(ApplyActorRotation).CallDeferred();
 
     }
     public PlayerBase GetOwner() {
         GD.Print("[GetOwner] " + Name + " owner is " + GetParent().Name);
         return GetParent<PlayerBase>();
+    }
+    async void ApplyActorRotation() {
+        if (CameraBase.CameraTransformOffset.Normalized() == Vector3.Up) return;
+        StaticRotation.LookAt(Position + CameraBase.CameraTransformOffset);
     }
 }

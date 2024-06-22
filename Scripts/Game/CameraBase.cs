@@ -14,19 +14,14 @@ public partial class CameraBase : Camera3D {
 
     // Offsets 
 
-    Vector3 cameraTransformOffset = new(0, 8, 0);
-    Vector3 cameraRotationOffset = new(-90, 0, 0);
+    public static readonly Vector3 CameraTransformOffset = new(0, 8, 0);
+    public static readonly Vector3 CameraRotationOffset = new(-90, 0, 0);
     ProjectionType projectionType = ProjectionType.Perspective;
-
-/*
-
-     Vector3 cameraTransformOffset = new(8, 7, 8);
-     Vector3 cameraRotationOffset = new(-30, 45, 0);
-     ProjectionType projectionType = ProjectionType.Orthogonal;
-   
-   */
+    
+    /* public static readonly Vector3 CameraTransformOffset = new(-8, 7, 8);
+     public static readonly Vector3 CameraRotationOffset = new(-30, -45, 0); 
+     ProjectionType projectionType = ProjectionType.Orthogonal;*/
     int cameraOrthogonalSize = 10;
-
 
     public ActorBase SelectedActor {
         get => selectedActor;
@@ -35,6 +30,7 @@ public partial class CameraBase : Camera3D {
             AttachToActor(value);
         }
     }
+
 
     public override void _Ready() {
         base._Ready();
@@ -51,7 +47,7 @@ public partial class CameraBase : Camera3D {
         if (SelectedActor == null) return;
         try {
             // Follow the selected actor
-            Reposition(cameraTransformOffset + SelectedActor.Transform.Origin, cameraRotationOffset + SelectedActor.RotationDegrees);
+            Reposition(CameraTransformOffset + SelectedActor.Transform.Origin, CameraRotationOffset + SelectedActor.RotationDegrees);
         } catch (ObjectDisposedException) {
             // We will reset camera if the selectedActor was removed in the meanwhile.
             SelectedActor = null;
@@ -77,7 +73,7 @@ public partial class CameraBase : Camera3D {
             Position.Z);
 
         Position = newOffset;
-        cameraTransformOffset.Y = newOffset.Y;
+        //CameraBase.CameraRotationOffset.Y = newOffset.Y;
     }
 
     public void AttachToActor(ActorBase actor) {
@@ -95,7 +91,7 @@ public partial class CameraBase : Camera3D {
     }
 
     public void UpdateCameraProperties() {
-        Reposition(cameraTransformOffset, cameraRotationOffset);
+        Reposition(CameraTransformOffset, CameraRotationOffset);
         Projection = projectionType;
         if (Projection == ProjectionType.Orthogonal) {
             Size = cameraOrthogonalSize;

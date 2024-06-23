@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://qpmqc8rwup0u"]
 
 [ext_resource type="PackedScene" uid="uid://dbhnuw18l0pdn" path="res://Templates/grid_map.tscn" id="1_bdpbe"]
-[ext_resource type="Script" path="res://Scripts/Game/PlayerManager.cs" id="2_stoxf"]
+[ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/PlayerManager.cs" id="2_bpkkl"]
 [ext_resource type="PackedScene" uid="uid://biehf781gdcuh" path="res://Templates/NavigationUnit.tscn" id="3_28b0r"]
 [ext_resource type="PackedScene" uid="uid://b6ajx743pvfx" path="res://Templates/PlayerBase.tscn" id="3_gsb7g"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerBase.cs" id="4_s7yi8"]
@@ -59,13 +59,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7948, 1, -11.7314)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.878, 1, -11.0724)
 
 [node name="Players" type="Node" parent="."]
-script = ExtResource("2_stoxf")
+script = ExtResource("2_bpkkl")
 
 [node name="Player" parent="Players" instance=ExtResource("3_gsb7g")]
+testRelationships = ["Hostile"]
 
 [node name="NavigationUnit" parent="Players/Player" instance=ExtResource("3_28b0r")]
 
 [node name="Neutral" parent="Players" instance=ExtResource("3_gsb7g")]
+testRelationships = ["Hostile"]
 
 [node name="NeutralNPC1" parent="Players/Neutral" instance=ExtResource("3_28b0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.92586, 0, 0)
@@ -77,6 +79,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7129, 0, -0.0471983)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.94346, -2.61949, 3.86857)
 
 [node name="Hostile" parent="Players" instance=ExtResource("3_gsb7g")]
+testRelationships = ["Neutral", "Player"]
 
 [node name="Enemy1" parent="Players/Hostile" instance=ExtResource("3_28b0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2.27824)

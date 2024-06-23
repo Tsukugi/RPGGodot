@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://b6ajx743pvfx"]
 
-[ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategyPlayer.cs" id="1_416j5"]
+[ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/RealTimeStrategyPlayer.cs" id="1_w2jw0"]
 [ext_resource type="Script" path="res://Scripts/Game/CameraBase.cs" id="2_7o631"]
 [ext_resource type="Script" path="res://Scripts/UI/InteractionPanel.cs" id="3_aodfl"]
 [ext_resource type="Script" path="res://Scripts/UI/SelectionPanel.cs" id="4_co5sg"]
 
 [node name="Player" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-script = ExtResource("1_416j5")
+script = ExtResource("1_w2jw0")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 size = 19.367

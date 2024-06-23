@@ -13,9 +13,10 @@ public partial class CameraBase : Camera3D {
     public event EventHandler<Vector3> OnRotationChange;
 
     // Offsets 
-
     public static readonly Vector3 CameraTransformOffset = new(0, 8, 0);
     public static readonly Vector3 CameraRotationOffset = new(-90, 0, 0);
+    Vector3 currentTransformOffset = CameraTransformOffset;
+    Vector3 currentRotationOffset = CameraRotationOffset;
     ProjectionType projectionType = ProjectionType.Perspective;
 
     /* public static readonly Vector3 CameraTransformOffset = new(-8, 7, 8);
@@ -49,7 +50,7 @@ public partial class CameraBase : Camera3D {
         if (SelectedActor == null) return;
         try {
             // Follow the selected actor
-            Reposition(CameraTransformOffset + SelectedActor.Transform.Origin, CameraRotationOffset + SelectedActor.RotationDegrees);
+            Reposition(currentTransformOffset + SelectedActor.Transform.Origin, currentRotationOffset + SelectedActor.RotationDegrees);
         } catch (ObjectDisposedException) {
             // We will reset camera if the selectedActor was removed in the meanwhile.
             SelectedActor = null;
@@ -75,7 +76,7 @@ public partial class CameraBase : Camera3D {
             Position.Z);
 
         Position = newOffset;
-        //CameraBase.CameraRotationOffset.Y = newOffset.Y;
+        currentTransformOffset.Y = newOffset.Y;
     }
 
     public void AttachToActor(ActorBase actor) {
@@ -93,7 +94,7 @@ public partial class CameraBase : Camera3D {
     }
 
     public void UpdateCameraProperties() {
-        Reposition(CameraTransformOffset, CameraRotationOffset);
+        Reposition(currentTransformOffset, currentRotationOffset);
         Projection = projectionType;
         if (Projection == ProjectionType.Orthogonal) {
             Size = cameraOrthogonalSize;

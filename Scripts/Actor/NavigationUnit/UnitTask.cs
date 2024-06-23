@@ -4,16 +4,18 @@ using Godot;
 public partial class UnitTask : Node {
     NavigationUnit unit;
     TaskBase currentTask = null;
-    Queue<TaskBase> tasks = new();
+    readonly Queue<TaskBase> tasks = new();
     Timer taskCheckTimer = new() {
         OneShot = false,
-        WaitTime = 0f + new System.Random().NextDouble(),
+        WaitTime = 0.5f + new System.Random().NextDouble(),
     };
 
+    public int Count { get => tasks.Count; }
+    public TaskBase CurrentTask { get => currentTask; }
 
     public override void _Ready() {
         base._Ready();
-        unit = this.FindNavigationUnit();
+        unit = this.TryFindNavigationUnit();
 
         // Timer
         AddChild(taskCheckTimer);
@@ -21,23 +23,35 @@ public partial class UnitTask : Node {
         taskCheckTimer.Start();
     }
 
+    public override void _PhysicsProcess(double delta) {
+        base._PhysicsProcess(delta);
+        if (currentTask is null) return;
+        if (currentTask.CheckIfCompleted()) return;
+        currentTask.OnPhysicsProcess();
+    }
+
     void OnTaskCheck() {
         if (tasks.Count > 0) {
             if (currentTask == null) currentTask = tasks.Peek();
-            if (!currentTask.IsAlreadyStarted) {
+            if (!(currentTask.IsAlreadyStarted || currentTask.CheckIfCompleted())) {
                 currentTask.StartTask();
-                GD.Print("[OnTaskCheck] " + currentTask.Type + " Task has started");
+                unit.Player.DebugLog("[OnTaskCheck] " + currentTask.Type + " Task has started");
             }
         } else {
-            GD.Print("[OnTaskCheck] " + unit.Name + " has finished all tasks");
+            unit.Player.DebugLog("[OnTaskCheck] " + unit.Name + " has finished all tasks");
         }
 
-        if (currentTask != null && currentTask.CheckIfCompleted()) {
-            GD.Print("[OnTaskCheck] " + currentTask.Type + " has been completed");
+        if (currentTask is null) return;
+        if (currentTask.CheckIfCompleted()) {
+            unit.Player.DebugLog("[OnTaskCheck] " + currentTask.Type + " has been completed");
             CompleteTask();
+            return;
+        } else {
+            currentTask.OnTaskInterval();
         }
 
     }
+
 
     void CompleteTask() {
         currentTask = null;
@@ -46,7 +60,12 @@ public partial class UnitTask : Node {
 
     public void Add(TaskBase newTask) {
         tasks.Enqueue(newTask);
-        GD.Print("[UnitTask.Add] " + newTask.Type + " has been added for " + unit.Name + ". Current tasks length: " + tasks.Count);
+        unit.Player.DebugLog("[UnitTask.Add] " + newTask.Type + " has been added for " + unit.Name + ". Current tasks length: " + tasks.Count);
+    }
+
+    public void ClearAll() {
+        tasks.Clear();
+        CompleteTask();
     }
 }
 

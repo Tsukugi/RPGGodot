@@ -84,7 +84,7 @@ public partial class AxisUnit : Unit {
         attackedUnit.Attributes.ApplyDamage(attackedUnit.Attributes.BaseDamage);
         GD.Print("[OnMeleeAttackAreaEnteredHandler] HP: " + attackedUnit.Attributes.HitPoints + " / " + attackedUnit.Attributes.MaxHitPoints);
 
-        if (attackedUnit.Attributes.CanBeKilled()) {
+        if (attackedUnit.Attributes.CanBeKilled) {
             attackedUnit.Visible = false;
         }
     }

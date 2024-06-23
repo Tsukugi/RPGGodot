@@ -13,11 +13,17 @@ public partial class UnitAlertArea : Area3D {
     CollisionShape3D collisionShape;
     AlertState alertState = AlertState.Safe;
 
-    public AlertState AlertState { get => alertState; set => alertState = value; }
+    public AlertState AlertState {
+        get => alertState;
+        set {
+            alertState = value;
+            unit.CombatArea.Target = null;
+        }
+    }
 
     public override void _Ready() {
         base._Ready();
-        Unit parentUnit = this.FindUnitNode();
+        Unit parentUnit = this.TryFindUnit();
         if (parentUnit is NavigationUnit navigationUnit) {
             unit = navigationUnit;
             collisionShape = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.Area_CollisionShape);
@@ -32,7 +38,7 @@ public partial class UnitAlertArea : Area3D {
 
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-        if (unit is not NavigationUnit) return;
+        if (unit is null) return;
         if (unit.UnitSelection.IsSelected) return;
         // TODO: I think is better to optimize this with a live dictionary, instead of calling this every physicsFrame.
         List<NavigationUnit> bodies = GetOverlappingBodies().FilterNavigationUnits();
@@ -43,24 +49,32 @@ public partial class UnitAlertArea : Area3D {
     }
 
     void OnAlertAreaEntered(Node3D body) {
-        if (unit is not NavigationUnit) return;
+        if (unit is null) return;
         if (unit.UnitSelection.IsSelected) return;
         if (body is not NavigationUnit navigationUnit) return;
         AlertChangeOnEnemyUnitRange(navigationUnit);
     }
 
     void OnAlertAreaExited(Node3D body) {
-        if (unit is not NavigationUnit) return;
+        if (unit is null) return;
         if (unit.UnitSelection.IsSelected) return;
     }
 
 
     void AlertChangeOnEnemyUnitRange(NavigationUnit possibleEnemy) {
-        if (unit is not NavigationUnit) return;
+        if (unit is null) return;
         if (!possibleEnemy.Player.IsHostile()) return;
+        if (unit.Player.IsHostile()) return;
+        if (unit.UnitTask.Count > 0) return;
+
         // TODO: Implement To ignore or hide or combat;
+        OnCombatStarted(possibleEnemy);
+    }
+
+    void OnCombatStarted(NavigationUnit possibleEnemy) {
         alertState = AlertState.Combat;
-       // unit.CombatArea.Target = possibleEnemy;
+        unit.CombatArea.Target = possibleEnemy;
+        unit.UnitTask.Add(new UnitTaskAttack(possibleEnemy, unit));
     }
 
 

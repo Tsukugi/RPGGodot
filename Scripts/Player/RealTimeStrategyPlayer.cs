@@ -33,12 +33,12 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
             selectedActors.ForEach(actor => {
                 actor.UnitSelection.IsSelected = false;
             });
-            GD.Print("[SelectedActors.set] Cleared actors: " + selectedActors.Count);
+            DebugLog("[SelectedActors.set] Cleared actors: " + selectedActors.Count);
             selectedActors = value;
             selectedActors.ForEach(actor => {
                 actor.UnitSelection.IsSelected = true;
             });
-            GD.Print("[SelectedActors.set] Added actors: " + selectedActors.Count);
+            DebugLog("[SelectedActors.set] Added actors: " + selectedActors.Count);
         }
     }
     public ShapeCast3D SelectionShapeCast3D { get => selectionShapeCast3D; }
@@ -55,6 +55,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
 
 
         // !Debug
+        return;
         if (!this.IsFirstPlayer()) {
             var children = GetChildren();
 
@@ -102,10 +103,10 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
             if (eventMouseButton.ButtonIndex == MouseButton.Middle) {
 
                 if (eventMouseButton.Pressed) {
-                    GD.Print("[RealTimeStrategyPlayer._Input]: Start Camera Drag");
+                    DebugLog("[RealTimeStrategyPlayer._Input]: Start Camera Drag");
                     cameraDragStartPosition = Camera.GetViewport().GetMousePosition();
                 } else {
-                    GD.Print("[RealTimeStrategyPlayer._Input]: End Camera Drag");
+                    DebugLog("[RealTimeStrategyPlayer._Input]: End Camera Drag");
                     // Reset
                     cameraDragStartPosition = Vector2.Zero;
                     cameraDragCurrentPosition = Vector2.Zero;
@@ -118,27 +119,27 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
                 if (eventMouseButton.Pressed) {
                     selectionAreaStart = Camera.GetViewport().GetMousePosition();
                     selectionAreaEnd = selectionAreaStart;
-                    GD.Print("[RealTimeStrategyPlayer._Input]: Start Selection");
+                    DebugLog("[RealTimeStrategyPlayer._Input]: Start Selection");
                 } else {
                     float selectionAreaSize = VectorUtils.GetDistanceFromVectors(selectionAreaStart, selectionAreaEnd);
                     bool isSingleSelection = selectionAreaSize < minSelectionAreaForMultiSelection;
-                    GD.Print("[RealTimeStrategyPlayer._Input]: selectionAreaSize " + selectionAreaSize);
+                    DebugLog("[RealTimeStrategyPlayer._Input]: selectionAreaSize " + selectionAreaSize);
 
                     if (isSingleSelection) {
                         Vector3? worldSelectionPoint = NavigationBase.Get3DWorldPosition(Camera, selectionAreaStart);
                         if (worldSelectionPoint is not Vector3 foundWorldSelectionPoint) return;
                         selectionShapeCast3D.GlobalPosition = foundWorldSelectionPoint;
                         SelectedActors = new List<NavigationUnit>();
-                        GD.Print("[RealTimeStrategyPlayer._Input]: SelectedActorsCleared");
+                        DebugLog("[RealTimeStrategyPlayer._Input]: SelectedActorsCleared");
                     } else {
                         SelectedActors = actorsTargetedForSelection;
-                        GD.Print("[RealTimeStrategyPlayer._Input]: SelectedActorsAdded Count: " + SelectedActors.Count);
+                        DebugLog("[RealTimeStrategyPlayer._Input]: SelectedActorsAdded Count: " + SelectedActors.Count);
                     }
                     // Reset
                     selectionAreaEnd = Vector2.Zero;
                     selectionAreaStart = Vector2.Zero;
                     selectionPanel.ResetPosition();
-                    GD.Print("[RealTimeStrategyPlayer._Input]: Selection Finished");
+                    DebugLog("[RealTimeStrategyPlayer._Input]: Selection Finished");
                 }
             }
             if (eventMouseButton.ButtonIndex == MouseButton.Right) {

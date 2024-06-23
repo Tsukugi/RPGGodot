@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdb43rk0bbcpy"]
+[gd_scene load_steps=7 format=3 uid="uid://bdb43rk0bbcpy"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/Unit.cs" id="1_g5rk2"]
 [ext_resource type="PackedScene" uid="uid://bh5lo8eo1jyfg" path="res://Templates/UnitAreas.tscn" id="2_1npkd"]
 [ext_resource type="Texture2D" uid="uid://bkikmt1pknv4g" path="res://Art/TextureEnvBasic/Cut/Props/box.png" id="2_lcnwf"]
+[ext_resource type="Script" path="res://Scripts/Actor/UnitAttributes.cs" id="4_jxxpj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4qoob"]
 radius = 0.001
@@ -48,3 +49,6 @@ visible = false
 outline_modulate = Color(0.341176, 0.709804, 0.972549, 1)
 text = "Test
 "
+
+[node name="Attributes" type="Node" parent="."]
+script = ExtResource("4_jxxpj")

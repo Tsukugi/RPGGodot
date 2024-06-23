@@ -9,13 +9,16 @@ public partial class UnitSelection : Node3D {
         set {
             isSelected = value;
             selectedIndicator.Visible = isSelected;
-            if (isSelected) unit.AlertArea.AlertState = AlertState.Safe;
+            if (isSelected) {
+                unit.AlertArea.AlertState = AlertState.Safe;
+                unit.UnitTask.ClearAll();
+            }
         }
     }
 
     public override void _Ready() {
         base._Ready();
-        unit = this.FindNavigationUnit();
+        unit = this.TryFindNavigationUnit();
         selectedIndicator = unit.GetNodeOrNull<Sprite3D>(StaticNodePaths.SelectedIndicator);
     }
 }

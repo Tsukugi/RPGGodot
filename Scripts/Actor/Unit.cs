@@ -15,26 +15,17 @@ public enum UnitRenderDirection {
 }
 
 public partial class Unit : ActorBase {
-
-    private Label3D overheadLabel;
-    private ActorAnimationHandler actorAnimationHandler = null;
-    private Area3D interactionArea = null;
-    // These are attributes handy enough to be fast modified on the editor
-    [Export]
-    protected int movementSpeed = 3; // How fast the player will move (pixels/sec).
-    [Export]
-    protected int maxHitPoints = 100;
-    [Export]
-    protected int armor = 1;
-    [Export]
-    protected int baseDamage = 100;
-    protected ActorAnimationHandler ActorAnimationHandler { get => actorAnimationHandler; }
-    protected Area3D InteractionArea { get => interactionArea; }
-
-    public readonly UnitAttributes Attributes = new();
+    ActorAnimationHandler actorAnimationHandler = null;
+    Area3D interactionArea = null;
+    UnitAttributes attributes;
+    protected Label3D overheadLabel;
+    public ActorAnimationHandler ActorAnimationHandler { get => actorAnimationHandler; }
+    public Area3D InteractionArea { get => interactionArea; }
+    public UnitAttributes Attributes { get => attributes; }
 
     public override void _Ready() {
         base._Ready();
+        attributes = GetNodeOrNull<UnitAttributes>(StaticNodePaths.Attributes);
         overheadLabel = GetNodeOrNull<Label3D>(StaticNodePaths.OverheadLabel);
         interactionArea = GetNodeOrNull<Area3D>(StaticNodePaths.InteractionArea);
         interactionArea.BodyEntered += OnInteractionAreaEnteredHandler;
@@ -44,12 +35,10 @@ public partial class Unit : ActorBase {
             AnimationPrefix = "idle"
         };
         actorAnimationHandler.ApplyAnimation(inputFaceDirection);
-
-        UpdateUnitAttributes();
     }
 
-    public override void _Process(double delta) {
-        if (!Visible && Attributes.CanBeKilled()) {
+    public override void _PhysicsProcess(double delta) {
+        if (!Visible && Attributes.CanBeKilled) {
             // Kill the Unit 
             QueueFree();
             return;
@@ -73,22 +62,16 @@ public partial class Unit : ActorBase {
         Player.InteractionPanel.Visible = false;
     }
 
-    private void UpdateUnitAttributes() {
-        Attributes.MaxHitPoints = maxHitPoints;
-        Attributes.HitPoints = maxHitPoints;
-        Attributes.Armor = armor;
-        Attributes.BaseDamage = baseDamage;
-    }
 
     protected void MoveUnit(Vector3 direction, float delta) {
         // Apply velocity.
-        direction = direction.Normalized() * movementSpeed;
+        direction = direction.Normalized() * Attributes.MovementSpeed;
         MoveAndCollide(direction * (float)delta);
     }
 
     protected void MoveAndSlide(Vector3 direction) {
         // Apply velocity.
-        direction = direction.Normalized() * movementSpeed;
+        direction = direction.Normalized() * Attributes.MovementSpeed;
         Velocity = direction;
         MoveAndSlide();
     }

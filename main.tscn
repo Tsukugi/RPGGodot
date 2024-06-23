@@ -64,12 +64,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.878, 1, -11.0724)
 [node name="Neutral" parent="." instance=ExtResource("3_gsb7g")]
 
 [node name="NeutralNPC1" parent="Neutral" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.42415, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.92586, 0, 0)
+
+[node name="NeutralNPC2" parent="Neutral" instance=ExtResource("3_28b0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7129, 0, -0.0471983)
+
+[node name="NeutralNPC3" parent="Neutral" instance=ExtResource("3_28b0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.81186, 0, 2.12004)
 
 [node name="Hostile" parent="." instance=ExtResource("3_gsb7g")]
 
 [node name="Enemy1" parent="Hostile" instance=ExtResource("3_28b0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2.27824)
+
+[node name="Enemy2" parent="Hostile" instance=ExtResource("3_28b0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.82231, 0, -0.331697)
+
+[node name="Enemy3" parent="Hostile" instance=ExtResource("3_28b0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.31061, 0, 2.62858)
 
 [node name="Environment" type="Node3D" parent="."]
 script = ExtResource("4_s7yi8")

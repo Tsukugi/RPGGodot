@@ -35,12 +35,17 @@ public partial class NavigationUnit : Unit {
         unitTask = GetNodeOrNull<UnitTask>(StaticNodePaths.TaskController);
     }
 
+    public override void _PhysicsProcess(double delta) {
+        base._PhysicsProcess(delta);
+        overheadLabel.Text = "HP: " + Attributes.HitPoints + " / " + Attributes.MaxHitPoints + " \n- TasksCount: " + unitTask.Count + " \n- AlertState: " + alertArea.AlertState;
+    }
+
     public void NavigateTo(Vector3 direction) {
-        Vector3 Velocity = GlobalPosition.DirectionTo(direction) * movementSpeed;
+        Vector3 Velocity = GlobalPosition.DirectionTo(direction) * Attributes.MovementSpeed;
         MoveAndSlide(Velocity);
         UpdateRenderDirection(Velocity.ToVector2());
     }
-    
+
     void UpdateRenderDirection(Vector2 direction) {
         UnitRenderDirection newUnitDirection = ActorAnimationHandler.GetRenderDirectionFromVector(direction);
         if (newUnitDirection != unitRenderDirectionState) {
@@ -51,8 +56,8 @@ public partial class NavigationUnit : Unit {
 }
 
 public static class NavigationUnitUtils {
-    public static NavigationUnit FindNavigationUnit(this Node child) {
-        Unit unit = child.FindUnitNode();
+    public static NavigationUnit TryFindNavigationUnit(this Node child) {
+        Unit unit = child.TryFindUnit();
         if (unit is not NavigationUnit navigationUnit) throw new System.Exception("[FindNavigationUnit] This child is not attached to a NavigationUnit");
         return navigationUnit;
     }

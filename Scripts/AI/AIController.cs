@@ -19,7 +19,7 @@ public partial class AIController : Node {
 
     public override void _Ready() {
         base._Ready();
-        unit = this.FindNavigationUnit();
+        unit = this.TryFindNavigationUnit();
 
         AddChild(behaviourCheckTimer);
         behaviourCheckTimer.Timeout += OnBehaviourCheck;
@@ -32,18 +32,18 @@ public partial class AIController : Node {
             float distance = VectorUtils.GetDistanceFromVectors(unit.GlobalPosition, nextPosition);
             if (unit.NavigationAgent.NavigationTargetPosition != nextPosition) {
                 unit.NavigationAgent.NavigationTargetPosition = nextPosition;
-                GD.Print("[OnBehaviourCheck] Set next WayPoint to " + unit.NavigationAgent.NavigationTargetPosition);
+                unit.Player.DebugLog("[OnBehaviourCheck] Set next WayPoint to " + unit.NavigationAgent.NavigationTargetPosition);
             } else if (distance < waypointDistanceSafeRadius) {
                 if (!unit.NavigationAgent.IsMoving) {
                     unit.NavigationAgent.NavigationTargetPosition = unit.GlobalPosition;
                 }
                 Node3D usedPoint = wayPoints.Pop();
-                GD.Print("[OnBehaviourCheck] Waypoint Reached");
+                unit.Player.DebugLog("[OnBehaviourCheck] Waypoint Reached");
                 if (recycleWaypoints) {
                     wayPoints.Append(usedPoint);
                 }
                 if (wayPoints.Count == 0) {
-                    GD.Print("[OnBehaviourCheck] Final destination reached");
+                    unit.Player.DebugLog("[OnBehaviourCheck] Final destination reached");
                 }
             } else {
                 // Is moving

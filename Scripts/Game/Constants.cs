@@ -10,6 +10,7 @@ public static class StaticNodePaths {
     public static readonly string NavigationAgent = "Navigation/NavigationAgent";
     public static readonly string NavigationTarget = "Navigation/NavigationTarget";
     public static readonly string Selection = "Selection";
+    public static readonly string Attributes = "Attributes";
     public static readonly string SelectedIndicator = "Selection/SelectedIndicator";
     public static readonly string AIController = "AIController";
     public static readonly string TaskController = "TaskController";

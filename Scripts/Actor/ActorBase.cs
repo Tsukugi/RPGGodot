@@ -37,7 +37,7 @@ public partial class ActorBase : CharacterBody3D {
 }
 
 public static class ActorUtils {
-    public static Unit FindUnitNode(this Node child) {
+    public static Unit TryFindUnit(this Node child) {
         Node currentNode = child;
         while (true) {
             currentNode = currentNode.GetParent();

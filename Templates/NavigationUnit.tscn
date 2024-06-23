@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://biehf781gdcuh"]
+[gd_scene load_steps=12 format=3 uid="uid://biehf781gdcuh"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/NavigationUnit/NavigationUnit.cs" id="1_3mh64"]
 [ext_resource type="PackedScene" uid="uid://bh5lo8eo1jyfg" path="res://Templates/UnitAreas.tscn" id="2_3d65c"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cl7pjrsu3sfyg" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_44.png" id="3_0m470"]
 [ext_resource type="Script" path="res://Scripts/Actor/NavigationUnit/UnitTask.cs" id="5_kvp20"]
 [ext_resource type="Script" path="res://Scripts/AI/AIController.cs" id="5_ngwae"]
+[ext_resource type="Script" path="res://Scripts/Actor/UnitAttributes.cs" id="6_q0wgi"]
 [ext_resource type="Script" path="res://Scripts/Actor/NavigationUnit/UnitNavigationAgent.cs" id="6_q3oeq"]
 [ext_resource type="Script" path="res://Scripts/Actor/NavigationUnit/UnitSelection.cs" id="7_xioca"]
 [ext_resource type="Texture2D" uid="uid://b8n51425dpvj7" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_50.png" id="7_xobwt"]
@@ -53,6 +54,9 @@ script = ExtResource("5_ngwae")
 
 [node name="TaskController" type="Node" parent="."]
 script = ExtResource("5_kvp20")
+
+[node name="Attributes" type="Node" parent="."]
+script = ExtResource("6_q0wgi")
 
 [node name="Navigation" type="Node3D" parent="."]
 

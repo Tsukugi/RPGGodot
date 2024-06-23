@@ -15,17 +15,19 @@ public partial class PlayerBase : Node3D {
     }
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-        if (!SimpleGameManager.IsFirstPlayer(this)) return;
         if (IsPerformanceLogActive) LogPerformance();
     }
 
-    protected static void LogPerformance() {
-        GD.Print("TimeFps: " + Performance.GetMonitor(Performance.Monitor.TimeFps));
-        GD.Print("RenderTotalObjectsInFrame: " + Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame));
-        GD.Print("NavigationAgentCount: " + Performance.GetMonitor(Performance.Monitor.NavigationAgentCount));
-        GD.Print("TimeNavigationProcess: " + Performance.GetMonitor(Performance.Monitor.TimeNavigationProcess));
-        GD.Print("TimeProcess: " + Performance.GetMonitor(Performance.Monitor.TimeProcess));
-        GD.Print("RenderVideoMemUsed: " + Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed));
+    protected void LogPerformance() {
+        DebugLog("TimeFps: " + Performance.GetMonitor(Performance.Monitor.TimeFps));
+        DebugLog("RenderTotalObjectsInFrame: " + Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame));
+        DebugLog("NavigationAgentCount: " + Performance.GetMonitor(Performance.Monitor.NavigationAgentCount));
+        DebugLog("TimeNavigationProcess: " + Performance.GetMonitor(Performance.Monitor.TimeNavigationProcess));
+        DebugLog("TimeProcess: " + Performance.GetMonitor(Performance.Monitor.TimeProcess));
+        DebugLog("RenderVideoMemUsed: " + Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed));
     }
 
+    public void DebugLog(string message) {
+        if (this.IsFirstPlayer()) GD.Print(message);
+    }
 }

@@ -145,13 +145,22 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
                 if (eventMouseButton.Pressed) {
                     Vector3? targetPosition = NavigationBase.GetNavigationTargetPosition(Camera);
                     if (targetPosition is not Vector3 targetPositionInWorld) return;
-                    SelectionBase.ApplyGroupPosition(
+                    SelectionBase.ApplyCommandToGroupPosition(
                         SelectedActors,
                         targetPositionInWorld,
                         navigationGroupGapDistance,
-                        (float)System.Math.Floor(System.Math.Sqrt(SelectedActors.Count)));
+                        (float)System.Math.Floor(System.Math.Sqrt(SelectedActors.Count)),
+                        ApplyNavigation);
                 }
             }
+        }
+    }
+
+    static void ApplyNavigation(NavigationUnit unit, Vector3 targetPosition) {
+        if (unit.UnitSelection.IsSelected) {
+            unit.NavigationAgent.StartNewNavigation(targetPosition);
+        } else {
+            unit.UnitTask.Add(new UnitTaskMove(targetPosition, unit));
         }
     }
 

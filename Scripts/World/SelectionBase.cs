@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
@@ -46,14 +45,14 @@ public static class SelectionBase {
         return list;
     }
 
-    public static void ApplyGroupPosition(List<NavigationUnit> group, Vector3 targetPosition, float gapDistance, float rowLimit) {
+    public static void ApplyCommandToGroupPosition(List<NavigationUnit> group, Vector3 targetPosition, float gapDistance, float rowLimit, System.Action<NavigationUnit, Vector3> command) {
         for (int i = 0; i < group.Count; i++) {
             if (!group[i].Player.IsFirstPlayer()) continue;
-            Vector3 navigationTarget = new Vector3(
+            Vector3 navigationTarget = new(
                     targetPosition.X + i * gapDistance % rowLimit,
                     targetPosition.Y,
                     targetPosition.Z + i * (gapDistance / rowLimit));
-            group[i].UnitTask.Add(new UnitTaskMove(navigationTarget, group[i]));
+            command(group[i], navigationTarget);
         }
     }
 

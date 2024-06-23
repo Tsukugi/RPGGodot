@@ -12,6 +12,7 @@ public static class StaticNodePaths {
     public static readonly string Selection = "Selection";
     public static readonly string SelectedIndicator = "Selection/SelectedIndicator";
     public static readonly string AIController = "AIController";
+    public static readonly string TaskController = "TaskController";
     public static readonly string BodyCollision = "BodyCollision";
 
     // StaticRotation

@@ -3,9 +3,16 @@ using Godot;
 public partial class UnitNavigationAgent : NavigationAgent3D {
     NavigationUnit unit;
     Node3D navigationTarget = null;
+    Vector3 navigationTargetPosition;
     public Node3D NavigationTarget { get => navigationTarget; }
-    public Vector3 NavigationTargetPosition;
     public bool IsMoving { get => this.IsNavigationFinished(); }
+    public Vector3 NavigationTargetPosition {
+        get => navigationTargetPosition;
+        set {
+            navigationTargetPosition = value;
+            unit.UnitTask.Add(new UnitTaskMove(TaskType.Move, navigationTargetPosition, unit));
+        }
+    }
 
     public override void _Ready() {
         base._Ready();

@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://biehf781gdcuh"]
+[gd_scene load_steps=11 format=3 uid="uid://biehf781gdcuh"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/NavigationUnit/NavigationUnit.cs" id="1_3mh64"]
 [ext_resource type="PackedScene" uid="uid://bh5lo8eo1jyfg" path="res://Templates/UnitAreas.tscn" id="2_3d65c"]
 [ext_resource type="SpriteFrames" uid="uid://brxi6sc2re2r1" path="res://MeshesLibrary/Player.tres" id="2_8yxj2"]
 [ext_resource type="Texture2D" uid="uid://cl7pjrsu3sfyg" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_44.png" id="3_0m470"]
+[ext_resource type="Script" path="res://Scripts/Actor/NavigationUnit/UnitTask.cs" id="5_kvp20"]
 [ext_resource type="Script" path="res://Scripts/AI/AIController.cs" id="5_ngwae"]
 [ext_resource type="Script" path="res://Scripts/Actor/NavigationUnit/UnitNavigationAgent.cs" id="6_q3oeq"]
 [ext_resource type="Script" path="res://Scripts/Actor/NavigationUnit/UnitSelection.cs" id="7_xioca"]
@@ -49,6 +50,9 @@ text = "Test
 
 [node name="AIController" type="Node" parent="."]
 script = ExtResource("5_ngwae")
+
+[node name="TaskController" type="Node" parent="."]
+script = ExtResource("5_kvp20")
 
 [node name="Navigation" type="Node3D" parent="."]
 

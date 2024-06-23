@@ -1,7 +1,6 @@
 
 using System.Collections.Generic;
 using Godot;
-using Godot.Collections;
 
 public enum AlertState {
     Safe,
@@ -9,7 +8,7 @@ public enum AlertState {
     Combat,
 }
 
-public partial class AlertArea : Area3D {
+public partial class UnitAlertArea : Area3D {
     NavigationUnit unit;
     CollisionShape3D collisionShape;
     AlertState alertState = AlertState.Safe;

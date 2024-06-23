@@ -8,15 +8,17 @@ public partial class NavigationUnit : Unit {
     RealTimeStrategyPlayer player;
     AIController aiController;
     UnitCombatArea combatArea;
-    AlertArea alertArea;
+    UnitAlertArea alertArea;
     UnitNavigationAgent navigationAgent;
     UnitSelection unitSelection;
+    UnitTask unitTask;
     public new RealTimeStrategyPlayer Player { get => player; }
     public AIController AiController { get => aiController; }
     public UnitCombatArea CombatArea { get => combatArea; }
-    public AlertArea AlertArea { get => alertArea; }
+    public UnitAlertArea AlertArea { get => alertArea; }
     public UnitNavigationAgent NavigationAgent { get => navigationAgent; }
     public UnitSelection UnitSelection { get => unitSelection; }
+    public UnitTask UnitTask { get => unitTask; }
 
     // State
     UnitRenderDirection unitRenderDirectionState = UnitRenderDirection.Down;
@@ -27,9 +29,10 @@ public partial class NavigationUnit : Unit {
 
         aiController = GetNodeOrNull<AIController>(StaticNodePaths.AIController);
         combatArea = GetNodeOrNull<UnitCombatArea>(StaticNodePaths.CombatArea);
-        alertArea = GetNodeOrNull<AlertArea>(StaticNodePaths.AlertArea);
+        alertArea = GetNodeOrNull<UnitAlertArea>(StaticNodePaths.AlertArea);
         navigationAgent = GetNodeOrNull<UnitNavigationAgent>(StaticNodePaths.NavigationAgent);
         unitSelection = GetNodeOrNull<UnitSelection>(StaticNodePaths.Selection);
+        unitTask = GetNodeOrNull<UnitTask>(StaticNodePaths.TaskController);
     }
 
     public void NavigateTo(Vector3 direction) {

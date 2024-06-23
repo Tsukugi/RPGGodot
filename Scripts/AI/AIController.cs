@@ -19,8 +19,7 @@ public partial class AIController : Node {
 
     public override void _Ready() {
         base._Ready();
-        // ! We assume that we use this as a child of a NavigationUnit
-        unit = GetParentOrNull<NavigationUnit>();
+        unit = this.FindNavigationUnit();
 
         AddChild(behaviourCheckTimer);
         behaviourCheckTimer.Timeout += OnBehaviourCheck;

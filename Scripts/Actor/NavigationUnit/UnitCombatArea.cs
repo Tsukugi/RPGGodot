@@ -8,7 +8,7 @@ public partial class UnitCombatArea : Area3D {
 
     public override void _Ready() {
         base._Ready();
-        Unit parentUnit = this.TryFindUnit();
+        Unit parentUnit = this.TryFindParentNodeOfType<Unit>();
         if (parentUnit is NavigationUnit navigationUnit) {
             unit = navigationUnit;
 
@@ -22,9 +22,13 @@ public partial class UnitCombatArea : Area3D {
         if (!canAttack) return;
         canAttack = false;
         target.Attributes.ApplyDamage(unit.Attributes.BaseDamage);
-        TimerUtils.CreateSimpleTimer(OnAttackCooldownEnd, 1 / unit.Attributes.AttackSpeed);
+        TimerUtils.CreateSimpleTimer(OnAttackCastEnd, 1 / unit.Attributes.AttackCastDuration);
     }
 
+    void OnAttackCastEnd(object source, ElapsedEventArgs e) {
+        TimerUtils.CreateSimpleTimer(OnAttackCooldownEnd, 1 / unit.Attributes.AttackSpeed);
+        unit.Player.DebugLog("[OnAttackCastEnd]");
+    }
     void OnAttackCooldownEnd(object source, ElapsedEventArgs e) {
         canAttack = true;
         unit.Player.DebugLog("[OnAttackCooldownEnd]");

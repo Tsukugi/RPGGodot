@@ -56,12 +56,6 @@ public partial class NavigationUnit : Unit {
 }
 
 public static class NavigationUnitUtils {
-    public static NavigationUnit TryFindNavigationUnit(this Node child) {
-        Unit unit = child.TryFindUnit();
-        if (unit is not NavigationUnit navigationUnit) throw new System.Exception("[FindNavigationUnit] This child is not attached to a NavigationUnit");
-        return navigationUnit;
-    }
-
     public static List<NavigationUnit> FilterNavigationUnits(this Array<Node3D> array) {
         List<NavigationUnit> navUnits = new();
         foreach (Node3D node in array) {

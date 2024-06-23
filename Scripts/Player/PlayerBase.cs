@@ -1,6 +1,8 @@
 using Godot;
 
 public partial class PlayerBase : Node3D {
+
+    PlayerManager manager;
     CameraBase camera;
     InteractionPanel interactionPanel;
     bool IsPerformanceLogActive = false;
@@ -10,8 +12,11 @@ public partial class PlayerBase : Node3D {
 
 
     public override void _Ready() {
+        base._Ready();
+        manager = this.TryFindParentNodeOfType<PlayerManager>();
         camera = GetNodeOrNull<CameraBase>(StaticNodePaths.PlayerCamera);
         interactionPanel = GetNodeOrNull<InteractionPanel>(StaticNodePaths.PlayerUIInteractionPanel);
+
     }
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);

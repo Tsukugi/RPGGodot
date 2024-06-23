@@ -18,7 +18,7 @@ public partial class UnitSelection : Node3D {
 
     public override void _Ready() {
         base._Ready();
-        unit = this.TryFindNavigationUnit();
+        unit = this.TryFindParentNodeOfType<NavigationUnit>();
         selectedIndicator = unit.GetNodeOrNull<Sprite3D>(StaticNodePaths.SelectedIndicator);
     }
 }

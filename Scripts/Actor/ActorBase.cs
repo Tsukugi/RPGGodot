@@ -35,15 +35,3 @@ public partial class ActorBase : CharacterBody3D {
     }
 
 }
-
-public static class ActorUtils {
-    public static Unit TryFindUnit(this Node child) {
-        Node currentNode = child;
-        while (true) {
-            currentNode = currentNode.GetParent();
-            if (currentNode == null)  // We went to the root node
-                throw new System.Exception("[FindUnitNode] Could not find a unit as a direct or indirect parent of this node");
-            if (currentNode is Unit unit) return unit;
-        }
-    }
-}

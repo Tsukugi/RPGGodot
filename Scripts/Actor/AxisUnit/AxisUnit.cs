@@ -68,7 +68,7 @@ public partial class AxisUnit : Unit {
                     if (attackHandler.OnAttackCooldownTimer != null && attackHandler.OnAttackCooldownTimer.Enabled) break;
                     GD.Print("[StartAttack]");
                     CallDeferred("DeferredUpdateAttackAreaMonitoring", true);
-                    attackHandler.StartAttack(AttackAnimationEndHandler, OnAttackCooldownEndHandler, Attributes.AttackDuration, Attributes.AttackSpeed);
+                    attackHandler.StartAttack(AttackAnimationEndHandler, OnAttackCooldownEndHandler, Attributes.AttackCastDuration, Attributes.AttackSpeed);
                     EffectAnimationHandler.ApplyAnimation(Player.AxisInputHandler.ActionInputState);
                     break;
                 }

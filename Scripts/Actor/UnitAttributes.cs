@@ -5,17 +5,17 @@ public partial class UnitAttributes : Node {
     [Export]
     float movementSpeed = 3f;
     [Export]
-    int maxHitPoints = 10;
+    int maxHitPoints = 50;
     [Export]
-    int hitPoints = 10;
+    int hitPoints = 50;
     [Export]
-    double attackSpeed = 1;
+    double attackSpeed = 0.5;
     [Export]
     int armor = 1;
     [Export]
     int baseDamage = 5;
     [Export]
-    double attackDuration = 0.3;
+    double attackCastDuration = 0.3;
     [Export]
     double attackRange = 2;
 
@@ -28,13 +28,13 @@ public partial class UnitAttributes : Node {
     public double AttackSpeed { get => 1 / attackSpeed; }
     public int Armor { get => armor; }
     public int BaseDamage { get => baseDamage; }
-    public double AttackDuration { get => attackDuration; }
+    public double AttackCastDuration { get => attackCastDuration; }
     public double AttackRange { get => attackRange; }
     public float MovementSpeed { get => movementSpeed; }
 
     public override void _Ready() {
         base._Ready();
-        unit = this.TryFindUnit();
+        unit = this.TryFindParentNodeOfType<Unit>();
     }
 
     public override void _PhysicsProcess(double delta) {

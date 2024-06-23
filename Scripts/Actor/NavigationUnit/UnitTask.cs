@@ -15,7 +15,7 @@ public partial class UnitTask : Node {
 
     public override void _Ready() {
         base._Ready();
-        unit = this.TryFindNavigationUnit();
+        unit = this.TryFindParentNodeOfType<NavigationUnit>();
 
         // Timer
         AddChild(taskCheckTimer);

@@ -23,7 +23,7 @@ public partial class UnitAlertArea : Area3D {
 
     public override void _Ready() {
         base._Ready();
-        Unit parentUnit = this.TryFindUnit();
+        Unit parentUnit = this.TryFindParentNodeOfType<Unit>();
         if (parentUnit is NavigationUnit navigationUnit) {
             unit = navigationUnit;
             collisionShape = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.Area_CollisionShape);

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://qpmqc8rwup0u"]
+[gd_scene load_steps=8 format=3 uid="uid://qpmqc8rwup0u"]
 
 [ext_resource type="PackedScene" uid="uid://dbhnuw18l0pdn" path="res://Templates/grid_map.tscn" id="1_bdpbe"]
+[ext_resource type="Script" path="res://Scripts/Game/PlayerManager.cs" id="2_stoxf"]
 [ext_resource type="PackedScene" uid="uid://biehf781gdcuh" path="res://Templates/NavigationUnit.tscn" id="3_28b0r"]
 [ext_resource type="PackedScene" uid="uid://b6ajx743pvfx" path="res://Templates/PlayerBase.tscn" id="3_gsb7g"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerBase.cs" id="4_s7yi8"]
@@ -57,85 +58,88 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7948, 1, -11.7314)
 [node name="WaypointTest9" type="Node3D" parent="NavigationRegion3D/Areas"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.878, 1, -11.0724)
 
-[node name="Player" parent="." instance=ExtResource("3_gsb7g")]
+[node name="Players" type="Node" parent="."]
+script = ExtResource("2_stoxf")
 
-[node name="NavigationUnit" parent="Player" instance=ExtResource("3_28b0r")]
+[node name="Player" parent="Players" instance=ExtResource("3_gsb7g")]
 
-[node name="Neutral" parent="." instance=ExtResource("3_gsb7g")]
+[node name="NavigationUnit" parent="Players/Player" instance=ExtResource("3_28b0r")]
 
-[node name="NeutralNPC1" parent="Neutral" instance=ExtResource("3_28b0r")]
+[node name="Neutral" parent="Players" instance=ExtResource("3_gsb7g")]
+
+[node name="NeutralNPC1" parent="Players/Neutral" instance=ExtResource("3_28b0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.92586, 0, 0)
 
-[node name="NeutralNPC2" parent="Neutral" instance=ExtResource("3_28b0r")]
+[node name="NeutralNPC2" parent="Players/Neutral" instance=ExtResource("3_28b0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7129, 0, -0.0471983)
 
-[node name="NeutralNPC3" parent="Neutral" instance=ExtResource("3_28b0r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.81186, 0, 2.12004)
+[node name="NeutralNPC3" parent="Players/Neutral" instance=ExtResource("3_28b0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.94346, -2.61949, 3.86857)
 
-[node name="Hostile" parent="." instance=ExtResource("3_gsb7g")]
+[node name="Hostile" parent="Players" instance=ExtResource("3_gsb7g")]
 
-[node name="Enemy1" parent="Hostile" instance=ExtResource("3_28b0r")]
+[node name="Enemy1" parent="Players/Hostile" instance=ExtResource("3_28b0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2.27824)
 
-[node name="Enemy2" parent="Hostile" instance=ExtResource("3_28b0r")]
+[node name="Enemy2" parent="Players/Hostile" instance=ExtResource("3_28b0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.82231, 0, -0.331697)
 
-[node name="Enemy3" parent="Hostile" instance=ExtResource("3_28b0r")]
+[node name="Enemy3" parent="Players/Hostile" instance=ExtResource("3_28b0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.31061, 0, 2.62858)
 
-[node name="Environment" type="Node3D" parent="."]
+[node name="Environment" type="Node3D" parent="Players"]
 script = ExtResource("4_s7yi8")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Environment"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Players/Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0259027, 2.90914, 1.35264)
 light_energy = 2.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Players/Environment"]
 transform = Transform3D(0.837156, 0.0480797, -0.544847, 0.491042, 0.372718, 0.787375, 0.240931, -0.926698, 0.288414, 0, 4.91587, 0)
 light_color = Color(0.294118, 0.368627, 1, 1)
 light_energy = 2.0
 shadow_enabled = true
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Environment"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="Players/Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.55132, 3.54167, 1.59529)
 light_energy = 2.0
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="Environment"]
+[node name="OmniLight3D4" type="OmniLight3D" parent="Players/Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.07075, 3.54167, -7.92717)
 light_energy = 2.0
 
-[node name="Box" parent="Environment" instance=ExtResource("5_2ke7l")]
+[node name="Box" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 1.13366, 0.5, 12.2876)
 
-[node name="Box2" parent="Environment" instance=ExtResource("5_2ke7l")]
+[node name="Box2" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 3.2794, 0.5, 13.2546)
 
-[node name="Box3" parent="Environment" instance=ExtResource("5_2ke7l")]
+[node name="Box3" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 3.68479, 0.5, 11.4989)
 
-[node name="Box4" parent="Environment" instance=ExtResource("5_2ke7l")]
+[node name="Box4" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10.7754, 0.503917, 0.301059)
 
-[node name="Box5" parent="Environment" instance=ExtResource("5_2ke7l")]
+[node name="Box5" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8.58113, 0.5, 1.28615)
 
-[node name="Box6" parent="Environment" instance=ExtResource("5_2ke7l")]
+[node name="Box6" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8.17574, 0.5, -0.469552)
 
-[node name="Box7" parent="Environment" instance=ExtResource("5_2ke7l")]
+[node name="Box7" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -14.7583, 0.5, 17.4511)
 
-[node name="Box8" parent="Environment" instance=ExtResource("5_2ke7l")]
+[node name="Box8" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -12.6126, 0.5, 18.4181)
 
-[node name="Box9" parent="Environment" instance=ExtResource("5_2ke7l")]
+[node name="Box9" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -12.2072, 0.5, 16.6624)
 
-[node name="Box10" parent="Environment" instance=ExtResource("5_2ke7l")]
+[node name="Box10" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -26.6189, 0.5, 5.48264)
 
-[node name="Box11" parent="Environment" instance=ExtResource("5_2ke7l")]
+[node name="Box11" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -24.4731, 0.5, 6.44964)
 
-[node name="Box12" parent="Environment" instance=ExtResource("5_2ke7l")]
+[node name="Box12" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -24.0677, 0.5, 4.69394)

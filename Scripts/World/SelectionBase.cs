@@ -49,10 +49,11 @@ public static class SelectionBase {
     public static void ApplyGroupPosition(List<NavigationUnit> group, Vector3 targetPosition, float gapDistance, float rowLimit) {
         for (int i = 0; i < group.Count; i++) {
             if (!group[i].Player.IsFirstPlayer()) continue;
-            group[i].NavigationAgent.NavigationTargetPosition = new Vector3(
-                targetPosition.X + i * gapDistance % rowLimit,
-                targetPosition.Y,
-                targetPosition.Z + i * (gapDistance / rowLimit));
+            Vector3 navigationTarget = new Vector3(
+                    targetPosition.X + i * gapDistance % rowLimit,
+                    targetPosition.Y,
+                    targetPosition.Z + i * (gapDistance / rowLimit));
+            group[i].UnitTask.Add(new UnitTaskMove(navigationTarget, group[i]));
         }
     }
 

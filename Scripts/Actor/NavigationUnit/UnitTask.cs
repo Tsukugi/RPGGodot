@@ -1,14 +1,13 @@
 using System.Collections.Generic;
-using System.Linq;
 using Godot;
 
 public partial class UnitTask : Node {
     NavigationUnit unit;
     TaskBase currentTask = null;
-    Stack<TaskBase> tasks = new();
+    Queue<TaskBase> tasks = new();
     Timer taskCheckTimer = new() {
         OneShot = false,
-        WaitTime = 1f + new System.Random().NextDouble(),
+        WaitTime = 0f + new System.Random().NextDouble(),
     };
 
 
@@ -23,28 +22,31 @@ public partial class UnitTask : Node {
     }
 
     void OnTaskCheck() {
-        if (currentTask.CheckIfCompleted()) CompleteTask();
+        if (tasks.Count > 0) {
+            if (currentTask == null) currentTask = tasks.Peek();
+            if (!currentTask.IsAlreadyStarted) {
+                currentTask.StartTask();
+                GD.Print("[OnTaskCheck] " + currentTask.Type + " Task has started");
+            }
+        } else {
+            GD.Print("[OnTaskCheck] " + unit.Name + " has finished all tasks");
+        }
+
+        if (currentTask != null && currentTask.CheckIfCompleted()) {
+            GD.Print("[OnTaskCheck] " + currentTask.Type + " has been completed");
+            CompleteTask();
+        }
+
     }
 
     void CompleteTask() {
-        currentTask = tasks.Pop();
+        currentTask = null;
+        if (tasks.Count > 0) tasks.Dequeue();
     }
 
     public void Add(TaskBase newTask) {
-        tasks.Append(newTask);
+        tasks.Enqueue(newTask);
+        GD.Print("[UnitTask.Add] " + newTask.Type + " has been added for " + unit.Name + ". Current tasks length: " + tasks.Count);
     }
-
-    void Attack(Unit target) {
-        GD.Print("[UnitTask.Add] Attacking " + target.Name);
-    }
-    void AttackMove(Vector3 position) {
-        GD.Print("[UnitTask.Add] Moving and Attacking if necessary");
-        unit.NavigateTo(position);
-    }
-    void Interact(Unit target) {
-        GD.Print("[UnitTask.Add] Interacting with " + target.Name);
-    }
-
-
 }
 

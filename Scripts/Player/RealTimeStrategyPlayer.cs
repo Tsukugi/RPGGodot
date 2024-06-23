@@ -69,9 +69,8 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
                     Stack<Node3D> WayPoints = new();
                     foreach (var item in shuffledWaypoints) {
                         if (item is not Node3D waypoint) continue;
-                        WayPoints.Push(waypoint);
+                        unit.UnitTask.Add(new UnitTaskMove(waypoint.GlobalPosition, unit));
                     }
-                    unit.AiController.WayPoints = WayPoints;
                 }
             }
         }

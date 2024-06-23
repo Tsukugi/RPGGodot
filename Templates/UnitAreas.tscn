@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bh5lo8eo1jyfg"]
+[gd_scene load_steps=6 format=3 uid="uid://bh5lo8eo1jyfg"]
 
-[ext_resource type="Script" path="res://Scripts/Actor/NavigationUnit/AlertArea.cs" id="1_h54t7"]
+[ext_resource type="Script" path="res://Scripts/Actor/NavigationUnit/UnitCombatArea.cs" id="1_g41m0"]
+[ext_resource type="Script" path="res://Scripts/Actor/NavigationUnit/UnitAlertArea.cs" id="1_h54t7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_umy0v"]
 height = 1.0
@@ -14,6 +15,7 @@ height = 1.0
 [node name="Areas" type="Node3D"]
 
 [node name="Combat" type="Area3D" parent="."]
+script = ExtResource("1_g41m0")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Combat"]
 shape = SubResource("CapsuleShape3D_umy0v")

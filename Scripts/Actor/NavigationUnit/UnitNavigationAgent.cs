@@ -3,16 +3,8 @@ using Godot;
 public partial class UnitNavigationAgent : NavigationAgent3D {
     NavigationUnit unit;
     Node3D navigationTarget = null;
-    Vector3 navigationTargetPosition;
-    public Node3D NavigationTarget { get => navigationTarget; }
+    Vector3 newTargetPosition;
     public bool IsMoving { get => this.IsNavigationFinished(); }
-    public Vector3 NavigationTargetPosition {
-        get => navigationTargetPosition;
-        set {
-            navigationTargetPosition = value;
-            unit.UnitTask.Add(new UnitTaskMove(TaskType.Move, navigationTargetPosition, unit));
-        }
-    }
 
     public override void _Ready() {
         base._Ready();
@@ -29,19 +21,29 @@ public partial class UnitNavigationAgent : NavigationAgent3D {
     }
 
     void OnNavigationMovement() {
-        if (TargetPosition != NavigationTargetPosition) {
+        if (TargetPosition != newTargetPosition) {
             // * On Start
-            TargetPosition = NavigationTargetPosition;
+            TargetPosition = newTargetPosition;
             navigationTarget.Visible = true;
         } else if (IsNavigationFinished()) {
             // * On Finish and EveryIteration while Idle
             navigationTarget.Visible = false;
         } else {
             // * On EveryIteration while moving
-            navigationTarget.GlobalPosition = NavigationTargetPosition;
+            navigationTarget.GlobalPosition = newTargetPosition;
             Vector3 currentAgentPosition = unit.GlobalTransform.Origin;
             Vector3 nextPathPosition = GetNextPathPosition();
             unit.NavigateTo(nextPathPosition);
         }
+    }
+
+    public void StartNewNavigation(Vector3 position) {
+        newTargetPosition = position;
+        // If player is selected, apply it immediately;
+      /*  if (unit.UnitSelection.IsSelected) {
+            newTargetPosition = position;
+        } else {
+            unit.UnitTask.Add(new UnitTaskMove(position, unit));
+        }*/
     }
 }

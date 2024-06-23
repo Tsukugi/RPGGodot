@@ -40,6 +40,7 @@ public partial class NavigationUnit : Unit {
         MoveAndSlide(Velocity);
         UpdateRenderDirection(Velocity.ToVector2());
     }
+    
     void UpdateRenderDirection(Vector2 direction) {
         UnitRenderDirection newUnitDirection = ActorAnimationHandler.GetRenderDirectionFromVector(direction);
         if (newUnitDirection != unitRenderDirectionState) {

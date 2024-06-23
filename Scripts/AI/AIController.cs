@@ -27,7 +27,7 @@ public partial class AIController : Node {
     }
 
     void OnBehaviourCheck() {
-        if (wayPoints.Count > 0) {
+        /*if (wayPoints.Count > 0) {
             Vector3 nextPosition = wayPoints.First().GlobalPosition;
             float distance = VectorUtils.GetDistanceFromVectors(unit.GlobalPosition, nextPosition);
             if (unit.NavigationAgent.NavigationTargetPosition != nextPosition) {
@@ -48,6 +48,6 @@ public partial class AIController : Node {
             } else {
                 // Is moving
             }
-        }
+        }*/
     }
 }

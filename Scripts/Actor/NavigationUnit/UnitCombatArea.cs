@@ -21,7 +21,8 @@ public partial class UnitCombatArea : Area3D {
     public void TryStartAttack() {
         if (!canAttack) return;
         canAttack = false;
-        target.Attributes.ApplyDamage(unit.Attributes.BaseDamage);
+        int finalDamage = target.Attributes.ApplyDamage(unit.Attributes.BaseDamage);
+        GD.Print("[TryStartAttack] " + unit.Name + " dealt " + finalDamage + " of damage. Target hitpoints: " + target.Attributes.HitPoints);
         TimerUtils.CreateSimpleTimer(OnAttackCastEnd, 1 / unit.Attributes.AttackCastDuration);
     }
 

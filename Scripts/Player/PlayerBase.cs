@@ -3,7 +3,7 @@ using Godot;
 public partial class PlayerBase : Node {
     CameraBase camera;
     InteractionPanel interactionPanel;
-    bool IsPerformanceLogActive = false;
+    bool IsPerformanceLogActive = true;
     protected PlayerManager manager;
 
     public CameraBase Camera { get => camera; }
@@ -22,14 +22,15 @@ public partial class PlayerBase : Node {
 
     protected void LogPerformance() {
         DebugLog("TimeFps: " + Performance.GetMonitor(Performance.Monitor.TimeFps));
-        DebugLog("RenderTotalObjectsInFrame: " + Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame));
+        DebugLog("RenderTotalObjectsInFrame: " + Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame), true);
         DebugLog("NavigationAgentCount: " + Performance.GetMonitor(Performance.Monitor.NavigationAgentCount));
-        DebugLog("TimeNavigationProcess: " + Performance.GetMonitor(Performance.Monitor.TimeNavigationProcess));
-        DebugLog("TimeProcess: " + Performance.GetMonitor(Performance.Monitor.TimeProcess));
-        DebugLog("RenderVideoMemUsed: " + Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed));
+        DebugLog("TimeNavigationProcess: " + Performance.GetMonitor(Performance.Monitor.TimeNavigationProcess), true);
+        DebugLog("TimeProcess: " + Performance.GetMonitor(Performance.Monitor.TimeProcess), true);
+        DebugLog("RenderVideoMemUsed: " + Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed), true);
     }
 
-    public void DebugLog(string message) {
+    public void DebugLog(string message, bool ignore = false) {
+        if (ignore) return;
         if (this.IsFirstPlayer()) GD.Print(message);
     }
 

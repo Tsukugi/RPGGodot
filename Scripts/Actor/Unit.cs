@@ -23,6 +23,7 @@ public partial class Unit : ActorBase {
     public Area3D InteractionArea { get => interactionArea; }
     public UnitAttributes Attributes { get => attributes; }
     public Label3D OverheadLabel { get => overheadLabel; }
+    public bool IsBodyCollisionEnabled { get => !BodyCollision.Disabled; set => BodyCollision.Disabled = !value; }
 
     public override void _Ready() {
         base._Ready();
@@ -36,16 +37,13 @@ public partial class Unit : ActorBase {
             AnimationPrefix = "idle"
         };
         actorAnimationHandler.ApplyAnimation(inputFaceDirection);
+
+        attributes.OnKilled += OnKilledHandler;
     }
 
-    public override void _PhysicsProcess(double delta) {
-        if (!Visible && Attributes.CanBeKilled) {
-            // Kill the Unit 
-            QueueFree();
-            return;
-        }
-
-        overheadLabel.Text = "Player" + Player.Name + " \n " + "HP: " + Attributes.HitPoints + " / " + Attributes.MaxHitPoints;
+    void OnKilledHandler(Unit unit) {
+        // Kill the Unit 
+        unit.QueueFree();
     }
 
     void OnInteractionAreaEnteredHandler(Node3D body) {

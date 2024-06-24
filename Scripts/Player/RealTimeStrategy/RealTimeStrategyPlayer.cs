@@ -1,6 +1,5 @@
 
 using System.Collections.Generic;
-using System.Linq;
 using Godot;
 using Godot.Collections;
 
@@ -134,6 +133,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
     }
 
     static void ApplyNavigation(NavigationUnit unit, Vector3 targetPosition) {
+        // TODO Improve me to accumulate tasks instead
         if (unit.UnitSelection.IsSelected) {
             unit.NavigationAgent.StartNewNavigation(targetPosition);
         } else {
@@ -143,7 +143,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
 
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-        if (!SimpleGameManager.IsFirstPlayer(this)) return;
+        if (!this.IsFirstPlayer()) return;
 
         // Camera WASD move
         Vector2 axis = NavigationInputHandler.GetAxis();

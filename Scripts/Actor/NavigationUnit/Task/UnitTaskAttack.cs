@@ -8,31 +8,34 @@ public partial class UnitTaskAttack : TaskBase {
     }
 
     public override void StartTask() {
+        base.StartTask();
         unit.Player.DebugLog("[UnitTask.Add] Attacking to " + target.Name);
         unit.NavigationAgent.StartNewNavigation(target.GlobalPosition);
-        isAlreadyStarted = true;
     }
     public override bool CheckIfCompleted() {
         return target.Attributes.CanBeKilled;
     }
 
-    public override void OnTaskInterval() {
+    public override void OnTaskProcess() {
         if (IsInRange()) {
             /// Attack
+            unit.IsBodyCollisionEnabled = false;
             unit.Player.DebugLog("[UnitTask.Add] " + unit.Name + " should attack to " + target.Name + " as it is in range.");
             unit.NavigationAgent.CancelNavigation();
+            unit.CombatArea.TryStartAttack();
         } else {
             // Get into range
             unit.Player.DebugLog("[UnitTask.Add] " + unit.Name + " should move to " + target.Name + " as it is not in range.");
             unit.NavigationAgent.StartNewNavigation(target.GlobalPosition);
         }
-    }
 
-    public override void OnPhysicsProcess() {
-        unit.CombatArea.TryStartAttack();
     }
 
     bool IsInRange() {
         return VectorUtils.GetDistanceFromVectors(unit.GlobalPosition, target.GlobalPosition) < navigationTargetSafeDistanceRadius;
+    }
+
+    public override void OnTaskCompleted() {
+        unit.NavigationAgent.CancelNavigation();
     }
 }

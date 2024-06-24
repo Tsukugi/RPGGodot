@@ -1,7 +1,8 @@
+using System;
 using Godot;
 
 public partial class UnitAttributes : Node {
-    Unit unit = null;
+    Unit unit;
     [Export]
     float movementSpeed = 3f;
     [Export]
@@ -37,33 +38,30 @@ public partial class UnitAttributes : Node {
         unit = this.TryFindParentNodeOfType<Unit>();
     }
 
-    public override void _PhysicsProcess(double delta) {
-        base._PhysicsProcess(delta);
-        // ? Unit requires to not be visible and CanBeKilled to be deleted
-        if (CanBeKilled) unit.Visible = false;
-    }
-
     // Try to avoid overflowing and underflowing
     void SetHitPoints(int newHitPoints) {
         if (newHitPoints > maxHitPoints) hitPoints = maxHitPoints;
         else if (newHitPoints < 0) hitPoints = 0;
         else hitPoints = newHitPoints;
-    }
 
+        if (CanBeKilled) OnKilled(unit);
+    }
 
     public void Update(int maxHitPoints, int armor, int baseDamage) {
         this.maxHitPoints = maxHitPoints;
         this.armor = armor;
         this.baseDamage = baseDamage;
         SetHitPoints(maxHitPoints);
-
     }
 
-    public void ApplyDamage(int damage) {
+    public int ApplyDamage(int damage) {
         int finalDamage = damage - Armor;
         if (finalDamage < 0) finalDamage = 0;
-        GD.Print("[ApplyDamage] " + unit.Name + " dealt " + finalDamage + " of damage. Target hitpoints: " + (hitPoints - finalDamage));
         SetHitPoints(hitPoints - finalDamage);
+        return finalDamage;
     }
+
+    public delegate void OnKilledEventHandler(Unit unit);
+    public event OnKilledEventHandler OnKilled;
 
 }

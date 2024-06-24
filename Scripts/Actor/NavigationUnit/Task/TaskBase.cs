@@ -11,19 +11,21 @@ public abstract class TaskBase {
     public bool IsAlreadyStarted { get => isAlreadyStarted; }
 
     /// <summary>
-    /// This method tells the initial actions when the task is started
+    /// This method does the initial actions when the task is started
     /// </summary>
-    public abstract void StartTask();
+    public virtual void StartTask() {
+        isAlreadyStarted = true;
+    }
     /// <summary>
     /// Use this method to update some actions on every Task's Timer interval
     /// </summary>
-    public abstract void OnTaskInterval();
+    public abstract void OnTaskProcess();
     /// <summary>
-    /// Use this method to update some actions on every _PhysicsProcess interval. Please use it sparingly
-    /// </summary>
-    public abstract void OnPhysicsProcess();
-    /// <summary>
-    /// This method is to be checked every check interval, and tells if the task can be completed
+    /// This method is to be checked every check interval, and checks if the task can be completed
     /// </summary>
     public abstract bool CheckIfCompleted();
+    /// <summary>
+    /// This method is to be executed when the completion check has passed, use it to clean the state of the unit.
+    /// </summary>
+    public abstract void OnTaskCompleted();
 }

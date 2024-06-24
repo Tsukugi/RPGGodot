@@ -35,15 +35,6 @@ public partial class NavigationUnit : Unit {
         unitTask = GetNodeOrNull<UnitTask>(StaticNodePaths.TaskController);
     }
 
-    public override void _PhysicsProcess(double delta) {
-        base._PhysicsProcess(delta);
-        overheadLabel.Text = Name + " \n " +
-            "HP: " + Attributes.HitPoints + " / " + Attributes.MaxHitPoints + " \n " +
-            "AlertArea: " + alertArea.AlertState;
-
-       	
-    }
-
     public void NavigateTo(Vector3 direction) {
         Vector3 Velocity = GlobalPosition.DirectionTo(direction) * Attributes.MovementSpeed;
         MoveAndSlide(Velocity);

@@ -20,14 +20,12 @@ public partial class UnitNavigationAgent : NavigationAgent3D {
     void OnNavigationMovement() {
         if (IsNavigationFinished()) {
             // * On Finish and EveryIteration while Idle
-            navigationTarget.Visible = false;
-            // unit.Player.DebugLog("[OnNavigationMovement] " + unit.Name + " reached its destination");
+            if (navigationTarget.Visible) navigationTarget.Visible = false;
         } else {
             // * On EveryIteration while moving
             navigationTarget.GlobalPosition = TargetPosition;
             Vector3 nextPathPosition = GetNextPathPosition();
             unit.NavigateTo(nextPathPosition);
-            // unit.Player.DebugLog("[OnNavigationMovement] " + unit.Name + " moves to " + nextPathPosition);
         }
     }
 

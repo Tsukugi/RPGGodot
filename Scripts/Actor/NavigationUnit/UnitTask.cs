@@ -5,13 +5,10 @@ public partial class UnitTask : Node {
     NavigationUnit unit;
     TaskBase currentTask = null;
     readonly Queue<TaskBase> tasks = new();
-    Timer taskCheckTimer = new() {
-        OneShot = false,
-        WaitTime = 0.5f + new System.Random().NextDouble(),
-    };
+
     Timer taskProcessTimer = new() {
         OneShot = false,
-        WaitTime = new System.Random().NextDouble(),
+        WaitTime = 1f,
     };
 
     public int Count { get => tasks.Count; }
@@ -21,48 +18,34 @@ public partial class UnitTask : Node {
         base._Ready();
         unit = this.TryFindParentNodeOfType<NavigationUnit>();
 
-        // Timer
-        AddChild(taskCheckTimer);
-        taskCheckTimer.Timeout += OnTaskCheck;
-        taskCheckTimer.Start();
         AddChild(taskProcessTimer);
         taskProcessTimer.Timeout += OnTaskProcess;
         taskProcessTimer.Start();
     }
 
     void OnTaskProcess() {
-        if (currentTask is null) return;
-        if (currentTask.CheckIfCompleted()) return;
-        currentTask.OnPhysicsProcess();
-        unit.Player.DebugLog("[OnTaskCheck] " + unit.Name + "'s " + currentTask.Type + " Task is processed");
-    }
+        if (tasks.Count <= 0) return;
 
-    void OnTaskCheck() {
-        if (tasks.Count > 0) {
-            if (currentTask == null) currentTask = tasks.Peek();
-            if (!(currentTask.IsAlreadyStarted || currentTask.CheckIfCompleted())) {
-                currentTask.StartTask();
-                unit.Player.DebugLog("[OnTaskCheck] " + currentTask.Type + " Task has started");
-            }
-        } else {
-            unit.Player.DebugLog("[OnTaskCheck] " + unit.Name + " has finished all tasks");
-        }
+        if (currentTask == null) currentTask = tasks.Peek();
 
-        if (currentTask is null) return;
         if (currentTask.CheckIfCompleted()) {
             unit.Player.DebugLog("[OnTaskCheck] " + currentTask.Type + " has been completed");
             CompleteTask();
-            return;
+        } else if (currentTask.IsAlreadyStarted) {
+            unit.Player.DebugLog("[OnTaskCheck] " + unit.Name + "'s " + currentTask.Type + " Task is processed");
+            currentTask.OnTaskProcess();
         } else {
-            currentTask.OnTaskInterval();
+            currentTask.StartTask();
+            unit.Player.DebugLog("[OnTaskCheck] " + currentTask.Type + " Task has started");
         }
-
     }
 
 
     void CompleteTask() {
+        currentTask.OnTaskCompleted();
         currentTask = null;
         if (tasks.Count > 0) tasks.Dequeue();
+
     }
 
     public void Add(TaskBase newTask) {

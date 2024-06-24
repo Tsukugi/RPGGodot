@@ -197,12 +197,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         return SelectionBase.SelectActors(foundStartWorldArea, foundEndWorldArea, GetChildren());
     }
 
-
-    static bool IsNavigationUnit(Node node) {
-        return node is NavigationUnit;
-    }
-
     public List<NavigationUnit> GetAllUnits() {
-        return (List<NavigationUnit>)GetChildren().ToList().Where(IsNavigationUnit);
+        return this.TryGetAllChildOfType<NavigationUnit>();
     }
 }

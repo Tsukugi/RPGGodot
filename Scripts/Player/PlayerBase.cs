@@ -1,14 +1,13 @@
 using Godot;
 
 public partial class PlayerBase : Node {
-    PlayerManager manager;
     CameraBase camera;
     InteractionPanel interactionPanel;
     bool IsPerformanceLogActive = false;
+    protected PlayerManager manager;
 
     public CameraBase Camera { get => camera; }
     public InteractionPanel InteractionPanel { get => interactionPanel; }
-
 
     public override void _Ready() {
         base._Ready();
@@ -32,5 +31,13 @@ public partial class PlayerBase : Node {
 
     public void DebugLog(string message) {
         if (this.IsFirstPlayer()) GD.Print(message);
+    }
+
+    public RelationshipType GetRelationship(PlayerBase player) {
+        return manager.PlayerRelationship.GetRelationship(Name, player.Name);
+    }
+
+    public bool IsHostilePlayer(PlayerBase player) {
+        return manager.PlayerRelationship.GetRelationship(Name, player.Name) == RelationshipType.Hostile;
     }
 }

@@ -6,8 +6,4 @@ public static class SimpleGameManager {
     public static bool IsFirstPlayer(this PlayerBase player) {
         return player.Name == Player;
     }
-    public static bool IsHostile(this PlayerBase player) {
-        return player.Name == Hostile;
-    }
-
 }

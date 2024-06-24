@@ -37,7 +37,10 @@ public partial class NavigationUnit : Unit {
 
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-        overheadLabel.Text = "HP: " + Attributes.HitPoints + " / " + Attributes.MaxHitPoints + " \n- TasksCount: " + unitTask.Count + " \n- AlertState: " + alertArea.AlertState;
+        overheadLabel.Text = Name + " \n " +
+            "HP: " + Attributes.HitPoints + " / " + Attributes.MaxHitPoints + " \n ";
+
+       	
     }
 
     public void NavigateTo(Vector3 direction) {

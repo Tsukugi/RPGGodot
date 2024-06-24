@@ -22,6 +22,7 @@ public partial class Unit : ActorBase {
     public ActorAnimationHandler ActorAnimationHandler { get => actorAnimationHandler; }
     public Area3D InteractionArea { get => interactionArea; }
     public UnitAttributes Attributes { get => attributes; }
+    public Label3D OverheadLabel { get => overheadLabel; }
 
     public override void _Ready() {
         base._Ready();
@@ -44,7 +45,7 @@ public partial class Unit : ActorBase {
             return;
         }
 
-        overheadLabel.Text = "HP: " + Attributes.HitPoints + " / " + Attributes.MaxHitPoints;
+        overheadLabel.Text = "Player" + Player.Name + " \n " + "HP: " + Attributes.HitPoints + " / " + Attributes.MaxHitPoints;
     }
 
     void OnInteractionAreaEnteredHandler(Node3D body) {

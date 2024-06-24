@@ -13,7 +13,7 @@ public partial class UnitAttributes : Node {
     [Export]
     int armor = 1;
     [Export]
-    int baseDamage = 5;
+    int baseDamage = 7;
     [Export]
     double attackCastDuration = 0.3;
     [Export]
@@ -62,7 +62,7 @@ public partial class UnitAttributes : Node {
     public void ApplyDamage(int damage) {
         int finalDamage = damage - Armor;
         if (finalDamage < 0) finalDamage = 0;
-        GD.Print("[ApplyDamage] Actor dealt " + finalDamage + " of damage. Target hitpoints: " + (hitPoints - finalDamage));
+        GD.Print("[ApplyDamage] " + unit.Name + " dealt " + finalDamage + " of damage. Target hitpoints: " + (hitPoints - finalDamage));
         SetHitPoints(hitPoints - finalDamage);
     }
 

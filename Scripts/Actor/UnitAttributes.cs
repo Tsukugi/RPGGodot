@@ -20,7 +20,7 @@ public partial class UnitAttributes : Node {
     double attackRange = 2;
 
     public bool CanBeKilled {
-        get => hitPoints <= 0;
+        get => hitPoints <= 0 || unit.IsQueuedForDeletion();
     }
 
     public int HitPoints { get => hitPoints; }

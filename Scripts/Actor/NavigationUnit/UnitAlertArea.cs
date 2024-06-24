@@ -63,8 +63,9 @@ public partial class UnitAlertArea : Area3D {
 
     void AlertChangeOnEnemyUnitRange(NavigationUnit possibleEnemy) {
         if (unit is null) return;
+        if (possibleEnemy.Attributes.CanBeKilled) return;
         if (!unit.Player.IsHostilePlayer(possibleEnemy.Player)) return;
-        if (unit.UnitTask.Count > 0) return;
+        if (unit.UnitTask.CurrentTask != null && unit.UnitTask.CurrentTask.Type == TaskType.Attack) return;
 
         // TODO: Implement To ignore or hide or combat;
         OnCombatStarted(possibleEnemy);
@@ -73,6 +74,7 @@ public partial class UnitAlertArea : Area3D {
     void OnCombatStarted(NavigationUnit possibleEnemy) {
         alertState = AlertState.Combat;
         unit.CombatArea.Target = possibleEnemy;
+        unit.UnitTask.ClearAll();
         unit.UnitTask.Add(new UnitTaskAttack(possibleEnemy, unit));
     }
 

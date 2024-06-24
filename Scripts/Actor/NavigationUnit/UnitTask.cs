@@ -9,6 +9,10 @@ public partial class UnitTask : Node {
         OneShot = false,
         WaitTime = 0.5f + new System.Random().NextDouble(),
     };
+    Timer taskProcessTimer = new() {
+        OneShot = false,
+        WaitTime = new System.Random().NextDouble(),
+    };
 
     public int Count { get => tasks.Count; }
     public TaskBase CurrentTask { get => currentTask; }
@@ -21,13 +25,16 @@ public partial class UnitTask : Node {
         AddChild(taskCheckTimer);
         taskCheckTimer.Timeout += OnTaskCheck;
         taskCheckTimer.Start();
+        AddChild(taskProcessTimer);
+        taskProcessTimer.Timeout += OnTaskProcess;
+        taskProcessTimer.Start();
     }
 
-    public override void _PhysicsProcess(double delta) {
-        base._PhysicsProcess(delta);
+    void OnTaskProcess() {
         if (currentTask is null) return;
         if (currentTask.CheckIfCompleted()) return;
         currentTask.OnPhysicsProcess();
+        unit.Player.DebugLog("[OnTaskCheck] " + unit.Name + "'s " + currentTask.Type + " Task is processed");
     }
 
     void OnTaskCheck() {
@@ -64,6 +71,7 @@ public partial class UnitTask : Node {
     }
 
     public void ClearAll() {
+        currentTask = null;
         tasks.Clear();
         CompleteTask();
     }

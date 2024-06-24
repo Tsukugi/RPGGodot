@@ -38,7 +38,8 @@ public partial class NavigationUnit : Unit {
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
         overheadLabel.Text = Name + " \n " +
-            "HP: " + Attributes.HitPoints + " / " + Attributes.MaxHitPoints + " \n ";
+            "HP: " + Attributes.HitPoints + " / " + Attributes.MaxHitPoints + " \n " +
+            "AlertArea: " + alertArea.AlertState;
 
        	
     }

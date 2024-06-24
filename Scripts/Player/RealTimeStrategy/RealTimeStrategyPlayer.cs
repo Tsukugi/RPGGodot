@@ -52,30 +52,6 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         base._Ready();
         selectionPanel = GetNodeOrNull<SelectionPanel>(StaticNodePaths.PlayerUISelectionPanel);
         AddChild(selectionShapeCast3D);
-
-
-        // !Debug
-        return;
-        if (!this.IsFirstPlayer()) {
-            var children = GetChildren();
-
-            Node areas = GetNodeOrNull("../NavigationRegion3D/Areas");
-            var waypoints = areas.GetChildren();
-
-
-            foreach (var child in children) {
-                if (child is NavigationUnit unit) {
-                    var shuffledWaypoints = waypoints;
-                    waypoints.Shuffle();
-                    Stack<Node3D> WayPoints = new();
-                    foreach (var item in shuffledWaypoints) {
-                        if (item is not Node3D waypoint) continue;
-                        unit.UnitTask.Add(new UnitTaskMove(waypoint.GlobalPosition, unit));
-                    }
-                }
-            }
-        }
-        // !EndDebug 
     }
 
     public override void _Input(InputEvent @event) {

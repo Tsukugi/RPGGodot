@@ -45,6 +45,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
     // Camera
     Vector2 cameraDragStartPosition = Vector2.Zero;
     Vector2 cameraDragCurrentPosition = Vector2.Zero;
+    Vector2 cameraEdgeMovingDirection = Vector2.Zero;
 
 
     public override void _Ready() {
@@ -67,6 +68,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
             if (Input.IsMouseButtonPressed(MouseButton.Middle)) {
                 cameraDragCurrentPosition = Camera.GetViewport().GetMousePosition();
             }
+            cameraEdgeMovingDirection = Camera.GetEdgeMovingDirection();
         }
 
         if (@event is InputEventMouseButton eventMouseButton) {
@@ -148,18 +150,23 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         // Camera WASD move
         Vector2 axis = NavigationInputHandler.GetAxis();
         if (axis != Vector2.Zero) {
-            Camera.AxisMove(axis, (float)delta);
+            Camera.AxisMove(axis.Rotate(CameraBase.CameraRotationAxisOffset), (float)delta);
         }
 
         // Camera Middle mouse button drag move
         if (cameraDragCurrentPosition != Vector2.Zero) {
-            Camera.AxisMove((cameraDragCurrentPosition - cameraDragStartPosition).Normalized(), (float)delta);
+            Camera.AxisMove((cameraDragCurrentPosition - cameraDragStartPosition).Rotate(CameraBase.CameraRotationAxisOffset).Normalized(), (float)delta);
         }
 
         // Single Selection 
         Array collisions = selectionShapeCast3D.CollisionResult;
         if (collisions.Count > 0) {
             SelectionBase.SelectActor(this, collisions);
+        }
+
+        // Camera edge move
+        if (cameraEdgeMovingDirection != Vector2.Zero) {
+            Camera.AxisMove(cameraEdgeMovingDirection.Normalized(), (float)delta);
         }
     }
 

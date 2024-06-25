@@ -2,10 +2,10 @@ using System;
 using Godot;
 
 public static class VectorUtils {
-    const float DegToRad = (float)Math.PI / 180;
+    const float degToRad = (float)Math.PI / 180;
 
     public static Vector2 Rotate(this Vector2 vector, float degrees) {
-        return vector.RotateRadians(degrees * DegToRad);
+        return vector.RotateRadians(degrees * degToRad);
     }
 
     public static Vector2 RotateRadians(this Vector2 vector, float radians) {
@@ -27,6 +27,8 @@ public static class VectorUtils {
     }
 
     public static readonly Vector3 FarAway = Vector3.One * -9999;
+
+    public static float DegToRad => degToRad;
 
     public static Vector2 GetDistanceVector(Vector2 start, Vector2 end) {
         return new Vector2(

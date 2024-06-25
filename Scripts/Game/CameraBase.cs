@@ -13,8 +13,9 @@ public partial class CameraBase : Camera3D {
     public event EventHandler<Vector3> OnRotationChange;
 
     // Offsets 
-    public static readonly Vector3 CameraTransformOffset = new(0, 8, 0);
-    public static readonly Vector3 CameraRotationOffset = new(-90, 0, 0);
+    public static readonly Vector3 CameraTransformOffset = new(-8, 8, 8);
+    public static readonly Vector3 CameraRotationOffset = new(-45, -45, 0);
+    public static readonly int CameraRotationAxisOffset = 45;
     Vector3 currentTransformOffset = CameraTransformOffset;
     Vector3 currentRotationOffset = CameraRotationOffset;
     ProjectionType projectionType = ProjectionType.Perspective;
@@ -23,6 +24,8 @@ public partial class CameraBase : Camera3D {
      public static readonly Vector3 CameraRotationOffset = new(-30, -45, 0); 
      ProjectionType projectionType = ProjectionType.Orthogonal;*/
     int cameraOrthogonalSize = 10;
+
+    int edgeMovementPadding = 50;
 
     public ActorBase SelectedActor {
         get => selectedActor;
@@ -47,15 +50,37 @@ public partial class CameraBase : Camera3D {
 
     public override void _Process(double delta) {
         base._Process(delta);
+        FollowActor();
+    }
+
+    void FollowActor() {
         if (SelectedActor == null) return;
         try {
+            Vector3 offset = currentTransformOffset + SelectedActor.Transform.Origin;
+            Vector3 rotation = currentRotationOffset + SelectedActor.RotationDegrees;
             // Follow the selected actor
-            Reposition(currentTransformOffset + SelectedActor.Transform.Origin, currentRotationOffset + SelectedActor.RotationDegrees);
+            Reposition(offset, rotation);
         } catch (ObjectDisposedException) {
             // We will reset camera if the selectedActor was removed in the meanwhile.
             SelectedActor = null;
         }
     }
+
+    public Vector2 GetEdgeMovingDirection() {
+        Vector2 mousePosition = GetViewport().GetMousePosition();
+        Vector2 viewportSize = GetViewport().GetVisibleRect().Size;
+        Rect2 paddedArea = new(
+            new Vector2(edgeMovementPadding, edgeMovementPadding),
+            new Vector2(viewportSize.X - edgeMovementPadding, viewportSize.Y - edgeMovementPadding));
+
+        Vector2 cameraEdgeMovingPosition = Vector2.Zero;
+        if (mousePosition.X < paddedArea.Position.X) cameraEdgeMovingPosition.X = -1;
+        else if (mousePosition.X > paddedArea.Size.X) cameraEdgeMovingPosition.X = 1;
+        if (mousePosition.Y < paddedArea.Position.Y) cameraEdgeMovingPosition.Y = -1;
+        else if (mousePosition.Y > paddedArea.Size.Y) cameraEdgeMovingPosition.Y = 1;
+        return cameraEdgeMovingPosition.Rotate(CameraRotationAxisOffset);
+    }
+
 
     public void AxisMove(Vector2 axis, float delta) {
         if (axis == Vector2.Zero) return;
@@ -101,7 +126,4 @@ public partial class CameraBase : Camera3D {
         }
     }
 
-    internal void AxisMove(CameraZoomDirection zoomIn, int v) {
-        throw new NotImplementedException();
-    }
 }

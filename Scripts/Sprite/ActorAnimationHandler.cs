@@ -18,6 +18,7 @@ public class ActorAnimationHandler : AnimationHandlerBase {
             else unitRenderDirection = UnitRenderDirection.Up;
         }
 
+        GD.Print(unitRenderDirection);
         return unitRenderDirection;
     }
 

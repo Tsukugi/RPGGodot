@@ -31,7 +31,7 @@ public partial class ActorBase : CharacterBody3D {
     }
     async void ApplyActorRotation() {
         if (CameraBase.CameraTransformOffset.Normalized() == Vector3.Up) return;
-        StaticRotation.LookAt(Position + CameraBase.CameraTransformOffset);
+        StaticRotation.LookAt(Position + CameraBase.CameraTransformOffset, Vector3.Up, true);
     }
 
 }

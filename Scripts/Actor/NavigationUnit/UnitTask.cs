@@ -42,7 +42,7 @@ public partial class UnitTask : Node {
 
 
     void CompleteTask() {
-        currentTask.OnTaskCompleted();
+        if (currentTask != null) currentTask.OnTaskCompleted();
         currentTask = null;
         if (tasks.Count > 0) tasks.Dequeue();
 

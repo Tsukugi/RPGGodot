@@ -30,7 +30,6 @@ public partial class UnitAlertArea : Area3D {
             collisionShape = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.Area_CollisionShape);
             collisionShape.Disabled = false;
             BodyEntered += OnAlertAreaEntered;
-            BodyExited += OnAlertAreaExited;
         } else {
             GD.Print("[UnitAlertArea._Ready] " + parentUnit.Name + " has no NavigationUnit as parent, removing this Area as it is not needed.");
             QueueFree();
@@ -38,11 +37,12 @@ public partial class UnitAlertArea : Area3D {
     }
 
     void OnAlertAreaEntered(Node3D body) {
-      
+        if (unit is null) return;
+        if (unit.UnitSelection.IsSelected) return;
+        if (body is not NavigationUnit navigationUnit) return;
+        AlertChangeOnEnemyUnitRange(navigationUnit);
     }
 
-    void OnAlertAreaExited(Node3D body) {
-    }
 
 
     void AlertChangeOnEnemyUnitRange(NavigationUnit possibleEnemy) {

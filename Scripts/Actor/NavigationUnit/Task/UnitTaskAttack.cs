@@ -1,5 +1,6 @@
 public partial class UnitTaskAttack : TaskBase {
     readonly Unit target;
+
     public UnitTaskAttack(Unit target, NavigationUnit unit) {
         type = TaskType.Attack;
         this.target = target;
@@ -13,13 +14,12 @@ public partial class UnitTaskAttack : TaskBase {
         unit.NavigationAgent.StartNewNavigation(target.GlobalPosition);
     }
     public override bool CheckIfCompleted() {
-        return target.Attributes.CanBeKilled;
+        return base.CheckIfCompleted() || target.Attributes.CanBeKilled;
     }
 
     public override void OnTaskProcess() {
         if (IsInRange()) {
             /// Attack
-            unit.IsBodyCollisionEnabled = false;
             unit.Player.DebugLog("[UnitTask.Add] " + unit.Name + " should attack to " + target.Name + " as it is in range.");
             unit.NavigationAgent.CancelNavigation();
             unit.CombatArea.TryStartAttack();
@@ -28,7 +28,6 @@ public partial class UnitTaskAttack : TaskBase {
             unit.Player.DebugLog("[UnitTask.Add] " + unit.Name + " should move to " + target.Name + " as it is not in range.");
             unit.NavigationAgent.StartNewNavigation(target.GlobalPosition);
         }
-
     }
 
     bool IsInRange() {
@@ -36,6 +35,7 @@ public partial class UnitTaskAttack : TaskBase {
     }
 
     public override void OnTaskCompleted() {
+        base.OnTaskCompleted();
         unit.NavigationAgent.CancelNavigation();
     }
 }

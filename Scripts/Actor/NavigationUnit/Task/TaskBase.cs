@@ -5,7 +5,6 @@ public enum TaskType {
 public abstract class TaskBase {
     protected NavigationUnit unit;
     protected TaskType type;
-    protected float navigationTargetSafeDistanceRadius = 3f;
     protected bool isAlreadyStarted = false;
     private bool isForceFinished = false;
     public TaskType Type { get => type; }

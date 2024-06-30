@@ -27,27 +27,6 @@ public partial class AIController : Node {
     }
 
     void OnBehaviourCheck() {
-        /*if (wayPoints.Count > 0) {
-            Vector3 nextPosition = wayPoints.First().GlobalPosition;
-            float distance = VectorUtils.GetDistanceFromVectors(unit.GlobalPosition, nextPosition);
-            if (unit.NavigationAgent.NavigationTargetPosition != nextPosition) {
-                unit.NavigationAgent.NavigationTargetPosition = nextPosition;
-                unit.Player.DebugLog("[OnBehaviourCheck] Set next WayPoint to " + unit.NavigationAgent.NavigationTargetPosition);
-            } else if (distance < waypointDistanceSafeRadius) {
-                if (!unit.NavigationAgent.IsMoving) {
-                    unit.NavigationAgent.NavigationTargetPosition = unit.GlobalPosition;
-                }
-                Node3D usedPoint = wayPoints.Pop();
-                unit.Player.DebugLog("[OnBehaviourCheck] Waypoint Reached");
-                if (recycleWaypoints) {
-                    wayPoints.Append(usedPoint);
-                }
-                if (wayPoints.Count == 0) {
-                    unit.Player.DebugLog("[OnBehaviourCheck] Final destination reached");
-                }
-            } else {
-                // Is moving
-            }
-        }*/
+        // TODO Implement me
     }
 }

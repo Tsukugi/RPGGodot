@@ -11,7 +11,6 @@ public partial class CameraBase : Camera3D {
     [Export]
     float cameraZoomVelocity = 0.5f;
     public event EventHandler<Vector3> OnRotationChange;
-
     // Offsets 
     public static readonly Vector3 CameraTransformOffset = new(-8, 8, 8);
     public static readonly Vector3 CameraRotationOffset = new(-45, -45, 0);
@@ -71,7 +70,9 @@ public partial class CameraBase : Camera3D {
         Vector2 viewportSize = GetViewport().GetVisibleRect().Size;
         Rect2 paddedArea = new(
             new Vector2(edgeMovementPadding, edgeMovementPadding),
-            new Vector2(viewportSize.X - edgeMovementPadding, viewportSize.Y - edgeMovementPadding));
+            new Vector2(
+                viewportSize.X - edgeMovementPadding,
+                viewportSize.Y - edgeMovementPadding));
 
         Vector2 cameraEdgeMovingPosition = Vector2.Zero;
         if (mousePosition.X < paddedArea.Position.X) cameraEdgeMovingPosition.X = -1;
@@ -81,6 +82,11 @@ public partial class CameraBase : Camera3D {
         return cameraEdgeMovingPosition.Rotate(CameraRotationAxisOffset);
     }
 
+    static Rect2 GetBoundariesRect(int size) {
+        int halfSize = size / 2;
+        Rect2 boundaries = new(new Vector2(-halfSize, -halfSize), new Vector2(size, size));
+        return boundaries;
+    }
 
     public void AxisMove(Vector2 axis, float delta) {
         if (axis == Vector2.Zero) return;

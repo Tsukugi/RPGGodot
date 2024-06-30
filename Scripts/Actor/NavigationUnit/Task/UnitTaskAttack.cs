@@ -5,7 +5,6 @@ public partial class UnitTaskAttack : TaskBase {
         type = TaskType.Attack;
         this.target = target;
         this.unit = unit;
-        navigationTargetSafeDistanceRadius = (float)unit.Attributes.AttackRange;
     }
 
     public override void StartTask() {
@@ -31,7 +30,7 @@ public partial class UnitTaskAttack : TaskBase {
     }
 
     bool IsInRange() {
-        return VectorUtils.GetDistanceFromVectors(unit.GlobalPosition, target.GlobalPosition) < navigationTargetSafeDistanceRadius;
+        return VectorUtils.GetDistanceFromVectors(unit.GlobalPosition, target.GlobalPosition) < unit.Attributes.AttackRange;
     }
 
     public override void OnTaskCompleted() {

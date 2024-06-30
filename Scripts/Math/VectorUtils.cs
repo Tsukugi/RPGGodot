@@ -3,6 +3,8 @@ using Godot;
 
 public static class VectorUtils {
     const float degToRad = (float)Math.PI / 180;
+    public static readonly Vector3 FarAway = Vector3.One * -9999;
+    public static float DegToRad => degToRad;
 
     public static Vector2 Rotate(this Vector2 vector, float degrees) {
         return vector.RotateRadians(degrees * degToRad);
@@ -25,11 +27,6 @@ public static class VectorUtils {
         angleRadians *= 2;
         return (float)MathUtils.ToDegrees(angleRadians);
     }
-
-    public static readonly Vector3 FarAway = Vector3.One * -9999;
-
-    public static float DegToRad => degToRad;
-
     public static Vector2 GetDistanceVector(Vector2 start, Vector2 end) {
         return new Vector2(
                   Math.Abs(end.X - start.X),
@@ -55,5 +52,16 @@ public static class VectorUtils {
     }
     public static Vector3 ToVector3(this Vector2 worldVector) {
         return new Vector3(worldVector.X, 0, worldVector.Y);
+    }
+
+    public static bool IsInArea(this Vector2 point, Rect2 area) {
+        return !(point.X < area.Position.X ||
+            point.X > area.Size.X ||
+            point.Y < area.Position.Y ||
+            point.Y > area.Size.Y);
+    }
+
+    public static Vector3 WithY(this Vector3 vector, float Y) {
+        return new Vector3(vector.X, Y, vector.Z);
     }
 }

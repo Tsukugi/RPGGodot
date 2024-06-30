@@ -22,7 +22,7 @@ public partial class UnitTaskMove : TaskBase {
     }
     public override bool CheckIfCompleted() {
         float distance = VectorUtils.GetDistanceFromVectors(unit.GlobalPosition.ToVector2(), targetPosition.ToVector2());
-        return base.CheckIfCompleted() || distance < navigationTargetSafeDistanceRadius;
+        return base.CheckIfCompleted() || distance < unit.NavigationAgent.TargetDesiredDistance;
     }
 
     public override void OnTaskProcess() {

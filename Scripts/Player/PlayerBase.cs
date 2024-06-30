@@ -3,7 +3,7 @@ using Godot;
 public partial class PlayerBase : Node {
     CameraBase camera;
     InteractionPanel interactionPanel;
-    bool IsPerformanceLogActive = true;
+    bool IsPerformanceLogActive = false;
     protected PlayerManager manager;
 
     public CameraBase Camera { get => camera; }

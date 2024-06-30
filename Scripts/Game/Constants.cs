@@ -28,6 +28,11 @@ public static class StaticNodePaths {
     public static readonly string Area_CollisionShape = "CollisionShape";
 
     /** Player **/
+    public static readonly string PlayerInput = "Input";
+    public static readonly string PlayerSelection = "Selection"; 
+    public static readonly string PlayerNavigation = "Navigation";
+    public static readonly string PlayerSingleSelectionCast = "SingleSelectionCast";
+    public static readonly string PlayerMultiSelectionCast = "MultiSelectionCast";
     public static readonly string PlayerCamera = "Camera3D";
     public static readonly string PlayerUISelectionPanel = "CanvasLayer/Control/SelectionPanel";
     public static readonly string PlayerUIInteractionPanel = "CanvasLayer/Control/InteractionPanel";

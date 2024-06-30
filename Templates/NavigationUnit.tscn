@@ -63,7 +63,11 @@ script = ExtResource("6_q0wgi")
 [node name="Navigation" type="Node3D" parent="."]
 
 [node name="NavigationAgent" type="NavigationAgent3D" parent="Navigation"]
+path_desired_distance = 0.2
+target_desired_distance = 0.2
+path_max_distance = 0.01
 keep_y_velocity = false
+debug_enabled = true
 script = ExtResource("6_q3oeq")
 
 [node name="NavigationTarget" type="Sprite3D" parent="Navigation"]

@@ -528,31 +528,69 @@ metadata/_editor_floor_ = Vector3(0, -4, 0)
 [node name="Areas" type="Node3D" parent="NavigationRegion3D"]
 
 [node name="WaypointTest" type="Node3D" parent="NavigationRegion3D/Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="WaypointTest2" type="Node3D" parent="NavigationRegion3D/Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7948, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7948, 0, 0)
 
 [node name="WaypointTest3" type="Node3D" parent="NavigationRegion3D/Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.878, 1, 0.658974)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.878, 0, 0.658974)
 
 [node name="WaypointTest4" type="Node3D" parent="NavigationRegion3D/Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.923393, 1, 17.7735)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.923393, 0, 17.7735)
 
 [node name="WaypointTest5" type="Node3D" parent="NavigationRegion3D/Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.866, 0.999992, 16.5904)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.866, 0, 16.5904)
 
 [node name="WaypointTest6" type="Node3D" parent="NavigationRegion3D/Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9546, 1, 16.0353)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9546, 0, 16.0353)
 
 [node name="WaypointTest7" type="Node3D" parent="NavigationRegion3D/Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -11.7314)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.7314)
 
 [node name="WaypointTest8" type="Node3D" parent="NavigationRegion3D/Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7948, 1, -11.7314)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7948, 0, -11.7314)
 
 [node name="WaypointTest9" type="Node3D" parent="NavigationRegion3D/Areas"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.878, 1, -11.0724)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.878, 0, -11.0724)
+
+[node name="WaypointTest10" type="Node3D" parent="NavigationRegion3D/Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.604051, 7.64256e-06, -9.64326)
+
+[node name="WaypointTest11" type="Node3D" parent="NavigationRegion3D/Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79241, 1.14638e-05, 11.5263)
+
+[node name="WaypointTest12" type="Node3D" parent="NavigationRegion3D/Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.79, 0, -0.0431036)
+
+[node name="WaypointTest13" type="Node3D" parent="NavigationRegion3D/Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.9952, 0, 0.656114)
+
+[node name="WaypointTest14" type="Node3D" parent="NavigationRegion3D/Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.668, 0, -1.38758)
+
+[node name="WaypointTest15" type="Node3D" parent="NavigationRegion3D/Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.8666, 0, 15.7269)
+
+[node name="WaypointTest16" type="Node3D" parent="NavigationRegion3D/Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.924, 0, 12.5404)
+
+[node name="WaypointTest17" type="Node3D" parent="NavigationRegion3D/Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95.7446, 0, 9.21284)
+
+[node name="WaypointTest18" type="Node3D" parent="NavigationRegion3D/Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.79, 0, -10.7728)
+
+[node name="WaypointTest19" type="Node3D" parent="NavigationRegion3D/Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.0004, 0, -13.778)
+
+[node name="WaypointTest20" type="Node3D" parent="NavigationRegion3D/Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.668, 0, -13.119)
+
+[node name="WaypointTest21" type="Node3D" parent="NavigationRegion3D/Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.186, 7.64256e-06, -11.6898)
+
+[node name="WaypointTest22" type="Node3D" parent="NavigationRegion3D/Areas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.9976, 1.14638e-05, 9.47976)
 
 [node name="Players" type="Node" parent="."]
 script = ExtResource("2_bpkkl")

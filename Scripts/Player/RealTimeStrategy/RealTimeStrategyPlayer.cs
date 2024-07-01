@@ -28,6 +28,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
             NavigationUnit navUnit = navUnitTemplate.Instantiate<NavigationUnit>();
             AddChild(navUnit);
             navUnit.Position = position;
+            navUnit.NavigationAgent.StartNewNavigation(position.Add(1));
         }
     }
 }

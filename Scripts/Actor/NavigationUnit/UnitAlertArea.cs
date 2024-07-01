@@ -17,8 +17,7 @@ public partial class UnitAlertArea : Area3D {
         get => alertState;
         set {
             alertState = value;
-            unit.CombatArea.Target = null;
-            unit.Player.DebugLog("[AlertState.Set] " + unit.Name + " -> " + alertState);
+
         }
     }
 
@@ -38,12 +37,11 @@ public partial class UnitAlertArea : Area3D {
     void InitializeDeferred() {
         Monitoring = true;
         collisionShape.Disabled = false;
-        collisionShape.Scale = VectorUtils.Magnitude(unit.Attributes.AttackRange + 2f);
+        collisionShape.Scale = VectorUtils.Magnitude(unit.Attributes.AttackRange + 3f);
         BodyEntered += OnAlertAreaEntered;
     }
 
-    void OnCombatEnd(TaskBase task) {
-        unit.Player.DebugLog("[OnCombatEnd] " + task.Type);
+    void OnCombatEnd() {
         if (alertState == AlertState.Combat) alertState = AlertState.Safe;
         SetDeferred("Monitoring", true);
     }
@@ -55,8 +53,6 @@ public partial class UnitAlertArea : Area3D {
         AlertChangeOnEnemyUnitRange(navigationUnit);
     }
 
-
-
     void AlertChangeOnEnemyUnitRange(NavigationUnit possibleEnemy) {
         if (unit is null) return;
         if (possibleEnemy.Attributes.CanBeKilled) return;
@@ -65,16 +61,14 @@ public partial class UnitAlertArea : Area3D {
 
         unit.Player.DebugLog("[UnitAlertArea.OnAlertAreaEntered] " + unit.Name + " -> " + possibleEnemy.Name);
         // TODO: Implement To ignore or hide or combat;
-        OnCombatStarted(possibleEnemy);
+        StartCombatTask(possibleEnemy);
         SetDeferred("Monitoring", false);
     }
 
-    void OnCombatStarted(NavigationUnit possibleEnemy) {
+    void StartCombatTask(NavigationUnit possibleEnemy) {
         alertState = AlertState.Combat;
-        unit.CombatArea.Target = possibleEnemy;
-        UnitTaskAttack newAttackTask = new(possibleEnemy, unit);
-        newAttackTask.OnTaskCompletedEvent += OnCombatEnd;
-        unit.UnitTask.PriorityRunTask(newAttackTask);
+        unit.UnitCombat.StartCombatTask(possibleEnemy);
+        unit.UnitCombat.OnCombatEndEvent += OnCombatEnd;
     }
 
 

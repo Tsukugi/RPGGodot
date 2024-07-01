@@ -8,7 +8,7 @@ public abstract class TaskBase {
     protected NavigationUnit unit;
     protected TaskType type;
     protected bool isAlreadyStarted = false;
-    private bool isForceFinished = false;
+    protected bool isForceFinished = false;
     public TaskType Type { get => type; }
     public bool IsAlreadyStarted { get => isAlreadyStarted; }
     protected bool IsForceFinished { get => isForceFinished; }
@@ -33,7 +33,7 @@ public abstract class TaskBase {
     /// This method is to be executed when the completion check has passed, use it to clean the state of the unit.
     /// </summary>
     public virtual void OnTaskCompleted() {
-        if (OnTaskCompletedEvent != null) OnTaskCompletedEvent(this);
+        OnTaskCompletedEvent?.Invoke(this);
         isForceFinished = true;
     }
 

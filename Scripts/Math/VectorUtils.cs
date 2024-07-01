@@ -54,6 +54,10 @@ public static class VectorUtils {
         return new Vector3(worldVector.X, 0, worldVector.Y);
     }
 
+    public static Vector3 Add(this Vector3 vector, float amount) {
+        return new Vector3(vector.X + amount, vector.Y + amount, vector.Z + amount);
+    }
+
     public static Vector3 Magnitude(float magnitude) {
         return new Vector3(magnitude, magnitude, magnitude);
     }

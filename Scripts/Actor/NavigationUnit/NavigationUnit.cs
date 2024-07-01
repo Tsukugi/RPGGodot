@@ -14,7 +14,7 @@ public partial class NavigationUnit : Unit {
     UnitTask unitTask;
     public new RealTimeStrategyPlayer Player { get => player; }
     public AIController AiController { get => aiController; }
-    public UnitCombat CombatArea { get => combatArea; }
+    public UnitCombat UnitCombat { get => combatArea; }
     public UnitAlertArea AlertArea { get => alertArea; }
     public UnitNavigationAgent NavigationAgent { get => navigationAgent; }
     public UnitSelection UnitSelection { get => unitSelection; }

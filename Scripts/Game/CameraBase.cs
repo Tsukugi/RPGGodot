@@ -49,11 +49,10 @@ public partial class CameraBase : Camera3D {
 
     public override void _Process(double delta) {
         base._Process(delta);
-        FollowActor();
+        if (SelectedActor != null) FollowActor();
     }
 
     void FollowActor() {
-        if (SelectedActor == null) return;
         try {
             Vector3 offset = currentTransformOffset + SelectedActor.Transform.Origin;
             Vector3 rotation = currentRotationOffset + SelectedActor.RotationDegrees;

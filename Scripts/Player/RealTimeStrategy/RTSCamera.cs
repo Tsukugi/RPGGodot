@@ -79,7 +79,8 @@ public partial class RTSCamera : Node {
 
         // Camera Middle mouse button drag move
         if (cameraDragCurrentPosition != Vector2.Zero) {
-            player.Camera.AxisMove((cameraDragCurrentPosition - cameraDragStartPosition).Rotate(CameraBase.CameraRotationAxisOffset).Normalized(), (float)delta);
+            Vector2 direction = (cameraDragCurrentPosition - cameraDragStartPosition).Rotate(CameraBase.CameraRotationAxisOffset).Normalized();
+            player.Camera.AxisMove(direction * (player.Camera.GlobalPosition.Y / 2), (float)delta);
         }
 
         // Camera edge move

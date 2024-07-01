@@ -9,25 +9,35 @@ public partial class UnitTaskAttack : TaskBase {
 
     public override void StartTask() {
         base.StartTask();
-        unit.Player.DebugLog("[UnitTask.Add] Attacking to " + target.Name);
+        unit.Player.DebugLog("[StartTask] Attacking to " + target.Name);
         OnTaskProcess();
+        unit.UnitCombat.OnCombatEndEvent += () => {
+            isForceFinished = true;
+        };
+        unit.UnitCombat.OnAttackFailedEvent += () => {
+            if (CheckIfCompleted()) return;
+            GetIntoRange();
+        };
     }
     public override bool CheckIfCompleted() {
-        return base.CheckIfCompleted() || target.Attributes.CanBeKilled || unit.CombatArea.Target == null;
+        return base.CheckIfCompleted() || target.Attributes.CanBeKilled || !unit.UnitCombat.IsInCombat;
     }
 
     public override void OnTaskProcess() {
-        if (IsInRange()) {
-            /// Attack
-            unit.Player.DebugLog("[UnitTaskAttack.OnTaskProcess] " + unit.Name + " should attack to " + target.Name + " as it is in range.", true);
-            unit.NavigationAgent.CancelNavigation();
-            unit.CombatArea.TryStartAttack();
-        } else {
-            // Get into range
-            unit.CombatArea.StopAttack();
-            unit.Player.DebugLog("[UnitTaskAttack.OnTaskProcess] " + unit.Name + " should move to " + target.Name + " as it is not in range.", true);
-            unit.NavigationAgent.StartNewNavigation(target.GlobalPosition);
-        }
+        if (IsInRange()) ExecuteAttack();
+        else GetIntoRange();
+    }
+
+    void ExecuteAttack() {
+        unit.Player.DebugLog("[UnitTaskAttack.OnTaskProcess] " + unit.Name + " should attack to " + target.Name + " as it is in range.", true);
+        unit.NavigationAgent.CancelNavigation();
+        unit.UnitCombat.TryStartAttack();
+    }
+
+    void GetIntoRange() {
+        unit.UnitCombat.StopAttack();
+        unit.Player.DebugLog("[UnitTaskAttack.OnTaskProcess] " + unit.Name + " should move to " + target.Name + " as it is not in range.", true);
+        unit.NavigationAgent.StartNewNavigation(target.GlobalPosition);
     }
 
     bool IsInRange() {

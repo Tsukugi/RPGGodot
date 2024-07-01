@@ -30,9 +30,7 @@ public partial class UnitTask : Node {
             + unit.AlertArea.AlertState + " \n ";
         if (currentTask != null) {
             text += currentTask.Type.ToString();
-            if (unit.CombatArea.Target != null) {
-                text += " " + unit.CombatArea.Target.Name;
-            }
+            if (unit.UnitCombat.IsInCombat) text += " " + unit.UnitCombat.TargetName;
         }
         unit.OverheadLabel.Text = text + " \n " + tasks.Count.ToString();
         //! EndDebug

@@ -23,15 +23,22 @@ public partial class PlayerManager : Node {
         playerRelationship.UpdateRelationship("Hostile", "Neutral", RelationshipType.Hostile);
         playerRelationship.UpdateRelationship("Player", "Hostile", RelationshipType.Hostile);
         playerRelationship.UpdateRelationship("Player", "Neutral", RelationshipType.Friend);
-        playerRelationship.UpdateRelationship("Hostile", "Player", RelationshipType.Hostile);
+        // playerRelationship.UpdateRelationship("Hostile", "Player", RelationshipType.Hostile);
 
         Node areas = GetNodeOrNull("../NavigationRegion3D/Areas");
         List<Node3D> waypoints = areas.TryGetAllChildOfType<Node3D>();
         RealTimeStrategyPlayer Hostile = GetNodeOrNull<RealTimeStrategyPlayer>("Hostile");
         RealTimeStrategyPlayer Neutral = GetNodeOrNull<RealTimeStrategyPlayer>("Neutral");
         waypoints.Shuffle();
-        Hostile.AddUnits(waypoints[0].GlobalPosition.WithY(0), 10);
-        Neutral.AddUnits(waypoints[1].GlobalPosition.WithY(0), 10);
+        Hostile.AddUnits(waypoints[0].GlobalPosition.WithY(0), 32);
+        Neutral.AddUnits(waypoints[1].GlobalPosition.WithY(0), 32);
+        Hostile.AddUnits(waypoints[^1].GlobalPosition.WithY(0), 32);
+        Neutral.AddUnits(waypoints[^2].GlobalPosition.WithY(0), 32);
+        waypoints.Shuffle();
+        Hostile.AddUnits(waypoints[0].GlobalPosition.WithY(0), 32);
+        Neutral.AddUnits(waypoints[1].GlobalPosition.WithY(0), 32);
+        Hostile.AddUnits(waypoints[^1].GlobalPosition.WithY(0), 32);
+        Neutral.AddUnits(waypoints[^2].GlobalPosition.WithY(0), 32);
 
         await Wait(1);
         DebugMoveToRandomWaypoints(Neutral, waypoints);

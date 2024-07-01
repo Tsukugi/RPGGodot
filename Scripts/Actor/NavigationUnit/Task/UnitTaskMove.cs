@@ -2,6 +2,7 @@ using Godot;
 
 public partial class UnitTaskMove : TaskBase {
     Vector3 targetPosition;
+    Vector2 unitPositionOnTaskCheck;
     Unit target;
 
     public UnitTaskMove(Vector3 targetPosition, NavigationUnit unit) {
@@ -21,7 +22,13 @@ public partial class UnitTaskMove : TaskBase {
         unit.NavigationAgent.StartNewNavigation(targetPosition);
     }
     public override bool CheckIfCompleted() {
+        float unitDistanceSinceLastCheck = VectorUtils.GetDistanceFromVectors(unit.GlobalPosition.ToVector2(), unitPositionOnTaskCheck);
+        if (unitDistanceSinceLastCheck < 1) unit.NavigationAgent.LooseTargetDesiredDistance(0.2f);
+
         float distance = VectorUtils.GetDistanceFromVectors(unit.GlobalPosition.ToVector2(), targetPosition.ToVector2());
+
+        unitPositionOnTaskCheck = unit.GlobalPosition.ToVector2();
+
         return base.CheckIfCompleted() || distance < unit.NavigationAgent.TargetDesiredDistance;
     }
 
@@ -33,6 +40,7 @@ public partial class UnitTaskMove : TaskBase {
 
     public override void OnTaskCompleted() {
         base.OnTaskCompleted();
+        unit.NavigationAgent.ResetTargetDesiredDistance();
         unit.NavigationAgent.CancelNavigation();
     }
 

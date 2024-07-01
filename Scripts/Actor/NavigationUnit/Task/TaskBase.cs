@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 public enum TaskType {
     Move, AttackMove, Attack, Interact,
 }
@@ -31,6 +33,10 @@ public abstract class TaskBase {
     /// This method is to be executed when the completion check has passed, use it to clean the state of the unit.
     /// </summary>
     public virtual void OnTaskCompleted() {
+        if (OnTaskCompletedEvent != null) OnTaskCompletedEvent(this);
         isForceFinished = true;
     }
+
+    public delegate void OnTaskEvent(TaskBase task);
+    public event OnTaskEvent OnTaskCompletedEvent;
 }

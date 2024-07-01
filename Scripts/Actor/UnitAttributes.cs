@@ -14,11 +14,11 @@ public partial class UnitAttributes : Node {
     [Export]
     int armor = 1;
     [Export]
-    int baseDamage = 7;
+    int baseDamage = 20;
     [Export]
     double attackCastDuration = 0.3;
     [Export]
-    float attackRange = 2;
+    float attackRange = 10;
 
     public bool CanBeKilled {
         get => hitPoints <= 0 || unit.IsQueuedForDeletion();

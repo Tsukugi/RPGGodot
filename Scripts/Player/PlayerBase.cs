@@ -21,17 +21,16 @@ public partial class PlayerBase : Node {
     }
 
     protected void LogPerformance() {
-        DebugLog("TimeFps: " + Performance.GetMonitor(Performance.Monitor.TimeFps));
-        DebugLog("RenderTotalObjectsInFrame: " + Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame), true);
+        DebugLog("TimeFps: " + Performance.GetMonitor(Performance.Monitor.TimeFps), true);
+        DebugLog("RenderTotalObjectsInFrame: " + Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame));
         DebugLog("NavigationAgentCount: " + Performance.GetMonitor(Performance.Monitor.NavigationAgentCount));
-        DebugLog("TimeNavigationProcess: " + Performance.GetMonitor(Performance.Monitor.TimeNavigationProcess), true);
-        DebugLog("TimeProcess: " + Performance.GetMonitor(Performance.Monitor.TimeProcess), true);
-        DebugLog("RenderVideoMemUsed: " + Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed), true);
+        DebugLog("TimeNavigationProcess: " + Performance.GetMonitor(Performance.Monitor.TimeNavigationProcess));
+        DebugLog("TimeProcess: " + Performance.GetMonitor(Performance.Monitor.TimeProcess));
+        DebugLog("RenderVideoMemUsed: " + Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed));
     }
 
-    public void DebugLog(string message, bool ignore = false) {
-        if (ignore) return;
-        if (this.IsFirstPlayer()) GD.Print(message);
+    public void DebugLog(string message, bool show = false) {
+        if (show) return; GD.Print(message);
     }
 
     public RelationshipType GetRelationship(PlayerBase player) {

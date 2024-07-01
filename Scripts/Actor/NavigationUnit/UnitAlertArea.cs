@@ -18,7 +18,7 @@ public partial class UnitAlertArea : Area3D {
         set {
             alertState = value;
             unit.CombatArea.Target = null;
-            GD.Print("[AlertState.Set] " + unit.Name + " -> " + alertState);
+            unit.Player.DebugLog("[AlertState.Set] " + unit.Name + " -> " + alertState);
         }
     }
 
@@ -28,12 +28,24 @@ public partial class UnitAlertArea : Area3D {
         if (parentUnit is NavigationUnit navigationUnit) {
             unit = navigationUnit;
             collisionShape = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.Area_CollisionShape);
-            collisionShape.Disabled = false;
-            BodyEntered += OnAlertAreaEntered;
+            Callable.From(InitializeDeferred).CallDeferred();
         } else {
             GD.Print("[UnitAlertArea._Ready] " + parentUnit.Name + " has no NavigationUnit as parent, removing this Area as it is not needed.");
             QueueFree();
         }
+    }
+
+    void InitializeDeferred() {
+        Monitoring = true;
+        collisionShape.Disabled = false;
+        collisionShape.Scale = VectorUtils.Magnitude(unit.Attributes.AttackRange + 2f);
+        BodyEntered += OnAlertAreaEntered;
+    }
+
+    void OnCombatEnd(TaskBase task) {
+        unit.Player.DebugLog("[OnCombatEnd] " + task.Type);
+        if (alertState == AlertState.Combat) alertState = AlertState.Safe;
+        SetDeferred("Monitoring", true);
     }
 
     void OnAlertAreaEntered(Node3D body) {
@@ -51,16 +63,18 @@ public partial class UnitAlertArea : Area3D {
         if (!unit.Player.IsHostilePlayer(possibleEnemy.Player)) return;
         if (unit.UnitTask.CurrentTask != null && unit.UnitTask.CurrentTask.Type == TaskType.Attack) return;
 
-        GD.Print("[UnitAlertArea.OnAlertAreaEntered] " + unit.Name + " -> " + possibleEnemy.Name);
+        unit.Player.DebugLog("[UnitAlertArea.OnAlertAreaEntered] " + unit.Name + " -> " + possibleEnemy.Name);
         // TODO: Implement To ignore or hide or combat;
         OnCombatStarted(possibleEnemy);
+        SetDeferred("Monitoring", false);
     }
 
     void OnCombatStarted(NavigationUnit possibleEnemy) {
         alertState = AlertState.Combat;
         unit.CombatArea.Target = possibleEnemy;
-        unit.UnitTask.ClearAll();
-        unit.UnitTask.Add(new UnitTaskAttack(possibleEnemy, unit));
+        UnitTaskAttack newAttackTask = new(possibleEnemy, unit);
+        newAttackTask.OnTaskCompletedEvent += OnCombatEnd;
+        unit.UnitTask.PriorityRunTask(newAttackTask);
     }
 
 

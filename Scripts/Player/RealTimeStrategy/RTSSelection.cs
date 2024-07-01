@@ -13,20 +13,20 @@ public partial class RTSSelection : Node {
     Vector2 selectionAreaStart = Vector2.Zero;
     Vector2 selectionAreaEnd = Vector2.Zero;
     float minSelectionAreaForMultiSelection = 35;
-    ShapeCast3D multiSelectionShapeCast3D;
+    ShapeCast3D selectionShapeCast3D;
 
     bool isSelecting = false;
 
-    public Array CollisionsOnSelection { get => multiSelectionShapeCast3D.CollisionResult; }
+    public Array CollisionsOnSelection { get => selectionShapeCast3D.CollisionResult; }
     public List<NavigationUnit> SelectedActors { get => selectedActors; }
-    public ShapeCast3D SelectionShapeCast3D { get => multiSelectionShapeCast3D; }
+    public ShapeCast3D SelectionShapeCast3D { get => selectionShapeCast3D; }
 
 
     public override void _Ready() {
         base._Ready();
         player = this.TryFindParentNodeOfType<RealTimeStrategyPlayer>();
         selectionPanel = player.GetNodeOrNull<SelectionPanel>(StaticNodePaths.PlayerUISelectionPanel);
-        multiSelectionShapeCast3D = player.GetNodeOrNull<ShapeCast3D>(StaticNodePaths.PlayerMultiSelectionCast);
+        selectionShapeCast3D = player.GetNodeOrNull<ShapeCast3D>(StaticNodePaths.PlayerSelectionCast);
     }
 
     public override void _Input(InputEvent @event) {
@@ -47,7 +47,7 @@ public partial class RTSSelection : Node {
             if (eventMouseButton.ButtonIndex == MouseButton.Left) {
                 // The Selecting phase is since the user presses the mouse button until he releases it
                 if (eventMouseButton.Pressed) {
-                    multiSelectionShapeCast3D.CollideWithBodies = true;
+                    selectionShapeCast3D.CollideWithBodies = true;
                     selectionAreaStart = mousePosition;
                     selectionAreaEnd = selectionAreaStart;
                     UpdateSelectActorsInArea(selectionAreaStart, selectionAreaEnd);
@@ -59,7 +59,7 @@ public partial class RTSSelection : Node {
                     selectionAreaStart = Vector2.Zero;
                     selectionPanel.ResetPosition();
                     player.DebugLog("[RTSSelection._Input]: Selection Finished");
-                    multiSelectionShapeCast3D.CollideWithBodies = false;
+                    selectionShapeCast3D.CollideWithBodies = false;
                 }
             }
         }
@@ -70,8 +70,8 @@ public partial class RTSSelection : Node {
         base._PhysicsProcess(delta);
         if (!player.IsFirstPlayer()) return;
 
-        if (multiSelectionShapeCast3D.CollisionResult.Count > 0) {
-            SelectionBase.SelectActors(UpdateSelectedActors, multiSelectionShapeCast3D.CollisionResult, player.Name);
+        if (selectionShapeCast3D.CollisionResult.Count > 0) {
+            SelectionBase.SelectActors(UpdateSelectedActors, selectionShapeCast3D.CollisionResult, player.Name);
         }
     }
 
@@ -114,7 +114,7 @@ public partial class RTSSelection : Node {
         Vector3 endWorldArea2 = player.RTSNavigation.NavigationBase.Get3DWorldPosition(player.Camera, areaEnd);
 
         /* We are drawing a "cube" with Y -10, 10 */
-        ((ConvexPolygonShape3D)multiSelectionShapeCast3D.Shape).Points = new Vector3[] {
+        ((ConvexPolygonShape3D)selectionShapeCast3D.Shape).Points = new Vector3[] {
                 startWorldArea.WithY(-10), startWorldArea2.WithY(-10), endWorldArea.WithY(-10), endWorldArea2.WithY(-10),
                 startWorldArea.WithY(10), startWorldArea2.WithY(10), endWorldArea.WithY(10), endWorldArea2.WithY(10)
             };

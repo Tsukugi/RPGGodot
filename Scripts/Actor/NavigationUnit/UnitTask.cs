@@ -4,7 +4,7 @@ using Godot;
 public partial class UnitTask : Node {
     NavigationUnit unit;
     TaskBase currentTask = null;
-    readonly Queue<TaskBase> tasks = new();
+    Queue<TaskBase> tasks = new();
 
     Timer taskProcessTimer = new() {
         OneShot = false,
@@ -24,6 +24,19 @@ public partial class UnitTask : Node {
     }
 
     void OnTaskProcess() {
+        //! Debug
+        string text = unit.Name + " \n "
+            + unit.Attributes.HitPoints + "/" + unit.Attributes.MaxHitPoints + " \n "
+            + unit.AlertArea.AlertState + " \n ";
+        if (currentTask != null) {
+            text += currentTask.Type.ToString();
+            if (unit.CombatArea.Target != null) {
+                text += " " + unit.CombatArea.Target.Name;
+            }
+        }
+        unit.OverheadLabel.Text = text + " \n " + tasks.Count.ToString();
+        //! EndDebug
+
         if (tasks.Count <= 0) return;
 
         if (currentTask == null) currentTask = tasks.Peek();
@@ -35,22 +48,34 @@ public partial class UnitTask : Node {
             unit.Player.DebugLog("[OnTaskCheck] " + unit.Name + "'s " + currentTask.Type + " Task is processed");
             currentTask.OnTaskProcess();
         } else {
-            currentTask.StartTask();
             unit.Player.DebugLog("[OnTaskCheck] " + currentTask.Type + " Task has started");
+            currentTask.StartTask();
         }
     }
 
 
     void CompleteTask() {
-        if (currentTask != null) currentTask.OnTaskCompleted();
+        if (currentTask != null) {
+            currentTask.OnTaskCompleted();
+        }
         currentTask = null;
         if (tasks.Count > 0) tasks.Dequeue();
-
     }
 
     public void Add(TaskBase newTask) {
         tasks.Enqueue(newTask);
         unit.Player.DebugLog("[UnitTask.Add] " + newTask.Type + " has been added for " + unit.Name + ". Current tasks length: " + tasks.Count);
+    }
+    public void PriorityRunTask(TaskBase newTask) {
+        if (currentTask != null) currentTask.OnTaskCompleted();
+        Queue<TaskBase> newQueue = new();
+        newQueue.Enqueue(newTask);
+        foreach (var item in tasks) {
+            newQueue.Enqueue(item);
+        }
+        tasks = newQueue;
+        currentTask = newTask;
+        unit.Player.DebugLog("[UnitTask.PriorityAdd] " + newTask.Type + " has been added for " + unit.Name + " as highest priority. Current tasks length: " + tasks.Count);
     }
 
     public void ClearAll() {
@@ -58,5 +83,6 @@ public partial class UnitTask : Node {
         tasks.Clear();
         CompleteTask();
     }
+
 }
 

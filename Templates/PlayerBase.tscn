@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6ajx743pvfx"]
+[gd_scene load_steps=9 format=3 uid="uid://b6ajx743pvfx"]
 
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/RealTimeStrategyPlayer.cs" id="1_w2jw0"]
 [ext_resource type="Script" path="res://Scripts/Game/CameraBase.cs" id="2_7o631"]
@@ -10,8 +10,6 @@
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nycjr"]
 points = PackedVector3Array(-1, 0, -1, 1, 0, -1, -1, 0, 1, 1, 0, 1)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p7fdw"]
 
 [node name="Player" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
@@ -65,13 +63,10 @@ enableMoveOnEdge = false
 [node name="Selection" type="Node" parent="."]
 script = ExtResource("6_wb7p4")
 
-[node name="Navigation" type="Node" parent="."]
-script = ExtResource("7_0mbkk")
-
-[node name="MultiSelectionCast" type="ShapeCast3D" parent="."]
+[node name="SelectionCast" type="ShapeCast3D" parent="Selection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 shape = SubResource("ConvexPolygonShape3D_nycjr")
 collision_mask = 2
 
-[node name="SingleSelectionCast" type="ShapeCast3D" parent="."]
-shape = SubResource("CapsuleShape3D_p7fdw")
-collision_mask = 2
+[node name="Navigation" type="Node" parent="."]
+script = ExtResource("7_0mbkk")

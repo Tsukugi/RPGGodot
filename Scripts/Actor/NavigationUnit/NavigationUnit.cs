@@ -7,14 +7,14 @@ public partial class NavigationUnit : Unit {
     // Dependencies
     RealTimeStrategyPlayer player;
     AIController aiController;
-    UnitCombatArea combatArea;
+    UnitCombat combatArea;
     UnitAlertArea alertArea;
     UnitNavigationAgent navigationAgent;
     UnitSelection unitSelection;
     UnitTask unitTask;
     public new RealTimeStrategyPlayer Player { get => player; }
     public AIController AiController { get => aiController; }
-    public UnitCombatArea CombatArea { get => combatArea; }
+    public UnitCombat CombatArea { get => combatArea; }
     public UnitAlertArea AlertArea { get => alertArea; }
     public UnitNavigationAgent NavigationAgent { get => navigationAgent; }
     public UnitSelection UnitSelection { get => unitSelection; }
@@ -28,7 +28,7 @@ public partial class NavigationUnit : Unit {
         player = (RealTimeStrategyPlayer)GetOwner();
 
         aiController = GetNodeOrNull<AIController>(StaticNodePaths.AIController);
-        combatArea = GetNodeOrNull<UnitCombatArea>(StaticNodePaths.CombatArea);
+        combatArea = GetNodeOrNull<UnitCombat>(StaticNodePaths.Combat);
         alertArea = GetNodeOrNull<UnitAlertArea>(StaticNodePaths.AlertArea);
         navigationAgent = GetNodeOrNull<UnitNavigationAgent>(StaticNodePaths.NavigationAgent);
         unitSelection = GetNodeOrNull<UnitSelection>(StaticNodePaths.Selection);
@@ -48,6 +48,8 @@ public partial class NavigationUnit : Unit {
             ActorAnimationHandler.ApplyAnimation(unitRenderDirectionState);
         }
     }
+
+
 }
 
 public static class NavigationUnitUtils {

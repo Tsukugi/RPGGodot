@@ -47,8 +47,6 @@ public static class SelectionBase {
         if (playerUnits.Count > 0) OnSelection(playerUnits);
         else if (firstPickedUnitPlayerUnits.Count > 0) OnSelection(firstPickedUnitPlayerUnits);
         else OnSelection(units);
-
-        GD.Print(playerUnits.Count, firstPickedUnitPlayerUnits.Count, units.Count);
     }
 
 

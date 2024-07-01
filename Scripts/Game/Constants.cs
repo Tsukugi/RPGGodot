@@ -10,6 +10,8 @@ public static class StaticNodePaths {
     public static readonly string NavigationAgent = "Navigation/NavigationAgent";
     public static readonly string NavigationTarget = "Navigation/NavigationTarget";
     public static readonly string Selection = "Selection";
+    public static readonly string Combat = "Combat";
+    public static readonly string CombatRayCast = "Combat/CombatRayCast";
     public static readonly string Attributes = "Attributes";
     public static readonly string SelectedIndicator = "Selection/SelectedIndicator";
     public static readonly string AIController = "AIController";
@@ -23,20 +25,22 @@ public static class StaticNodePaths {
 
     // Areas
     public static readonly string InteractionArea = "Areas/Interaction";
-    public static readonly string CombatArea = "Areas/Combat";
     public static readonly string AlertArea = "Areas/Alert";
     public static readonly string Area_CollisionShape = "CollisionShape";
 
     /** Player **/
     public static readonly string PlayerInput = "Input";
-    public static readonly string PlayerSelection = "Selection"; 
+    public static readonly string PlayerSelection = "Selection";
+    public static readonly string PlayerSelectionCast = "Selection/SelectionCast";
     public static readonly string PlayerNavigation = "Navigation";
-    public static readonly string PlayerSingleSelectionCast = "SingleSelectionCast";
-    public static readonly string PlayerMultiSelectionCast = "MultiSelectionCast";
     public static readonly string PlayerCamera = "Camera3D";
     public static readonly string PlayerUISelectionPanel = "CanvasLayer/Control/SelectionPanel";
     public static readonly string PlayerUIInteractionPanel = "CanvasLayer/Control/InteractionPanel";
     public static readonly string InteractionPanel_Label = "Label";
+}
+
+public static class ResourcePaths {
+    public static readonly string NavigationUnit = "res://Templates/NavigationUnit.tscn";
 }
 
 

@@ -54,6 +54,14 @@ public static class VectorUtils {
         return new Vector3(worldVector.X, 0, worldVector.Y);
     }
 
+    public static Vector3 Magnitude(float magnitude) {
+        return new Vector3(magnitude, magnitude, magnitude);
+    }
+
+    public static Vector3 Magnitude(this Vector3 vector, float magnitude) {
+        return vector * new Vector3(magnitude, magnitude, magnitude);
+    }
+
     public static bool IsInArea(this Vector2 point, Rect2 area) {
         return !(point.X < area.Position.X ||
             point.X > area.Size.X ||

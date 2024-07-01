@@ -6,8 +6,9 @@
 [ext_resource type="Script" path="res://Scripts/Actor/UnitAttributes.cs" id="4_jxxpj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4qoob"]
-radius = 0.001
-height = 1.0
+margin = 0.2
+radius = 0.1
+height = 0.7
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3d8bo"]
 animations = [{

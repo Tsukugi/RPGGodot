@@ -29,14 +29,14 @@ public partial class UnitTaskAttack : TaskBase {
     }
 
     void ExecuteAttack() {
-        unit.Player.DebugLog("[UnitTaskAttack.OnTaskProcess] " + unit.Name + " should attack to " + target.Name + " as it is in range.", true);
+        unit.Player.DebugLog("[UnitTaskAttack.ExecuteAttack] " + unit.Name + " should attack to " + target.Name + " as it is in range.");
         unit.NavigationAgent.CancelNavigation();
         unit.UnitCombat.TryStartAttack();
     }
 
     void GetIntoRange() {
         unit.UnitCombat.StopAttack();
-        unit.Player.DebugLog("[UnitTaskAttack.OnTaskProcess] " + unit.Name + " should move to " + target.Name + " as it is not in range.", true);
+        unit.Player.DebugLog("[UnitTaskAttack.GetIntoRange] " + unit.Name + " should move to " + target.Name + " as it is not in range.");
         unit.NavigationAgent.StartNewNavigation(target.GlobalPosition);
     }
 

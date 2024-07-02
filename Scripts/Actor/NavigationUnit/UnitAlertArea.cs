@@ -13,13 +13,7 @@ public partial class UnitAlertArea : Area3D {
     CollisionShape3D collisionShape;
     AlertState alertState = AlertState.Safe;
 
-    public AlertState AlertState {
-        get => alertState;
-        set {
-            alertState = value;
-
-        }
-    }
+    public AlertState AlertState { get => alertState; }
 
     public override void _Ready() {
         base._Ready();
@@ -69,6 +63,10 @@ public partial class UnitAlertArea : Area3D {
         alertState = AlertState.Combat;
         unit.UnitCombat.StartCombatTask(possibleEnemy);
         unit.UnitCombat.OnCombatEndEvent += OnCombatEnd;
+    }
+
+    public void CalmDown() {
+        alertState = AlertState.Safe;
     }
 
 

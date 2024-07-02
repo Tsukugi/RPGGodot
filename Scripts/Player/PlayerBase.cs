@@ -40,4 +40,8 @@ public partial class PlayerBase : Node {
     public bool IsHostilePlayer(PlayerBase player) {
         return manager.PlayerRelationship.GetRelationship(Name, player.Name) == RelationshipType.Hostile;
     }
+
+    public bool IsSamePlayer(PlayerBase player) {
+        return Name == player.Name;
+    }
 }

@@ -1,7 +1,5 @@
-using System.Threading.Tasks;
-
 public enum TaskType {
-    Move, AttackMove, Attack, Interact,
+    Move, AttackMove, Attack, Interact, Hide,
 }
 
 public abstract class TaskBase {

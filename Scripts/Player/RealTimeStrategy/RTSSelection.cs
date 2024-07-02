@@ -80,7 +80,7 @@ public partial class RTSSelection : Node {
         // Clear old and assign new selected state
         selectedActors.ForEach(actor => {
             try {
-                actor.UnitSelection.IsSelected = false;
+                actor.UnitSelection.Deselect();
             } catch (System.ObjectDisposedException) {
                 player.DebugLog("[UpdateSelectedActors] Tried to call a disposed actor, ignoring");
             }
@@ -88,7 +88,7 @@ public partial class RTSSelection : Node {
         player.DebugLog("[UpdateSelectedActors] Cleared actors: " + selectedActors.Count);
         selectedActors = selectedUnits;
         selectedActors.ForEach(actor => {
-            actor.UnitSelection.IsSelected = true;
+            actor.UnitSelection.Select(player);
         });
         player.DebugLog("[UpdateSelectedActors] Added actors: " + selectedActors.Count);
     }

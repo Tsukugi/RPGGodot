@@ -1,5 +1,3 @@
-
-using System.Collections.Generic;
 using Godot;
 
 public enum AlertState {
@@ -13,6 +11,9 @@ public partial class UnitAlertArea : Area3D {
     CollisionShape3D collisionShape;
     AlertState alertState = AlertState.Safe;
 
+    public float AreaRadius { get => collisionShape.Scale.X; }
+
+    public AlertState AlertStateOnEnemySight = AlertState.Hide;
     public AlertState AlertState { get => alertState; }
 
     public override void _Ready() {
@@ -36,7 +37,14 @@ public partial class UnitAlertArea : Area3D {
     }
 
     void OnCombatEnd() {
-        if (alertState == AlertState.Combat) alertState = AlertState.Safe;
+        CalmDown();
+        unit.Player.DebugLog(unit.Name + " -> [StartAttackTask -> OnCombatEndEvent : OnCombatEnd] Finished correctly", true);
+        SetDeferred("Monitoring", true);
+    }
+
+    void OnHideEnd(TaskBase task) {
+        CalmDown();
+        unit.Player.DebugLog(unit.Name + " -> [StartHideTask -> OnTaskCompletedEvent : OnHideEnd] Finished correctly", true);
         SetDeferred("Monitoring", true);
     }
 
@@ -54,9 +62,23 @@ public partial class UnitAlertArea : Area3D {
         if (unit.UnitTask.CurrentTask != null && unit.UnitTask.CurrentTask.Type == TaskType.Attack) return;
 
         unit.Player.DebugLog("[UnitAlertArea.OnAlertAreaEntered] " + unit.Name + " -> " + possibleEnemy.Name);
-        // TODO: Implement To ignore or hide or combat;
-        StartCombatTask(possibleEnemy);
-        SetDeferred("Monitoring", false);
+
+        switch (AlertStateOnEnemySight) {
+            case AlertState.Hide:
+                StartHideTask(possibleEnemy);
+                SetDeferred("Monitoring", false);
+                break;
+            case AlertState.Combat:
+                StartCombatTask(possibleEnemy);
+                SetDeferred("Monitoring", false);
+                break;
+        }
+    }
+    void StartHideTask(NavigationUnit possibleEnemy) {
+        alertState = AlertState.Hide;
+        UnitTaskHide newHideTask = new(possibleEnemy, unit);
+        newHideTask.OnTaskCompletedEvent += OnHideEnd;
+        unit.UnitTask.PriorityRunTask(newHideTask);
     }
 
     void StartCombatTask(NavigationUnit possibleEnemy) {
@@ -68,7 +90,6 @@ public partial class UnitAlertArea : Area3D {
     public void CalmDown() {
         alertState = AlertState.Safe;
     }
-
 
     public void ToggleManualDraft() {
         if (alertState == AlertState.Combat) {

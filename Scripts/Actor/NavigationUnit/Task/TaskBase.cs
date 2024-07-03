@@ -9,7 +9,7 @@ public abstract class TaskBase {
     protected bool isForceFinished = false;
     public TaskType Type { get => type; }
     public bool IsAlreadyStarted { get => isAlreadyStarted; }
-    protected bool IsForceFinished { get => isForceFinished; }
+    public bool IsForceFinished { get => isForceFinished; }
 
     /// <summary>
     /// This method does the initial actions when the task is started
@@ -31,6 +31,7 @@ public abstract class TaskBase {
     /// This method is to be executed when the completion check has passed, use it to clean the state of the unit.
     /// </summary>
     public virtual void OnTaskCompleted() {
+        if (isForceFinished) return;
         OnTaskCompletedEvent?.Invoke(this);
         isForceFinished = true;
     }

@@ -8,7 +8,7 @@ public partial class UnitTask : Node {
 
     Timer taskProcessTimer = new() {
         OneShot = false,
-        WaitTime = 1f,
+        WaitTime = 0.5f,
     };
 
     public int Count { get => tasks.Count; }
@@ -53,9 +53,7 @@ public partial class UnitTask : Node {
 
 
     void CompleteTask() {
-        if (currentTask != null) {
-            currentTask.OnTaskCompleted();
-        }
+        if (currentTask != null) currentTask.OnTaskCompleted();
         currentTask = null;
         if (tasks.Count > 0) tasks.Dequeue();
     }
@@ -64,8 +62,8 @@ public partial class UnitTask : Node {
         tasks.Enqueue(newTask);
         unit.Player.DebugLog("[UnitTask.Add] " + newTask.Type + " has been added for " + unit.Name + ". Current tasks length: " + tasks.Count);
     }
+
     public void PriorityRunTask(TaskBase newTask) {
-        if (currentTask != null) currentTask.OnTaskCompleted();
         Queue<TaskBase> newQueue = new();
         newQueue.Enqueue(newTask);
         foreach (var item in tasks) {

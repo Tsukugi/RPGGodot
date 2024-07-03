@@ -30,7 +30,7 @@ public partial class PlayerBase : Node {
     }
 
     public void DebugLog(string message, bool show = false) {
-        if (show) return; GD.Print(message);
+        if (show) GD.Print(Name + " -> " + message);
     }
 
     public RelationshipType GetRelationship(PlayerBase player) {

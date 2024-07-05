@@ -45,14 +45,14 @@ public partial class UnitTaskMove : TaskBase {
     }
 
     public override void OnTaskProcess() {
-        float unitDistanceSinceLastCheck = VectorUtils.GetDistanceFromVectors(unit.GlobalPosition.ToVector2(), unitPositionOnTaskCheck);
+        float unitDistanceSinceLastCheck = unit.GlobalPosition.ToVector2().DistanceTo(unitPositionOnTaskCheck);
         if (unitDistanceSinceLastCheck < minDistanceToStartAvoidance) {
             unit.NavigationAgent.LooseTargetDesiredDistance(0.2f);
             ExecuteManualAvoidance();
         } else {
             ResumeOriginalNavigation();
         }
-        distanceToTarget = VectorUtils.GetDistanceFromVectors(unit.GlobalPosition.ToVector2(), targetPosition.ToVector2());
+        distanceToTarget = unit.GlobalPosition.ToVector2().DistanceTo(targetPosition.ToVector2());
         if (target is not null) {
             targetPosition = target.GlobalPosition;
             unit.NavigationAgent.StartNewNavigation(targetPosition);

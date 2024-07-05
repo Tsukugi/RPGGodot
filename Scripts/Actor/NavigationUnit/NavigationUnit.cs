@@ -12,6 +12,7 @@ public partial class NavigationUnit : Unit {
     UnitNavigationAgent navigationAgent;
     UnitSelection unitSelection;
     UnitTask unitTask;
+    ShapeCast3D detectionCast;
     public new RealTimeStrategyPlayer Player { get => player; }
     public AIController AiController { get => aiController; }
     public UnitCombat UnitCombat { get => combatArea; }
@@ -19,6 +20,7 @@ public partial class NavigationUnit : Unit {
     public UnitNavigationAgent NavigationAgent { get => navigationAgent; }
     public UnitSelection UnitSelection { get => unitSelection; }
     public UnitTask UnitTask { get => unitTask; }
+    public ShapeCast3D DetectionCast { get => detectionCast; }
 
     // State
     UnitRenderDirection unitRenderDirectionState = UnitRenderDirection.Down;
@@ -33,6 +35,7 @@ public partial class NavigationUnit : Unit {
         navigationAgent = GetNodeOrNull<UnitNavigationAgent>(StaticNodePaths.NavigationAgent);
         unitSelection = GetNodeOrNull<UnitSelection>(StaticNodePaths.Selection);
         unitTask = GetNodeOrNull<UnitTask>(StaticNodePaths.TaskController);
+        detectionCast = GetNodeOrNull<ShapeCast3D>(StaticNodePaths.TaskController_DetectionCast);
     }
 
     public void NavigateTo(Vector3 direction) {

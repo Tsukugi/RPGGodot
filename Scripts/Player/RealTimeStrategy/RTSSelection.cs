@@ -95,7 +95,7 @@ public partial class RTSSelection : Node {
 
     void UpdateSelectActorsInArea(Vector2 selectionAreaStart, Vector2 selectionAreaEnd) {
 
-        float selectionAreaSize = VectorUtils.GetDistanceFromVectors(selectionAreaStart, selectionAreaEnd);
+        float selectionAreaSize = selectionAreaStart.DistanceTo(selectionAreaEnd);
         Vector2 areaStart = selectionAreaStart;
         Vector2 areaEnd = selectionAreaEnd;
 
@@ -104,7 +104,7 @@ public partial class RTSSelection : Node {
             Vector2 addedPadding = Vector2.One * minSelectionAreaForMultiSelection;
             areaStart = selectionAreaStart - addedPadding / 2;
             areaEnd = selectionAreaStart + addedPadding / 2;
-            float newAreaSize = VectorUtils.GetDistanceFromVectors(areaStart, areaEnd);
+            float newAreaSize = areaStart.DistanceTo(areaEnd);
             player.DebugLog("[RTSSelection.UpdateSelectActorsInArea]: selectionAreaSize " + newAreaSize);
         }
 

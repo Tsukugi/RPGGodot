@@ -10,10 +10,10 @@ public partial class SelectionPanel : Control {
     }
 
     public static Vector2 GetSize(Vector2 start, Vector2 end) {
-        return VectorUtils.GetDistanceVector(start, end);
+        return VectorUtils.FullDirectionTo(start, end).ToAbsolute();
     }
     public static Vector3 GetSize(Vector3 start, Vector3 end) {
-        return VectorUtils.GetDistanceVector(start, end);
+        return VectorUtils.FullDirectionTo(start, end).ToAbsolute();
     }
     public static Vector2 GetStartPosition(Vector2 start, Vector2 end) {
         return new Vector2(

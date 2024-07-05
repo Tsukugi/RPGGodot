@@ -67,6 +67,7 @@ script = ExtResource("6_wb7p4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 shape = SubResource("ConvexPolygonShape3D_nycjr")
 collision_mask = 2
+collide_with_bodies = false
 
 [node name="Navigation" type="Node" parent="."]
 script = ExtResource("7_0mbkk")

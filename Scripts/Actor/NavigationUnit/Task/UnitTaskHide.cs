@@ -7,21 +7,11 @@ public partial class UnitTaskHide : TaskBase {
     Vector3 hidePosition;
     bool isHidePositionFound = false;
 
-    ShapeCast3D newCast = new() {
-        Shape = new CapsuleShape3D(),
-        CollisionMask = (uint)CollisionMasks.Terrain,
-        CollideWithBodies = false,
-        CollideWithAreas = false,
-    };
-
     public UnitTaskHide(Unit target, NavigationUnit unit) {
         type = TaskType.Hide;
         this.target = target;
         this.unit = unit;
         safeDistanceToHide = unit.AlertArea.AreaRadius;
-        ((CapsuleShape3D)newCast.Shape).Radius = safeDistanceToHide / 2;
-
-        unit.AddChild(newCast);
     }
 
     public override void StartTask() {
@@ -37,14 +27,13 @@ public partial class UnitTaskHide : TaskBase {
     }
 
     public override void OnTaskProcess() {
-        if (isHidePositionFound) return;
+        // if (isHidePositionFound) return;
         UpdateHidePosition();
         if (isHidePositionFound) GetAwayFromRange(hidePosition);
     }
 
     public override void OnTaskCompleted() {
         base.OnTaskCompleted();
-        if (!newCast.IsQueuedForDeletion()) newCast.QueueFree();
         unit.NavigationAgent.CancelNavigation();
     }
 
@@ -55,36 +44,55 @@ public partial class UnitTaskHide : TaskBase {
 
 
     void UpdateHidePosition() {
-        Vector3? possibleHidePosition = FindHidePosition();
-        if (possibleHidePosition is not Vector3 newHidePosition) return;
-        hidePosition = newHidePosition;
+        Vector3 possibleHidePosition = FindHidePosition();
+
+        if (isHidePositionFound &&
+         target.GlobalPosition.DistanceTo(possibleHidePosition) < target.GlobalPosition.DistanceTo(hidePosition)) return;
+
+        hidePosition = possibleHidePosition;
         isHidePositionFound = true;
     }
 
-    Vector3? FindHidePosition() {
-        Vector3? hidePosition = null;
-        newCast.CollideWithBodies = true;
-        newCast.ForceShapecastUpdate();
+    Vector3 FindHidePosition() {
+        Vector3? possibleHidePosition = null;
+        unit.DetectionCast.CollideWithBodies = true;
+        unit.DetectionCast.ForceShapecastUpdate();
 
-        if (newCast.IsColliding()) {
-            Array collisions = newCast.CollisionResult;
-            unit.Player.DebugLog("[FindHidePosition]" + collisions[0], true);
-            Node3D wallNode = collisions[0].AsGodotDictionary()["collider"].As<Node3D>();
-            hidePosition = FindCoverPosition(wallNode);
+        if (unit.DetectionCast.IsColliding()) {
+            Array collisions = unit.DetectionCast.CollisionResult;
+            foreach (var item in collisions) {
+                Node3D wallNode = item.AsGodotDictionary()["collider"].As<Node3D>();
+                Vector3 position = item.AsGodotDictionary()["point"].As<Vector3>();
+                if (CheckIsUselessCover(wallNode) || possibleHidePosition is not null) continue;
+                unit.Player.DebugLog("[FindHidePosition]" + position, true);
+                possibleHidePosition = FindCoverPosition(position, 1);
+
+            }
         }
-        newCast.CollideWithBodies = false;
-        return hidePosition;
+
+        unit.DetectionCast.CollideWithBodies = false;
+        if (possibleHidePosition is Vector3 hidePosition) return hidePosition;
+        return unit.GlobalPosition - unit.GlobalPosition.FullDirectionTo(target.GlobalPosition);
     }
 
-    Vector3 FindCoverPosition(Node3D wallNode) {
-        float offset = wallNode.Scale.X;
-        Vector2 direction = VectorUtils.GetDistanceVector(unit.GlobalPosition.ToVector2(), wallNode.GlobalPosition.ToVector2()).Normalized() * offset;
+    bool CheckIsUselessCover(Node3D coverNode) {
+        if (coverNode is GridMap) return true;
+        if (coverNode is NavigationUnit unitToHideBehind) {
+            if (unitToHideBehind.Player.IsHostilePlayer(unit.Player)) return true;
+            if (unitToHideBehind.Name == unit.Name) return true;
+            if (unitToHideBehind.GlobalPosition == unit.GlobalPosition) return true;
+        }
+        return false;
+    }
+
+    Vector3 FindCoverPosition(Vector3 position, float offsetRadius) {
+        Vector2 direction = unit.GlobalPosition.ToVector2().DirectionTo(position.ToVector2()) * offsetRadius;
         // TODO Find collision in gridmap
-        unit.Player.DebugLog("[FindCoverPosition]" + wallNode + " " + wallNode.GlobalPosition + " " + direction + " " + offset, true);
-        return wallNode.GlobalPosition + direction.ToVector3();
+        unit.Player.DebugLog("[FindCoverPosition]" + position + " " + direction + " " + offsetRadius, true);
+        return position + direction.ToVector3();
     }
 
     bool IsAwayFromTarget() {
-        return VectorUtils.GetDistanceFromVectors(unit.GlobalPosition, target.GlobalPosition) > safeDistanceToHide;
+        return unit.GlobalPosition.DistanceTo(target.GlobalPosition) > safeDistanceToHide;
     }
 }

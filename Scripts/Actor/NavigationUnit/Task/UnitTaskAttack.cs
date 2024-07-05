@@ -41,7 +41,7 @@ public partial class UnitTaskAttack : TaskBase {
     }
 
     bool IsInRange() {
-        return VectorUtils.GetDistanceFromVectors(unit.GlobalPosition, target.GlobalPosition) < unit.Attributes.AttackRange;
+        return unit.GlobalPosition.DistanceTo(target.GlobalPosition) < unit.Attributes.AttackRange;
     }
 
     public override void OnTaskCompleted() {

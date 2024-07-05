@@ -1,4 +1,9 @@
 {
     "dotnet.server.useOmnisharp": true,
-    "omnisharp.enableEditorConfigSupport": false
+    "omnisharp.enableEditorConfigSupport": false,
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#293105",
+        "titleBar.activeBackground": "#394407",
+        "titleBar.activeForeground": "#F8FCE6"
+    }
 }

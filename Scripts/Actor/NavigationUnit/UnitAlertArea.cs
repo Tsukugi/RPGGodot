@@ -60,6 +60,7 @@ public partial class UnitAlertArea : Area3D {
         if (possibleEnemy.Attributes.CanBeKilled) return;
         if (!unit.Player.IsHostilePlayer(possibleEnemy.Player)) return;
         if (unit.UnitTask.CurrentTask != null && unit.UnitTask.CurrentTask.Type == TaskType.Attack) return;
+        if (unit.UnitTask.CurrentTask != null && unit.UnitTask.CurrentTask.Type == TaskType.Hide) return;
 
         unit.Player.DebugLog("[UnitAlertArea.OnAlertAreaEntered] " + unit.Name + " -> " + possibleEnemy.Name);
 
@@ -78,7 +79,7 @@ public partial class UnitAlertArea : Area3D {
         alertState = AlertState.Hide;
         UnitTaskHide newHideTask = new(possibleEnemy, unit);
         newHideTask.OnTaskCompletedEvent += OnHideEnd;
-        unit.UnitTask.PriorityRunTask(newHideTask);
+        unit.UnitTask.PriorityAddTask(newHideTask);
     }
 
     void StartCombatTask(NavigationUnit possibleEnemy) {

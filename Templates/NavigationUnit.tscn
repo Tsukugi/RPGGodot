@@ -19,7 +19,7 @@ height = 0.7
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_w83ah"]
 height = 0.1
-radius = 20.0
+radius = 10.0
 
 [node name="NavigationUnit" type="CharacterBody3D"]
 collision_layer = 2

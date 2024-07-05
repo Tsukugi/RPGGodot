@@ -11,7 +11,7 @@ public partial class UnitTaskHide : TaskBase {
         type = TaskType.Hide;
         this.target = target;
         this.unit = unit;
-        safeDistanceToHide = unit.AlertArea.AreaRadius;
+        safeDistanceToHide = target.Attributes.AttackRange + 1f;
     }
 
     public override void StartTask() {
@@ -23,11 +23,10 @@ public partial class UnitTaskHide : TaskBase {
     }
 
     public override bool CheckIfCompleted() {
-        return base.CheckIfCompleted() || IsAwayFromTarget();
+        return base.CheckIfCompleted() || (IsAwayFromTarget() && unit.NavigationAgent.DistanceToTarget() <= unit.NavigationAgent.TargetDesiredDistance);
     }
 
     public override void OnTaskProcess() {
-        // if (isHidePositionFound) return;
         UpdateHidePosition();
         if (isHidePositionFound) GetAwayFromRange(hidePosition);
     }
@@ -39,7 +38,7 @@ public partial class UnitTaskHide : TaskBase {
 
     void GetAwayFromRange(Vector3 hidePosition) {
         unit.Player.DebugLog("[UnitTaskHide.GetAwayFromRange] " + unit.Name + " will move to " + hidePosition + " as " + target.Name + "is in Range.", true);
-        unit.NavigationAgent.StartNewNavigation(hidePosition);
+        unit.UnitTask.PriorityAddTask(new UnitTaskMove(hidePosition, unit));
     }
 
 
@@ -82,11 +81,12 @@ public partial class UnitTaskHide : TaskBase {
             if (unitToHideBehind.Name == unit.Name) return true;
             if (unitToHideBehind.GlobalPosition == unit.GlobalPosition) return true;
         }
+        //if(coverNode.GlobalPosition.DistanceTo)
         return false;
     }
 
     Vector3 FindCoverPosition(Vector3 position, float offsetRadius) {
-        Vector2 direction = unit.GlobalPosition.ToVector2().DirectionTo(position.ToVector2()) * offsetRadius;
+        Vector2 direction = target.GlobalPosition.ToVector2().DirectionTo(position.ToVector2()) * offsetRadius;
         // TODO Find collision in gridmap
         unit.Player.DebugLog("[FindCoverPosition]" + position + " " + direction + " " + offsetRadius, true);
         return position + direction.ToVector3();

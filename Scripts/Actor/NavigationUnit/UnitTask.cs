@@ -63,7 +63,7 @@ public partial class UnitTask : Node {
         unit.Player.DebugLog("[UnitTask.Add] " + newTask.Type + " has been added for " + unit.Name + ". Current tasks length: " + tasks.Count);
     }
 
-    public void PriorityRunTask(TaskBase newTask) {
+    public void PriorityAddTask(TaskBase newTask) {
         Queue<TaskBase> newQueue = new();
         newQueue.Enqueue(newTask);
         foreach (var item in tasks) {
@@ -71,7 +71,12 @@ public partial class UnitTask : Node {
         }
         tasks = newQueue;
         currentTask = newTask;
-        unit.Player.DebugLog("[UnitTask.PriorityAdd] " + newTask.Type + " has been added for " + unit.Name + " as highest priority. Current tasks length: " + tasks.Count);
+        unit.Player.DebugLog("[UnitTask.PriorityAddTask] " + newTask.Type + " has been added for " + unit.Name + " as highest priority. Current tasks length: " + tasks.Count);
+    }
+
+    public void PriorityReplaceTask(TaskBase newTask) {
+        currentTask = newTask;
+        unit.Player.DebugLog("[UnitTask.PriorityReplaceTask] " + newTask.Type + " has been replaced for " + unit.Name + " as highest priority.");
     }
 
     public void ClearAll() {

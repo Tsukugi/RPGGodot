@@ -34,7 +34,7 @@ public partial class UnitCombat : Node3D {
         StartCombat(target);
         UnitTaskAttack newAttackTask = new(target, unit);
         newAttackTask.OnTaskCompletedEvent += (TaskBase task) => EndCombat();
-        unit.UnitTask.PriorityRunTask(newAttackTask);
+        unit.UnitTask.PriorityAddTask(newAttackTask);
     }
 
     public void StartCombat(Unit target) {

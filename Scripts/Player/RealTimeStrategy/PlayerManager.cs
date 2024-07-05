@@ -51,7 +51,7 @@ public partial class PlayerManager : Node {
         List<NavigationUnit> allUnits = player.GetAllUnits();
         foreach (NavigationUnit unit in allUnits) {
             Color newColor = unit.OverheadLabel.OutlineModulate;
-            // if (firstPlayer.IsHostilePlayer(player)) unit.AlertArea.AlertStateOnEnemySight = AlertState.Safe;
+            if (firstPlayer.IsHostilePlayer(player)) unit.AlertArea.AlertStateOnEnemySight = AlertState.Combat;
             if (firstPlayer.IsHostilePlayer(player)) newColor = new Color(1, 0, 0);
             if (firstPlayer.GetRelationship(player) == RelationshipType.Friend) {
                 newColor = new Color(0.5f, 1, 0.5f);

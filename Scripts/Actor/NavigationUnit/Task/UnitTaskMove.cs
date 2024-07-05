@@ -5,8 +5,7 @@ public partial class UnitTaskMove : TaskBase {
     Vector3 avoidancePosition = Vector3.Zero;
     Vector2 unitPositionOnTaskCheck;
 
-    float minDistanceToStartAvoidance = 1f;
-    bool isAvoiding = false;
+    readonly float minDistanceToStartAvoidance = 0.5f;
 
     float distanceToTarget = 1000;
     Unit target;
@@ -32,7 +31,7 @@ public partial class UnitTaskMove : TaskBase {
     }
 
     void ExecuteManualAvoidance() {
-        Vector3 newAvoidancePosition = targetPosition.Rotated(Vector3.Up, 90);
+        Vector3 newAvoidancePosition = targetPosition.Normalized().Rotated(Vector3.Up, 45);
         if (newAvoidancePosition == avoidancePosition) return;
         avoidancePosition = newAvoidancePosition;
         unit.NavigationAgent.StartNewNavigation(avoidancePosition);

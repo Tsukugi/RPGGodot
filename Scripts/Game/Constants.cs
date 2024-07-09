@@ -22,6 +22,7 @@ public static class StaticNodePaths {
     // StaticRotation
     public static readonly string StaticRotation = "StaticRotation";
     public static readonly string ActorSprite = "StaticRotation/AnimatedSprite3D";
+    public static readonly string ActorMeshInstance = "StaticRotation/MeshInstance3D";
     public static readonly string OverheadLabel = "StaticRotation/OverheadLabel";
 
     // Areas

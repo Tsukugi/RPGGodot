@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://denbdue5thqbf"]
+[gd_scene load_steps=6 format=3 uid="uid://denbdue5thqbf"]
 
 [ext_resource type="Texture2D" uid="uid://cglbwwof5cb5n" path="res://Art/TextureEnvBasic/Cut/Grass/tile061.png" id="1_26kgo"]
+[ext_resource type="PackedScene" uid="uid://b0sf81kiidfhj" path="res://MeshesLibrary/navRegionBlock.tscn" id="2_0ywwx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lk8f0"]
 shading_mode = 2
@@ -12,8 +13,10 @@ material = SubResource("StandardMaterial3D_lk8f0")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wse3h"]
 
-[node name="Grass" type="MeshInstance3D"]
+[node name="Grass" type="MeshInstance3D" groups=["navigation_mesh_source_group"]]
 mesh = SubResource("BoxMesh_w2wln")
+
+[node name="NavigationRegion3D" parent="." instance=ExtResource("2_0ywwx")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

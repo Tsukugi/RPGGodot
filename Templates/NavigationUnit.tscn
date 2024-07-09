@@ -13,9 +13,9 @@
 [ext_resource type="Script" path="res://Scripts/Actor/NavigationUnit/UnitCombat.cs" id="7_yau1o"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4qoob"]
-margin = 0.2
+margin = 0.0
 radius = 0.1
-height = 0.7
+height = 0.5
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_w83ah"]
 height = 0.1
@@ -24,8 +24,6 @@ radius = 10.0
 [node name="NavigationUnit" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 2
-collision_priority = 1e+08
-axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
@@ -39,6 +37,7 @@ script = ExtResource("1_3mh64")
 [node name="Areas" parent="." instance=ExtResource("2_3d65c")]
 
 [node name="BodyCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_4qoob")
 
 [node name="StaticRotation" type="Node3D" parent="."]
@@ -63,6 +62,7 @@ script = ExtResource("5_ngwae")
 script = ExtResource("5_kvp20")
 
 [node name="DetectionCast" type="ShapeCast3D" parent="TaskController"]
+enabled = false
 shape = SubResource("CylinderShape3D_w83ah")
 target_position = Vector3(0, 0, 0)
 collision_mask = 3
@@ -76,7 +76,9 @@ script = ExtResource("6_q0wgi")
 script = ExtResource("7_yau1o")
 
 [node name="CombatRayCast" type="RayCast3D" parent="Combat"]
+visible = false
 collision_mask = 3
+collide_with_bodies = false
 debug_shape_custom_color = Color(1, 0.45098, 0.384314, 1)
 debug_shape_thickness = 5
 
@@ -86,8 +88,12 @@ debug_shape_thickness = 5
 path_desired_distance = 0.2
 target_desired_distance = 0.2
 path_max_distance = 0.21
-keep_y_velocity = false
+navigation_layers = 3
+avoidance_layers = 2
+avoidance_mask = 2
 debug_enabled = true
+debug_use_custom = true
+debug_path_custom_point_size = 1.0
 script = ExtResource("6_q3oeq")
 
 [node name="NavigationTarget" type="Sprite3D" parent="Navigation"]

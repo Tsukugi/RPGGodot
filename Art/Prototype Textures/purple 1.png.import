@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cup0vwa350apj"
-path.s3tc="res://.godot/imported/tile033.png-b09acfbcb004e56b695b4a67c8bf708e.s3tc.ctex"
+uid="uid://dn32kn6c8sle4"
+path.s3tc="res://.godot/imported/purple 1.png-d4e6c5f972189720ae3bada795bf2c5c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Art/TextureEnvBasic/Cut/Grass/tile033.png"
-dest_files=["res://.godot/imported/tile033.png-b09acfbcb004e56b695b4a67c8bf708e.s3tc.ctex"]
+source_file="res://Art/Prototype Textures/purple 1.png"
+dest_files=["res://.godot/imported/purple 1.png-d4e6c5f972189720ae3bada795bf2c5c.s3tc.ctex"]
 
 [params]
 

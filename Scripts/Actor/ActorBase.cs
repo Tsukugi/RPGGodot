@@ -7,6 +7,7 @@ public partial class ActorBase : CharacterBody3D {
 
     PlayerBase player = null;
     AnimatedSprite3D animatedSprite3D = null;
+    MeshInstance3D meshInstance3D = null;
     Node3D staticRotation = null;
     CollisionShape3D bodyCollision = null;
 
@@ -20,8 +21,10 @@ public partial class ActorBase : CharacterBody3D {
         player = GetOwner();
         staticRotation = GetNodeOrNull<Node3D>(StaticNodePaths.StaticRotation);
         animatedSprite3D = GetNodeOrNull<AnimatedSprite3D>(StaticNodePaths.ActorSprite);
+        meshInstance3D = GetNodeOrNull<MeshInstance3D>(StaticNodePaths.ActorMeshInstance);
         bodyCollision = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.BodyCollision);
-        Callable.From(ApplyActorRotation).CallDeferred();
+        // We are applying rotation on 2d actors only
+        if (meshInstance3D is null) Callable.From(ApplyActorRotation).CallDeferred();
 
     }
     public PlayerBase GetOwner() {

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0sf81kiidfhj"]
+
+[ext_resource type="NavigationMesh" uid="uid://dnr003c8sglbx" path="res://MeshesLibrary/navRegionBlock.tres" id="1_y0scs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c8c30"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D"]
+navigation_mesh = ExtResource("1_y0scs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_c8c30")

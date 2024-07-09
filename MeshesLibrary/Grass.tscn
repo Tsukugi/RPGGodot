@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://dqrp662fffibl"]
+[gd_scene load_steps=21 format=3 uid="uid://dqrp662fffibl"]
 
 [ext_resource type="Texture2D" uid="uid://cglbwwof5cb5n" path="res://Art/TextureEnvBasic/Cut/Grass/tile061.png" id="1_3fw7f"]
 [ext_resource type="Texture2D" uid="uid://c0jres13a4ty" path="res://Art/TextureEnvBasic/Cut/Grass/tile032.png" id="2_qq8xl"]
+[ext_resource type="PackedScene" uid="uid://b0sf81kiidfhj" path="res://MeshesLibrary/navRegionBlock.tscn" id="2_teska"]
 [ext_resource type="Texture2D" uid="uid://bi5tvqf2lhnjq" path="res://Art/TextureEnvBasic/Cut/Grass/tile029.png" id="3_x4w2h"]
 [ext_resource type="Texture2D" uid="uid://bjxsk2cu8d4wj" path="res://Art/TextureEnvBasic/Cut/Grass/tile000.png" id="4_12tfj"]
 [ext_resource type="Texture2D" uid="uid://de4dmyk87dhum" path="res://Art/TextureEnvBasic/Cut/Grass/tile053.png" id="5_noaeo"]
@@ -62,6 +63,8 @@ material = SubResource("StandardMaterial3D_q1mgi")
 [node name="Grass" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_w2wln")
 
+[node name="NavigationRegion3D" parent="Grass" instance=ExtResource("2_teska")]
+
 [node name="StaticBody3D" type="StaticBody3D" parent="Grass"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Grass/StaticBody3D"]
@@ -69,6 +72,8 @@ shape = SubResource("BoxShape3D_wse3h")
 
 [node name="Grass2" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_hbbxd")
+
+[node name="NavigationRegion3D" parent="Grass2" instance=ExtResource("2_teska")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Grass2"]
 
@@ -78,6 +83,8 @@ shape = SubResource("BoxShape3D_wse3h")
 [node name="Grass3" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_at723")
 
+[node name="NavigationRegion3D" parent="Grass3" instance=ExtResource("2_teska")]
+
 [node name="StaticBody3D" type="StaticBody3D" parent="Grass3"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Grass3/StaticBody3D"]
@@ -85,6 +92,8 @@ shape = SubResource("BoxShape3D_wse3h")
 
 [node name="Grass4" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_7ycc8")
+
+[node name="NavigationRegion3D" parent="Grass4" instance=ExtResource("2_teska")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Grass4"]
 
@@ -94,6 +103,8 @@ shape = SubResource("BoxShape3D_wse3h")
 [node name="Grass5" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_agwyy")
 
+[node name="NavigationRegion3D" parent="Grass5" instance=ExtResource("2_teska")]
+
 [node name="StaticBody3D" type="StaticBody3D" parent="Grass5"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Grass5/StaticBody3D"]
@@ -101,6 +112,8 @@ shape = SubResource("BoxShape3D_wse3h")
 
 [node name="Grass6" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_i72yw")
+
+[node name="NavigationRegion3D" parent="Grass6" instance=ExtResource("2_teska")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Grass6"]
 

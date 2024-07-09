@@ -45,6 +45,7 @@ public partial class UnitCombat : Node3D {
     }
 
     public void EndCombat() {
+        if (!isInCombat) return;
         unit.Player.DebugLog("[EndCombat] " + unit.Name + " has finished combat");
         target = null;
         isInCombat = false;
@@ -74,11 +75,12 @@ public partial class UnitCombat : Node3D {
         combatRayCast.CollideWithBodies = true;
         combatRayCast.TargetPosition = target.GlobalPosition - unit.GlobalPosition;
         combatRayCast.ForceRaycastUpdate();
+        unit.Player.DebugLog("[CastAttack] " + unit.Name + " is attacking to " + combatRayCast.TargetPosition);
 
         if (combatRayCast.IsColliding()) {
             GodotObject collisionTarget = combatRayCast.GetCollider();
             if (collisionTarget is NavigationUnit targetUnit) {
-                unit.Player.DebugLog(unit.Name + " -> " + targetUnit.Name);
+                unit.Player.DebugLog("[CastAttack] " + unit.Name + " -> " + targetUnit.Name, true);
                 OnTargetAttackReached(targetUnit);
             } else {
                 OnAttackFailedEvent?.Invoke();
@@ -86,7 +88,7 @@ public partial class UnitCombat : Node3D {
         } else {
             OnAttackFailedEvent?.Invoke();
         }
-        combatRayCast.TargetPosition = Vector3.Zero;
+        combatRayCast.TargetPosition = Vector3.Down;
         combatRayCast.CollideWithBodies = false;
     }
 

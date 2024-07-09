@@ -30,15 +30,15 @@ public partial class PlayerManager : Node {
         RealTimeStrategyPlayer Hostile = GetNodeOrNull<RealTimeStrategyPlayer>("Hostile");
         RealTimeStrategyPlayer Neutral = GetNodeOrNull<RealTimeStrategyPlayer>("Neutral");
         waypoints.Shuffle();
-        Hostile.AddUnits(waypoints[0].GlobalPosition.WithY(0), 3);
-        Neutral.AddUnits(waypoints[1].GlobalPosition.WithY(0), 3);
-        Hostile.AddUnits(waypoints[^1].GlobalPosition.WithY(0), 3);
-        Neutral.AddUnits(waypoints[^2].GlobalPosition.WithY(0), 3);
+        Hostile.AddUnits(waypoints[0].GlobalPosition.WithY(0), 1);
+        Neutral.AddUnits(waypoints[1].GlobalPosition.WithY(0), 1);
+        Hostile.AddUnits(waypoints[^1].GlobalPosition.WithY(0), 1);
+        Neutral.AddUnits(waypoints[^2].GlobalPosition.WithY(0), 1);
         waypoints.Shuffle();
-        Hostile.AddUnits(waypoints[0].GlobalPosition.WithY(0), 3);
-        Neutral.AddUnits(waypoints[1].GlobalPosition.WithY(0), 3);
-        Hostile.AddUnits(waypoints[^1].GlobalPosition.WithY(0), 3);
-        Neutral.AddUnits(waypoints[^2].GlobalPosition.WithY(0), 3);
+        Hostile.AddUnits(waypoints[0].GlobalPosition.WithY(0), 1);
+        Neutral.AddUnits(waypoints[1].GlobalPosition.WithY(0), 1);
+        Hostile.AddUnits(waypoints[^1].GlobalPosition.WithY(0), 1);
+        Neutral.AddUnits(waypoints[^2].GlobalPosition.WithY(0), 1);
 
         await Wait(1);
         DebugMoveToRandomWaypoints(Neutral, waypoints);
@@ -50,12 +50,12 @@ public partial class PlayerManager : Node {
         RealTimeStrategyPlayer firstPlayer = GetNodeOrNull<RealTimeStrategyPlayer>("Player");
         List<NavigationUnit> allUnits = player.GetAllUnits();
         foreach (NavigationUnit unit in allUnits) {
-            unit.AlertArea.AlertStateOnEnemySight = AlertState.Safe;
+           
             Color newColor = unit.OverheadLabel.OutlineModulate;
             if (firstPlayer.IsHostilePlayer(player)) newColor = new Color(1, 0, 0);
             if (firstPlayer.GetRelationship(player) == RelationshipType.Friend) {
                 newColor = new Color(0.5f, 1, 0.5f);
-                unit.Attributes.Update(10000, 10, 1);
+                //  unit.Attributes.Update(10000, 10, 1);
             }
             if (firstPlayer.GetRelationship(player) == RelationshipType.Neutral) newColor = new Color(0.5f, 0.5f, 0.5f);
             if (firstPlayer.GetRelationship(player) == RelationshipType.Unknown) newColor = new Color(0, 0, 0);

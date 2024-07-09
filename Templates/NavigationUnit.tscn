@@ -24,6 +24,7 @@ radius = 10.0
 [node name="NavigationUnit" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 2
+axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
@@ -37,7 +38,7 @@ script = ExtResource("1_3mh64")
 [node name="Areas" parent="." instance=ExtResource("2_3d65c")]
 
 [node name="BodyCollision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("CapsuleShape3D_4qoob")
 
 [node name="StaticRotation" type="Node3D" parent="."]
@@ -76,9 +77,7 @@ script = ExtResource("6_q0wgi")
 script = ExtResource("7_yau1o")
 
 [node name="CombatRayCast" type="RayCast3D" parent="Combat"]
-visible = false
 collision_mask = 3
-collide_with_bodies = false
 debug_shape_custom_color = Color(1, 0.45098, 0.384314, 1)
 debug_shape_thickness = 5
 

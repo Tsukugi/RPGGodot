@@ -13,7 +13,7 @@ public partial class UnitAlertArea : Area3D {
 
     public float AreaRadius { get => collisionShape.Scale.X; }
 
-    public AlertState AlertStateOnEnemySight = AlertState.Hide;
+    public AlertState AlertStateOnEnemySight = AlertState.Combat;
     public AlertState AlertState { get => alertState; }
 
     public override void _Ready() {

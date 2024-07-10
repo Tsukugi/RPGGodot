@@ -23,12 +23,10 @@ radius = 10.0
 
 [node name="NavigationUnit" type="CharacterBody3D"]
 collision_layer = 2
-collision_mask = 2
-axis_lock_linear_y = true
+collision_mask = 6
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-motion_mode = 1
 floor_stop_on_slope = false
 floor_block_on_wall = false
 platform_wall_layers = 3

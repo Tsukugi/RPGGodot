@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Tsukugi",
+        "attributes": {
+            "movementSpeed": 3,
+            "maxHitPoints": 1313,
+            "attackSpeed": 0.5,
+            "armor": 5,
+            "baseDamage": 20,
+            "attackCastDuration": 0.3,
+            "attackRange": 10
+        }
+    },
+    {
+        "name": "Tsukita",
+        "attributes": {
+            "movementSpeed": 3,
+            "maxHitPoints": 101,
+            "attackSpeed": 1,
+            "armor": 1,
+            "baseDamage": 1,
+            "attackCastDuration": 0,
+            "attackRange": 5
+        }
+    }
+]

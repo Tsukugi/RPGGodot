@@ -1,0 +1,31 @@
+[
+    {
+        "name": "Fireball",
+        "type": [
+            "unitTargeted",
+            "positionTargeted"
+        ],
+        "effectType": "damage",
+        "velocity": 10,
+        "attributes": {
+            "HPEffect": 20,
+            "castDuration": 2,
+            "range": 10,
+            "cooldown": 5
+        }
+    },
+    {
+        "name": "Heal",
+        "type": [
+            "unitTargeted"
+        ],
+        "effectType": "heal",
+        "velocity": 25,
+        "attributes": {
+            "HPEffect": 5,
+            "castDuration": 0.2,
+            "range": 2,
+            "cooldown": 5
+        }
+    }
+]

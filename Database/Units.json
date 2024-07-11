@@ -15,10 +15,22 @@
         "name": "Tsukita",
         "attributes": {
             "movementSpeed": 3,
-            "maxHitPoints": 101,
-            "attackSpeed": 1,
+            "maxHitPoints": 200,
+            "attackSpeed": 3,
             "armor": 1,
-            "baseDamage": 1,
+            "baseDamage": 3,
+            "attackCastDuration": 0,
+            "attackRange": 5
+        }
+    },
+    {
+        "name": "Tsuki",
+        "attributes": {
+            "movementSpeed": 3,
+            "maxHitPoints": 150,
+            "attackSpeed": 3,
+            "armor": 2,
+            "baseDamage": 3,
             "attackCastDuration": 0,
             "attackRange": 5
         }

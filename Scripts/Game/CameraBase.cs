@@ -5,6 +5,8 @@ using Godot;
 public partial class CameraBase : Camera3D {
 
     [Export]
+    bool findAnyActorOnStartEnabled = false;
+    [Export]
     ActorBase selectedActor = null;
     [Export]
     float cameraVelocity = 3;
@@ -37,14 +39,15 @@ public partial class CameraBase : Camera3D {
 
     public override void _Ready() {
         base._Ready();
-        Node parent = GetParent();
-        if (parent is not PlayerBase player) throw new Exception("[CameraBase._Ready] Parent is not player, it is" + parent);
-
+        PlayerBase player = this.TryFindParentNodeOfType<PlayerBase>();
         Current = player.IsFirstPlayer();
-
-        ActorBase newActor = parent.GetChildren().OfType<ActorBase>().FirstOrDefault();
-        if (newActor == null) return;
-        SelectedActor = newActor;
+        
+        UpdateCameraProperties();
+        if (findAnyActorOnStartEnabled) {
+            ActorBase newActor = player.GetChildren().OfType<ActorBase>().FirstOrDefault();
+            if (newActor == null) return;
+            SelectedActor = newActor;
+        }
     }
 
     public override void _Process(double delta) {

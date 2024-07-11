@@ -24,7 +24,6 @@ public partial class UnitAlertArea : Area3D {
             collisionShape = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.Area_CollisionShape);
             Callable.From(InitializeDeferred).CallDeferred();
         } else {
-            GD.Print("[UnitAlertArea._Ready] " + parentUnit.Name + " has no NavigationUnit as parent, removing this Area as it is not needed.");
             QueueFree();
         }
     }

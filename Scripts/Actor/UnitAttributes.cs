@@ -46,10 +46,14 @@ public partial class UnitAttributes : Node {
         if (CanBeKilled) OnKilled(unit);
     }
 
-    public void Update(int maxHitPoints, int armor, int baseDamage) {
-        this.maxHitPoints = maxHitPoints;
-        this.armor = armor;
-        this.baseDamage = baseDamage;
+    public void Update(NavigationUnitAttributesDTO attributesDTO) {
+        maxHitPoints = attributesDTO.maxHitPoints;
+        armor = attributesDTO.armor;
+        baseDamage = attributesDTO.baseDamage;
+        movementSpeed = attributesDTO.movementSpeed;
+        attackSpeed = attributesDTO.attackSpeed <= 0 ? 0.1 : attributesDTO.attackSpeed;
+        attackCastDuration = attributesDTO.attackCastDuration;
+        attackRange = attributesDTO.attackRange;
         SetHitPoints(maxHitPoints);
     }
 

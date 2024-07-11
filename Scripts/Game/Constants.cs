@@ -11,7 +11,7 @@ public static class StaticNodePaths {
     public static readonly string NavigationTarget = "Navigation/NavigationTarget";
     public static readonly string Selection = "Selection";
     public static readonly string Combat = "Combat";
-    public static readonly string CombatRayCast = "Combat/CombatRayCast";
+    public static readonly string CombatRayCast = "CombatRayCast";
     public static readonly string Attributes = "Attributes";
     public static readonly string SelectedIndicator = "Selection/SelectedIndicator";
     public static readonly string AIController = "AIController";

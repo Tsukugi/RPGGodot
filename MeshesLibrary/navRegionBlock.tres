@@ -5,7 +5,6 @@ vertices = PackedVector3Array(-0.5, 0.52, -0.5, -0.5, 0.52, 0.5, 0.5, 0.52, 0.5,
 polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3)]
 sample_partition_type = 1
 geometry_parsed_geometry_type = 1
-cell_height = 0.01
 agent_radius = 0.0
 region_min_size = 1.0
 edge_max_error = 0.1

@@ -4,9 +4,14 @@ using Godot;
 public partial class PlayerManager : Node {
     List<PlayerBase> players = new();
     PlayerRelationship playerRelationship;
+    readonly LocalDatabase localDatabase = new();
+
+    List<Node3D> waypoints = new();
 
     public List<PlayerBase> Players { get => players; }
     public PlayerRelationship PlayerRelationship { get => playerRelationship; }
+
+
 
     public override void _Ready() {
         players = this.TryGetAllChildOfType<PlayerBase>();
@@ -18,6 +23,12 @@ public partial class PlayerManager : Node {
 
 
     async void DebugStart() {
+        localDatabase.LoadData();
+        GD.Print("[DebugStart] Loaded " + localDatabase.Units.Count + " units");
+        GD.Print("[DebugStart] Loaded " + localDatabase.Abilites.Count + " abilities");
+        RealTimeStrategyPlayer player = GetNodeOrNull<RealTimeStrategyPlayer>("Player");
+        player.AddUnits(localDatabase.Units["Tsukugi"], player.GetNodeOrNull<Node3D>("Spawn1").GlobalPosition);
+
         await Wait(1);
         playerRelationship.UpdateRelationship("Neutral", "Hostile", RelationshipType.Hostile);
         playerRelationship.UpdateRelationship("Hostile", "Neutral", RelationshipType.Hostile);
@@ -26,36 +37,30 @@ public partial class PlayerManager : Node {
         playerRelationship.UpdateRelationship("Hostile", "Player", RelationshipType.Hostile);
 
         Node areas = GetNodeOrNull("../NavigationRegion3D/Areas");
-        List<Node3D> waypoints = areas.TryGetAllChildOfType<Node3D>();
+        waypoints = areas.TryGetAllChildOfType<Node3D>();
         RealTimeStrategyPlayer Hostile = GetNodeOrNull<RealTimeStrategyPlayer>("Hostile");
         RealTimeStrategyPlayer Neutral = GetNodeOrNull<RealTimeStrategyPlayer>("Neutral");
         waypoints.Shuffle();
-        Hostile.AddUnits(waypoints[0].GlobalPosition.WithY(0), 1);
-        Neutral.AddUnits(waypoints[1].GlobalPosition.WithY(0), 1);
-        Hostile.AddUnits(waypoints[^1].GlobalPosition.WithY(0), 1);
-        Neutral.AddUnits(waypoints[^2].GlobalPosition.WithY(0), 1);
-        waypoints.Shuffle();
-        Hostile.AddUnits(waypoints[0].GlobalPosition.WithY(0), 1);
-        Neutral.AddUnits(waypoints[1].GlobalPosition.WithY(0), 1);
-        Hostile.AddUnits(waypoints[^1].GlobalPosition.WithY(0), 1);
-        Neutral.AddUnits(waypoints[^2].GlobalPosition.WithY(0), 1);
 
+        for (int i = 0; i < waypoints.Count; i++) {
+            if (i % 2 == 0) Hostile.AddUnits(localDatabase.Units["Tsuki"], waypoints[i].GlobalPosition);
+            else Neutral.AddUnits(localDatabase.Units["Tsukita"], waypoints[i].GlobalPosition);
+
+        }
         await Wait(1);
         DebugMoveToRandomWaypoints(Neutral, waypoints);
         DebugMoveToRandomWaypoints(Hostile, waypoints);
     }
 
-
     void DebugMoveToRandomWaypoints(RealTimeStrategyPlayer player, List<Node3D> waypoints) {
         RealTimeStrategyPlayer firstPlayer = GetNodeOrNull<RealTimeStrategyPlayer>("Player");
         List<NavigationUnit> allUnits = player.GetAllUnits();
         foreach (NavigationUnit unit in allUnits) {
-           
+
             Color newColor = unit.OverheadLabel.OutlineModulate;
             if (firstPlayer.IsHostilePlayer(player)) newColor = new Color(1, 0, 0);
             if (firstPlayer.GetRelationship(player) == RelationshipType.Friend) {
                 newColor = new Color(0.5f, 1, 0.5f);
-                //  unit.Attributes.Update(10000, 10, 1);
             }
             if (firstPlayer.GetRelationship(player) == RelationshipType.Neutral) newColor = new Color(0.5f, 0.5f, 0.5f);
             if (firstPlayer.GetRelationship(player) == RelationshipType.Unknown) newColor = new Color(0, 0, 0);

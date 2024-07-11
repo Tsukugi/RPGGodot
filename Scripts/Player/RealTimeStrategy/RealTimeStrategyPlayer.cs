@@ -23,10 +23,12 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         return this.TryGetAllChildOfType<NavigationUnit>();
     }
 
-    public void AddUnits(Vector3 position, int amount = 1) {
+    public void AddUnits(NavigationUnitDTO unitDTO, Vector3 position, int amount = 1) {
         for (int i = 0; i < amount; i++) {
             NavigationUnit navUnit = navUnitTemplate.Instantiate<NavigationUnit>();
             AddChild(navUnit);
+            navUnit.Attributes.Update(unitDTO.attributes);
+            navUnit.Name = unitDTO.name;
             navUnit.Position = position;
             navUnit.NavigationAgent.StartNewNavigation(position.Add(1));
         }

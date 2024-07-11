@@ -1,9 +1,11 @@
-public class Ability {
-    float castTime = 0;
-    string name;
+using System.Collections.Generic;
 
-    AbilityType abilityType;
-    EffectTypeOnTarget effectTypeOnTarget;
+public class Ability {
+    string name { get; set; }
+    List<AbilityType> type { get; set; }
+    EffectTypeOnTarget effectType { get; set; }
+    float velocity { get; set; }
+    AbilityAttributesDTO attributes { get; set; }
 }
 
 public enum AbilityType {

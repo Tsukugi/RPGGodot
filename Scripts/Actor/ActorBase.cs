@@ -28,7 +28,6 @@ public partial class ActorBase : CharacterBody3D {
 
     }
     public PlayerBase GetOwner() {
-        GD.Print("[GetOwner] " + Name + " owner is " + GetParent().Name);
         return this.TryFindParentNodeOfType<PlayerBase>();
     }
     async void ApplyActorRotation() {

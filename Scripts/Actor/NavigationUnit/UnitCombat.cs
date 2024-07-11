@@ -26,7 +26,6 @@ public partial class UnitCombat : Node3D {
         base._PhysicsProcess(delta);
 
         if (target is null || target.Attributes.CanBeKilled) EndCombat();
-
     }
 
 
@@ -60,7 +59,8 @@ public partial class UnitCombat : Node3D {
             return;
         }
         CastAttack();
-        TimerUtils.CreateSimpleTimer(OnAttackCastEnd, 1 / unit.Attributes.AttackCastDuration);
+        if (unit.Attributes.AttackCastDuration > 0) TimerUtils.CreateSimpleTimer((s, e) => OnAttackCastEnd(), unit.Attributes.AttackCastDuration);
+        else OnAttackCastEnd();
     }
 
     public void StopAttack() {
@@ -73,7 +73,7 @@ public partial class UnitCombat : Node3D {
 
     void CastAttack() {
         combatRayCast.CollideWithBodies = true;
-        combatRayCast.TargetPosition = target.GlobalPosition - unit.GlobalPosition;
+        combatRayCast.TargetPosition = target.GlobalPosition + Vector3.Up.Magnitude(0.5f) - unit.GlobalPosition;
         combatRayCast.ForceRaycastUpdate();
         unit.Player.DebugLog("[CastAttack] " + unit.Name + " is attacking to " + combatRayCast.TargetPosition);
 
@@ -88,7 +88,6 @@ public partial class UnitCombat : Node3D {
         } else {
             OnAttackFailedEvent?.Invoke();
         }
-        combatRayCast.TargetPosition = Vector3.Down;
         combatRayCast.CollideWithBodies = false;
     }
 
@@ -99,12 +98,12 @@ public partial class UnitCombat : Node3D {
         unit.Player.DebugLog("[TryStartAttack] " + unit.Name + " dealt " + finalDamage + " of damage. " +
              " \n Target hitpoints: " + targetUnit.Attributes.HitPoints);
     }
-    void OnAttackCastEnd(object source, ElapsedEventArgs e) {
-        TimerUtils.CreateSimpleTimer(OnAttackCooldownEnd, 1 / unit.Attributes.AttackSpeed);
+    void OnAttackCastEnd() {
+        TimerUtils.CreateSimpleTimer((s, e) => OnAttackCooldownEnd(), unit.Attributes.AttackSpeed);
         unit.Player.DebugLog("[OnAttackCastEnd]");
     }
 
-    void OnAttackCooldownEnd(object source, ElapsedEventArgs e) {
+    void OnAttackCooldownEnd() {
         isAlreadyAttacking = false;
         unit.Player.DebugLog("[OnAttackCooldownEnd]");
 

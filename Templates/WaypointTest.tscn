@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm1nwk4kpqi34"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oexii"]
+emission_enabled = true
+emission = Color(0.949028, 0.760788, 0.410658, 1)
+emission_energy_multiplier = 2.42
+
+[sub_resource type="SphereMesh" id="SphereMesh_w2l3h"]
+material = SubResource("StandardMaterial3D_oexii")
+
+[node name="WaypointTest" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_w2l3h")

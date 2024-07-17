@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://euwk4mdeovi5"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_f0myg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xox6x"]
+
+[node name="Projectile" type="CharacterBody3D"]
+collision_layer = 7
+collision_mask = 7
+input_ray_pickable = false
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+motion_mode = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("SphereMesh_f0myg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_xox6x")

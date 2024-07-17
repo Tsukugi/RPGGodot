@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using Godot;
 public partial class ActorBase : CharacterBody3D {
 
@@ -10,6 +11,8 @@ public partial class ActorBase : CharacterBody3D {
     MeshInstance3D meshInstance3D = null;
     Node3D staticRotation = null;
     CollisionShape3D bodyCollision = null;
+
+    Dictionary<string, Ability> abilities = new();
 
     protected PlayerBase Player { get => player; }
 
@@ -35,4 +38,9 @@ public partial class ActorBase : CharacterBody3D {
         StaticRotation.LookAt(GlobalPosition + CameraBase.CameraTransformOffset, Vector3.Up, true);
     }
 
+    public void AddAbility(AbilityDTO abilityDTO) {
+        Ability ability = new();
+        ability.Update(abilityDTO);
+        abilities.Add(abilityDTO.name, ability);
+    }
 }

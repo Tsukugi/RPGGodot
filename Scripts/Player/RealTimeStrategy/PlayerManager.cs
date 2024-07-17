@@ -27,7 +27,7 @@ public partial class PlayerManager : Node {
         GD.Print("[DebugStart] Loaded " + localDatabase.Units.Count + " units");
         GD.Print("[DebugStart] Loaded " + localDatabase.Abilites.Count + " abilities");
         RealTimeStrategyPlayer player = GetNodeOrNull<RealTimeStrategyPlayer>("Player");
-        player.AddUnits(localDatabase.Units["Tsukugi"], player.GetNodeOrNull<Node3D>("Spawn1").GlobalPosition);
+        player.AddUnit(localDatabase.Units["Tsukugi"], player.GetNodeOrNull<Node3D>("Spawn1").GlobalPosition);
 
         await Wait(1);
         playerRelationship.UpdateRelationship("Neutral", "Hostile", RelationshipType.Hostile);
@@ -43,9 +43,8 @@ public partial class PlayerManager : Node {
         waypoints.Shuffle();
 
         for (int i = 0; i < waypoints.Count; i++) {
-            if (i % 2 == 0) Hostile.AddUnits(localDatabase.Units["Tsuki"], waypoints[i].GlobalPosition);
-            else Neutral.AddUnits(localDatabase.Units["Tsukita"], waypoints[i].GlobalPosition);
-
+            if (i % 2 == 0) Hostile.AddUnit(localDatabase.Units["Tsuki"], waypoints[i].GlobalPosition);
+            else Neutral.AddUnit(localDatabase.Units["Tsukita"], waypoints[i].GlobalPosition);
         }
         await Wait(1);
         DebugMoveToRandomWaypoints(Neutral, waypoints);

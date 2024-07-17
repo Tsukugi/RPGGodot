@@ -9,7 +9,10 @@
             "baseDamage": 20,
             "attackCastDuration": 0.3,
             "attackRange": 10
-        }
+        },
+        "abilities": [
+            "Fireball"
+        ]
     },
     {
         "name": "Tsukita",
@@ -21,7 +24,10 @@
             "baseDamage": 3,
             "attackCastDuration": 0,
             "attackRange": 5
-        }
+        },
+        "abilities": [
+            "Heal"
+        ]
     },
     {
         "name": "Tsuki",
@@ -33,6 +39,7 @@
             "baseDamage": 3,
             "attackCastDuration": 0,
             "attackRange": 5
-        }
+        },
+        "abilities": []
     }
 ]

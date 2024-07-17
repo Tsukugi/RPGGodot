@@ -43,6 +43,7 @@ public static class StaticNodePaths {
 
 public static class ResourcePaths {
     public static readonly string NavigationUnit = "res://Templates/NavigationUnit.tscn";
+    public static readonly string Projectile = "res://Templates/Projectile.tscn";
 }
 
 

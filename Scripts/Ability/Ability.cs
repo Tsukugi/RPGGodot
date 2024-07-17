@@ -1,11 +1,33 @@
 using System.Collections.Generic;
+using Godot;
 
-public class Ability {
-    string name { get; set; }
-    List<AbilityType> type { get; set; }
-    EffectTypeOnTarget effectType { get; set; }
-    float velocity { get; set; }
-    AbilityAttributesDTO attributes { get; set; }
+public class Ability : Node {
+    List<string> effectType;
+    AbilityAttributesDTO attributes;
+
+    Timer processTimer = new() {
+        OneShot = false,
+        WaitTime = 0.5f,
+    };
+
+    public override void _Ready() {
+        base._Ready();
+        AddChild(processTimer);
+        processTimer.Timeout += OnProcess;
+        processTimer.Start();
+    }
+
+    public void Update(AbilityDTO ability) {
+        Name = ability.name;
+        effectType = ability.effectType;
+        attributes = ability.attributes;
+    }
+
+    public void OnFinished() {
+    }
+
+    public void OnProcess() {
+    }
 }
 
 public enum AbilityType {

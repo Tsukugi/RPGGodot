@@ -1,5 +1,5 @@
 public enum TaskType {
-    Move, Attack, Hide, Cast //,AttackMove, Interact,
+    Move, Attack, Hide, Cast, Ability //,AttackMove, Interact,
 }
 
 public abstract class TaskBase {

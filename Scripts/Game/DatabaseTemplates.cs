@@ -3,6 +3,7 @@ using System.Collections.Generic;
 public class NavigationUnitDTO {
     public string name { get; set; }
     public NavigationUnitAttributesDTO attributes { get; set; }
+    public AbilityDTO[] abilities { get; set; }
 }
 
 public class NavigationUnitAttributesDTO {
@@ -17,9 +18,7 @@ public class NavigationUnitAttributesDTO {
 
 public class AbilityDTO {
     public string name { get; set; }
-    public List<string> type { get; set; }
-    public string effectType { get; set; }
-    public float velocity { get; set; }
+    public List<string> effectType { get; set; }
     public AbilityAttributesDTO attributes { get; set; }
 }
 
@@ -28,4 +27,5 @@ public class AbilityAttributesDTO {
     public double castDuration { get; set; }
     public int range { get; set; }
     public int cooldown { get; set; }
+    public float velocity { get; set; }
 }

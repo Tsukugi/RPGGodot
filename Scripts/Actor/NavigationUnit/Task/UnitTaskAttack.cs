@@ -24,6 +24,7 @@ public partial class UnitTaskAttack : TaskBase {
     }
 
     public override void OnTaskProcess() {
+        base.OnTaskProcess();
         if (IsInRange()) ExecuteAttack();
         else GetIntoRange();
     }

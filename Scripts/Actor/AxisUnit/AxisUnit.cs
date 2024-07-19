@@ -55,7 +55,7 @@ public partial class AxisUnit : Unit {
                 }
             case InputState.Move: {
                     ActorAnimationHandler.AnimationPrefix = Constants.AnimationPrefixRunning;
-                    MoveUnit(Vector2To3(direction), (float)delta);
+                    MoveAndCollide(Vector2To3(direction), (float)delta);
                     float rotation = VectorUtils.GetRotationFromDirection(direction);
                     RotationAnchor.RotationDegrees = new Vector3(0, rotation - 90, 0);
                     break;

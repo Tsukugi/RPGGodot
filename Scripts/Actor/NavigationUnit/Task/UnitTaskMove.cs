@@ -44,6 +44,7 @@ public partial class UnitTaskMove : TaskBase {
     }
 
     public override void OnTaskProcess() {
+        base.OnTaskProcess();
         float unitDistanceSinceLastCheck = unit.GlobalPosition.ToVector2().DistanceTo(unitPositionOnTaskCheck);
         if (unitDistanceSinceLastCheck < minDistanceToStartAvoidance) {
             unit.NavigationAgent.LooseTargetDesiredDistance(0.2f);

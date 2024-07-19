@@ -56,6 +56,14 @@ offset_right = 10.0
 offset_bottom = 10.0
 script = ExtResource("4_co5sg")
 
+[node name="Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_top = 553.0
+offset_right = 161.0
+offset_bottom = 648.0
+text = "Fireball
+"
+
 [node name="Camera" type="Node" parent="."]
 script = ExtResource("5_bgae1")
 enableMoveOnEdge = false

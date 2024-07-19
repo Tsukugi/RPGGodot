@@ -80,7 +80,7 @@ public partial class UnitCombat : Node3D {
         if (combatRayCast.IsColliding()) {
             GodotObject collisionTarget = combatRayCast.GetCollider();
             if (collisionTarget is NavigationUnit targetUnit) {
-                unit.Player.DebugLog("[CastAttack] " + unit.Name + " -> " + targetUnit.Name, true);
+                unit.Player.DebugLog("[CastAttack] " + unit.Name + " -> " + targetUnit.Name);
                 OnTargetAttackReached(targetUnit);
             } else {
                 OnAttackFailedEvent?.Invoke();

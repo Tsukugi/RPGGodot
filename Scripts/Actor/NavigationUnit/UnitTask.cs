@@ -1,29 +1,15 @@
-using System.Collections.Generic;
-using Godot;
 
-public partial class UnitTask : Node {
+public partial class UnitTask : TaskHandler {
     NavigationUnit unit;
-    TaskBase currentTask = null;
-    Queue<TaskBase> tasks = new();
-
-    Timer taskProcessTimer = new() {
-        OneShot = false,
-        WaitTime = 0.5f,
-    };
-
-    public int Count { get => tasks.Count; }
-    public TaskBase CurrentTask { get => currentTask; }
 
     public override void _Ready() {
         base._Ready();
+        Start();
         unit = this.TryFindParentNodeOfType<NavigationUnit>();
-
-        AddChild(taskProcessTimer);
-        taskProcessTimer.Timeout += OnTaskProcess;
-        taskProcessTimer.Start();
     }
 
-    void OnTaskProcess() {
+    protected override void OnTaskProcess() {
+        base.OnTaskProcess();
         //! Debug
         string text = unit.Name + " \n "
             + unit.Attributes.HitPoints + "/" + unit.Attributes.MaxHitPoints + " \n "
@@ -34,56 +20,6 @@ public partial class UnitTask : Node {
         }
         unit.OverheadLabel.Text = text + " \n " + tasks.Count.ToString();
         //! EndDebug
-
-        if (tasks.Count <= 0) return;
-
-        if (currentTask == null) currentTask = tasks.Peek();
-
-        if (currentTask.CheckIfCompleted()) {
-            unit.Player.DebugLog("[OnTaskCheck] " + currentTask.Type + " has been completed");
-            CompleteTask();
-        } else if (currentTask.IsAlreadyStarted) {
-            unit.Player.DebugLog("[OnTaskCheck] " + unit.Name + "'s " + currentTask.Type + " Task is processed");
-            currentTask.OnTaskProcess();
-        } else {
-            unit.Player.DebugLog("[OnTaskCheck] " + currentTask.Type + " Task has started");
-            currentTask.StartTask();
-        }
     }
-
-
-    void CompleteTask() {
-        if (currentTask != null) currentTask.OnTaskCompleted();
-        currentTask = null;
-        if (tasks.Count > 0) tasks.Dequeue();
-    }
-
-    public void Add(TaskBase newTask) {
-        tasks.Enqueue(newTask);
-        unit.Player.DebugLog("[UnitTask.Add] " + newTask.Type + " has been added for " + unit.Name + ". Current tasks length: " + tasks.Count);
-    }
-
-    public void PriorityAddTask(TaskBase newTask) {
-        Queue<TaskBase> newQueue = new();
-        newQueue.Enqueue(newTask);
-        foreach (var item in tasks) {
-            newQueue.Enqueue(item);
-        }
-        tasks = newQueue;
-        currentTask = newTask;
-        unit.Player.DebugLog("[UnitTask.PriorityAddTask] " + newTask.Type + " has been added for " + unit.Name + " as highest priority. Current tasks length: " + tasks.Count);
-    }
-
-    public void PriorityReplaceTask(TaskBase newTask) {
-        currentTask = newTask;
-        unit.Player.DebugLog("[UnitTask.PriorityReplaceTask] " + newTask.Type + " has been replaced for " + unit.Name + " as highest priority.");
-    }
-
-    public void ClearAll() {
-        currentTask = null;
-        tasks.Clear();
-        CompleteTask();
-    }
-
 }
 

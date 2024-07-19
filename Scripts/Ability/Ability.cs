@@ -1,32 +1,30 @@
+using System;
 using System.Collections.Generic;
-using Godot;
 
-public class Ability : Node {
+public partial class Ability : TaskHandler {
     List<string> effectType;
     AbilityAttributesDTO attributes;
+    public AbilityAttributesDTO Attributes { get => attributes; }
 
-    Timer processTimer = new() {
-        OneShot = false,
-        WaitTime = 0.5f,
-    };
-
-    public override void _Ready() {
-        base._Ready();
-        AddChild(processTimer);
-        processTimer.Timeout += OnProcess;
-        processTimer.Start();
-    }
-
-    public void Update(AbilityDTO ability) {
+    public void UpdateValues(AbilityDTO ability) {
         Name = ability.name;
         effectType = ability.effectType;
         attributes = ability.attributes;
     }
 
-    public void OnFinished() {
+    public override void Start() {
+        base.Start();
+        MapEffectsToQueue();
+        OnTaskProcess(); // We start the timer but we want to evaluate inmediately
     }
 
-    public void OnProcess() {
+    void MapEffectsToQueue() {
+        ClearAll();
+        foreach (string className in effectType) {
+            Type type = Type.GetType(className);
+            TaskBase newEffect = (TaskBase)Activator.CreateInstance(type);
+            AddTask(newEffect);
+        }
     }
 }
 

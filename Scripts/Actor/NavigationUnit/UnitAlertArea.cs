@@ -37,13 +37,13 @@ public partial class UnitAlertArea : Area3D {
 
     void OnCombatEnd() {
         CalmDown();
-        unit.Player.DebugLog(unit.Name + " -> [StartAttackTask -> OnCombatEndEvent : OnCombatEnd] Finished correctly", true);
+        unit.Player.DebugLog(unit.Name + " -> [StartAttackTask -> OnCombatEndEvent : OnCombatEnd] Finished correctly");
         SetDeferred("Monitoring", true);
     }
 
     void OnHideEnd(TaskBase task) {
         CalmDown();
-        unit.Player.DebugLog(unit.Name + " -> [StartHideTask -> OnTaskCompletedEvent : OnHideEnd] Finished correctly", true);
+        unit.Player.DebugLog(unit.Name + " -> [StartHideTask -> OnTaskCompletedEvent : OnHideEnd] Finished correctly");
         SetDeferred("Monitoring", true);
     }
 

@@ -46,7 +46,7 @@ public partial class UnitAttributes : Node {
         if (CanBeKilled) OnKilled(unit);
     }
 
-    public void Update(NavigationUnitAttributesDTO attributesDTO) {
+    public void UpdateValues(NavigationUnitAttributesDTO attributesDTO) {
         maxHitPoints = attributesDTO.maxHitPoints;
         armor = attributesDTO.armor;
         baseDamage = attributesDTO.baseDamage;

@@ -69,7 +69,7 @@ public partial class PlayerManager : Node {
             waypoints.Shuffle();
             Stack<Node3D> WayPoints = new();
             foreach (Node3D waypoint in waypoints) {
-                unit.UnitTask.Add(new UnitTaskMove(waypoint.GlobalPosition, unit));
+                unit.UnitTask.AddTask(new UnitTaskMove(waypoint.GlobalPosition, unit));
             }
         }
     }

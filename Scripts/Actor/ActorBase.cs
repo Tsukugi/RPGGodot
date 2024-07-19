@@ -33,6 +33,7 @@ public partial class ActorBase : CharacterBody3D {
     public PlayerBase GetOwner() {
         return this.TryFindParentNodeOfType<PlayerBase>();
     }
+
     async void ApplyActorRotation() {
         if (CameraBase.CameraTransformOffset.Normalized() == Vector3.Up) return;
         StaticRotation.LookAt(GlobalPosition + CameraBase.CameraTransformOffset, Vector3.Up, true);
@@ -40,7 +41,25 @@ public partial class ActorBase : CharacterBody3D {
 
     public void AddAbility(AbilityDTO abilityDTO) {
         Ability ability = new();
-        ability.Update(abilityDTO);
+        ability.UpdateValues(abilityDTO);
         abilities.Add(abilityDTO.name, ability);
+    }
+
+    public void CastAbility(string name) {
+        Player.DebugLog("[CastAbility] Casting " + name, true);
+        abilities[name].Start();
+    }
+
+    protected void MoveAndCollide(Vector3 direction, float delta) {
+        // Apply velocity.
+        direction = direction.Normalized();
+        MoveAndCollide(direction * (float)delta);
+    }
+
+    protected void MoveAndSlide(Vector3 direction) {
+        // Apply velocity.
+        direction = direction.Normalized();
+        Velocity = direction;
+        MoveAndSlide();
     }
 }

@@ -50,6 +50,7 @@ public static class ResourcePaths {
 public enum CollisionMasks {
     Terrain = 1,
     Actor = 2,
+    Projectile = 4,
 }
 
 public enum CameraZoomDirection {

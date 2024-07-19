@@ -20,7 +20,8 @@ public abstract class TaskBase {
     /// <summary>
     /// Use this method to update some actions on every Task's Timer interval
     /// </summary>
-    public abstract void OnTaskProcess();
+    public virtual void OnTaskProcess() {
+    }
     /// <summary>
     /// This method is to be checked every check interval, and checks if the task can be completed
     /// </summary>

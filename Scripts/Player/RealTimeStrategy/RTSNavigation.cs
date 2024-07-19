@@ -37,7 +37,7 @@ public partial class RTSNavigation : Node {
         if (unit.UnitSelection.IsSelected) {
             unit.NavigationAgent.StartNewNavigation(targetPosition);
         } else {
-            unit.UnitTask.Add(new UnitTaskMove(targetPosition, unit));
+            unit.UnitTask.AddTask(new UnitTaskMove(targetPosition, unit));
         }
     }
 }

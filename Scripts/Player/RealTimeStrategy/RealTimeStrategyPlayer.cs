@@ -26,7 +26,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
     public void AddUnit(NavigationUnitDTO unitDTO, Vector3 position) {
         NavigationUnit navUnit = navUnitTemplate.Instantiate<NavigationUnit>();
         AddChild(navUnit);
-        navUnit.Attributes.Update(unitDTO.attributes);
+        navUnit.Attributes.UpdateValues(unitDTO.attributes);
         navUnit.Name = unitDTO.name;
         navUnit.Position = position;
         navUnit.NavigationAgent.StartNewNavigation(position.Add(1));

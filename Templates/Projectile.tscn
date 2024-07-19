@@ -1,22 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://euwk4mdeovi5"]
+[gd_scene load_steps=4 format=3 uid="uid://euwk4mdeovi5"]
+
+[ext_resource type="Script" path="res://Scripts/Actor/Projectile/ProjectileUnit.cs" id="1_6smr6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8kucw"]
+margin = 0.45
+radius = 0.3
+height = 1.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_f0myg"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_xox6x"]
-
 [node name="Projectile" type="CharacterBody3D"]
-collision_layer = 7
+collision_layer = 8
 collision_mask = 7
 input_ray_pickable = false
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 motion_mode = 1
+script = ExtResource("1_6smr6")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_8kucw")
+
+[node name="StaticRotation" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticRotation"]
+transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0, 0, 0)
 mesh = SubResource("SphereMesh_f0myg")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-shape = SubResource("SphereShape3D_xox6x")
+skeleton = NodePath("../..")

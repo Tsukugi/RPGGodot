@@ -27,6 +27,7 @@ public partial class UnitTaskHide : TaskBase {
     }
 
     public override void OnTaskProcess() {
+        base.OnTaskProcess();
         UpdateHidePosition();
         if (isHidePositionFound) GetAwayFromRange(hidePosition);
     }
@@ -37,7 +38,7 @@ public partial class UnitTaskHide : TaskBase {
     }
 
     void GetAwayFromRange(Vector3 hidePosition) {
-        unit.Player.DebugLog("[UnitTaskHide.GetAwayFromRange] " + unit.Name + " will move to " + hidePosition + " as " + target.Name + "is in Range.", true);
+        unit.Player.DebugLog("[UnitTaskHide.GetAwayFromRange] " + unit.Name + " will move to " + hidePosition + " as " + target.Name + "is in Range.");
         unit.UnitTask.PriorityAddTask(new UnitTaskMove(hidePosition, unit));
     }
 
@@ -63,7 +64,7 @@ public partial class UnitTaskHide : TaskBase {
                 Node3D wallNode = item.AsGodotDictionary()["collider"].As<Node3D>();
                 Vector3 position = item.AsGodotDictionary()["point"].As<Vector3>();
                 if (CheckIsUselessCover(wallNode) || possibleHidePosition is not null) continue;
-                unit.Player.DebugLog("[FindHidePosition]" + position, true);
+                unit.Player.DebugLog("[FindHidePosition]" + position);
                 possibleHidePosition = FindCoverPosition(position, 1);
 
             }
@@ -88,7 +89,7 @@ public partial class UnitTaskHide : TaskBase {
     Vector3 FindCoverPosition(Vector3 position, float offsetRadius) {
         Vector2 direction = target.GlobalPosition.ToVector2().DirectionTo(position.ToVector2()) * offsetRadius;
         // TODO Find collision in gridmap
-        unit.Player.DebugLog("[FindCoverPosition]" + position + " " + direction + " " + offsetRadius, true);
+        unit.Player.DebugLog("[FindCoverPosition]" + position + " " + direction + " " + offsetRadius);
         return position + direction.ToVector3();
     }
 

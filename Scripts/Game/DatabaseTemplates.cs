@@ -3,7 +3,7 @@ using System.Collections.Generic;
 public class NavigationUnitDTO {
     public string name { get; set; }
     public NavigationUnitAttributesDTO attributes { get; set; }
-    public AbilityDTO[] abilities { get; set; }
+    public string[] abilities { get; set; }
 }
 
 public class NavigationUnitAttributesDTO {

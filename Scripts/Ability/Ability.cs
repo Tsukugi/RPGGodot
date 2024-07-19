@@ -21,10 +21,13 @@ public partial class Ability : TaskHandler {
     void MapEffectsToQueue() {
         ClearAll();
         foreach (string className in effectType) {
-            Type type = Type.GetType(className);
+            Type type = Type.GetType(GetEffectName(className));
             TaskBase newEffect = (TaskBase)Activator.CreateInstance(type);
             AddTask(newEffect);
         }
+    }
+    static string GetEffectName(string dtoName) {
+        return "Effect" + dtoName;
     }
 }
 

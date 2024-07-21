@@ -22,6 +22,7 @@ script = ExtResource("2_7o631")
 cameraVelocity = 5.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Control" type="Control" parent="CanvasLayer"]
@@ -56,13 +57,18 @@ offset_right = 10.0
 offset_bottom = 10.0
 script = ExtResource("4_co5sg")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control"]
+[node name="AbilityBtn" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
 offset_top = 553.0
 offset_right = 161.0
 offset_bottom = 648.0
 text = "Fireball
 "
+
+[node name="SelectedUnitInfo" type="RichTextLabel" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 324.0
+offset_bottom = 172.0
 
 [node name="Camera" type="Node" parent="."]
 script = ExtResource("5_bgae1")

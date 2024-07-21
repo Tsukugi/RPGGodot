@@ -36,6 +36,12 @@ public static class StaticNodePaths {
     public static readonly string PlayerSelectionCast = "Selection/SelectionCast";
     public static readonly string PlayerNavigation = "Navigation";
     public static readonly string PlayerCamera = "Camera3D";
+
+    public static readonly string PlayerUICanvas = "CanvasLayer";
+
+    public static readonly string PlayerUISelectedUnitInfo = "CanvasLayer/Control/SelectedUnitInfo";
+
+    public static readonly string PlayerUIAbilityBtn = "CanvasLayer/Control/AbilityBtn";
     public static readonly string PlayerUISelectionPanel = "CanvasLayer/Control/SelectionPanel";
     public static readonly string PlayerUIInteractionPanel = "CanvasLayer/Control/InteractionPanel";
     public static readonly string InteractionPanel_Label = "Label";

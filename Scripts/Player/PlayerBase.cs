@@ -3,17 +3,20 @@ using Godot;
 public partial class PlayerBase : Node {
     CameraBase camera;
     InteractionPanel interactionPanel;
+    CanvasLayer canvasLayer;
     bool IsPerformanceLogActive = false;
     protected PlayerManager manager;
 
     public CameraBase Camera { get => camera; }
     public InteractionPanel InteractionPanel { get => interactionPanel; }
+    public CanvasLayer CanvasLayer { get => canvasLayer; }
 
     public override void _Ready() {
         base._Ready();
         manager = this.TryFindParentNodeOfType<PlayerManager>();
         camera = GetNodeOrNull<CameraBase>(StaticNodePaths.PlayerCamera);
         interactionPanel = GetNodeOrNull<InteractionPanel>(StaticNodePaths.PlayerUIInteractionPanel);
+        canvasLayer = GetNodeOrNull<CanvasLayer>(StaticNodePaths.PlayerUICanvas);
     }
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);

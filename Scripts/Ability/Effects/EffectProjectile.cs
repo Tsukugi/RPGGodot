@@ -1,22 +1,19 @@
 using Godot;
 
-public partial class EffectProjectile : TaskBase {
-    readonly Ability ability;
-    readonly PackedScene projectileTemplate = GD.Load<PackedScene>(ResourcePaths.Projectile);
-    readonly ProjectileUnit projectile;
-    Vector3 targetPosition;
+public partial class EffectProjectile : EffectBase {
+    PackedScene projectileTemplate = GD.Load<PackedScene>(ResourcePaths.Projectile);
 
-    public EffectProjectile(Vector3 targetPosition, NavigationUnit unit, Ability ability) {
-        type = TaskType.Ability;
-        this.targetPosition = targetPosition;
-        this.unit = unit;
-        this.ability = ability;
-        projectile = projectileTemplate.Instantiate<ProjectileUnit>();
-        projectile.UpdateValues(this.targetPosition, this.ability.Attributes.velocity);
-        projectile.OnCollideEvent += () => {
-            isForceFinished = true;
-        };
-        unit.AddChild(projectile);
-        unit.Player.DebugLog("[AbilityProjectile.StartTask] New Projectile to " + targetPosition, true);
+    ProjectileUnit projectile;
+
+    public override void StartTask() {
+        type = TaskType.Effect;
+        unit.Player.DebugLog("[EffectProjectile.StartTask]" + unit.Name, true);
+        projectile = projectileTemplate.Instantiate<ProjectileUnit>(); 
+        projectile.OnCollideEvent += OnTaskCompleted;
+        unit.Player.AddChild(projectile);
+        projectile.GlobalPosition = unit.GlobalPosition.WithY(0.5f);
+        projectile.UpdateValues(target.GlobalPosition, ability.Attributes.velocity);
+        unit.Player.DebugLog("[EffectProjectile.StartTask] New Projectile to " + target.GlobalPosition, true);
+        base.StartTask();
     }
 }

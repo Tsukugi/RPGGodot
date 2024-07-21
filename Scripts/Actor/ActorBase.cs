@@ -14,11 +14,12 @@ public partial class ActorBase : CharacterBody3D {
 
     Dictionary<string, Ability> abilities = new();
 
-    protected PlayerBase Player { get => player; }
-
     protected CollisionShape3D BodyCollision { get => bodyCollision; }
     protected AnimatedSprite3D Sprite { get => animatedSprite3D; }
     protected Node3D StaticRotation { get => staticRotation; }
+    public Dictionary<string, Ability> Abilities { get => abilities; }
+    public PlayerBase Player { get => player; }
+
 
     public override void _Ready() {
         player = GetOwner();
@@ -40,14 +41,14 @@ public partial class ActorBase : CharacterBody3D {
     }
 
     public void AddAbility(AbilityDTO abilityDTO) {
-        Ability ability = new();
-        ability.UpdateValues(abilityDTO);
+        Ability ability = new(abilityDTO);
         abilities.Add(abilityDTO.name, ability);
+        AddChild(ability);
     }
 
-    public void CastAbility(string name) {
+    public void CastAbility(string name, ActorBase target) {
         Player.DebugLog("[CastAbility] Casting " + name, true);
-        abilities[name].Start();
+        abilities[name].Cast(target);
     }
 
     protected void MoveAndCollide(Vector3 direction, float delta) {

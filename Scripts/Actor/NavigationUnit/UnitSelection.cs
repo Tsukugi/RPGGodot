@@ -13,10 +13,10 @@ public partial class UnitSelection : Node3D {
     }
 
     public void Select(PlayerBase player) {
-        if (unit.Player.IsSamePlayer(player)) {
-            unit.AlertArea.CalmDown();
-            unit.UnitTask.ClearAll();
-        }
+        // if (unit.Player.IsSamePlayer(player)) {
+        //     unit.AlertArea.CalmDown();
+        //     unit.UnitTask.ClearAll();
+        // }
         isSelected = true;
         selectedIndicator.Visible = true;
     }

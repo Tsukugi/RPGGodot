@@ -10,7 +10,7 @@
             "castDuration": 2,
             "range": 10,
             "cooldown": 5,
-            "velocity": 10
+            "velocity": 15
         }
     },
     {

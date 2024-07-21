@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://euwk4mdeovi5"]
+[gd_scene load_steps=5 format=3 uid="uid://euwk4mdeovi5"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/Projectile/ProjectileUnit.cs" id="1_6smr6"]
 
@@ -7,11 +7,17 @@ margin = 0.45
 radius = 0.3
 height = 1.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wor3m"]
+emission_enabled = true
+emission = Color(0.418779, 0.976878, 0.944548, 1)
+emission_energy_multiplier = 3.52
+
 [sub_resource type="SphereMesh" id="SphereMesh_f0myg"]
+material = SubResource("StandardMaterial3D_wor3m")
 
 [node name="Projectile" type="CharacterBody3D"]
 collision_layer = 8
-collision_mask = 7
+collision_mask = 2
 input_ray_pickable = false
 axis_lock_angular_x = true
 axis_lock_angular_y = true

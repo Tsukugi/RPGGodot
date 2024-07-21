@@ -1,5 +1,4 @@
 
-using System.Timers;
 using Godot;
 public partial class UnitCombat : Node3D {
     NavigationUnit unit = null;
@@ -9,8 +8,9 @@ public partial class UnitCombat : Node3D {
     bool isInCombat = false;
     RayCast3D combatRayCast;
 
-    public string TargetName { get => isInCombat ? target.Name : " "; }
     public bool IsInCombat { get => isInCombat; }
+    public Unit Target { get => target; }
+
     public delegate void OnCombatEvent();
     public event OnCombatEvent OnCombatEndEvent;
     public event OnCombatEvent OnAttackReachedEvent;

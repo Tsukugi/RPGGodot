@@ -4,7 +4,7 @@ public partial class UnitTask : TaskHandler {
 
     public override void _Ready() {
         base._Ready();
-        Start();
+        StartTimer();
         unit = this.TryFindParentNodeOfType<NavigationUnit>();
     }
 
@@ -16,7 +16,7 @@ public partial class UnitTask : TaskHandler {
             + unit.AlertArea.AlertState + " \n ";
         if (currentTask != null) {
             text += currentTask.Type.ToString();
-            if (unit.UnitCombat.IsInCombat) text += " " + unit.UnitCombat.TargetName;
+            if (unit.UnitCombat.IsInCombat) text += " " + unit.UnitCombat.Target.Name;
         }
         unit.OverheadLabel.Text = text + " \n " + tasks.Count.ToString();
         //! EndDebug

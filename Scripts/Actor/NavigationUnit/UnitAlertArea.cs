@@ -49,7 +49,7 @@ public partial class UnitAlertArea : Area3D {
 
     void OnAlertAreaEntered(Node3D body) {
         if (unit is null) return;
-        if (unit.UnitSelection.IsSelected) return;
+        //if (unit.UnitSelection.IsSelected) return;
         if (body is not NavigationUnit navigationUnit) return;
         AlertChangeOnEnemyUnitRange(navigationUnit);
     }

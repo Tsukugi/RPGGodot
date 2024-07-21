@@ -4,7 +4,7 @@ using Godot;
 public partial class PlayerManager : Node {
     List<PlayerBase> players = new();
     PlayerRelationship playerRelationship;
-    readonly LocalDatabase localDatabase = new();
+    public static readonly LocalDatabase localDatabase = new();
 
     List<Node3D> waypoints = new();
 
@@ -16,6 +16,8 @@ public partial class PlayerManager : Node {
     public override void _Ready() {
         players = this.TryGetAllChildOfType<PlayerBase>();
         playerRelationship = new(players);
+        RealTimeStrategyPlayer player = GetNodeOrNull<RealTimeStrategyPlayer>("Player");
+        player.CanvasLayer.Visible = true;
         //! Debug 
         Callable.From(DebugStart).CallDeferred();
         // !EndDebug 

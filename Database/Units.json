@@ -6,7 +6,7 @@
             "maxHitPoints": 1313,
             "attackSpeed": 0.5,
             "armor": 5,
-            "baseDamage": 20,
+            "baseDamage": 2,
             "attackCastDuration": 0.3,
             "attackRange": 10
         },

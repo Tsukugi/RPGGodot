@@ -51,7 +51,7 @@ public partial class RTSSelection : Node {
                     selectionAreaStart = mousePosition;
                     selectionAreaEnd = selectionAreaStart;
                     UpdateSelectActorsInArea(selectionAreaStart, selectionAreaEnd);
-                    UpdateSelectedActors(new List<NavigationUnit>());
+                    // UpdateSelectedActors(new List<NavigationUnit>());
                     player.DebugLog("[RTSSelection._Input]: Start Selection");
                 } else {
                     // Reset

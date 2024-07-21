@@ -65,11 +65,11 @@ public partial class TaskHandler : Node {
     }
 
 
-    public virtual void Start() {
+    public virtual void StartTimer() {
         taskProcessTimer.Start();
     }
 
-    public virtual void Stop() {
+    public virtual void StopTimer() {
         taskProcessTimer.Stop();
     }
 }

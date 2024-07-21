@@ -29,6 +29,8 @@ public static class StaticNodePaths {
     public static readonly string InteractionArea = "Areas/Interaction";
     public static readonly string AlertArea = "Areas/Alert";
     public static readonly string Area_CollisionShape = "CollisionShape";
+    public static readonly string AreaRange = "AreaRange";
+    public static readonly string AreaRange_Shape = "AreaRange/Shape";
 
     /** Player **/
     public static readonly string PlayerInput = "Input";

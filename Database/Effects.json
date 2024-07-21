@@ -1,0 +1,16 @@
+[
+    {
+        "id": "Projectile",
+        "velocity": 15
+    },
+    {
+        "id": "DamageAreaOfEffect",
+        "damage": 20,
+        "range": 10,
+        "velocity": 15
+    },
+    {
+        "id": "HealTarget",
+        "amount": 15
+    }
+]

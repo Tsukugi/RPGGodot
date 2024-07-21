@@ -18,14 +18,27 @@ public class NavigationUnitAttributesDTO {
 
 public class AbilityDTO {
     public string name { get; set; }
-    public List<string> effectType { get; set; }
+    public List<string> effects { get; set; }
     public AbilityAttributesDTO attributes { get; set; }
 }
 
 public class AbilityAttributesDTO {
-    public int HPEffect { get; set; }
     public double castDuration { get; set; }
     public int range { get; set; }
     public int cooldown { get; set; }
+}
+
+
+public class DamageAreaOfEffectDTO {
+    public int damage { get; set; }
+    public float range { get; set; }
     public float velocity { get; set; }
+}
+
+public class ProjectileDTO {
+    public float velocity { get; set; }
+}
+
+public class HealTargetDTO {
+    public int amount { get; set; }
 }

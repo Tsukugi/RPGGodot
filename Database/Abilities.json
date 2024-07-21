@@ -1,29 +1,25 @@
 [
     {
         "name": "Fireball",
-        "effectType": [
+        "effects": [
             "Projectile",
-            "DamageOnCollide"
+            "DamageAreaOfEffect"
         ],
         "attributes": {
-            "HPEffect": 20,
-            "castDuration": 2,
-            "range": 10,
+            "castDuration": 0.5,
             "cooldown": 5,
-            "velocity": 15
+            "range": 10
         }
     },
     {
         "name": "Heal",
         "effectType": [
-            "TargetHeal"
+            "HealTarget"
         ],
         "attributes": {
-            "HPEffect": 5,
-            "castDuration": 0.2,
-            "range": 2,
-            "cooldown": 5,
-            "velocity": 25
+            "castDuration": 0.5,
+            "cooldown": 2,
+            "range": 10
         }
     }
 ]

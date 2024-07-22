@@ -2,8 +2,8 @@
     {
         "name": "Fireball",
         "effects": [
-            "Projectile",
-            "DamageAreaOfEffect"
+            "FireballProjectile",
+            "FireballAoEDamage"
         ],
         "attributes": {
             "castDuration": 0.5,

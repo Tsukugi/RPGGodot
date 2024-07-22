@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public partial class Ability : TaskHandler {
     ActorBase unit;
-    List<string> effectType;
+    List<string> effects;
     AbilityAttributesDTO attributes;
     public AbilityAttributesDTO Attributes { get => attributes; }
 
@@ -11,7 +11,7 @@ public partial class Ability : TaskHandler {
 
     public Ability(AbilityDTO ability) {
         Name = ability.name;
-        effectType = ability.effectType;
+        effects = ability.effects;
         attributes = ability.attributes;
     }
 
@@ -34,10 +34,12 @@ public partial class Ability : TaskHandler {
 
     void MapEffectsToQueue() {
         ClearAll();
-        foreach (string className in effectType) {
-            Type type = Type.GetType(GetEffectName(className));
+        foreach (string effectId in effects) {
+            EffectBaseDTO effectBase = PlayerManager.localDatabase.Effects[effectId];
+            Type type = Type.GetType(GetEffectName(effectBase.baseEffect));
             EffectBase newEffect = (EffectBase)Activator.CreateInstance(type);
-            newEffect.UpdateEffectValues(unit, this, target);
+
+            newEffect.UpdateEffectValues(unit, this, target, effectBase);
             AddTask(newEffect);
         }
     }

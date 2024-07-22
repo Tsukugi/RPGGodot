@@ -1,16 +1,19 @@
 [
     {
-        "id": "Projectile",
+        "id": "FireballProjectile",
+        "baseEffect": "Projectile",
         "velocity": 15
     },
     {
-        "id": "DamageAreaOfEffect",
+        "id": "FireballAoEDamage",
+        "baseEffect": "DamageAreaOfEffect",
         "damage": 20,
         "range": 10,
         "velocity": 15
     },
     {
         "id": "HealTarget",
+        "baseEffect": "HealTarget",
         "amount": 15
     }
 ]

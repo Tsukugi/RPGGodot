@@ -4,8 +4,7 @@ using Godot;
 public partial class PlayerManager : Node {
     List<PlayerBase> players = new();
     PlayerRelationship playerRelationship;
-    public static readonly LocalDatabase localDatabase = new();
-
+    
     List<Node3D> waypoints = new();
 
     public List<PlayerBase> Players { get => players; }
@@ -25,11 +24,12 @@ public partial class PlayerManager : Node {
 
 
     async void DebugStart() {
-        localDatabase.LoadData();
-        GD.Print("[DebugStart] Loaded " + localDatabase.Units.Count + " units");
-        GD.Print("[DebugStart] Loaded " + localDatabase.Abilites.Count + " abilities");
+        LocalDatabase.LoadData();
+        GD.Print("[DebugStart] Loaded " + LocalDatabase.Units.Count + " units");
+        GD.Print("[DebugStart] Loaded " + LocalDatabase.Abilites.Count + " abilities");
+        GD.Print("[DebugStart] Loaded " + LocalDatabase.Effects.Count + " effects");
         RealTimeStrategyPlayer player = GetNodeOrNull<RealTimeStrategyPlayer>("Player");
-        player.AddUnit(localDatabase.Units["Tsukugi"], player.GetNodeOrNull<Node3D>("Spawn1").GlobalPosition);
+        player.AddUnit(LocalDatabase.Units["Tsukugi"], player.GetNodeOrNull<Node3D>("Spawn1").GlobalPosition);
 
         await Wait(1);
         playerRelationship.UpdateRelationship("Neutral", "Hostile", RelationshipType.Hostile);
@@ -45,8 +45,8 @@ public partial class PlayerManager : Node {
         waypoints.Shuffle();
 
         for (int i = 0; i < waypoints.Count; i++) {
-            if (i % 2 == 0) Hostile.AddUnit(localDatabase.Units["Tsuki"], waypoints[i].GlobalPosition);
-            else Neutral.AddUnit(localDatabase.Units["Tsukita"], waypoints[i].GlobalPosition);
+            if (i % 2 == 0) Hostile.AddUnit(LocalDatabase.Units["Tsuki"], waypoints[i].GlobalPosition);
+            else Neutral.AddUnit(LocalDatabase.Units["Tsukita"], waypoints[i].GlobalPosition);
         }
         await Wait(1);
         DebugMoveToRandomWaypoints(Neutral, waypoints);

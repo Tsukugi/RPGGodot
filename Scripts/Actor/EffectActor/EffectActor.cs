@@ -1,34 +1,40 @@
 using Godot;
 
-public partial class EffectActor : ActorBase {
-    protected Vector3 targetPosition;
-    protected float velocity = 0;
-
-    public delegate void EventHandler();
-    public event EventHandler OnCollideEvent;
+public abstract partial class EffectActor : ActorBase {
+    protected ActorBase target;
+    protected EffectBaseDTO attributes;
+    protected bool isInitialized = false;
+    public delegate void CollideEvent(ActorBase collider);
+    public event CollideEvent OnCollideEvent;
 
     public override void _Ready() {
         base._Ready();
-        targetPosition = GlobalPosition;
+        target = this;
     }
 
-    public void UpdateValues(Vector3 targetPosition, float velocity) {
-        this.targetPosition = targetPosition;
-        this.velocity = velocity;
+    public void UpdateValues(ActorBase target, EffectBaseDTO attributes) {
+        this.target = target;
+        this.attributes = attributes;
+        isInitialized = true;
     }
-    
+
     protected void NavigateTo(Vector3 direction, float velocity) {
         Vector3 Velocity = GlobalPosition.DirectionTo(direction) * velocity;
         MoveAndSlide(Velocity);
     }
 
-    protected void InvokeCollideEvent() {
-        OnCollideEvent?.Invoke();
+    protected void InvokeCollideEvent(ActorBase collider) {
+        OnCollideEvent?.Invoke(collider);
     }
 
-    protected bool IsCollisionOnDifferentPlayer() {
-        return GetLastSlideCollision() is KinematicCollision3D collision3D
-              && collision3D.GetCollider() is ActorBase unit
-              && !unit.Player.IsSamePlayer(Player);
+    protected ActorBase IsCollisionOnDifferentPlayer(object collider) {
+        if (collider is not ActorBase unit || unit.Player.IsSamePlayer(Player)) return null;
+        GD.Print(unit.Name);
+        return unit;
+    }
+
+    protected GodotObject GetCharacterBodyCollider() {
+        if (GetLastSlideCollision() is not KinematicCollision3D collision3D) return null;
+        return collision3D.GetCollider();
     }
 };

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Godot;
 
 public partial class Ability : TaskHandler {
     ActorBase unit;
@@ -31,14 +32,13 @@ public partial class Ability : TaskHandler {
         StartAbility();
     }
 
-
+    delegate void Test();
     void MapEffectsToQueue() {
         ClearAll();
         foreach (string effectId in effects) {
-            EffectBaseDTO effectBase = PlayerManager.localDatabase.Effects[effectId];
+            EffectBaseDTO effectBase = LocalDatabase.GetEffect(effectId);
             Type type = Type.GetType(GetEffectName(effectBase.baseEffect));
-            EffectBase newEffect = (EffectBase)Activator.CreateInstance(type);
-
+            dynamic newEffect = Activator.CreateInstance(type);
             newEffect.UpdateEffectValues(unit, this, target, effectBase);
             AddTask(newEffect);
         }

@@ -1,21 +1,26 @@
 using Godot;
 
 public partial class AreaOfEffectUnit : EffectActor {
-
+    Area3D areaRange;
     CollisionShape3D collisionShape;
+
     public override void _Ready() {
         base._Ready();
+        areaRange = GetNodeOrNull<Area3D>(StaticNodePaths.AreaRange);
         collisionShape = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.AreaRange_Shape);
         ((CapsuleShape3D)collisionShape.Shape).Radius = 0.1f;
+        areaRange.BodyEntered += (collider) => {
+            if (IsCollisionOnDifferentPlayer(collider) is ActorBase collidedActor) InvokeCollideEvent(collidedActor);
+        };
     }
 
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-        if (velocity <= 0) return;
-        if (IsCollisionOnDifferentPlayer()) {
-            InvokeCollideEvent();
-            return;
+        if (!isInitialized) return;
+
+        if (Scale.X >= attributes.range) {
+            QueueFree();
         }
-        ((CapsuleShape3D)collisionShape.Shape).Radius += (float)(velocity * delta);
+        Scale += Scale.Magnitude((float)(attributes.velocity * delta));
     }
 }

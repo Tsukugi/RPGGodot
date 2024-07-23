@@ -40,6 +40,8 @@
             "attackCastDuration": 0,
             "attackRange": 5
         },
-        "abilities": []
+        "abilities": [
+            "Heal"
+        ]
     }
 ]

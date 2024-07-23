@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://euwk4mdeovi5"]
 
-[ext_resource type="Script" path="res://Scripts/Actor/Projectile/ProjectileUnit.cs" id="1_6smr6"]
+[ext_resource type="Script" path="res://Scripts/Actor/EffectActor/ProjectileUnit.cs" id="1_lcppc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8kucw"]
 margin = 0.45
@@ -23,7 +23,7 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 motion_mode = 1
-script = ExtResource("1_6smr6")
+script = ExtResource("1_lcppc")
 
 [node name="BodyCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)

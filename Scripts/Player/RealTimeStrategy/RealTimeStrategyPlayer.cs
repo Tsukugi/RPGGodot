@@ -62,7 +62,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         navUnit.Name = unitDTO.name;
         navUnit.Position = position;
         foreach (string item in unitDTO.abilities) {
-            navUnit.AddAbility(PlayerManager.localDatabase.Abilites[item]);
+            navUnit.AddAbility(LocalDatabase.Abilites[item]);
         }
     }
 }

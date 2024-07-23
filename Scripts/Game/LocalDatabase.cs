@@ -1,19 +1,24 @@
 using System.Collections.Generic;
 using System.IO;
+using Godot;
 using Newtonsoft.Json;
-public class LocalDatabase {
-    Dictionary<string, NavigationUnitDTO> units = new();
-    Dictionary<string, AbilityDTO> abilites = new();
-    Dictionary<string, EffectBaseDTO> effects = new();
+public static class LocalDatabase {
+    static Dictionary<string, NavigationUnitDTO> units = new();
+    static Dictionary<string, AbilityDTO> abilites = new();
+    static Dictionary<string, EffectBaseDTO> effects = new();
 
-    public Dictionary<string, AbilityDTO> Abilites { get => abilites; }
-    public Dictionary<string, NavigationUnitDTO> Units { get => units; }
-    public Dictionary<string, EffectBaseDTO> Effects { get => effects; }
+    public static Dictionary<string, AbilityDTO> Abilites { get => abilites; }
+    public static Dictionary<string, NavigationUnitDTO> Units { get => units; }
+    public static Dictionary<string, EffectBaseDTO> Effects { get => effects; }
 
-    public void LoadData() {
+    public static void LoadData() {
         JSONLoader.LoadUnits().ForEach(unit => units.Add(unit.name, unit));
         JSONLoader.LoadAbilities().ForEach(ability => abilites.Add(ability.name, ability));
         JSONLoader.LoadEffects().ForEach(effect => effects.Add(effect.id, effect));
+    }
+
+    public static EffectBaseDTO GetEffect(string key) {
+        return effects[key];
     }
 }
 public static class JSONLoader {

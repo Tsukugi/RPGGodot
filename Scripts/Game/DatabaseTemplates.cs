@@ -28,22 +28,13 @@ public class AbilityAttributesDTO {
     public int cooldown { get; set; }
 }
 
-
-
 public class EffectBaseDTO {
     public string id { get; set; }
     public string baseEffect { get; set; }
-}
-public class DamageAreaOfEffectDTO : EffectBaseDTO {
-    public int damage { get; set; }
+
+    public int damageAmount { get; set; }
+    public int healAmount { get; set; }
+
     public float range { get; set; }
     public float velocity { get; set; }
-}
-
-public class ProjectileDTO : EffectBaseDTO {
-    public float velocity { get; set; }
-}
-
-public class HealTargetDTO : EffectBaseDTO {
-    public int amount { get; set; }
 }

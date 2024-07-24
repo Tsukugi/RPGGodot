@@ -19,8 +19,8 @@ public abstract partial class EffectActor : ActorBase {
     }
 
     protected void NavigateTo(Vector3 direction, float velocity) {
-        Vector3 Velocity = GlobalPosition.DirectionTo(direction) * velocity;
-        MoveAndSlide(Velocity);
+        Vector3 moveVelocity = GlobalPosition.DirectionTo(direction) * velocity;
+        MoveAndSlide(moveVelocity);
     }
 
     protected void InvokeCollideEvent(ActorBase collider) {

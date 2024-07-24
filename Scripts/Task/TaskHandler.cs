@@ -12,6 +12,8 @@ public partial class TaskHandler : Node {
 
     public int Count { get => tasks.Count; }
     public TaskBase CurrentTask { get => currentTask; }
+    public delegate void OnTaskEvent();
+    public event OnTaskEvent OnAllTasksCompleted;
 
     public override void _Ready() {
         base._Ready();
@@ -20,7 +22,10 @@ public partial class TaskHandler : Node {
     }
 
     protected virtual void OnTaskProcess() {
-        if (tasks.Count <= 0) return;
+        if (tasks.Count <= 0) {
+            OnAllTasksCompleted?.Invoke();
+            return;
+        }
 
         currentTask ??= tasks.Peek();
 
@@ -35,7 +40,7 @@ public partial class TaskHandler : Node {
 
 
     void CompleteTask() {
-        if (currentTask != null) currentTask.OnTaskCompleted();
+        currentTask?.OnTaskCompleted();
         currentTask = null;
         if (tasks.Count > 0) tasks.Dequeue();
     }
@@ -72,5 +77,6 @@ public partial class TaskHandler : Node {
     public virtual void StopTimer() {
         taskProcessTimer.Stop();
     }
+
 }
 

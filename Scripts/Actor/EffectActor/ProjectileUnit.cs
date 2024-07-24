@@ -2,6 +2,9 @@ using Godot;
 
 public partial class ProjectileUnit : EffectActor {
 
+    [Export]
+    float velocityMultiplier = 1f;
+
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
         if (!isInitialized) return;
@@ -10,8 +13,6 @@ public partial class ProjectileUnit : EffectActor {
             QueueFree();
             return;
         }
-        // GD.Print("[ProjectileUnit] attributes " + attributes);
-        // GD.Print("[ProjectileUnit] NavigateTo " + target.GlobalPosition);
-        NavigateTo(target.GlobalPosition, (float)(attributes.velocity * delta));
+        NavigateTo(target.GlobalPosition, (float)(attributes.velocity * velocityMultiplier));
     }
 }

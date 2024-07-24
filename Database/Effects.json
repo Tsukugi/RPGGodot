@@ -2,7 +2,7 @@
     {
         "id": "FireballProjectile",
         "baseEffect": "Projectile",
-        "velocity": 50
+        "velocity": 5
     },
     {
         "id": "FireballAoEDamage",

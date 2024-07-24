@@ -12,12 +12,12 @@ public partial class ActorBase : CharacterBody3D {
     Node3D staticRotation = null;
     CollisionShape3D bodyCollision = null;
 
-    Dictionary<string, Ability> abilities = new();
+    Dictionary<string, AbilityCaster> abilities = new();
 
     protected CollisionShape3D BodyCollision { get => bodyCollision; }
     protected AnimatedSprite3D Sprite { get => animatedSprite3D; }
     protected Node3D StaticRotation { get => staticRotation; }
-    public Dictionary<string, Ability> Abilities { get => abilities; }
+    public Dictionary<string, AbilityCaster> Abilities { get => abilities; }
     public PlayerBase Player { get => player; }
 
 
@@ -41,25 +41,22 @@ public partial class ActorBase : CharacterBody3D {
     }
 
     public void AddAbility(AbilityDTO abilityDTO) {
-        Ability ability = new(abilityDTO);
-        abilities.Add(abilityDTO.name, ability);
-        AddChild(ability);
+        AbilityCaster abilityCaster = new(abilityDTO);
+        abilities.Add(abilityDTO.name, abilityCaster);
     }
 
     public void CastAbility(string name, ActorBase target) {
         Player.DebugLog("[CastAbility] Casting " + name, true);
-        abilities[name].Cast(target);
+        abilities[name].Cast(this, target);
     }
 
     protected void MoveAndCollide(Vector3 direction, float delta) {
         // Apply velocity.
-        direction = direction.Normalized();
         MoveAndCollide(direction * (float)delta);
     }
 
     protected void MoveAndSlide(Vector3 direction) {
         // Apply velocity.
-        direction = direction.Normalized();
         Velocity = direction;
         MoveAndSlide();
     }

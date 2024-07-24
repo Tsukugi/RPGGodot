@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Godot;
 
 public partial class Ability : TaskHandler {
     ActorBase unit;
@@ -8,7 +7,6 @@ public partial class Ability : TaskHandler {
     AbilityAttributesDTO attributes;
     public AbilityAttributesDTO Attributes { get => attributes; }
 
-    ActorBase target;
 
     public Ability(AbilityDTO ability) {
         Name = ability.name;
@@ -27,14 +25,12 @@ public partial class Ability : TaskHandler {
     }
 
     public void Cast(ActorBase target) {
-        this.target = target;
-        MapEffectsToQueue();
+        ClearAll();
+        AddEffectsToTaskQueue(target);
         StartAbility();
     }
 
-    delegate void Test();
-    void MapEffectsToQueue() {
-        ClearAll();
+    void AddEffectsToTaskQueue(ActorBase target) {
         foreach (string effectId in effects) {
             EffectBaseDTO effectBase = LocalDatabase.GetEffect(effectId);
             Type type = Type.GetType(GetEffectName(effectBase.baseEffect));
@@ -46,12 +42,4 @@ public partial class Ability : TaskHandler {
     static string GetEffectName(string dtoName) {
         return "Effect" + dtoName;
     }
-}
-
-public enum AbilityType {
-    UnitTargeted, AreaOfEffect, PositionTargeted, Aura,
-}
-
-public enum EffectTypeOnTarget {
-    Heal, Damage, StatusEffect
-}
+};

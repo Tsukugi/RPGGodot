@@ -144,7 +144,6 @@ script = ExtResource("4_s7yi8")
 [node name="Projectile" parent="Players/Environment" instance=ExtResource("8_307ho")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80119, 0.223068, 16.4336)
 collision_mask = 6
-inputFaceDirection = 0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Players/Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0259027, 2.90914, 1.35264)
@@ -167,179 +166,140 @@ light_energy = 2.0
 [node name="Box" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 17.9839, 0.25, -2.50582)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box2" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 20.1259, 0.25, -1.54042)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box3" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 20.5306, 0.25, -3.29312)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box4" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 14.515, 0.25, -9.62987)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box5" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 16.7054, 0.25, -8.64648)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box6" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 17.1101, 0.25, -10.3992)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box7" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 10.5389, 0.25, 7.49059)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box8" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 12.6809, 0.25, 8.45599)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box9" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 13.0856, 0.25, 6.70329)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box10" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.3012, 0.25, -4.45722)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box11" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.840897, 0.25, -3.49188)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box12" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.2456, 0.25, -5.24456)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box13" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.56653, 0.25, 11.9384)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box14" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.575466, 0.25, 12.9038)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box15" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.980167, 0.25, 11.1511)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box16" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -13.4551, 0.25, -0.0274525)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box17" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -11.2646, 0.25, 0.955937)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box18" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -10.8599, 0.25, -0.796692)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box19" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 18.6729, 0.25, 1.87195)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box20" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 20.8149, 0.25, 2.83728)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box21" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 21.2196, 0.25, 1.08461)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box22" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 15.2523, 0.25, -5.23408)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box23" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 17.3944, 0.25, -4.26875)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box24" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 17.7991, 0.25, -6.02142)
 safe_margin = 0.5
-inputFaceDirection = 0
 
 [node name="Box25" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.04749, 0.260468, -1.1684)
-inputFaceDirection = 0
 
 [node name="Box26" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.3469, 0.25, -1.79907)
-inputFaceDirection = 0
 
 [node name="Box27" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5264, 0.25, 0.65613)
-inputFaceDirection = 0
 
 [node name="Box28" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.3055, 0.25, 1.75641)
-inputFaceDirection = 0
 
 [node name="Box29" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.3055, 0.25, 1.2081)
-inputFaceDirection = 0
 
 [node name="Box30" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.3055, 0.25, 0.59406)
-inputFaceDirection = 0
 
 [node name="Box31" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.3055, 0.25, 0.0457425)
-inputFaceDirection = 0
 
 [node name="Box32" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -10.2118, 0.25, -9.91734)
-inputFaceDirection = 0
 
 [node name="Box33" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -10.2118, 0.25, -10.4657)
-inputFaceDirection = 0
 
 [node name="Box34" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -10.2118, 0.25, -11.0797)
-inputFaceDirection = 0
 
 [node name="Box35" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.588005, 0.25, -10.3818)
-inputFaceDirection = 0
 
 [node name="Box36" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.25689, 0, -0.428961, 0, 0.5, 0, 0.428961, 0, 0.25689, -10.8589, 0.25, 10.311)
-inputFaceDirection = 0
 
 [node name="Box37" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.25689, 0, -0.428961, 0, 0.5, 0, 0.428961, 0, 0.25689, -10.3884, 0.25, 10.0293)
-inputFaceDirection = 0
 
 [node name="Box38" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.25689, 0, -0.428961, 0, 0.5, 0, 0.428961, 0, 0.25689, -9.86164, 0.25, 9.71383)
-inputFaceDirection = 0
 
 [node name="Box39" parent="Players/Environment" instance=ExtResource("5_2ke7l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -10.2118, 0.25, -9.3437)
-inputFaceDirection = 0

@@ -1,5 +1,9 @@
 
 using Godot;
+/*
+ * Important name convention: Use Effect${NameOfTheEffect} as class name, 
+ * as it is required for the generic Effect loader.
+*/
 public class EffectBase : TaskBase {
     protected new ActorBase unit;
     protected Ability ability;

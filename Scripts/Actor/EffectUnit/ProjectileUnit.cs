@@ -9,7 +9,7 @@ public partial class ProjectileUnit : EffectUnit {
         base._PhysicsProcess(delta);
         if (!isInitialized) return;
         if (IsCollisionOnDifferentPlayer(GetCharacterBodyCollider()) is Unit collider) {
-            InvokeCollideEvent(collider);
+            InvokeCollideEvent(collider, true);
             QueueFree();
             return;
         }

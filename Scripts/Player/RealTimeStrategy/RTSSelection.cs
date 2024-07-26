@@ -8,7 +8,7 @@ public partial class RTSSelection : Node {
     RealTimeStrategyPlayer player;
 
     // Selection
-    List<NavigationUnit> selectedActors = new();
+    List<NavigationUnit> selectedUnits = new();
     SelectionPanel selectionPanel;
     Vector2 selectionAreaStart = Vector2.Zero;
     Vector2 selectionAreaEnd = Vector2.Zero;
@@ -18,9 +18,12 @@ public partial class RTSSelection : Node {
     bool isSelecting = false;
 
     public Array CollisionsOnSelection { get => selectionShapeCast3D.CollisionResult; }
-    public List<NavigationUnit> SelectedActors { get => selectedActors; }
+    public List<NavigationUnit> SelectedUnits { get => selectedUnits; }
     public ShapeCast3D SelectionShapeCast3D { get => selectionShapeCast3D; }
 
+
+    public delegate void SelectionEvent(List<NavigationUnit> selectedActors);
+    public event SelectionEvent OnSelectUnitsEvent;
 
     public override void _Ready() {
         base._Ready();
@@ -78,19 +81,20 @@ public partial class RTSSelection : Node {
     void UpdateSelectedActors(List<NavigationUnit> selectedUnits) {
         // TODO: Please improve me, i worry about this performance
         // Clear old and assign new selected state
-        selectedActors.ForEach(actor => {
+        this.selectedUnits.ForEach(actor => {
             try {
                 actor.UnitSelection.Deselect();
             } catch (System.ObjectDisposedException) {
                 player.DebugLog("[UpdateSelectedActors] Tried to call a disposed actor, ignoring");
             }
         });
-        player.DebugLog("[UpdateSelectedActors] Cleared actors: " + selectedActors.Count);
-        selectedActors = selectedUnits;
-        selectedActors.ForEach(actor => {
+        player.DebugLog("[UpdateSelectedActors] Cleared actors: " + this.selectedUnits.Count);
+        this.selectedUnits = selectedUnits;
+        this.selectedUnits.ForEach(actor => {
             actor.UnitSelection.Select(player);
         });
-        player.DebugLog("[UpdateSelectedActors] Added actors: " + selectedActors.Count);
+        OnSelectUnitsEvent?.Invoke(this.selectedUnits);
+        player.DebugLog("[UpdateSelectedActors] Added actors: " + this.selectedUnits.Count);
     }
 
     void UpdateSelectActorsInArea(Vector2 selectionAreaStart, Vector2 selectionAreaEnd) {

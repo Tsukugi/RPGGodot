@@ -11,6 +11,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
 
     RichTextLabel selectedUnitInfo;
     Button abilityBtn;
+    Button abilityBtn2;
 
     public RTSNavigation RTSNavigation { get => rtsNavigation; }
     public RTSSelection RTSSelection { get => rtsSelection; }
@@ -23,32 +24,36 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         rtsNavigation = GetNodeOrNull<RTSNavigation>(StaticNodePaths.PlayerNavigation);
         selectedUnitInfo = GetNodeOrNull<RichTextLabel>(StaticNodePaths.PlayerUISelectedUnitInfo);
         abilityBtn = GetNodeOrNull<Button>(StaticNodePaths.PlayerUIAbilityBtn);
-        abilityBtn.Pressed += OnAbilityPressed;
+        abilityBtn2 = GetNodeOrNull<Button>(StaticNodePaths.PlayerUIAbilityBtn2);
+
+        rtsSelection.OnSelectUnitsEvent += (selectedUnits) => {
+            if (selectedUnits.Count == 0) {
+                selectedUnitInfo.Text = "";
+                return;
+            }
+            var unit = selectedUnits[0];
+            var abilitiesList = unit.Abilities.Keys.ToList();
+            string abilities = string.Join(", ", abilitiesList);
+
+            selectedUnitInfo.Text = "Name: " + unit.Name + "\n"
+            + "Abilities: [" + abilities + "] \n";
+            if (abilitiesList.Count >= 1) BindButtonToAbility(unit, unit.Abilities[abilitiesList[0]], abilityBtn);
+            if (abilitiesList.Count >= 2) BindButtonToAbility(unit, unit.Abilities[abilitiesList[1]], abilityBtn2);
+        };
     }
 
-
-    public override void _PhysicsProcess(double delta) {
-        base._PhysicsProcess(delta);
-        if (rtsSelection.SelectedActors.Count == 0) {
-            selectedUnitInfo.Text = "";
-            return;
-        }
-        var unit = rtsSelection.SelectedActors[0];
-        string abilities = string.Join(", ", unit.Abilities.Keys.ToList());
-
-        selectedUnitInfo.Text = "Name: " + unit.Name + "\n"
-        + "Abilities: [" + abilities + "] \n";
-    }
-
-
-    void OnAbilityPressed() {
+    void BindButtonToAbility(NavigationUnit unit, AbilityCaster ability, Button btn) {
         if (!this.IsFirstPlayer()) return;
-        DebugLog("[abilityBtn.Pressed]", true);
-        if (rtsSelection.SelectedActors.Count == 0) return;
-        var unit = rtsSelection.SelectedActors[0];
+        btn.Visible = true;
+        btn.Text = ability.AbilityAttributes.name;
+        btn.Pressed += () => OnAbilityPressed(unit, ability.AbilityAttributes.name);
+    }
+
+    void OnAbilityPressed(NavigationUnit unit, string name) {
+        if (!this.IsFirstPlayer()) return;
         DebugLog("[abilityBtn.Pressed] " + unit.Name, true);
         if (unit.UnitCombat.Target is null) return;
-        unit.CastAbility("Fireball", unit.UnitCombat.Target);
+        unit.CastAbility(name, unit.UnitCombat.Target);
     }
 
     public List<NavigationUnit> GetAllUnits() {

@@ -22,10 +22,10 @@ public partial class RTSNavigation : Node {
                     Vector3? targetPosition = NavigationBase.GetNavigationTargetPosition(player.Camera);
                     if (targetPosition is not Vector3 targetPositionInWorld) return;
                     SelectionBase.ApplyCommandToGroupPosition(
-                        player.RTSSelection.SelectedActors,
+                        player.RTSSelection.SelectedUnits,
                         targetPositionInWorld,
                         navigationGroupGapDistance,
-                        (float)System.Math.Floor(System.Math.Sqrt(player.RTSSelection.SelectedActors.Count)),
+                        (float)System.Math.Floor(System.Math.Sqrt(player.RTSSelection.SelectedUnits.Count)),
                         ApplyNavigation);
                 }
             }

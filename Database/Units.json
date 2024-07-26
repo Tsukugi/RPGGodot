@@ -11,7 +11,8 @@
             "attackRange": 10
         },
         "abilities": [
-            "Fireball"
+            "Fireball",
+            "ThrowMultiRock"
         ]
     },
     {

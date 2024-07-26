@@ -58,12 +58,37 @@ offset_bottom = 10.0
 script = ExtResource("4_co5sg")
 
 [node name="AbilityBtn" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_top = 553.0
-offset_right = 161.0
-offset_bottom = 648.0
-text = "Fireball
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -514.0
+offset_top = -142.0
+offset_right = -353.0
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Ability1
 "
+
+[node name="AbilityBtn2" type="Button" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -326.0
+offset_top = -143.0
+offset_right = -165.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Ability2"
 
 [node name="SelectedUnitInfo" type="RichTextLabel" parent="CanvasLayer/Control"]
 layout_mode = 0

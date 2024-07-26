@@ -1,9 +1,14 @@
 using Godot;
 
 public abstract partial class EffectUnit : ActorBase {
+
+    bool hasCollidedOnce = false;
     protected Unit target = null;
     protected EffectBaseDTO attributes;
     protected bool isInitialized = false;
+
+    protected bool HasCollidedOnce { get => hasCollidedOnce; }
+
     public delegate void CollideEvent(Unit collider);
     public event CollideEvent OnCollideEvent;
 
@@ -22,7 +27,9 @@ public abstract partial class EffectUnit : ActorBase {
         MoveAndSlide(moveVelocity);
     }
 
-    protected void InvokeCollideEvent(Unit collider) {
+    protected void InvokeCollideEvent(Unit collider, bool collideOnce = false) {
+        if (collideOnce && hasCollidedOnce) return;
+        hasCollidedOnce = true;
         OnCollideEvent?.Invoke(collider);
     }
 

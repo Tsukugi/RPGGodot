@@ -10,7 +10,7 @@ public partial class AreaOfEffectUnit : EffectUnit {
         collisionShape = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.AreaRange_Shape);
         ((CapsuleShape3D)collisionShape.Shape).Radius = 0.1f;
         areaRange.BodyEntered += (collider) => {
-            if (IsCollisionOnDifferentPlayer(collider) is Unit collidedActor) InvokeCollideEvent(collidedActor);
+            if (IsCollisionOnDifferentPlayer(collider) is Unit collidedActor) InvokeCollideEvent(collidedActor, true);
         };
     }
 

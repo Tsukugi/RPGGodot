@@ -30,6 +30,7 @@ public abstract class TaskBase {
     }
     /// <summary>
     /// This method is to be executed when the completion check has passed, use it to clean the state of the unit.
+    /// Alternatively it can be used explicitly to mark the task as completed.
     /// </summary>
     public virtual void OnTaskCompleted() {
         if (isForceFinished) return;

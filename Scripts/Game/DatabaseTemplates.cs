@@ -29,12 +29,15 @@ public class AbilityAttributesDTO {
 }
 
 public class EffectBaseDTO {
-    public string id { get; set; }
-    public string baseEffect { get; set; }
+    public string id { get; set; } // Id for the ability + effect
+    public string baseEffect { get; set; } // The base Effect class that has the effect logic
 
-    public int damageAmount { get; set; }
-    public int healAmount { get; set; }
+    // * Effect specific values, an effect may use some of them but it depends on each implementation
+    public int damageAmount { get; set; } // How much damage we are supposed to do
+    public int healAmount { get; set; } // How much healing we are supposed to do
 
-    public float range { get; set; }
-    public float velocity { get; set; }
+    // * EffectUnit 
+    public int numberOfInstances { get; set; } // How much copies of a effectUnit we may instance 
+    public float range { get; set; } // The range that a effectUnit may use to limit its behaviour
+    public float velocity { get; set; } // The velocity that a effectUnit may use to move
 }

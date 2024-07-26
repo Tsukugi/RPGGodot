@@ -44,6 +44,9 @@ public static class StaticNodePaths {
     public static readonly string PlayerUISelectedUnitInfo = "CanvasLayer/Control/SelectedUnitInfo";
 
     public static readonly string PlayerUIAbilityBtn = "CanvasLayer/Control/AbilityBtn";
+    public static readonly string PlayerUIAbilityBtn2 = "CanvasLayer/Control/AbilityBtn2";
+    public static readonly string PlayerUIAbilityBtn3 = "CanvasLayer/Control/AbilityBtn3";
+    public static readonly string PlayerUIAbilityBtn4 = "CanvasLayer/Control/AbilityBtn4";
     public static readonly string PlayerUISelectionPanel = "CanvasLayer/Control/SelectionPanel";
     public static readonly string PlayerUIInteractionPanel = "CanvasLayer/Control/InteractionPanel";
     public static readonly string InteractionPanel_Label = "Label";

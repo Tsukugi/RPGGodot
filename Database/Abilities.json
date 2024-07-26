@@ -1,5 +1,16 @@
 [
     {
+        "name": "ThrowMultiRock",
+        "effects": [
+            "ThrowMultiRockProjectile"
+        ],
+        "attributes": {
+            "castDuration": 0.5,
+            "cooldown": 15,
+            "range": 20
+        }
+    },
+    {
         "name": "Fireball",
         "effects": [
             "FireballProjectile",

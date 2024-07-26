@@ -71,6 +71,18 @@ public static class VectorUtils {
             point.Y > area.Size.Y);
     }
 
+    public static Vector3 AddToY(this Vector3 vector, float amount) {
+        return new Vector3(vector.X, vector.Y + amount, vector.Z);
+    }
+
+    public static Vector3 AddToX(this Vector3 vector, float amount) {
+        return new Vector3(vector.X + amount, vector.Y, vector.Z);
+    }
+
+    public static Vector3 AddToZ(this Vector3 vector, float amount) {
+        return new Vector3(vector.X, vector.Y + amount, vector.Z + amount);
+    }
+
     public static Vector3 WithY(this Vector3 vector, float Y) {
         return new Vector3(vector.X, Y, vector.Z);
     }

@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class ProjectileUnit : EffectActor {
+public partial class ProjectileUnit : EffectUnit {
 
     [Export]
     float velocityMultiplier = 1f;
@@ -8,7 +8,7 @@ public partial class ProjectileUnit : EffectActor {
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
         if (!isInitialized) return;
-        if (IsCollisionOnDifferentPlayer(GetCharacterBodyCollider()) is ActorBase collider) {
+        if (IsCollisionOnDifferentPlayer(GetCharacterBodyCollider()) is Unit collider) {
             InvokeCollideEvent(collider);
             QueueFree();
             return;

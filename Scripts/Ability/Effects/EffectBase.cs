@@ -5,16 +5,16 @@ using Godot;
  * as it is required for the generic Effect loader.
 */
 public class EffectBase : TaskBase {
-    protected new ActorBase unit;
+    protected new Unit unit;
     protected Ability ability;
     protected EffectBaseDTO attributes;
-    protected ActorBase target;
+    protected Unit target;
     public override void StartTask() {
         type = TaskType.Effect;
         base.StartTask();
     }
 
-    protected T NewEffectActor<T>(PackedScene template, Node owner, Vector3 position) where T : EffectActor {
+    protected T NewEffectActor<T>(PackedScene template, Node owner, Vector3 position) where T : EffectUnit {
         T instance = template.Instantiate<T>();
         owner.AddChild(instance);
         instance.GlobalPosition = position;
@@ -23,9 +23,9 @@ public class EffectBase : TaskBase {
     }
 
     public void UpdateEffectValues(
-        ActorBase unit,
+        Unit unit,
         Ability ability,
-        ActorBase target,
+        Unit target,
         EffectBaseDTO attributes) {
 
         this.unit = unit;

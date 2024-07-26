@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ueje1j2hc865"]
 
-[ext_resource type="Script" path="res://Scripts/Actor/EffectActor/AreaOfEffectUnit.cs" id="1_80olb"]
+[ext_resource type="Script" path="res://Scripts/Actor/EffectUnit/AreaOfEffectUnit.cs" id="1_80olb"]
 [ext_resource type="PackedScene" uid="uid://cilo708fdco00" path="res://Templates/AreaRange.tscn" id="2_upe38"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8kucw"]

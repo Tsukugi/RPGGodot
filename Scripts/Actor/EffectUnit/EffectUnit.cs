@@ -1,18 +1,17 @@
 using Godot;
 
-public abstract partial class EffectActor : ActorBase {
-    protected ActorBase target;
+public abstract partial class EffectUnit : ActorBase {
+    protected Unit target = null;
     protected EffectBaseDTO attributes;
     protected bool isInitialized = false;
-    public delegate void CollideEvent(ActorBase collider);
+    public delegate void CollideEvent(Unit collider);
     public event CollideEvent OnCollideEvent;
 
     public override void _Ready() {
         base._Ready();
-        target = this;
     }
 
-    public void UpdateValues(ActorBase target, EffectBaseDTO attributes) {
+    public void UpdateValues(Unit target, EffectBaseDTO attributes) {
         this.target = target;
         this.attributes = attributes;
         isInitialized = true;
@@ -23,12 +22,12 @@ public abstract partial class EffectActor : ActorBase {
         MoveAndSlide(moveVelocity);
     }
 
-    protected void InvokeCollideEvent(ActorBase collider) {
+    protected void InvokeCollideEvent(Unit collider) {
         OnCollideEvent?.Invoke(collider);
     }
 
-    protected ActorBase IsCollisionOnDifferentPlayer(object collider) {
-        if (collider is not ActorBase unit || unit.Player.IsSamePlayer(Player)) return null;
+    protected Unit IsCollisionOnDifferentPlayer(object collider) {
+        if (collider is not Unit unit || unit.Player.IsSamePlayer(Player)) return null;
         GD.Print(unit.Name);
         return unit;
     }

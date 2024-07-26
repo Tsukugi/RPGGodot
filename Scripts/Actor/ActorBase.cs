@@ -1,7 +1,5 @@
-
-using System.Collections.Generic;
 using Godot;
-public partial class ActorBase : CharacterBody3D {
+public abstract partial class ActorBase : CharacterBody3D {
 
     [Export] // Initial animation direction
     public UnitRenderDirection inputFaceDirection = UnitRenderDirection.Down;
@@ -12,12 +10,9 @@ public partial class ActorBase : CharacterBody3D {
     Node3D staticRotation = null;
     CollisionShape3D bodyCollision = null;
 
-    Dictionary<string, AbilityCaster> abilities = new();
-
     protected CollisionShape3D BodyCollision { get => bodyCollision; }
     protected AnimatedSprite3D Sprite { get => animatedSprite3D; }
     protected Node3D StaticRotation { get => staticRotation; }
-    public Dictionary<string, AbilityCaster> Abilities { get => abilities; }
     public PlayerBase Player { get => player; }
 
 
@@ -40,15 +35,6 @@ public partial class ActorBase : CharacterBody3D {
         StaticRotation.LookAt(GlobalPosition + CameraBase.CameraTransformOffset, Vector3.Up, true);
     }
 
-    public void AddAbility(AbilityDTO abilityDTO) {
-        AbilityCaster abilityCaster = new(abilityDTO);
-        abilities.Add(abilityDTO.name, abilityCaster);
-    }
-
-    public void CastAbility(string name, ActorBase target) {
-        Player.DebugLog("[CastAbility] Casting " + name, true);
-        abilities[name].Cast(this, target);
-    }
 
     protected void MoveAndCollide(Vector3 direction, float delta) {
         // Apply velocity.

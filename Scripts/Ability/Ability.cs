@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 public partial class Ability : TaskHandler {
-    ActorBase unit;
+    Unit unit;
     List<string> effects;
     AbilityAttributesDTO attributes;
     public AbilityAttributesDTO Attributes { get => attributes; }
@@ -16,7 +16,7 @@ public partial class Ability : TaskHandler {
 
     public override void _Ready() {
         base._Ready();
-        unit = this.TryFindParentNodeOfType<ActorBase>();
+        unit = this.TryFindParentNodeOfType<Unit>();
     }
 
     void StartAbility() {
@@ -24,13 +24,13 @@ public partial class Ability : TaskHandler {
         OnTaskProcess(); // We start the timer but we want to evaluate inmediately
     }
 
-    public void Cast(ActorBase target) {
+    public void Cast(Unit target) {
         ClearAll();
         AddEffectsToTaskQueue(target);
         StartAbility();
     }
 
-    void AddEffectsToTaskQueue(ActorBase target) {
+    void AddEffectsToTaskQueue(Unit target) {
         foreach (string effectId in effects) {
             EffectBaseDTO effectBase = LocalDatabase.GetEffect(effectId);
             Type type = Type.GetType(GetEffectName(effectBase.baseEffect));

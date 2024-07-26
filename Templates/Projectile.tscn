@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://euwk4mdeovi5"]
 
-[ext_resource type="Script" path="res://Scripts/Actor/EffectActor/ProjectileUnit.cs" id="1_lcppc"]
+[ext_resource type="Script" path="res://Scripts/Actor/EffectUnit/ProjectileUnit.cs" id="1_lcppc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8kucw"]
 margin = 0.45

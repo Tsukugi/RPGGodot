@@ -7,7 +7,7 @@ public partial class CameraBase : Camera3D {
     [Export]
     bool findAnyActorOnStartEnabled = false;
     [Export]
-    ActorBase selectedActor = null;
+    Unit selectedActor = null;
     [Export]
     float cameraVelocity = 3;
     [Export]
@@ -28,7 +28,7 @@ public partial class CameraBase : Camera3D {
 
     int edgeMovementPadding = 50;
 
-    public ActorBase SelectedActor {
+    public Unit SelectedActor {
         get => selectedActor;
         set {
             selectedActor = value;
@@ -44,7 +44,7 @@ public partial class CameraBase : Camera3D {
         
         UpdateCameraProperties();
         if (findAnyActorOnStartEnabled) {
-            ActorBase newActor = player.GetChildren().OfType<ActorBase>().FirstOrDefault();
+            Unit newActor = player.GetChildren().OfType<Unit>().FirstOrDefault();
             if (newActor == null) return;
             SelectedActor = newActor;
         }
@@ -112,7 +112,7 @@ public partial class CameraBase : Camera3D {
         currentTransformOffset.Y = newOffset.Y;
     }
 
-    public void AttachToActor(ActorBase actor) {
+    public void AttachToActor(Unit actor) {
         if (actor == null) {
             GD.Print("[CameraBase.AttachToActor] There is not a Unit available to attach");
         } else {

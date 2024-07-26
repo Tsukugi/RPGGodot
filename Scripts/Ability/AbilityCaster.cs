@@ -9,7 +9,7 @@ public class AbilityCaster {
 
     public AbilityDTO AbilityAttributes { get => abilityAttributes; }
 
-    public void Cast(ActorBase caster, ActorBase target) {
+    public void Cast(Unit caster, Unit target) {
         Ability ability = new(abilityAttributes);
         caster.AddChild(ability);
         ability.Cast(target);

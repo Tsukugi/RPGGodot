@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class AreaOfEffectUnit : EffectActor {
+public partial class AreaOfEffectUnit : EffectUnit {
     Area3D areaRange;
     CollisionShape3D collisionShape;
 
@@ -10,7 +10,7 @@ public partial class AreaOfEffectUnit : EffectActor {
         collisionShape = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.AreaRange_Shape);
         ((CapsuleShape3D)collisionShape.Shape).Radius = 0.1f;
         areaRange.BodyEntered += (collider) => {
-            if (IsCollisionOnDifferentPlayer(collider) is ActorBase collidedActor) InvokeCollideEvent(collidedActor);
+            if (IsCollisionOnDifferentPlayer(collider) is Unit collidedActor) InvokeCollideEvent(collidedActor);
         };
     }
 

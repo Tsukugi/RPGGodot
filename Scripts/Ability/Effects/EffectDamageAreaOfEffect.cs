@@ -9,6 +9,7 @@ public partial class EffectDamageAreaOfEffect : EffectBase {
         areaOfEffectUnit = NewEffectActor<AreaOfEffectUnit>(areaOfEffectTemplate, unit.Player, target.GlobalPosition.WithY(0.5f));
         areaOfEffectUnit.OnCollideEvent += (collider) => {
             unit.Player.DebugLog("[EffectDamageOnCollide.OnCollideEvent] Apply damage to" + collider.Name + " at " + collider.GlobalPosition, true);
+            collider.Attributes.ApplyDamage(attributes.damageAmount);
         };
         base.StartTask();
         OnTaskCompleted();

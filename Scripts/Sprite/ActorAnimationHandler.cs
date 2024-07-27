@@ -23,10 +23,22 @@ public class ActorAnimationHandler : AnimationHandlerBase {
 
     public void ApplyAnimation(UnitRenderDirection inputFaceDirection) {
         switch (inputFaceDirection) {
-            case UnitRenderDirection.Down: animatedSprite.Play(GetName("Down")); break;
-            case UnitRenderDirection.Up: animatedSprite.Play(GetName("Up")); break;
-            case UnitRenderDirection.Left: animatedSprite.Play(GetName("Left")); break;
-            case UnitRenderDirection.Right: animatedSprite.Play(GetName("Right")); break;
+            case UnitRenderDirection.Down: PlayAnimation("Down"); break;
+            case UnitRenderDirection.Up: PlayAnimation("Up"); break;
+            case UnitRenderDirection.Left: PlayAnimation("Left"); break;
+            case UnitRenderDirection.Right: PlayAnimation("Right"); break;
+            case UnitRenderDirection.UpLeft: PlayAnimation("UpLeft"); break;
+            case UnitRenderDirection.UpRight: PlayAnimation("UpRight"); break;
+            case UnitRenderDirection.DownLeft: PlayAnimation("DownLeft"); break;
+            case UnitRenderDirection.DownRight: PlayAnimation("DownRight"); break;
+        }
+    }
+
+    void PlayAnimation(string name) {
+        try {
+            animatedSprite.Play(GetName(name));
+        } catch (Exception e) {
+            GD.PrintErr(e);
         }
     }
 

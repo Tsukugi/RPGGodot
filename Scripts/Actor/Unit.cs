@@ -12,7 +12,11 @@ public enum UnitRenderDirection {
     Down,
     Up,
     Left,
-    Right
+    Right,
+    UpLeft,
+    UpRight,
+    DownLeft,
+    DownRight
 }
 
 public partial class Unit : ActorBase {

@@ -1,0 +1,77 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://dwxappiwglsjb"]
+
+[ext_resource type="Texture2D" uid="uid://dsbjsk5duxjdc" path="res://Art/Tsukita/Person/body01.png" id="1_7kaxh"]
+[ext_resource type="Texture2D" uid="uid://cb7qp4ktmgi3t" path="res://Art/Tsukita/Person/body03.png" id="2_6s7vr"]
+[ext_resource type="Texture2D" uid="uid://dv2r1wximauo2" path="res://Art/Tsukita/Person/body02.png" id="2_pj3d6"]
+[ext_resource type="Texture2D" uid="uid://ntm4bhboaiok" path="res://Art/Tsukita/Person/body07.png" id="3_5yw1f"]
+[ext_resource type="Texture2D" uid="uid://ds35uut637y8u" path="res://Art/Tsukita/Person/body08.png" id="3_x4ujm"]
+[ext_resource type="Texture2D" uid="uid://beqan6q1sfn74" path="res://Art/Tsukita/Person/body05.png" id="4_8m3yc"]
+[ext_resource type="Texture2D" uid="uid://cn8onjkgntu7f" path="res://Art/Tsukita/Person/body4.png" id="7_mtju5"]
+[ext_resource type="Texture2D" uid="uid://cd1pjc5ri31qb" path="res://Art/Tsukita/Person/body6.png" id="8_fqxcr"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7kaxh")
+}],
+"loop": true,
+"name": &"idleDown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pj3d6")
+}],
+"loop": true,
+"name": &"idleDownLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_x4ujm")
+}],
+"loop": true,
+"name": &"idleDownRight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6s7vr")
+}],
+"loop": true,
+"name": &"idleLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5yw1f")
+}],
+"loop": true,
+"name": &"idleRight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_8m3yc")
+}],
+"loop": true,
+"name": &"idleUp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_mtju5")
+}],
+"loop": true,
+"name": &"idleUpLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_fqxcr")
+}],
+"loop": true,
+"name": &"idleUpRight",
+"speed": 5.0
+}]

@@ -3,21 +3,24 @@ using System;
 using Godot;
 
 public class ActorAnimationHandler : AnimationHandlerBase {
+    readonly int numberOfSpriteFaces = 8;
+    readonly float centerFaceOffset = 45 / 2;
     public ActorAnimationHandler(AnimatedSprite3D sprite) {
         animatedSprite = sprite;
     }
 
-    public static UnitRenderDirection GetRenderDirectionFromVector(Vector2 direction) {
-        UnitRenderDirection unitRenderDirection;
+    public UnitRenderDirection GetRenderDirectionFromVector(Vector2 direction) {
+        UnitRenderDirection unitRenderDirection = UnitRenderDirection.Down;
 
-        if (Math.Abs(direction.X) > Math.Abs(direction.Y)) {
-            if (direction.X > 0) unitRenderDirection = UnitRenderDirection.Right;
-            else unitRenderDirection = UnitRenderDirection.Left;
-        } else {
-            if (direction.Y > 0) unitRenderDirection = UnitRenderDirection.Down;
-            else unitRenderDirection = UnitRenderDirection.Up;
+        double sideSize = 360 / numberOfSpriteFaces; // A full round divided onto the number of faces (8 faces)
+        double directionDegrees = Math.Abs(VectorUtils.GetRotationFromDirection(direction));
+
+        for (int i = 0; i < numberOfSpriteFaces; i++) {
+            if (directionDegrees - centerFaceOffset >= (i * sideSize) + centerFaceOffset) {
+                unitRenderDirection = (UnitRenderDirection)i;
+            }
         }
-
+        GD.Print(directionDegrees + " - " + sideSize + " - " + unitRenderDirection);
         return unitRenderDirection;
     }
 

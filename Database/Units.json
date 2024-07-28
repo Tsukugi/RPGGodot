@@ -2,7 +2,7 @@
     {
         "name": "Tsukugi",
         "attributes": {
-            "movementSpeed": 5,
+            "movementSpeed": 3,
             "maxHitPoints": 1313,
             "attackSpeed": 0.5,
             "armor": 5,

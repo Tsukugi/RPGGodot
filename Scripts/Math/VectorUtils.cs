@@ -3,7 +3,6 @@ using Godot;
 
 public static class VectorUtils {
     const float degToRad = (float)Math.PI / 180;
-    public static readonly Vector3 FarAway = Vector3.One * -9999;
     public static float DegToRad => degToRad;
 
     public static Vector2 Rotate(this Vector2 vector, float degrees) {

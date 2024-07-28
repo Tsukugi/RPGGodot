@@ -8,14 +8,15 @@ public enum UnitActionState {
     Cast,
 }
 
+// Ordered counterclock-wise
 public enum UnitRenderDirection {
-    Down,
-    Up,
-    Left,
     Right,
-    UpLeft,
     UpRight,
+    Up,
+    UpLeft,
+    Left,
     DownLeft,
+    Down,
     DownRight
 }
 

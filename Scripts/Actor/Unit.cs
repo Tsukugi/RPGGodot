@@ -21,6 +21,7 @@ public enum UnitRenderDirection {
 }
 
 public partial class Unit : ActorBase {
+    bool isKilled = false;
     ActorAnimationHandler actorAnimationHandler = null;
     Area3D interactionArea = null;
     UnitAttributes attributes;
@@ -32,6 +33,7 @@ public partial class Unit : ActorBase {
     public Label3D OverheadLabel { get => overheadLabel; }
     public bool IsBodyCollisionEnabled { get => !BodyCollision.Disabled; set => BodyCollision.Disabled = !value; }
     public Dictionary<string, AbilityCaster> Abilities { get => abilities; }
+    public bool IsKilled { get => isKilled; }
 
     public override void _Ready() {
         base._Ready();
@@ -47,13 +49,11 @@ public partial class Unit : ActorBase {
             };
             actorAnimationHandler.ApplyAnimation(inputFaceDirection);
         }
-
         attributes.OnKilled += OnKilledHandler;
     }
 
     void OnKilledHandler(Unit unit) {
-        // Kill the Unit 
-        unit.QueueFree();
+        isKilled = true;
     }
 
     void OnInteractionAreaEnteredHandler(Node3D body) {

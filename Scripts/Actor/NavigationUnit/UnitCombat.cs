@@ -24,7 +24,6 @@ public partial class UnitCombat : Node3D {
 
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-
         if (target is null || target.Attributes.CanBeKilled) EndCombat();
     }
 

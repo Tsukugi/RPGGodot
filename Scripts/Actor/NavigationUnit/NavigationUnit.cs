@@ -36,12 +36,20 @@ public partial class NavigationUnit : Unit {
         unitSelection = GetNodeOrNull<UnitSelection>(StaticNodePaths.Selection);
         unitTask = GetNodeOrNull<UnitTask>(StaticNodePaths.TaskController);
         detectionCast = GetNodeOrNull<ShapeCast3D>(StaticNodePaths.TaskController_DetectionCast);
+
+        Attributes.OnKilled += OnKilledHandler;
+    }
+
+    void OnKilledHandler(Unit unit) {
+        combatArea.EndCombat();
+        alertArea.Disable();
+        unitTask.ClearAll();
     }
 
     public void NavigateTo(Vector3 direction) {
         Vector3 Velocity = GlobalPosition.DirectionTo(direction) * Attributes.MovementSpeed;
         MoveAndSlide(Velocity);
-        UpdateRenderDirection(Velocity.ToVector2());
+        UpdateRenderDirection(Velocity.ToVector2().Rotate(RotationDegrees.X));
     }
 
     void UpdateRenderDirection(Vector2 direction) {
@@ -51,8 +59,6 @@ public partial class NavigationUnit : Unit {
             ActorAnimationHandler.ApplyAnimation(unitRenderDirectionState);
         }
     }
-
-
 }
 
 public static class NavigationUnitUtils {

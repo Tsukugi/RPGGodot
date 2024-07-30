@@ -18,14 +18,29 @@ public partial class UnitAlertArea : Area3D {
 
     public override void _Ready() {
         base._Ready();
+        Initialize();
+    }
+
+    public void Disable() {
+        unit = null;
+        CalmDown();
+        Callable.From(DisableDeferred).CallDeferred();
+    }
+
+    public void Initialize() {
         Unit parentUnit = this.TryFindParentNodeOfType<Unit>();
         if (parentUnit is NavigationUnit navigationUnit) {
             unit = navigationUnit;
             collisionShape = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.Area_CollisionShape);
             Callable.From(InitializeDeferred).CallDeferred();
         } else {
-            QueueFree();
+            Callable.From(DisableDeferred).CallDeferred();
         }
+    }
+
+    void DisableDeferred() {
+        Monitoring = false;
+        collisionShape.Disabled = true;
     }
 
     void InitializeDeferred() {

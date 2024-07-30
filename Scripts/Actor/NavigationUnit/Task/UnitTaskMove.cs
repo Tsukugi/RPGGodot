@@ -31,7 +31,7 @@ public partial class UnitTaskMove : TaskBase {
     }
 
     void ExecuteManualAvoidance() {
-        Vector3 newAvoidancePosition = targetPosition.Normalized().Rotated(Vector3.Up, 45);
+        Vector3 newAvoidancePosition = targetPosition.Normalized().Cross(targetPosition.Normalized());
         if (newAvoidancePosition == avoidancePosition) return;
         avoidancePosition = newAvoidancePosition;
         unit.NavigationAgent.StartNewNavigation(avoidancePosition);

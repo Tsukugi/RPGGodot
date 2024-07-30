@@ -3,8 +3,6 @@ using System;
 using Godot;
 
 public class ActorAnimationHandler : AnimationHandlerBase {
-    readonly int numberOfSpriteFaces = 8;
-    readonly float centerFaceOffset = 45 / 2;
     public ActorAnimationHandler(AnimatedSprite3D sprite) {
         animatedSprite = sprite;
     }
@@ -12,17 +10,19 @@ public class ActorAnimationHandler : AnimationHandlerBase {
     public UnitRenderDirection GetRenderDirectionFromVector(Vector2 direction) {
         UnitRenderDirection unitRenderDirection = UnitRenderDirection.Down;
 
-        double sideSize = 360 / numberOfSpriteFaces; // A full round divided onto the number of faces (8 faces)
-        double directionDegrees = Math.Abs(VectorUtils.GetRotationFromDirection(direction));
+        double directionDegrees = VectorUtils.GetRotationFromDirection(direction);
 
-        for (int i = 0; i < numberOfSpriteFaces; i++) {
-            if (directionDegrees - centerFaceOffset >= (i * sideSize) + centerFaceOffset) {
-                unitRenderDirection = (UnitRenderDirection)i;
-            }
-        }
-        GD.Print(directionDegrees + " - " + sideSize + " - " + unitRenderDirection);
+        if (directionDegrees.IsBetween(0, 45)) unitRenderDirection = UnitRenderDirection.Right;
+        if (directionDegrees.IsBetween(45, 90)) unitRenderDirection = UnitRenderDirection.UpRight;
+        if (directionDegrees.IsBetween(90, 135)) unitRenderDirection = UnitRenderDirection.Up;
+        if (directionDegrees.IsBetween(135, 180)) unitRenderDirection = UnitRenderDirection.UpLeft;
+        if (directionDegrees.IsBetween(180, 225)) unitRenderDirection = UnitRenderDirection.Left;
+        if (directionDegrees.IsBetween(225, 270)) unitRenderDirection = UnitRenderDirection.DownLeft;
+        if (directionDegrees.IsBetween(270, 315)) unitRenderDirection = UnitRenderDirection.Down;
+        if (directionDegrees.IsBetween(315, 360)) unitRenderDirection = UnitRenderDirection.DownRight;
         return unitRenderDirection;
     }
+
 
     public void ApplyAnimation(UnitRenderDirection inputFaceDirection) {
         switch (inputFaceDirection) {

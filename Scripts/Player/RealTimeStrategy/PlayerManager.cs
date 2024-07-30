@@ -38,7 +38,7 @@ public partial class PlayerManager : Node {
         playerRelationship.UpdateRelationship("Player", "Neutral", RelationshipType.Friend);
         playerRelationship.UpdateRelationship("Hostile", "Player", RelationshipType.Hostile);
 
-        Node areas = GetNodeOrNull("../NavigationRegion3D/Areas");
+        Node areas = GetNodeOrNull("../Terrain/Areas");
         waypoints = areas.TryGetAllChildOfType<Node3D>();
         RealTimeStrategyPlayer Hostile = GetNodeOrNull<RealTimeStrategyPlayer>("Hostile");
         RealTimeStrategyPlayer Neutral = GetNodeOrNull<RealTimeStrategyPlayer>("Neutral");

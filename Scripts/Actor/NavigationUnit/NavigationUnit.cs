@@ -41,6 +41,7 @@ public partial class NavigationUnit : Unit {
     }
 
     void OnKilledHandler(Unit unit) {
+        navigationAgent.CancelNavigation();
         combatArea.EndCombat();
         alertArea.Disable();
         unitTask.ClearAll();

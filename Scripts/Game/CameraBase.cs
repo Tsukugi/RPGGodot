@@ -19,7 +19,7 @@ public partial class CameraBase : Camera3D {
     public static readonly int CameraRotationAxisOffset = 45;
     Vector3 currentTransformOffset = CameraTransformOffset;
     Vector3 currentRotationOffset = CameraRotationOffset;
-    ProjectionType projectionType = ProjectionType.Perspective;
+    ProjectionType projectionType = ProjectionType.Orthogonal;
 
     /* public static readonly Vector3 CameraTransformOffset = new(-8, 7, 8);
      public static readonly Vector3 CameraRotationOffset = new(-30, -45, 0); 

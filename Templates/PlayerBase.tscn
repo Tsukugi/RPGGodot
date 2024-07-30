@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6ajx743pvfx"]
+[gd_scene load_steps=10 format=3 uid="uid://b6ajx743pvfx"]
 
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/RealTimeStrategyPlayer.cs" id="1_w2jw0"]
 [ext_resource type="Script" path="res://Scripts/Game/CameraBase.cs" id="2_7o631"]
 [ext_resource type="Script" path="res://Scripts/UI/InteractionPanel.cs" id="3_aodfl"]
 [ext_resource type="Script" path="res://Scripts/UI/SelectionPanel.cs" id="4_co5sg"]
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/RTSCamera.cs" id="5_bgae1"]
+[ext_resource type="PackedScene" uid="uid://bo2xgiyxdolci" path="res://Templates/AbilityBtn.tscn" id="5_vmhrf"]
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/RTSSelection.cs" id="6_wb7p4"]
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/RTSNavigation.cs" id="7_0mbkk"]
 
@@ -57,38 +58,19 @@ offset_right = 10.0
 offset_bottom = 10.0
 script = ExtResource("4_co5sg")
 
-[node name="AbilityBtn" type="Button" parent="CanvasLayer/Control"]
-visible = false
+[node name="AbilityBtn" parent="CanvasLayer/Control" instance=ExtResource("5_vmhrf")]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -514.0
-offset_top = -142.0
-offset_right = -353.0
-offset_bottom = -47.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Ability1
-"
+offset_left = -534.0
+offset_top = -154.0
+offset_right = -373.0
+offset_bottom = -59.0
 
-[node name="AbilityBtn2" type="Button" parent="CanvasLayer/Control"]
-visible = false
+[node name="AbilityBtn2" parent="CanvasLayer/Control" instance=ExtResource("5_vmhrf")]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -326.0
-offset_top = -143.0
-offset_right = -165.0
-offset_bottom = -48.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Ability2"
+offset_left = -338.0
+offset_top = -153.0
+offset_right = -177.0
+offset_bottom = -58.0
 
 [node name="SelectedUnitInfo" type="RichTextLabel" parent="CanvasLayer/Control"]
 layout_mode = 0

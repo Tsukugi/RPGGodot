@@ -85,4 +85,7 @@ public static class VectorUtils {
     public static Vector3 WithY(this Vector3 vector, float Y) {
         return new Vector3(vector.X, Y, vector.Z);
     }
+    public static Vector3 WithX(this Vector3 vector, float X) {
+        return new Vector3(X, vector.Y, vector.Z);
+    }
 }

@@ -8,11 +8,27 @@
             "armor": 5,
             "baseDamage": 2,
             "attackCastDuration": 0.3,
-            "attackRange": 10
+            "attackRange": 1
         },
         "abilities": [
             "Fireball",
             "ThrowMultiRock"
+        ]
+    },
+    {
+        "name": "Healer",
+        "attributes": {
+            "movementSpeed": 1,
+            "maxHitPoints": 100,
+            "attackSpeed": 0.2,
+            "armor": 1,
+            "baseDamage": 2,
+            "attackCastDuration": 0.3,
+            "attackRange": 1
+        },
+        "abilities": [
+            "Fireball",
+            "Heal"
         ]
     },
     {
@@ -24,7 +40,7 @@
             "armor": 1,
             "baseDamage": 3,
             "attackCastDuration": 0,
-            "attackRange": 5
+            "attackRange": 1
         },
         "abilities": [
             "Heal"
@@ -39,7 +55,7 @@
             "armor": 2,
             "baseDamage": 3,
             "attackCastDuration": 0,
-            "attackRange": 5
+            "attackRange": 1
         },
         "abilities": [
             "Heal"

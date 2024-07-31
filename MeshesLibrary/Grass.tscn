@@ -12,6 +12,7 @@
 shading_mode = 2
 albedo_texture = ExtResource("1_3fw7f")
 uv1_scale = Vector3(3, 2, 1)
+texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_w2wln"]
 material = SubResource("StandardMaterial3D_lk8f0")
@@ -22,6 +23,7 @@ material = SubResource("StandardMaterial3D_lk8f0")
 shading_mode = 2
 albedo_texture = ExtResource("2_qq8xl")
 uv1_scale = Vector3(3, 2, 1)
+texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_hbbxd"]
 material = SubResource("StandardMaterial3D_tftpt")
@@ -30,6 +32,7 @@ material = SubResource("StandardMaterial3D_tftpt")
 shading_mode = 2
 albedo_texture = ExtResource("3_x4w2h")
 uv1_scale = Vector3(3, 2, 1)
+texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_at723"]
 material = SubResource("StandardMaterial3D_s37h0")
@@ -38,6 +41,7 @@ material = SubResource("StandardMaterial3D_s37h0")
 shading_mode = 2
 albedo_texture = ExtResource("4_12tfj")
 uv1_scale = Vector3(3, 2, 1)
+texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_7ycc8"]
 material = SubResource("StandardMaterial3D_2thjf")
@@ -46,6 +50,7 @@ material = SubResource("StandardMaterial3D_2thjf")
 shading_mode = 2
 albedo_texture = ExtResource("5_noaeo")
 uv1_scale = Vector3(3, 2, 1)
+texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_agwyy"]
 material = SubResource("StandardMaterial3D_n3efu")
@@ -54,6 +59,7 @@ material = SubResource("StandardMaterial3D_n3efu")
 shading_mode = 2
 albedo_texture = ExtResource("6_p0a2q")
 uv1_scale = Vector3(3, 2, 1)
+texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_i72yw"]
 material = SubResource("StandardMaterial3D_q1mgi")

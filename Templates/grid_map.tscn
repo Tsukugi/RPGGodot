@@ -1,10 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://dbhnuw18l0pdn"]
 
-[ext_resource type="MeshLibrary" uid="uid://7qiicm2ititx" path="res://MeshesLibrary/Grass.tres" id="1_gk1h1"]
+[ext_resource type="MeshLibrary" uid="uid://glq2ja6mit3x" path="res://MeshesLibrary/Grass2.tres" id="1_ideqr"]
 
 [node name="GridMap" type="GridMap"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-mesh_library = ExtResource("1_gk1h1")
+mesh_library = ExtResource("1_ideqr")
 cell_size = Vector3(1, 1, 1)
 cell_octant_size = 24
 data = {

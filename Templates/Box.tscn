@@ -10,6 +10,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hv3f6"]
 albedo_texture = ExtResource("2_lcnwf")
 uv1_scale = Vector3(3, 2, 1)
+texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_bryj6"]
 material = SubResource("StandardMaterial3D_hv3f6")

@@ -65,19 +65,17 @@ public partial class UnitAlertArea : Area3D {
     void OnAlertAreaEntered(Node3D body) {
         if (unit is null) return;
         //if (unit.UnitSelection.IsSelected) return;
-        if (body is not NavigationUnit navigationUnit) return;
-        AlertChangeOnEnemyUnitRange(navigationUnit);
-    }
-
-    void AlertChangeOnEnemyUnitRange(NavigationUnit possibleEnemy) {
-        if (unit is null) return;
+        if (body is not NavigationUnit possibleEnemy) return;
         if (possibleEnemy.Attributes.CanBeKilled) return;
         if (!unit.Player.IsHostilePlayer(possibleEnemy.Player)) return;
         if (unit.UnitTask.CurrentTask != null && unit.UnitTask.CurrentTask.Type == TaskType.Attack) return;
         if (unit.UnitTask.CurrentTask != null && unit.UnitTask.CurrentTask.Type == TaskType.Hide) return;
-
         unit.Player.DebugLog("[UnitAlertArea.OnAlertAreaEntered] " + unit.Name + " -> " + possibleEnemy.Name);
 
+        AlertChangeOnEnemyUnitRange(possibleEnemy);
+    }
+
+    void AlertChangeOnEnemyUnitRange(NavigationUnit possibleEnemy) {
         switch (AlertStateOnEnemySight) {
             case AlertState.Hide:
                 StartHideTask(possibleEnemy);

@@ -158,5 +158,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.55132, 3.54167, 1.59529)
 light_energy = 2.0
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="Players/Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.07075, 3.54167, -7.92717)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.0708, 3.54167, 0.0728302)
 light_energy = 2.0
+omni_range = 10.725

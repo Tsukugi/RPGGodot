@@ -15,12 +15,21 @@
         "id": "FireballAoEDamage",
         "baseEffect": "DamageAreaOfEffect",
         "damageAmount": 20,
-        "range": 10,
+        "radius": 10,
         "velocity": 5
     },
     {
         "id": "HealTarget",
-        "baseEffect": "HealTarget",
-        "healAmount": 15
+        "baseEffect": "Heal",
+        "healAmount": 30,
+        "radius": 1,
+        "velocity": 5
+    },
+    {
+        "id": "HealArea",
+        "baseEffect": "Heal",
+        "healAmount": 15,
+        "radius": 5,
+        "velocity": 2
     }
 ]

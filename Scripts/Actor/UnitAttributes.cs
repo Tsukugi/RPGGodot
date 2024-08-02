@@ -64,6 +64,11 @@ public partial class UnitAttributes : Node {
         return finalDamage;
     }
 
+    public int ApplyHeal(int healAmount) {
+        SetHitPoints(hitPoints + healAmount);
+        return healAmount;
+    }
+
     public delegate void OnKilledEventHandler(Unit unit);
     public event OnKilledEventHandler OnKilled;
 

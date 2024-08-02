@@ -2,13 +2,14 @@
 using Godot;
 
 public partial class AbilityBtn : Button {
-
+    bool isInitialized = false;
     NavigationUnit linkedUnit = null;
     string linkedAbilityName = null;
 
     public override void _Ready() {
         base._Ready();
-        ButtonUp += () => OnAbilityPressed(linkedAbilityName);
+        ButtonUp += OnAbilityPressed;
+        isInitialized = true;
     }
 
     public void BindAbility(NavigationUnit unit, string abilityName) {
@@ -23,16 +24,14 @@ public partial class AbilityBtn : Button {
     public void UnbindAbility() {
         Visible = false;
         Text = "";
-        
+
         linkedUnit = null;
         linkedAbilityName = null;
     }
 
 
-    void OnAbilityPressed(string name) {
-        if (linkedUnit is null || linkedAbilityName is null) return;
-        GD.Print("[OnAbilityPressed] " + linkedUnit.Name);
-        if (linkedUnit.UnitCombat.Target is null) return;
-        linkedUnit.CastAbility(name, linkedUnit.UnitCombat.Target);
+    void OnAbilityPressed() {
+        if (!isInitialized) return;
+        linkedUnit.CastAbility(linkedAbilityName);
     }
 }

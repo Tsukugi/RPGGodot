@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
 
-public static class SelectionBase {
+public static class SelectionUtils {
     /// We use this function to extract the Units that come from a collision. 
     public static Unit GetColliderUnit(this Variant item) {
         // We know that item.collider is a Unit but can be a NavigationUnit 

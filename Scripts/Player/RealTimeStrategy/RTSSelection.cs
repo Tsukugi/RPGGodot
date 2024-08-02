@@ -13,7 +13,6 @@ public partial class RTSSelection : Node {
     Vector2 selectionAreaStart = Vector2.Zero;
     Vector2 selectionAreaEnd = Vector2.Zero;
     float minSelectionAreaForMultiSelection = 35;
-    ShapeCast3D selectionShapeCast3D;
 
     bool isSelecting = false;
 
@@ -34,7 +33,7 @@ public partial class RTSSelection : Node {
 
     public override void _Input(InputEvent @event) {
         base._Input(@event);
-        if (!player.IsFirstPlayer()) return;
+        if (!player.IsFirstPlayer() || !player.CanInteract(PlayerInteractionType.Selection)) return;
 
         Vector2 mousePosition = player.Camera.GetViewport().GetMousePosition();
 
@@ -74,7 +73,7 @@ public partial class RTSSelection : Node {
         if (!player.IsFirstPlayer()) return;
 
         if (selectionShapeCast3D.CollisionResult.Count > 0) {
-            SelectionBase.SelectActors(UpdateSelectedActors, selectionShapeCast3D.CollisionResult, player.Name);
+            SelectionUtils.SelectActors(UpdateSelectedActors, selectionShapeCast3D.CollisionResult, player.Name);
         }
     }
 
@@ -97,30 +96,5 @@ public partial class RTSSelection : Node {
         player.DebugLog("[UpdateSelectedActors] Added actors: " + this.selectedUnits.Count);
     }
 
-    void UpdateSelectActorsInArea(Vector2 selectionAreaStart, Vector2 selectionAreaEnd) {
-
-        float selectionAreaSize = selectionAreaStart.DistanceTo(selectionAreaEnd);
-        Vector2 areaStart = selectionAreaStart;
-        Vector2 areaEnd = selectionAreaEnd;
-
-        // If the selection size is too small (f.e. just a click) we will create an small area around it to select comfortably 
-        if (selectionAreaSize < minSelectionAreaForMultiSelection) {
-            Vector2 addedPadding = Vector2.One * minSelectionAreaForMultiSelection;
-            areaStart = selectionAreaStart - addedPadding / 2;
-            areaEnd = selectionAreaStart + addedPadding / 2;
-            float newAreaSize = areaStart.DistanceTo(areaEnd);
-            player.DebugLog("[RTSSelection.UpdateSelectActorsInArea]: selectionAreaSize " + newAreaSize);
-        }
-
-        Vector3 startWorldArea = player.RTSNavigation.NavigationBase.Get3DWorldPosition(player.Camera, areaStart);
-        Vector3 startWorldArea2 = player.RTSNavigation.NavigationBase.Get3DWorldPosition(player.Camera, new(areaEnd.X, areaStart.Y));
-        Vector3 endWorldArea = player.RTSNavigation.NavigationBase.Get3DWorldPosition(player.Camera, new(areaStart.X, areaEnd.Y));
-        Vector3 endWorldArea2 = player.RTSNavigation.NavigationBase.Get3DWorldPosition(player.Camera, areaEnd);
-
-        /* We are drawing a "cube" with Y -10, 10 */
-        ((ConvexPolygonShape3D)selectionShapeCast3D.Shape).Points = new Vector3[] {
-                startWorldArea.WithY(-10), startWorldArea2.WithY(-10), endWorldArea.WithY(-10), endWorldArea2.WithY(-10),
-                startWorldArea.WithY(10), startWorldArea2.WithY(10), endWorldArea.WithY(10), endWorldArea2.WithY(10)
-            };
-    }
+   
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6ajx743pvfx"]
+[gd_scene load_steps=13 format=3 uid="uid://b6ajx743pvfx"]
 
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/RealTimeStrategyPlayer.cs" id="1_w2jw0"]
 [ext_resource type="Script" path="res://Scripts/Game/CameraBase.cs" id="2_7o631"]
@@ -8,11 +8,24 @@
 [ext_resource type="PackedScene" uid="uid://bo2xgiyxdolci" path="res://Templates/AbilityBtn.tscn" id="5_vmhrf"]
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/RTSSelection.cs" id="6_wb7p4"]
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/RTSNavigation.cs" id="7_0mbkk"]
+[ext_resource type="Texture2D" uid="uid://c10k03qykxn1p" path="res://Art/Retro Impact Effect Pack ALL/images/Retro Impact Effect Pack 2 D_26.png" id="9_fmtku"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nycjr"]
 points = PackedVector3Array(-1, 0, -1, 1, 0, -1, -1, 0, 1, 1, 0, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b85au"]
+transparency = 1
+albedo_texture = ExtResource("9_fmtku")
+emission_enabled = true
+emission = Color(0.905882, 0.894118, 0.807843, 1)
+uv1_scale = Vector3(3, 2, 1)
+uv2_scale = Vector3(3, 2, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_n636x"]
+material = SubResource("StandardMaterial3D_b85au")
+
 [node name="Player" type="Node3D"]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 script = ExtResource("1_w2jw0")
 
@@ -92,3 +105,11 @@ collide_with_bodies = false
 
 [node name="Navigation" type="Node" parent="."]
 script = ExtResource("7_0mbkk")
+
+[node name="Ability" type="Node" parent="."]
+
+[node name="AbilityIndicator" type="MeshInstance3D" parent="Ability"]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("SphereMesh_n636x")
+skeleton = NodePath("../..")

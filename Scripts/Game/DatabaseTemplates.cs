@@ -23,6 +23,7 @@ public class AbilityDTO {
 }
 
 public class AbilityAttributesDTO {
+    public string castType { get; set; }
     public double castDuration { get; set; }
     public int range { get; set; }
     public int cooldown { get; set; }
@@ -39,5 +40,6 @@ public class EffectBaseDTO {
     // * EffectUnit 
     public int numberOfInstances { get; set; } // How much copies of a effectUnit we may instance 
     public float range { get; set; } // The range that a effectUnit may use to limit its behaviour
+    public float radius { get; set; } // The radius that a effectUnit may use to define the area of effect
     public float velocity { get; set; } // The velocity that a effectUnit may use to move
 }

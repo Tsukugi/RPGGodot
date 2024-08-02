@@ -2,7 +2,6 @@ using Godot;
 
 public abstract partial class EffectUnit : ActorBase {
 
-    protected Unit target = null;
     protected EffectBaseDTO attributes;
     protected bool isInitialized = false;
     public bool HasCollidedAlready = false;
@@ -10,8 +9,7 @@ public abstract partial class EffectUnit : ActorBase {
     public delegate void CollideEvent(Unit collider);
     public event CollideEvent OnCollideEvent;
 
-    public virtual void UpdateValues(Unit target, EffectBaseDTO attributes) {
-        this.target = target;
+    public virtual void UpdateAttributes(EffectBaseDTO attributes) {
         this.attributes = attributes;
         isInitialized = true;
     }

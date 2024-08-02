@@ -1,61 +1,69 @@
 
 public static class Constants {
     /** Animation **/
-    public static readonly string AnimationPrefixIdle = "idle";
-    public static readonly string AnimationPrefixRunning = "running";
+    public const string AnimationPrefixIdle = "idle";
+    public const string AnimationPrefixRunning = "running";
 }
 
 public static class StaticNodePaths {
     /** Unit **/
-    public static readonly string NavigationAgent = "Navigation/NavigationAgent";
-    public static readonly string NavigationTarget = "Navigation/NavigationTarget";
-    public static readonly string Selection = "Selection";
-    public static readonly string Combat = "Combat";
-    public static readonly string CombatRayCast = "CombatRayCast";
-    public static readonly string Attributes = "Attributes";
-    public static readonly string SelectedIndicator = "Selection/SelectedIndicator";
-    public static readonly string AIController = "AIController";
-    public static readonly string TaskController = "TaskController";
-    public static readonly string TaskController_DetectionCast = "TaskController/DetectionCast";
-    public static readonly string BodyCollision = "BodyCollision";
+    public const string NavigationAgent = "Navigation/NavigationAgent";
+    public const string NavigationTarget = "Navigation/NavigationTarget";
+    public const string Selection = "Selection";
+    public const string Combat = "Combat";
+    public const string CombatRayCast = "CombatRayCast";
+    public const string Attributes = "Attributes";
+    public const string SelectedIndicator = "Selection/SelectedIndicator";
+    public const string AIController = "AIController";
+    public const string TaskController = "TaskController";
+    public const string TaskController_DetectionCast = "TaskController/DetectionCast";
+    public const string BodyCollision = "BodyCollision";
 
     // StaticRotation
-    public static readonly string StaticRotation = "StaticRotation";
-    public static readonly string ActorSprite = "StaticRotation/AnimatedSprite3D";
-    public static readonly string ActorMeshInstance = "StaticRotation/MeshInstance3D";
-    public static readonly string OverheadLabel = "StaticRotation/OverheadLabel";
+    public const string StaticRotation = "StaticRotation";
+    public const string ActorSprite = "StaticRotation/AnimatedSprite3D";
+    public const string ActorMeshInstance = "StaticRotation/MeshInstance3D";
+    public const string OverheadLabel = "StaticRotation/OverheadLabel";
 
     // Areas
-    public static readonly string InteractionArea = "Areas/Interaction";
-    public static readonly string AlertArea = "Areas/Alert";
-    public static readonly string Area_CollisionShape = "CollisionShape";
-    public static readonly string AreaRange = "AreaRange";
-    public static readonly string AreaRange_Shape = "AreaRange/Shape";
+    public const string InteractionArea = "Areas/Interaction";
+    public const string AlertArea = "Areas/Alert";
+    public const string Area_CollisionShape = "CollisionShape";
+    public const string AreaRange = "AreaRange";
+    public const string AreaRange_Shape = "AreaRange/Shape";
 
     /** Player **/
-    public static readonly string PlayerInput = "Input";
-    public static readonly string PlayerSelection = "Selection";
-    public static readonly string PlayerSelectionCast = "Selection/SelectionCast";
-    public static readonly string PlayerNavigation = "Navigation";
-    public static readonly string PlayerCamera = "Camera3D";
+    public const string PlayerInput = "Input";
+    public const string PlayerSelection = "Selection";
+    public const string PlayerSelectionCast = "Selection/SelectionCast";
+    public const string PlayerNavigation = "Navigation";
+    public const string PlayerCamera = "Camera3D";
+    public const string PlayerAbility = "PlayerAbility";
+    public const string PlayerAbility_AbilityIndicator = "AbilityIndicator";
 
-    public static readonly string PlayerUICanvas = "CanvasLayer";
+    public const string PlayerUICanvas = "CanvasLayer";
+    // TODO Create Navigation module
 
-    public static readonly string PlayerUISelectedUnitInfo = "CanvasLayer/Control/SelectedUnitInfo";
+    public const string PlayerUISelectedUnitInfo = "CanvasLayer/Control/SelectedUnitInfo";
 
-    public static readonly string PlayerUIAbilityBtn = "CanvasLayer/Control/AbilityBtn";
-    public static readonly string PlayerUIAbilityBtn2 = "CanvasLayer/Control/AbilityBtn2";
-    public static readonly string PlayerUIAbilityBtn3 = "CanvasLayer/Control/AbilityBtn3";
-    public static readonly string PlayerUIAbilityBtn4 = "CanvasLayer/Control/AbilityBtn4";
-    public static readonly string PlayerUISelectionPanel = "CanvasLayer/Control/SelectionPanel";
-    public static readonly string PlayerUIInteractionPanel = "CanvasLayer/Control/InteractionPanel";
-    public static readonly string InteractionPanel_Label = "Label";
+    public const string PlayerUIAbilityBtn = "CanvasLayer/Control/AbilityBtn";
+    public const string PlayerUIAbilityBtn2 = "CanvasLayer/Control/AbilityBtn2";
+    public const string PlayerUIAbilityBtn3 = "CanvasLayer/Control/AbilityBtn3";
+    public const string PlayerUIAbilityBtn4 = "CanvasLayer/Control/AbilityBtn4";
+    public const string PlayerUISelectionPanel = "CanvasLayer/Control/SelectionPanel";
+    public const string PlayerUIInteractionPanel = "CanvasLayer/Control/InteractionPanel";
+    public const string InteractionPanel_Label = "Label";
 }
 
 public static class ResourcePaths {
-    public static readonly string NavigationUnit = "res://Templates/NavigationUnit.tscn";
-    public static readonly string Projectile = "res://Templates/Projectile.tscn";
-    public static readonly string AreaOfEffect = "res://Templates/AreaOfEffect.tscn";
+    public const string NavigationUnit = "res://Templates/NavigationUnit.tscn";
+    public const string Projectile = "res://Templates/Projectile.tscn";
+    public const string AreaOfEffect = "res://Templates/AreaOfEffect.tscn";
+}
+
+public static class AbilityCastTypes {
+    public const string Target = "target";
+    public const string Position = "position";
 }
 
 

@@ -21,7 +21,7 @@ public partial class RTSNavigation : Node {
                 if (eventMouseButton.Pressed) {
                     Vector3? targetPosition = NavigationBase.GetNavigationTargetPosition(player.Camera);
                     if (targetPosition is not Vector3 targetPositionInWorld) return;
-                    SelectionBase.ApplyCommandToGroupPosition(
+                    SelectionUtils.ApplyCommandToGroupPosition(
                         player.RTSSelection.SelectedUnits,
                         targetPositionInWorld,
                         navigationGroupGapDistance,

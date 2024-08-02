@@ -6,7 +6,6 @@ public partial class EffectProjectile : EffectBase {
     ProjectileUnit projectile;
 
     public override void StartTask() {
-        unit.Player.DebugLog("[EffectProjectile.StartTask] New Projectile to " + target.GlobalPosition);
         projectile = NewEffectActor<ProjectileUnit>(projectileTemplate, unit.Player, unit.GlobalPosition.AddToY(0.5f));
         projectile.OnCollideEvent += (collider) => {
             OnTaskCompleted();

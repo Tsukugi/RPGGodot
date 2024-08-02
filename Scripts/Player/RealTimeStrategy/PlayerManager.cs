@@ -4,7 +4,7 @@ using Godot;
 public partial class PlayerManager : Node {
     List<PlayerBase> players = new();
     PlayerRelationship playerRelationship;
-    
+
     List<Node3D> waypoints = new();
 
     public List<PlayerBase> Players { get => players; }
@@ -30,6 +30,7 @@ public partial class PlayerManager : Node {
         GD.Print("[DebugStart] Loaded " + LocalDatabase.Effects.Count + " effects");
         RealTimeStrategyPlayer player = GetNodeOrNull<RealTimeStrategyPlayer>("Player");
         player.AddUnit(LocalDatabase.Units["Tsukugi"], player.GetNodeOrNull<Node3D>("Spawn1").GlobalPosition);
+        player.AddUnit(LocalDatabase.Units["Healer"], player.GetNodeOrNull<Node3D>("Spawn1").GlobalPosition.AddToX(1f));
 
         await Wait(1);
         playerRelationship.UpdateRelationship("Neutral", "Hostile", RelationshipType.Hostile);

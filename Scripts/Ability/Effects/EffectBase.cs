@@ -8,7 +8,7 @@ public class EffectBase : TaskBase {
     protected new Unit unit;
     protected Ability ability;
     protected EffectBaseDTO attributes;
-    protected Unit target;
+    protected AbilityCastContext abilityCastContext;
     public override void StartTask() {
         type = TaskType.Effect;
         base.StartTask();
@@ -18,19 +18,19 @@ public class EffectBase : TaskBase {
         T instance = template.Instantiate<T>();
         owner.AddChild(instance);
         instance.GlobalPosition = position;
-        instance.UpdateValues(target, attributes);
+        instance.UpdateAttributes(attributes);
         return instance;
     }
 
     public void UpdateEffectValues(
         Unit unit,
         Ability ability,
-        Unit target,
+        AbilityCastContext abilityCastContext,
         EffectBaseDTO attributes) {
 
         this.unit = unit;
-        this.target = target;
         this.ability = ability;
+        this.abilityCastContext = abilityCastContext;
         this.attributes = attributes;
     }
 }

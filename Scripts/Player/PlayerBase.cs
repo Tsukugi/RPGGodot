@@ -4,12 +4,15 @@ public partial class PlayerBase : Node {
     CameraBase camera;
     InteractionPanel interactionPanel;
     CanvasLayer canvasLayer;
+    PlayerAbility playerAbility;
     bool IsPerformanceLogActive = false;
+    PlayerInteractionType interactionType = PlayerInteractionType.None;
     protected PlayerManager manager;
 
     public CameraBase Camera { get => camera; }
     public InteractionPanel InteractionPanel { get => interactionPanel; }
     public CanvasLayer CanvasLayer { get => canvasLayer; }
+    public PlayerAbility PlayerAbility { get => playerAbility; }
 
     public override void _Ready() {
         base._Ready();
@@ -17,11 +20,27 @@ public partial class PlayerBase : Node {
         camera = GetNodeOrNull<CameraBase>(StaticNodePaths.PlayerCamera);
         interactionPanel = GetNodeOrNull<InteractionPanel>(StaticNodePaths.PlayerUIInteractionPanel);
         canvasLayer = GetNodeOrNull<CanvasLayer>(StaticNodePaths.PlayerUICanvas);
+        playerAbility = GetNodeOrNull<PlayerAbility>(StaticNodePaths.PlayerAbility);
     }
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
         if (IsPerformanceLogActive) LogPerformance();
     }
+
+    // * Interaction
+    // We check if Player can interact with a type, a Player cannot interact if he's doing something else
+    public bool CanInteract(PlayerInteractionType type) {
+        return interactionType == PlayerInteractionType.None || interactionType == type;
+    }
+    public void Interact(PlayerInteractionType type) {
+        if (!CanInteract(type)) GD.PrintErr("[PlayerBase.Interact] Player is busy");
+        interactionType = type;
+    }
+    public void StopInteraction() {
+        interactionType = PlayerInteractionType.None;
+        DebugLog("[StopInteraction]", true);
+    }
+
 
     protected void LogPerformance() {
         DebugLog("TimeFps: " + Performance.GetMonitor(Performance.Monitor.TimeFps), true);
@@ -47,4 +66,15 @@ public partial class PlayerBase : Node {
     public bool IsSamePlayer(PlayerBase player) {
         return Name == player.Name;
     }
+}
+
+
+
+// * Add here every kind of interaction that would need to 
+// * be the only one active, so we dont have overlappings of 
+// * different Player interaction behaviours.
+public enum PlayerInteractionType {
+    None,
+    AbilityCast,
+    Selection,
 }

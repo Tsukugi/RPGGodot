@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 public partial class Ability : TaskHandler {
     Unit unit;
-    List<string> effects;
+    List<string> effectIds;
     AbilityAttributesDTO attributes;
     public AbilityAttributesDTO Attributes { get => attributes; }
 
 
     public Ability(AbilityDTO ability) {
         Name = ability.name;
-        effects = ability.effects;
+        effectIds = ability.effects;
         attributes = ability.attributes;
     }
 
@@ -24,18 +24,18 @@ public partial class Ability : TaskHandler {
         OnTaskProcess(); // We start the timer but we want to evaluate inmediately
     }
 
-    public void Cast(Unit target) {
+    public void Cast() {
         ClearAll();
-        AddEffectsToTaskQueue(target);
+        AddEffectsToTaskQueue();
         StartAbility();
     }
 
-    void AddEffectsToTaskQueue(Unit target) {
-        foreach (string effectId in effects) {
+    void AddEffectsToTaskQueue() {
+        foreach (string effectId in effectIds) {
             EffectBaseDTO effectBase = LocalDatabase.GetEffect(effectId);
             Type type = Type.GetType(GetEffectName(effectBase.baseEffect));
             dynamic newEffect = Activator.CreateInstance(type);
-            newEffect.UpdateEffectValues(unit, this, target, effectBase);
+            newEffect.UpdateEffectValues(unit, this, effectBase);
             AddTask(newEffect);
         }
     }

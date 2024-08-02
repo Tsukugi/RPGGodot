@@ -11,11 +11,6 @@ public partial class ProjectileUnit : EffectUnit {
     public delegate void OnTargetReached(Vector3 position);
     public event OnTargetReached OnTargetReachedEvent;
 
-    public override void UpdateValues(Unit target, EffectBaseDTO attributes) {
-        targetDirection = target.GlobalPosition;
-        base.UpdateValues(target, attributes);
-    }
-
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
         if (!isInitialized) return;
@@ -26,7 +21,7 @@ public partial class ProjectileUnit : EffectUnit {
         }
         if (GlobalPosition.DistanceTo(targetDirection) < 0.3f && !hasReachedTargetAlready) {
             hasReachedTargetAlready = true;
-            OnTargetReachedEvent?.Invoke(GlobalPosition); 
+            OnTargetReachedEvent?.Invoke(GlobalPosition);
             return;
         }
         NavigateTo(targetDirection, (float)(attributes.velocity * velocityMultiplier));

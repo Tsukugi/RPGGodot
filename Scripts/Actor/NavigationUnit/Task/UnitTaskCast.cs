@@ -14,7 +14,7 @@ public partial class UnitTaskCast : TaskBase {
     public override void StartTask() {
         base.StartTask();
         unit.Player.DebugLog("[UnitTask.StartTask] Casting to " + target.GlobalPosition);
-        unit.CastAbility(abilityName, target);
+        unit.CastAbility(abilityName);
         isForceFinished = true;
     }
     public override bool CheckIfCompleted() {

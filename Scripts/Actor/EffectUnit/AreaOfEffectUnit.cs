@@ -10,7 +10,7 @@ public partial class AreaOfEffectUnit : EffectUnit {
         collisionShape = GetNode<CollisionShape3D>(StaticNodePaths.AreaRange_Shape);
         ((CapsuleShape3D)collisionShape.Shape).Radius = 0.1f;
         areaRange.BodyEntered += (collider) => {
-            if (IsCollisionOnDifferentPlayer(collider) is Unit collidedActor && !HasCollidedAlready) InvokeCollideEvent(collidedActor);
+            if (GetAllowedColliderPlayer(collider) is Unit collidedActor && !HasCollidedAlready) InvokeCollideEvent(collidedActor);
         };
     }
 
@@ -18,7 +18,7 @@ public partial class AreaOfEffectUnit : EffectUnit {
         base._PhysicsProcess(delta);
         if (!isInitialized) return;
 
-        if (Scale.X >= attributes.range) {
+        if (Scale.X >= attributes.radius) {
             QueueFree();
         }
         Scale += Scale.Magnitude((float)(attributes.velocity * delta));

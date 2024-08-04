@@ -68,6 +68,13 @@ public static class AbilityCastTypes {
     public const string Position = "position";
 }
 
+public static class EffectPlayerTypes {
+    public const string Self = "Self";
+    public const string Friendly = "Friendly";
+    public const string Enemy = "Enemy";
+    public const string All = "All";
+}
+
 
 public enum CollisionMasks {
     Terrain = 1,

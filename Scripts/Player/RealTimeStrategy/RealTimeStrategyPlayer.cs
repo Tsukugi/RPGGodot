@@ -33,7 +33,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         return this.TryGetAllChildOfType<NavigationUnit>();
     }
 
-    public void AddUnit(NavigationUnitDTO unitDTO, Vector3 position) {
+    public NavigationUnit AddUnit(NavigationUnitDTO unitDTO, Vector3 position) {
         NavigationUnit navUnit = navUnitTemplate.Instantiate<NavigationUnit>();
         AddChild(navUnit);
         navUnit.Attributes.UpdateValues(unitDTO.attributes);
@@ -42,6 +42,8 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         foreach (string item in unitDTO.abilities) {
             navUnit.AddAbility(LocalDatabase.Abilites[item]);
         }
+
+        return navUnit;
     }
 
     public override void StopInteraction() {

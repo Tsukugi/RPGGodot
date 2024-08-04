@@ -23,8 +23,10 @@ public partial class PlayerSelection : Node {
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
         if (!player.IsFirstPlayer()) return;
-        if (AllowedInteractionType == PlayerInteractionType.None ||
-        (AllowedInteractionType != PlayerInteractionType.None && player.CanInteract(AllowedInteractionType))) {
+        if (AllowedInteractionType == PlayerInteractionType.None) {
+            GD.PushWarning("[PlayerSelection] Please set a AllowedInteractionType, ignoring all _PhysicsProcess otherwise.");
+            return;
+        } else if (player.CanInteract(AllowedInteractionType)) {
             CheckCollisionResult();
         }
     }
@@ -35,24 +37,28 @@ public partial class PlayerSelection : Node {
         }
     }
 
-    public virtual void StartSelection(Vector2 position) {
+    public virtual void StartSelection(Vector2 startPosition) {
         selectionShapeCast3D.CollideWithBodies = true;
-        selectionAreaStart = position;
+        selectionAreaStart = startPosition;
         selectionAreaEnd = selectionAreaStart;
-        SetCastAreaBounds(selectionAreaStart, selectionAreaEnd);
-        UpdateSelectedActors(new List<Unit>());
-        player.DebugLog("[RTSSelection._Input]: Start Selection");
+        UpdateCastArea();
+        player.DebugLog("[PlayerSelection]: Start Selection", true);
+    }
+
+    public virtual void UpdateSelectionArea(Vector2 selectionAreaStart, Vector2 selectionAreaEnd) {
+        this.selectionAreaStart = selectionAreaStart;
+        this.selectionAreaEnd = selectionAreaEnd;
+        UpdateCastArea();
     }
 
     public virtual void EndSelection() {
         selectionAreaEnd = Vector2.Zero;
         selectionAreaStart = Vector2.Zero;
         selectionShapeCast3D.CollideWithBodies = false;
-        player.DebugLog("[RTSSelection._Input]: Selection Finished");
+        player.DebugLog("[PlayerSelection]: Selection Finished", true);
     }
 
-    protected void SetCastAreaBounds(Vector2 selectionAreaStart, Vector2 selectionAreaEnd) {
-
+    protected void UpdateCastArea() {
         float selectionAreaSize = selectionAreaStart.DistanceTo(selectionAreaEnd);
         Vector2 areaStart = selectionAreaStart;
         Vector2 areaEnd = selectionAreaEnd;

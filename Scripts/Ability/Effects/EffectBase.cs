@@ -18,7 +18,7 @@ public class EffectBase : TaskBase {
         T instance = template.Instantiate<T>();
         owner.AddChild(instance);
         instance.GlobalPosition = position;
-        instance.UpdateAttributes(attributes);
+        instance.InitializeEffectUnit(attributes, abilityCastContext);
         return instance;
     }
 

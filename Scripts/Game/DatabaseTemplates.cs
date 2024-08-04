@@ -23,7 +23,7 @@ public class AbilityDTO {
 }
 
 public class AbilityAttributesDTO {
-    public string castType { get; set; }
+    public string castType { get; set; } // We use this to define if the Player behaviour depending if its targeted or positioned -> Type is AbilityCastTypes - Required (No default)
     public double castDuration { get; set; }
     public int range { get; set; }
     public int cooldown { get; set; }
@@ -32,12 +32,13 @@ public class AbilityAttributesDTO {
 public class EffectBaseDTO {
     public string id { get; set; } // Id for the ability + effect
     public string baseEffect { get; set; } // The base Effect class that has the effect logic
+    public string playerTypeAffected { get; set; } // We use this to differentiate behaviours to specific players -> Type is EffectPlayerTypes - default: "All"
 
     // * Effect specific values, an effect may use some of them but it depends on each implementation
     public int damageAmount { get; set; } // How much damage we are supposed to do
     public int healAmount { get; set; } // How much healing we are supposed to do
 
-    // * EffectUnit 
+    // * EffectUnit values
     public int numberOfInstances { get; set; } // How much copies of a effectUnit we may instance 
     public float range { get; set; } // The range that a effectUnit may use to limit its behaviour
     public float radius { get; set; } // The radius that a effectUnit may use to define the area of effect

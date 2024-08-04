@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public partial class PlayerAbility : Node {
@@ -13,6 +14,7 @@ public partial class PlayerAbility : Node {
         player = this.TryFindParentNodeOfType<PlayerBase>();
         abilityIndicator = GetNode<MeshInstance3D>(StaticNodePaths.AbilityIndicator);
         playerSelection = GetNode<PlayerSelection>(StaticNodePaths.PlayerSelection);
+        playerSelection.AllowedInteractionType = PlayerInteractionType.AbilityCast;
         playerSelection.OnSelectUnitsEvent += OnSelectedTargetUnits;
     }
 
@@ -34,6 +36,7 @@ public partial class PlayerAbility : Node {
 
         if (@event is InputEventMouseMotion) {
             abilityIndicator.GlobalPosition = mousePositionInWorld;
+            playerSelection.UpdateSelectionArea(mousePosition, mousePosition);
         }
 
         if (@event is InputEventMouseButton eventMouseButton) {
@@ -51,13 +54,17 @@ public partial class PlayerAbility : Node {
     // This is the result of the selection event, thus finishing the Ability casting on a target
     // TODO: What do we do with multiple units?
     void OnSelectedTargetUnits(List<Unit> units) {
-        if (units.Count > 0 && castContext is not null) {
-            player.DebugLog("[OnSelectedTargetUnits]", true);
-            castContext.AddTarget(units[0]);
+        if (castContext is null) GD.PrintErr("[OnSelectedTargetUnits] No context specified.");
+        if (units.Count > 0) {
+            Unit target = units[0];
+            player.DebugLog("[OnSelectedTargetUnits] Target found " + target.Name, true);
+            castContext.AddTarget(target);
             abilityCaster.Cast(castContext);
             EndCastingState();
+        } else {
+            player.DebugLog("[OnSelectedTargetUnits] No units found", true);
+            playerSelection.EndSelection();
         }
-        playerSelection.EndSelection();
     }
 
     // * Input events for a Positioned ability
@@ -85,6 +92,7 @@ public partial class PlayerAbility : Node {
     }
     public void EndCastingState() {
         GetTree().Paused = false;
+        playerSelection.EndSelection();
         player.DebugLog("[EndCastingState]", true);
         player.StopInteraction();
         castContext = null;

@@ -17,6 +17,7 @@ public partial class RTSSelection : PlayerSelection {
         base._Ready();
         player = this.TryFindParentNodeOfType<RealTimeStrategyPlayer>();
         selectionPanel = player.GetNode<SelectionPanel>(StaticNodePaths.PlayerUISelectionPanel);
+        AllowedInteractionType = PlayerInteractionType.UnitControl;
     }
 
     public override void _Input(InputEvent @event) {
@@ -30,7 +31,7 @@ public partial class RTSSelection : PlayerSelection {
             if (Input.IsMouseButtonPressed(MouseButton.Left)) {
                 selectionAreaEnd = mousePosition;
                 selectionPanel.ApplySelectionTransform(selectionAreaStart, selectionAreaEnd);
-                SetCastAreaBounds(selectionAreaStart, selectionAreaEnd);
+                UpdateCastArea();
             }
         }
 
@@ -44,6 +45,11 @@ public partial class RTSSelection : PlayerSelection {
                 }
             }
         }
+    }
+
+    public override void StartSelection(Vector2 startPosition) {
+        base.StartSelection(startPosition);
+        UpdateSelectedActors(new List<Unit>());
     }
 
     public override void EndSelection() {

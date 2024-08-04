@@ -7,7 +7,7 @@ public partial class EffectHeal : EffectBase {
 
     public override void StartTask() {
         if (abilityCastContext.Target is not Unit target) return;
-        unit.Player.DebugLog("[EffectHeal] Apply damage at " + target.GlobalPosition);
+        unit.Player.DebugLog("[EffectHeal] Healing " + target.Name, true);
         areaOfEffectUnit = NewEffectActor<AreaOfEffectUnit>(areaOfEffectTemplate, unit.Player, target.GlobalPosition.AddToY(0.5f));
         areaOfEffectUnit.OnCollideEvent += (collider) => {
             unit.Player.DebugLog("[EffectHeal] Healing to" + collider.Name + " at " + collider.GlobalPosition, true);
@@ -16,5 +16,4 @@ public partial class EffectHeal : EffectBase {
         base.StartTask();
         OnTaskCompleted();
     }
-
 }

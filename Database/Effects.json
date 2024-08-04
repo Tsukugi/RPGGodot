@@ -2,6 +2,7 @@
     {
         "id": "ThrowMultiRockProjectile",
         "baseEffect": "MultiProjectileOverHead",
+        "playerTypeAffected": "Enemy",
         "velocity": 5,
         "numberOfInstances": 3,
         "damageAmount": 7
@@ -9,11 +10,13 @@
     {
         "id": "FireballProjectile",
         "baseEffect": "Projectile",
+        "playerTypeAffected": "Enemy",
         "velocity": 5
     },
     {
         "id": "FireballAoEDamage",
         "baseEffect": "DamageAreaOfEffect",
+        "playerTypeAffected": "Enemy",
         "damageAmount": 20,
         "radius": 10,
         "velocity": 5
@@ -21,6 +24,7 @@
     {
         "id": "HealTarget",
         "baseEffect": "Heal",
+        "playerTypeAffected": "Friendly",
         "healAmount": 30,
         "radius": 1,
         "velocity": 5
@@ -28,6 +32,7 @@
     {
         "id": "HealArea",
         "baseEffect": "Heal",
+        "playerTypeAffected": "Friendly",
         "healAmount": 15,
         "radius": 5,
         "velocity": 2

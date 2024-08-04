@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using Godot;
 
 public class AbilityCastContext {
     string type;
     Unit? target;
     Vector3? targetPosition;
-
+    Dictionary<string, List<string>> playerAffectedPerEffect;
     public AbilityCastContext(string type) {
         this.type = type;
     }

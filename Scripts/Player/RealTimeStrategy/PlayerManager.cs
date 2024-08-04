@@ -29,8 +29,9 @@ public partial class PlayerManager : Node {
         GD.Print("[DebugStart] Loaded " + LocalDatabase.Abilites.Count + " abilities");
         GD.Print("[DebugStart] Loaded " + LocalDatabase.Effects.Count + " effects");
         RealTimeStrategyPlayer player = GetNode<RealTimeStrategyPlayer>("Player");
-        player.AddUnit(LocalDatabase.Units["Tsukugi"], player.GetNode<Node3D>("Spawn1").GlobalPosition);
+        var Tsukugi = player.AddUnit(LocalDatabase.Units["Tsukugi"], player.GetNode<Node3D>("Spawn1").GlobalPosition);
         player.AddUnit(LocalDatabase.Units["Healer"], player.GetNode<Node3D>("Spawn1").GlobalPosition.AddToX(1f));
+        Tsukugi.Attributes.ApplyDamage(100);
 
         await Wait(1);
         playerRelationship.UpdateRelationship("Neutral", "Hostile", RelationshipType.Hostile);

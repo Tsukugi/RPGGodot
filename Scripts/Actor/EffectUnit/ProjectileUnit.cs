@@ -14,7 +14,7 @@ public partial class ProjectileUnit : EffectUnit {
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
         if (!isInitialized) return;
-        if (IsCollisionOnDifferentPlayer(GetCharacterBodyCollider()) is Unit collider && !HasCollidedAlready) {
+        if (GetAllowedColliderPlayer(GetCharacterBodyCollider()) is Unit collider && !HasCollidedAlready) {
             InvokeCollideEvent(collider);
             QueueFree();
             return;

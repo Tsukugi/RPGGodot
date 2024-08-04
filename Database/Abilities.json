@@ -26,8 +26,20 @@
     },
     {
         "name": "Heal",
-        "effectType": [
+        "effects": [
             "HealTarget"
+        ],
+        "attributes": {
+            "castType": "target",
+            "castDuration": 0.5,
+            "cooldown": 2,
+            "range": 10
+        }
+    },
+    {
+        "name": "HealArea",
+        "effects": [
+            "HealArea"
         ],
         "attributes": {
             "castType": "target",

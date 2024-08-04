@@ -5,12 +5,13 @@ public abstract partial class EffectUnit : ActorBase {
     protected EffectBaseDTO attributes;
     protected bool isInitialized = false;
     public bool HasCollidedAlready = false;
-
+    protected AbilityCastContext abilityCastContext;
     public delegate void CollideEvent(Unit collider);
     public event CollideEvent OnCollideEvent;
 
-    public virtual void UpdateAttributes(EffectBaseDTO attributes) {
+    public virtual void InitializeEffectUnit(EffectBaseDTO attributes, AbilityCastContext context) {
         this.attributes = attributes;
+        this.abilityCastContext = context;
         isInitialized = true;
     }
 
@@ -24,8 +25,19 @@ public abstract partial class EffectUnit : ActorBase {
         OnCollideEvent?.Invoke(collider);
     }
 
-    protected Unit IsCollisionOnDifferentPlayer(object collider) {
-        if (collider is not Unit unit || unit.Player.IsSamePlayer(Player)) return null;
+
+    protected bool ApplyPlayerAffectedTypeFiltering(Unit unit) {
+        return attributes.playerTypeAffected switch {
+            EffectPlayerTypes.Self => unit.Player.IsSamePlayer(Player),
+            EffectPlayerTypes.Enemy => unit.Player.IsHostilePlayer(Player),
+            EffectPlayerTypes.Friendly => !unit.Player.IsHostilePlayer(Player),
+            EffectPlayerTypes.All => true,
+            _ => true,
+        };
+    }
+    protected Unit GetAllowedColliderPlayer(object collider) {
+        if (collider is not Unit unit) return null;
+        if (!ApplyPlayerAffectedTypeFiltering(unit)) return null;
         GD.Print(unit.Name);
         return unit;
     }

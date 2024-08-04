@@ -14,5 +14,4 @@ public class EnvironmentBase {
             return (Vector3)position;
         }
     }
-
 }

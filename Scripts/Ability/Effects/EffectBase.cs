@@ -6,7 +6,7 @@ using Godot;
 */
 public class EffectBase : TaskBase {
     protected new Unit unit;
-    protected Ability ability;
+    protected CastedAbility ability;
     protected EffectBaseDTO attributes;
     protected AbilityCastContext abilityCastContext;
     public override void StartTask() {
@@ -24,7 +24,7 @@ public class EffectBase : TaskBase {
 
     public void UpdateEffectValues(
         Unit unit,
-        Ability ability,
+        CastedAbility ability,
         AbilityCastContext abilityCastContext,
         EffectBaseDTO attributes) {
 

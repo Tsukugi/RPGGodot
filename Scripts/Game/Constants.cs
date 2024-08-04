@@ -25,6 +25,9 @@ public static class StaticNodePaths {
     public const string ActorMeshInstance = "StaticRotation/MeshInstance3D";
     public const string OverheadLabel = "StaticRotation/OverheadLabel";
 
+    // Ability
+    public const string AbilityIndicator = "AbilityIndicator";
+
     // Areas
     public const string InteractionArea = "Areas/Interaction";
     public const string AlertArea = "Areas/Alert";
@@ -33,16 +36,15 @@ public static class StaticNodePaths {
     public const string AreaRange_Shape = "AreaRange/Shape";
 
     /** Player **/
-    public const string PlayerInput = "Input";
     public const string PlayerSelection = "Selection";
-    public const string PlayerSelectionCast = "Selection/SelectionCast";
-    public const string PlayerNavigation = "Navigation";
+    public const string SelectionCast = "SelectionCast";
+    public const string PlayerRTSCamera = "RTSCamera";
+    public const string PlayerRTSSelection = "RTSSelection";
+    public const string PlayerRTSNavigation = "RTSNavigation";
     public const string PlayerCamera = "Camera3D";
-    public const string PlayerAbility = "PlayerAbility";
-    public const string PlayerAbility_AbilityIndicator = "AbilityIndicator";
+    public const string PlayerAbility = "Ability";
 
     public const string PlayerUICanvas = "CanvasLayer";
-    // TODO Create Navigation module
 
     public const string PlayerUISelectedUnitInfo = "CanvasLayer/Control/SelectedUnitInfo";
 

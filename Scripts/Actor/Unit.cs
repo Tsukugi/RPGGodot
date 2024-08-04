@@ -37,9 +37,9 @@ public partial class Unit : ActorBase {
 
     public override void _Ready() {
         base._Ready();
-        attributes = GetNodeOrNull<UnitAttributes>(StaticNodePaths.Attributes);
-        overheadLabel = GetNodeOrNull<Label3D>(StaticNodePaths.OverheadLabel);
-        interactionArea = GetNodeOrNull<Area3D>(StaticNodePaths.InteractionArea);
+        attributes = GetNode<UnitAttributes>(StaticNodePaths.Attributes);
+        overheadLabel = GetNode<Label3D>(StaticNodePaths.OverheadLabel);
+        interactionArea = GetNode<Area3D>(StaticNodePaths.InteractionArea);
         interactionArea.BodyEntered += OnInteractionAreaEnteredHandler;
         interactionArea.BodyExited += OnInteractionAreaExitedHandler;
 

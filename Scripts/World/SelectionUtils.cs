@@ -5,39 +5,39 @@ using Godot.Collections;
 public static class SelectionUtils {
     /// We use this function to extract the Units that come from a collision. 
     public static Unit GetColliderUnit(this Variant item) {
-        // We know that item.collider is a Unit but can be a NavigationUnit 
+        // We know that item.collider is a Unit but can be a Unit 
         return item.AsGodotDictionary()["collider"].As<Unit>();
     }
 
     public static void SelectActors(
-        System.Action<List<NavigationUnit>> OnSelection, Array collisions) {
-        List<NavigationUnit> actors = new();
+        System.Action<List<Unit>> OnSelection, Array collisions) {
+        List<Unit> actors = new();
         foreach (Variant item in collisions) {
-            if (item.GetColliderUnit() is not NavigationUnit navigationUnit) continue;
-            actors.Add(navigationUnit);
+            if (item.GetColliderUnit() is not Unit unit) continue;
+            actors.Add(unit);
         }
         OnSelection(actors);
     }
 
     public static void SelectActors(
-           System.Action<List<NavigationUnit>> OnSelection, Array collisions, string? playerControllerName = null) {
-        List<NavigationUnit> units = new();
-        List<NavigationUnit> playerUnits = new();
-        List<NavigationUnit> firstPickedUnitPlayerUnits = new();
+           System.Action<List<Unit>> OnSelection, Array collisions, string? playerControllerName = null) {
+        List<Unit> units = new();
+        List<Unit> playerUnits = new();
+        List<Unit> firstPickedUnitPlayerUnits = new();
         string pickedPlayerName = null;
         foreach (Variant item in collisions) {
-            if (item.GetColliderUnit() is not NavigationUnit navigationUnit) continue;
-            if (pickedPlayerName is null) pickedPlayerName = navigationUnit.Player.Name;
+            if (item.GetColliderUnit() is not Unit unit) continue;
+            if (pickedPlayerName is null) pickedPlayerName = unit.Player.Name;
 
             // Add units that are NavUnits
-            units.Add(navigationUnit);
+            units.Add(unit);
             // Add units that are playerControllerName's
-            if (playerControllerName is string playerName && navigationUnit.Player.Name == playerName) {
-                playerUnits.Add(navigationUnit);
+            if (playerControllerName is string playerName && unit.Player.Name == playerName) {
+                playerUnits.Add(unit);
             }
             // Add units that are the same player as the first picked unit
-            if (navigationUnit.Player.Name == pickedPlayerName) {
-                firstPickedUnitPlayerUnits.Add(navigationUnit);
+            if (unit.Player.Name == pickedPlayerName) {
+                firstPickedUnitPlayerUnits.Add(unit);
             }
         }
 
@@ -50,7 +50,7 @@ public static class SelectionUtils {
     }
 
 
-    public static List<NavigationUnit> SelectActorsInList(
+    public static List<Unit> SelectActorsInList(
     Vector3 startWorldArea,
     Vector3 endWorldArea,
     Array<Node> actorList) {
@@ -61,9 +61,9 @@ public static class SelectionUtils {
             SelectionPanel.GetStartPosition(startWorldArea, endWorldArea);
 
         /* We assume that every valid actor is a direct children of the player */
-        List<NavigationUnit> list = new();
+        List<Unit> list = new();
         foreach (Node item in actorList) {
-            if (item is NavigationUnit actor) {
+            if (item is Unit actor) {
                 bool isInArea = IsInArea(
                     actor.GlobalPosition,
                     selectionWorldStart,
@@ -77,7 +77,7 @@ public static class SelectionUtils {
         return list;
     }
 
-    public static void ApplyCommandToGroupPosition(List<NavigationUnit> group, Vector3 targetPosition, float gapDistance, float rowLimit, System.Action<NavigationUnit, Vector3> command) {
+    public static void ApplyCommandToGroupPosition(List<Unit> group, Vector3 targetPosition, float gapDistance, float rowLimit, System.Action<Unit, Vector3> command) {
         for (int i = 0; i < group.Count; i++) {
             if (!group[i].Player.IsFirstPlayer()) continue;
             Vector3 navigationTarget = new(

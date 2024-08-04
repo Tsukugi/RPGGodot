@@ -1,74 +1,94 @@
+using System.Collections.Generic;
 using Godot;
 
 public partial class PlayerAbility : Node {
     PlayerBase player;
-    AbilityCastContext abilityCastContext = null;
+    AbilityCaster abilityCaster = null;
+    AbilityCastContext castContext = null;
     MeshInstance3D abilityIndicator;
-    readonly NavigationBase navBase = new(); // TODO Change NavBase to not be related to navigation, we just wanna 2D mouse coordinates to World coordinates!
+    protected PlayerSelection playerSelection;
+    readonly EnvironmentBase envBase = new();
     public override void _Ready() {
         base._Ready();
         player = this.TryFindParentNodeOfType<PlayerBase>();
-        abilityIndicator = player.GetNodeOrNull<MeshInstance3D>(StaticNodePaths.PlayerAbility_AbilityIndicator);
+        abilityIndicator = GetNode<MeshInstance3D>(StaticNodePaths.AbilityIndicator);
+        playerSelection = GetNode<PlayerSelection>(StaticNodePaths.PlayerSelection);
+        playerSelection.OnSelectUnitsEvent += OnSelectedTargetUnits;
     }
 
     public override void _Input(InputEvent @event) {
         base._Input(@event);
         if (!player.IsFirstPlayer()) return;
-        OnAbilityCastInput(@event);
-    }
-
-
-    void OnAbilityCastInput(InputEvent @event) {
         if (!player.CanInteract(PlayerInteractionType.AbilityCast)) return;
 
         Vector2 mousePosition = player.Camera.GetViewport().GetMousePosition();
-        Vector3 mousePositionInWorld = navBase.Get3DWorldPosition(player.Camera, mousePosition); ;
-        switch (abilityCastContext.Type) {
-            case AbilityCastTypes.Target: OnTargetAbilityCastInput(@event, mousePositionInWorld); break;
-            case AbilityCastTypes.Position: OnTargetPositionAbilityCastInput(@event, mousePositionInWorld); break;
+        switch (castContext.Type) {
+            case AbilityCastTypes.Target: OnInputCastTargetAbility(@event, mousePosition); break;
+            case AbilityCastTypes.Position: OnInputCastPositionAbility(@event, mousePosition); break;
         }
     }
 
-    void OnTargetAbilityCastInput(InputEvent @event, Vector3 mousePositionInWorld) {
+    // * Input events for a Targeted ability
+    void OnInputCastTargetAbility(InputEvent @event, Vector2 mousePosition) {
+        Vector3 mousePositionInWorld = envBase.Get3DWorldPosition(player.Camera, mousePosition);
+
         if (@event is InputEventMouseMotion) {
             abilityIndicator.GlobalPosition = mousePositionInWorld;
         }
 
         if (@event is InputEventMouseButton eventMouseButton) {
-            EndCastingState();
-            if (eventMouseButton.ButtonIndex == MouseButton.Left) {
-                abilityCastContext.AddTargetPosition(mousePositionInWorld);
-                abilityCastContext.AddTarget();
-                abilityCastContext.AbilityCaster.Cast();
+            if (eventMouseButton.Pressed) {
+                if (eventMouseButton.ButtonIndex == MouseButton.Left) {
+                    castContext.AddTargetPosition(mousePositionInWorld);
+                    playerSelection.StartSelection(mousePosition);
+                } else if (eventMouseButton.ButtonIndex == MouseButton.Right) {
+                    EndCastingState();
+                }
             }
+
         }
     }
+    // This is the result of the selection event, thus finishing the Ability casting on a target
+    // TODO: What do we do with multiple units?
+    void OnSelectedTargetUnits(List<Unit> units) {
+        if (units.Count > 0 && castContext is not null) {
+            player.DebugLog("[OnSelectedTargetUnits]", true);
+            castContext.AddTarget(units[0]);
+            abilityCaster.Cast(castContext);
+            EndCastingState();
+        }
+        playerSelection.EndSelection();
+    }
 
-    void OnTargetPositionAbilityCastInput(InputEvent @event, Vector3 mousePositionInWorld) {
+    // * Input events for a Positioned ability
+    void OnInputCastPositionAbility(InputEvent @event, Vector2 mousePosition) {
+        Vector3 mousePositionInWorld = envBase.Get3DWorldPosition(player.Camera, mousePosition);
         if (@event is InputEventMouseMotion) {
             abilityIndicator.GlobalPosition = mousePositionInWorld;
         }
 
         if (@event is InputEventMouseButton eventMouseButton) {
-            EndCastingState();
             if (eventMouseButton.ButtonIndex == MouseButton.Left) {
-                abilityCastContext.AddTargetPosition(mousePositionInWorld);
-                abilityCastContext.AbilityCaster.Cast();
+                castContext.AddTargetPosition(mousePositionInWorld);
+                abilityCaster.Cast(castContext);
             }
+            EndCastingState();
         }
     }
 
     public void StartCastingState(AbilityCaster abilityCaster) {
-        player.DebugLog("[StartCastingState]", true);
-        player.Interact(PlayerInteractionType.AbilityCast);
-        abilityCastContext = new(abilityCaster);
         GetTree().Paused = true;
+        player.StartInteractionType(PlayerInteractionType.AbilityCast);
+        castContext = new(abilityCaster.Ability.attributes.castType);
+        this.abilityCaster = abilityCaster;
+        player.DebugLog("[StartCastingState] " + castContext, true);
     }
     public void EndCastingState() {
+        GetTree().Paused = false;
         player.DebugLog("[EndCastingState]", true);
         player.StopInteraction();
-        abilityCastContext = null;
-        GetTree().Paused = false;
+        castContext = null;
+        abilityCaster = null;
     }
 
 }

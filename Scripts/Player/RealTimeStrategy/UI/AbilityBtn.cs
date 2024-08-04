@@ -3,7 +3,7 @@ using Godot;
 
 public partial class AbilityBtn : Button {
     bool isInitialized = false;
-    NavigationUnit linkedUnit = null;
+    Unit linkedUnit = null;
     string linkedAbilityName = null;
 
     public override void _Ready() {
@@ -12,7 +12,7 @@ public partial class AbilityBtn : Button {
         isInitialized = true;
     }
 
-    public void BindAbility(NavigationUnit unit, string abilityName) {
+    public void BindAbility(Unit unit, string abilityName) {
         if (!unit.Player.IsFirstPlayer()) return;
         linkedUnit = unit;
         linkedAbilityName = abilityName;

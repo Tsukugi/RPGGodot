@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
 
-public partial class Ability : TaskHandler {
+public partial class CastedAbility : TaskHandler {
     Unit unit;
-    List<string> effectIds;
-    AbilityAttributesDTO attributes;
+    readonly List<string> effectIds;
+    readonly AbilityAttributesDTO attributes;
+    readonly AbilityCastContext context;
     public AbilityAttributesDTO Attributes { get => attributes; }
+    public AbilityCastContext Context { get => context; }
 
-
-    public Ability(AbilityDTO ability) {
+    public CastedAbility(AbilityDTO ability, AbilityCastContext context) {
         Name = ability.name;
         effectIds = ability.effects;
         attributes = ability.attributes;
+        this.context = context;
     }
 
     public override void _Ready() {
@@ -35,7 +37,7 @@ public partial class Ability : TaskHandler {
             EffectBaseDTO effectBase = LocalDatabase.GetEffect(effectId);
             Type type = Type.GetType(GetEffectName(effectBase.baseEffect));
             dynamic newEffect = Activator.CreateInstance(type);
-            newEffect.UpdateEffectValues(unit, this, effectBase);
+            newEffect.UpdateEffectValues(unit, this, context, effectBase);
             AddTask(newEffect);
         }
     }

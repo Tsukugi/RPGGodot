@@ -6,7 +6,8 @@ public partial class EffectMultiProjectileOverHead : EffectBase {
     float horizontalPositionOffset = 1f;
 
     public override void StartTask() {
-        unit.Player.DebugLog("[EffectMultiProjectile.StartTask] New Projectile to " + target.GlobalPosition);
+        if (abilityCastContext.TargetPosition is not Vector3 targetPosition) return;
+        unit.Player.DebugLog("[EffectMultiProjectileOverHead] New Projectile to " + targetPosition);
         activeProjectiles = attributes.numberOfInstances;
         for (int i = 0; i < attributes.numberOfInstances; i++) {
             ProjectileUnit projectile = NewEffectActor<ProjectileUnit>(
@@ -21,7 +22,7 @@ public partial class EffectMultiProjectileOverHead : EffectBase {
             };
 
             projectile.OnTargetReachedEvent += (position) => {
-                projectile.SetTargetDirection(target.GlobalPosition);
+                projectile.SetTargetDirection(targetPosition);
             };
         }
         base.StartTask();

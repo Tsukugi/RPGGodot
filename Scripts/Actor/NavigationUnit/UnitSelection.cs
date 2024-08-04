@@ -9,7 +9,7 @@ public partial class UnitSelection : Node3D {
     public override void _Ready() {
         base._Ready();
         unit = this.TryFindParentNodeOfType<NavigationUnit>();
-        selectedIndicator = unit.GetNodeOrNull<Sprite3D>(StaticNodePaths.SelectedIndicator);
+        selectedIndicator = unit.GetNode<Sprite3D>(StaticNodePaths.SelectedIndicator);
     }
 
     public void Select(PlayerBase player) {

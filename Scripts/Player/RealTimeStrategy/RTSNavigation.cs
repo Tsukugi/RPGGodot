@@ -16,6 +16,7 @@ public partial class RTSNavigation : Node {
     public override void _Input(InputEvent @event) {
         base._Input(@event);
         if (!player.IsFirstPlayer()) return;
+        if (!player.CanInteract(PlayerInteractionType.UnitControl)) return;
         if (@event is InputEventMouseButton eventMouseButton) {
             if (eventMouseButton.ButtonIndex == MouseButton.Right) {
                 if (eventMouseButton.Pressed) {
@@ -32,12 +33,13 @@ public partial class RTSNavigation : Node {
         }
     }
 
-    static void ApplyNavigation(NavigationUnit unit, Vector3 targetPosition) {
+    static void ApplyNavigation(Unit unit, Vector3 targetPosition) {
+        if (unit is not NavigationUnit navigationUnit) return;
         // TODO Improve me to accumulate tasks instead
-        if (unit.UnitSelection.IsSelected) {
-            unit.NavigationAgent.StartNewNavigation(targetPosition);
+        if (navigationUnit.UnitSelection.IsSelected) {
+            navigationUnit.NavigationAgent.StartNewNavigation(targetPosition);
         } else {
-            unit.UnitTask.AddTask(new UnitTaskMove(targetPosition, unit));
+            navigationUnit.UnitTask.AddTask(new UnitTaskMove(targetPosition, navigationUnit));
         }
     }
 }

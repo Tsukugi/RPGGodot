@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://qpmqc8rwup0u"]
+[gd_scene load_steps=11 format=3 uid="uid://qpmqc8rwup0u"]
 
 [ext_resource type="PackedScene" uid="uid://cgel652x1ajvq" path="res://Templates/GridMaps/TestGridMap.tscn" id="1_71a5p"]
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/PlayerManager.cs" id="2_bpkkl"]
 [ext_resource type="PackedScene" uid="uid://bmy6h3iwboair" path="res://Templates/GridMaps/TestGridMap2.tscn" id="2_h0xul"]
 [ext_resource type="Texture2D" uid="uid://bfpvlws48hbyl" path="res://Art/Prototype Textures/black.png" id="3_58oob"]
 [ext_resource type="PackedScene" uid="uid://b6ajx743pvfx" path="res://Templates/PlayerBase.tscn" id="3_gsb7g"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerBase.cs" id="4_s7yi8"]
 [ext_resource type="PackedScene" uid="uid://dm1nwk4kpqi34" path="res://Templates/WaypointTest.tscn" id="4_tuo0j"]
 [ext_resource type="PackedScene" uid="uid://euwk4mdeovi5" path="res://Templates/Projectile.tscn" id="8_307ho"]
 
@@ -136,28 +135,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1783, 0, -1.098)
 
 [node name="Hostile" parent="Players" instance=ExtResource("3_gsb7g")]
 
-[node name="Environment" type="Node3D" parent="Players"]
-script = ExtResource("4_s7yi8")
+[node name="Environment" parent="Players" instance=ExtResource("3_gsb7g")]
 
 [node name="Projectile" parent="Players/Environment" instance=ExtResource("8_307ho")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80119, 0.223068, 16.4336)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80119, 0.123068, 16.4336)
 collision_mask = 6
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Players/Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0259027, 2.90914, 1.35264)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0259027, 2.80914, 1.35264)
 light_energy = 2.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Players/Environment"]
-transform = Transform3D(0.837156, 0.0480797, -0.544847, 0.491042, 0.372718, 0.787375, 0.240931, -0.926698, 0.288414, 0, 4.91587, 0)
+transform = Transform3D(0.837156, 0.0480796, -0.544847, 0.491042, 0.372718, 0.787375, 0.240931, -0.926698, 0.288414, 0, 4.81587, 0)
 light_color = Color(0.294118, 0.368627, 1, 1)
 light_energy = 2.0
 shadow_enabled = true
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Players/Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.55132, 3.54167, 1.59529)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.55132, 3.44167, 1.59529)
 light_energy = 2.0
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="Players/Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.0708, 3.54167, 0.0728302)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.0708, 3.44167, 0.0728302)
 light_energy = 2.0
 omni_range = 10.725

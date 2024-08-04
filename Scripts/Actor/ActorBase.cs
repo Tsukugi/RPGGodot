@@ -18,10 +18,10 @@ public abstract partial class ActorBase : CharacterBody3D {
 
     public override void _Ready() {
         player = GetOwner();
-        staticRotation = GetNodeOrNull<Node3D>(StaticNodePaths.StaticRotation);
+        staticRotation = GetNode<Node3D>(StaticNodePaths.StaticRotation);
         animatedSprite3D = GetNodeOrNull<AnimatedSprite3D>(StaticNodePaths.ActorSprite);
         meshInstance3D = GetNodeOrNull<MeshInstance3D>(StaticNodePaths.ActorMeshInstance);
-        bodyCollision = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.BodyCollision);
+        bodyCollision = GetNode<CollisionShape3D>(StaticNodePaths.BodyCollision);
         // We are applying rotation on 2d actors only
         if (meshInstance3D is null) Callable.From(ApplyActorRotation).CallDeferred();
 

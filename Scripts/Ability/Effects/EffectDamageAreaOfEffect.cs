@@ -5,10 +5,11 @@ public partial class EffectDamageAreaOfEffect : EffectBase {
     AreaOfEffectUnit areaOfEffectUnit;
 
     public override void StartTask() {
-        unit.Player.DebugLog("[EffectDamageOnCollide.StartTask] Apply damage at " + target.GlobalPosition);
-        areaOfEffectUnit = NewEffectActor<AreaOfEffectUnit>(areaOfEffectTemplate, unit.Player, target.GlobalPosition.AddToY(0.5f));
+        if (abilityCastContext.TargetPosition is not Vector3 targetPosition) return;
+        unit.Player.DebugLog("[EffectDamageAreaOfEffect] " + targetPosition);
+        areaOfEffectUnit = NewEffectActor<AreaOfEffectUnit>(areaOfEffectTemplate, unit.Player, targetPosition.AddToY(0.5f));
         areaOfEffectUnit.OnCollideEvent += (collider) => {
-            unit.Player.DebugLog("[EffectDamageOnCollide.OnCollideEvent] Apply damage to" + collider.Name + " at " + collider.GlobalPosition, true);
+            unit.Player.DebugLog("[EffectDamageAreaOfEffect] Apply damage to" + collider.Name + " at " + collider.GlobalPosition, true);
             collider.Attributes.ApplyDamage(attributes.damageAmount);
         };
         base.StartTask();

@@ -26,10 +26,10 @@ public partial class AxisUnit : Unit {
         base._Ready();
         Player = (AxisPlayer)GetOwner();
         // Animation Setup
-        rotationAnchor = GetNodeOrNull<Node3D>(AxisNodePaths.RotationAnchor);
-        AnimatedSprite3D effectsSprite = GetNodeOrNull<AnimatedSprite3D>(AxisNodePaths.Effects);
+        rotationAnchor = GetNode<Node3D>(AxisNodePaths.RotationAnchor);
+        AnimatedSprite3D effectsSprite = GetNode<AnimatedSprite3D>(AxisNodePaths.Effects);
         effectAnimationHandler = new EffectAnimationHandler(effectsSprite);
-        attackArea = GetNodeOrNull<AttackCollisionArea>(AxisNodePaths.MeleeAttackArea);
+        attackArea = GetNode<AttackCollisionArea>(AxisNodePaths.MeleeAttackArea);
         attackArea.AreaEntered += OnMeleeAttackAreaEnteredHandler;
         attackArea.AreaExited += OnMeleeAttackAreaExitedHandler;
     }

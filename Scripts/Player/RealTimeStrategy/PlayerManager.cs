@@ -15,7 +15,7 @@ public partial class PlayerManager : Node {
     public override void _Ready() {
         players = this.TryGetAllChildOfType<PlayerBase>();
         playerRelationship = new(players);
-        RealTimeStrategyPlayer player = GetNodeOrNull<RealTimeStrategyPlayer>("Player");
+        RealTimeStrategyPlayer player = GetNode<RealTimeStrategyPlayer>("Player");
         player.CanvasLayer.Visible = true;
         //! Debug 
         Callable.From(DebugStart).CallDeferred();
@@ -28,9 +28,9 @@ public partial class PlayerManager : Node {
         GD.Print("[DebugStart] Loaded " + LocalDatabase.Units.Count + " units");
         GD.Print("[DebugStart] Loaded " + LocalDatabase.Abilites.Count + " abilities");
         GD.Print("[DebugStart] Loaded " + LocalDatabase.Effects.Count + " effects");
-        RealTimeStrategyPlayer player = GetNodeOrNull<RealTimeStrategyPlayer>("Player");
-        player.AddUnit(LocalDatabase.Units["Tsukugi"], player.GetNodeOrNull<Node3D>("Spawn1").GlobalPosition);
-        player.AddUnit(LocalDatabase.Units["Healer"], player.GetNodeOrNull<Node3D>("Spawn1").GlobalPosition.AddToX(1f));
+        RealTimeStrategyPlayer player = GetNode<RealTimeStrategyPlayer>("Player");
+        player.AddUnit(LocalDatabase.Units["Tsukugi"], player.GetNode<Node3D>("Spawn1").GlobalPosition);
+        player.AddUnit(LocalDatabase.Units["Healer"], player.GetNode<Node3D>("Spawn1").GlobalPosition.AddToX(1f));
 
         await Wait(1);
         playerRelationship.UpdateRelationship("Neutral", "Hostile", RelationshipType.Hostile);
@@ -39,10 +39,10 @@ public partial class PlayerManager : Node {
         playerRelationship.UpdateRelationship("Player", "Neutral", RelationshipType.Friend);
         playerRelationship.UpdateRelationship("Hostile", "Player", RelationshipType.Hostile);
 
-        Node areas = GetNodeOrNull("../Terrain/Areas");
+        Node areas = GetNode("../Terrain/Areas");
         waypoints = areas.TryGetAllChildOfType<Node3D>();
-        RealTimeStrategyPlayer Hostile = GetNodeOrNull<RealTimeStrategyPlayer>("Hostile");
-        RealTimeStrategyPlayer Neutral = GetNodeOrNull<RealTimeStrategyPlayer>("Neutral");
+        RealTimeStrategyPlayer Hostile = GetNode<RealTimeStrategyPlayer>("Hostile");
+        RealTimeStrategyPlayer Neutral = GetNode<RealTimeStrategyPlayer>("Neutral");
         waypoints.Shuffle();
 
         for (int i = 0; i < waypoints.Count; i++) {
@@ -55,7 +55,7 @@ public partial class PlayerManager : Node {
     }
 
     void DebugMoveToRandomWaypoints(RealTimeStrategyPlayer player, List<Node3D> waypoints) {
-        RealTimeStrategyPlayer firstPlayer = GetNodeOrNull<RealTimeStrategyPlayer>("Player");
+        RealTimeStrategyPlayer firstPlayer = GetNode<RealTimeStrategyPlayer>("Player");
         List<NavigationUnit> allUnits = player.GetAllUnits();
         foreach (NavigationUnit unit in allUnits) {
 

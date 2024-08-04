@@ -31,7 +31,7 @@ public partial class UnitAlertArea : Area3D {
         Unit parentUnit = this.TryFindParentNodeOfType<Unit>();
         if (parentUnit is NavigationUnit navigationUnit) {
             unit = navigationUnit;
-            collisionShape = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.Area_CollisionShape);
+            collisionShape = GetNode<CollisionShape3D>(StaticNodePaths.Area_CollisionShape);
             Callable.From(InitializeDeferred).CallDeferred();
         } else {
             Callable.From(DisableDeferred).CallDeferred();

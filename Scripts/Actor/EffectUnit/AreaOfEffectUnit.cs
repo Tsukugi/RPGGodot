@@ -6,8 +6,8 @@ public partial class AreaOfEffectUnit : EffectUnit {
 
     public override void _Ready() {
         base._Ready();
-        areaRange = GetNodeOrNull<Area3D>(StaticNodePaths.AreaRange);
-        collisionShape = GetNodeOrNull<CollisionShape3D>(StaticNodePaths.AreaRange_Shape);
+        areaRange = GetNode<Area3D>(StaticNodePaths.AreaRange);
+        collisionShape = GetNode<CollisionShape3D>(StaticNodePaths.AreaRange_Shape);
         ((CapsuleShape3D)collisionShape.Shape).Radius = 0.1f;
         areaRange.BodyEntered += (collider) => {
             if (IsCollisionOnDifferentPlayer(collider) is Unit collidedActor && !HasCollidedAlready) InvokeCollideEvent(collidedActor);

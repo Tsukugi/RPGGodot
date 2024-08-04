@@ -9,7 +9,7 @@ public partial class UnitNavigationAgent : NavigationAgent3D {
     public override void _Ready() {
         base._Ready();
         unit = this.TryFindParentNodeOfType<NavigationUnit>();
-        navigationTarget = unit.GetNodeOrNull<Node3D>(StaticNodePaths.NavigationTarget);
+        navigationTarget = unit.GetNode<Node3D>(StaticNodePaths.NavigationTarget);
         originalNavigationReachedDistance = TargetDesiredDistance;
     }
 

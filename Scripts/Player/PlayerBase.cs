@@ -1,12 +1,14 @@
 using Godot;
 
 public partial class PlayerBase : Node {
+    // Modules
+    protected PlayerAbility playerAbility;
+
     CameraBase camera;
     InteractionPanel interactionPanel;
     CanvasLayer canvasLayer;
-    PlayerAbility playerAbility;
     bool IsPerformanceLogActive = false;
-    PlayerInteractionType interactionType = PlayerInteractionType.None;
+    protected PlayerInteractionType currentInteractionType = PlayerInteractionType.None;
     protected PlayerManager manager;
 
     public CameraBase Camera { get => camera; }
@@ -16,11 +18,12 @@ public partial class PlayerBase : Node {
 
     public override void _Ready() {
         base._Ready();
+
         manager = this.TryFindParentNodeOfType<PlayerManager>();
-        camera = GetNodeOrNull<CameraBase>(StaticNodePaths.PlayerCamera);
-        interactionPanel = GetNodeOrNull<InteractionPanel>(StaticNodePaths.PlayerUIInteractionPanel);
-        canvasLayer = GetNodeOrNull<CanvasLayer>(StaticNodePaths.PlayerUICanvas);
-        playerAbility = GetNodeOrNull<PlayerAbility>(StaticNodePaths.PlayerAbility);
+        camera = GetNode<CameraBase>(StaticNodePaths.PlayerCamera);
+        interactionPanel = GetNode<InteractionPanel>(StaticNodePaths.PlayerUIInteractionPanel);
+        canvasLayer = GetNode<CanvasLayer>(StaticNodePaths.PlayerUICanvas);
+        playerAbility = GetNode<PlayerAbility>(StaticNodePaths.PlayerAbility);
     }
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
@@ -30,14 +33,15 @@ public partial class PlayerBase : Node {
     // * Interaction
     // We check if Player can interact with a type, a Player cannot interact if he's doing something else
     public bool CanInteract(PlayerInteractionType type) {
-        return interactionType == PlayerInteractionType.None || interactionType == type;
+        return currentInteractionType == type;
     }
-    public void Interact(PlayerInteractionType type) {
-        if (!CanInteract(type)) GD.PrintErr("[PlayerBase.Interact] Player is busy");
-        interactionType = type;
+    public void StartInteractionType(PlayerInteractionType type) {
+        if (!CanInteract(type)) GD.PrintErr("[CanInteract] Cannot start " + type + ". Already interacting with type " + currentInteractionType);
+        DebugLog("[Interact] " + type, true);
+        currentInteractionType = type;
     }
-    public void StopInteraction() {
-        interactionType = PlayerInteractionType.None;
+    public virtual void StopInteraction() {
+        currentInteractionType = PlayerInteractionType.None;
         DebugLog("[StopInteraction]", true);
     }
 
@@ -76,5 +80,5 @@ public partial class PlayerBase : Node {
 public enum PlayerInteractionType {
     None,
     AbilityCast,
-    Selection,
+    UnitControl,
 }

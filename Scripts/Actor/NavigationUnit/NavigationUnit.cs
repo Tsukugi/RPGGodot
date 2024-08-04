@@ -29,13 +29,13 @@ public partial class NavigationUnit : Unit {
         base._Ready();
         player = (RealTimeStrategyPlayer)GetOwner();
 
-        aiController = GetNodeOrNull<AIController>(StaticNodePaths.AIController);
-        combatArea = GetNodeOrNull<UnitCombat>(StaticNodePaths.Combat);
-        alertArea = GetNodeOrNull<UnitAlertArea>(StaticNodePaths.AlertArea);
-        navigationAgent = GetNodeOrNull<UnitNavigationAgent>(StaticNodePaths.NavigationAgent);
-        unitSelection = GetNodeOrNull<UnitSelection>(StaticNodePaths.Selection);
-        unitTask = GetNodeOrNull<UnitTask>(StaticNodePaths.TaskController);
-        detectionCast = GetNodeOrNull<ShapeCast3D>(StaticNodePaths.TaskController_DetectionCast);
+        aiController = GetNode<AIController>(StaticNodePaths.AIController);
+        combatArea = GetNode<UnitCombat>(StaticNodePaths.Combat);
+        alertArea = GetNode<UnitAlertArea>(StaticNodePaths.AlertArea);
+        navigationAgent = GetNode<UnitNavigationAgent>(StaticNodePaths.NavigationAgent);
+        unitSelection = GetNode<UnitSelection>(StaticNodePaths.Selection);
+        unitTask = GetNode<UnitTask>(StaticNodePaths.TaskController);
+        detectionCast = GetNode<ShapeCast3D>(StaticNodePaths.TaskController_DetectionCast);
 
         Attributes.OnKilled += OnKilledHandler;
     }

@@ -3,21 +3,21 @@ using Godot;
 
 public class AbilityCaster {
     Unit casterUnit;
-    AbilityDTO abilityAttributes;
-    public AbilityCaster(Unit casterUnit, AbilityDTO abilityAttributes) {
+    AbilityDTO ability;
+    public AbilityCaster(Unit casterUnit, AbilityDTO ability) {
         this.casterUnit = casterUnit;
-        this.abilityAttributes = abilityAttributes;
+        this.ability = ability;
     }
 
-    public AbilityDTO AbilityAttributes { get => abilityAttributes; }
+    public AbilityDTO Ability { get => ability; }
 
-    public void Cast() {
-        Ability ability = new(abilityAttributes);
-        casterUnit.AddChild(ability);
-        ability.Cast();
-        ability.OnAllTasksCompleted += () => {
-            GD.Print("[OnAllTasksCompleted] " + ability.Name);
-            ability.QueueFree();
+    public void Cast(AbilityCastContext context) {
+        CastedAbility castedAbility = new(ability, context);
+        casterUnit.AddChild(castedAbility);
+        castedAbility.Cast();
+        castedAbility.OnAllTasksCompleted += () => {
+            GD.Print("[OnAllTasksCompleted] " + castedAbility.Name);
+            castedAbility.QueueFree();
         };
     }
 }

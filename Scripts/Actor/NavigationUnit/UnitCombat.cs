@@ -19,7 +19,7 @@ public partial class UnitCombat : Node3D {
     public override void _Ready() {
         base._Ready();
         unit = this.TryFindParentNodeOfType<NavigationUnit>();
-        combatRayCast = unit.GetNodeOrNull<RayCast3D>(StaticNodePaths.CombatRayCast);
+        combatRayCast = unit.GetNode<RayCast3D>(StaticNodePaths.CombatRayCast);
     }
 
     public override void _PhysicsProcess(double delta) {

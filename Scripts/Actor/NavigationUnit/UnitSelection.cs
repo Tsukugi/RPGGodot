@@ -12,9 +12,9 @@ public partial class UnitSelection : Node3D {
         selectedIndicator = unit.GetNode<Sprite3D>(StaticNodePaths.SelectedIndicator);
     }
 
-    public void Select(PlayerBase player) {
-        if (unit.Player.IsSamePlayer(player)) {
-            unit.AlertArea.CalmDown();
+    public void Select(PlayerBase selectorPlayer) {
+        if (unit.Player.IsSamePlayer(selectorPlayer)) {
+            unit.AlertArea.SetMonitoringEnabled(false);
             unit.UnitTask.ClearAll();
         }
         isSelected = true;
@@ -22,6 +22,7 @@ public partial class UnitSelection : Node3D {
     }
 
     public void Deselect() {
+        unit.AlertArea.EnableAlertAreaScan();
         isSelected = false;
         selectedIndicator.Visible = false;
     }

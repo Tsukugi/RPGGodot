@@ -20,20 +20,17 @@ public partial class PlayerSelection : Node {
         selectionShapeCast3D = GetNode<ShapeCast3D>(StaticNodePaths.SelectionCast);
     }
 
-    public override void _PhysicsProcess(double delta) {
-        base._PhysicsProcess(delta);
+    // TODO I think we can do it event based and NOT physicsProcess based. 
+    public void CheckCollisionResult() {
         if (!player.IsFirstPlayer()) return;
         if (AllowedInteractionType == PlayerInteractionType.None) {
             GD.PushWarning("[PlayerSelection] Please set a AllowedInteractionType, ignoring all _PhysicsProcess otherwise.");
             return;
         } else if (player.CanInteract(AllowedInteractionType)) {
-            CheckCollisionResult();
-        }
-    }
-
-    void CheckCollisionResult() {
-        if (selectionShapeCast3D.CollisionResult.Count > 0) {
-            SelectionUtils.SelectActors(UpdateSelectedActors, selectionShapeCast3D.CollisionResult, player.Name);
+            selectionShapeCast3D.ForceShapecastUpdate();
+            if (selectionShapeCast3D.CollisionResult.Count > 0) {
+                SelectionUtils.SelectActors(UpdateSelectedActors, selectionShapeCast3D.CollisionResult, player.Name);
+            }
         }
     }
 
@@ -42,6 +39,7 @@ public partial class PlayerSelection : Node {
         selectionAreaStart = startPosition;
         selectionAreaEnd = selectionAreaStart;
         UpdateCastArea();
+        CheckCollisionResult();
         player.DebugLog("[PlayerSelection]: Start Selection", true);
     }
 
@@ -49,6 +47,7 @@ public partial class PlayerSelection : Node {
         this.selectionAreaStart = selectionAreaStart;
         this.selectionAreaEnd = selectionAreaEnd;
         UpdateCastArea();
+        CheckCollisionResult();
     }
 
     public virtual void EndSelection() {

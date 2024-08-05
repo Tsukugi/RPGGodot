@@ -7,6 +7,7 @@ public partial class PlayerAbility : Node {
     AbilityCaster abilityCaster = null;
     AbilityCastContext castContext = null;
     MeshInstance3D abilityIndicator;
+    bool castingFinished = false;
     protected PlayerSelection playerSelection;
     readonly EnvironmentBase envBase = new();
     public override void _Ready() {
@@ -40,15 +41,14 @@ public partial class PlayerAbility : Node {
         }
 
         if (@event is InputEventMouseButton eventMouseButton) {
-            if (eventMouseButton.Pressed) {
-                if (eventMouseButton.ButtonIndex == MouseButton.Left) {
+            if (eventMouseButton.ButtonIndex == MouseButton.Left) {
+                if (eventMouseButton.Pressed) {
                     castContext.AddTargetPosition(mousePositionInWorld);
                     playerSelection.StartSelection(mousePosition);
-                } else if (eventMouseButton.ButtonIndex == MouseButton.Right) {
+                } else {
                     EndCastingState();
                 }
             }
-
         }
     }
     // This is the result of the selection event, thus finishing the Ability casting on a target
@@ -60,7 +60,6 @@ public partial class PlayerAbility : Node {
             player.DebugLog("[OnSelectedTargetUnits] Target found " + target.Name, true);
             castContext.AddTarget(target);
             abilityCaster.Cast(castContext);
-            EndCastingState();
         } else {
             player.DebugLog("[OnSelectedTargetUnits] No units found", true);
             playerSelection.EndSelection();
@@ -76,10 +75,14 @@ public partial class PlayerAbility : Node {
 
         if (@event is InputEventMouseButton eventMouseButton) {
             if (eventMouseButton.ButtonIndex == MouseButton.Left) {
-                castContext.AddTargetPosition(mousePositionInWorld);
-                abilityCaster.Cast(castContext);
+                if (eventMouseButton.Pressed) {
+                    castContext.AddTargetPosition(mousePositionInWorld);
+                    abilityCaster.Cast(castContext);
+                } else {
+                    EndCastingState();
+                }
             }
-            EndCastingState();
+
         }
     }
 
@@ -88,13 +91,14 @@ public partial class PlayerAbility : Node {
         player.StartInteractionType(PlayerInteractionType.AbilityCast);
         castContext = new(abilityCaster.Ability.attributes.castType);
         this.abilityCaster = abilityCaster;
+        castingFinished = false;
         player.DebugLog("[StartCastingState] " + castContext, true);
     }
     public void EndCastingState() {
         GetTree().Paused = false;
         playerSelection.EndSelection();
-        player.DebugLog("[EndCastingState]", true);
         player.StopInteraction();
+        player.DebugLog("[EndCastingState]", true);
         castContext = null;
         abilityCaster = null;
     }

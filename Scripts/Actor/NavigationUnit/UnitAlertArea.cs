@@ -10,61 +10,46 @@ public partial class UnitAlertArea : Area3D {
     NavigationUnit unit = null;
     CollisionShape3D collisionShape;
     AlertState alertState = AlertState.Safe;
-
-    public float AreaRadius { get => collisionShape.Scale.X; }
-
-    public AlertState AlertStateOnEnemySight = AlertState.Combat;
+    AlertState alertStateOnEnemySight = AlertState.Combat;
     public AlertState AlertState { get => alertState; }
+    public AlertState AlertStateOnEnemySight { get => alertStateOnEnemySight; }
 
     public override void _Ready() {
         base._Ready();
-        Initialize();
-    }
-
-    public void Disable() {
-        unit = null;
-        CalmDown();
-        Callable.From(DisableDeferred).CallDeferred();
-    }
-
-    public void Initialize() {
         Unit parentUnit = this.TryFindParentNodeOfType<Unit>();
         if (parentUnit is NavigationUnit navigationUnit) {
             unit = navigationUnit;
             collisionShape = GetNode<CollisionShape3D>(StaticNodePaths.Area_CollisionShape);
-            Callable.From(InitializeDeferred).CallDeferred();
+            BodyEntered += OnAlertAreaEntered;
+            Callable.From(() => {
+                collisionShape.Scale = Vector3.One.Magnitude(unit.Attributes.AlertRange);
+                SetMonitoringEnabled(true);
+            }).CallDeferred();
         } else {
-            Callable.From(DisableDeferred).CallDeferred();
+            SetMonitoringEnabled(false);
         }
     }
 
-    void DisableDeferred() {
-        Monitoring = false;
-        collisionShape.Disabled = true;
+    public void EnableAlertAreaScan() {
+        alertState = AlertState.Safe;
+        SetMonitoringEnabled(true);
     }
 
-    void InitializeDeferred() {
-        Monitoring = true;
-        collisionShape.Disabled = false;
-        collisionShape.Scale = VectorUtils.Magnitude(unit.Attributes.AttackRange + 3f);
-        BodyEntered += OnAlertAreaEntered;
+    public void SetMonitoringEnabled(bool value) {
+        Callable.From(() => {
+            Monitoring = value;
+            collisionShape.Disabled = !value;
+        }).CallDeferred();
     }
 
-    void OnCombatEnd() {
-        CalmDown();
-        unit.Player.DebugLog(unit.Name + " -> [StartAttackTask -> OnCombatEndEvent : OnCombatEnd] Finished correctly");
-        SetDeferred("Monitoring", true);
-    }
-
-    void OnHideEnd(TaskBase task) {
-        CalmDown();
-        unit.Player.DebugLog(unit.Name + " -> [StartHideTask -> OnTaskCompletedEvent : OnHideEnd] Finished correctly");
-        SetDeferred("Monitoring", true);
+    void OnAlertEnd() {
+        EnableAlertAreaScan();
+        unit.Player.DebugLog(unit.Name + " -> [UnitAlertArea.OnAlertEnd] Finished correctly");
     }
 
     void OnAlertAreaEntered(Node3D body) {
         if (unit is null) return;
-        //if (unit.UnitSelection.IsSelected) return;
+        // if (unit.UnitSelection.IsSelected) return;
         if (body is not NavigationUnit possibleEnemy) return;
         if (possibleEnemy.Attributes.CanBeKilled) return;
         if (!unit.Player.IsHostilePlayer(possibleEnemy.Player)) return;
@@ -76,35 +61,30 @@ public partial class UnitAlertArea : Area3D {
     }
 
     void AlertChangeOnEnemyUnitRange(NavigationUnit possibleEnemy) {
-        switch (AlertStateOnEnemySight) {
+        switch (alertStateOnEnemySight) {
             case AlertState.Hide:
                 StartHideTask(possibleEnemy);
-                SetDeferred("Monitoring", false);
                 break;
             case AlertState.Combat:
                 StartCombatTask(possibleEnemy);
-                SetDeferred("Monitoring", false);
                 break;
         }
+        SetMonitoringEnabled(false);
     }
     void StartHideTask(NavigationUnit possibleEnemy) {
         alertState = AlertState.Hide;
         UnitTaskHide newHideTask = new(possibleEnemy, unit);
-        newHideTask.OnTaskCompletedEvent += OnHideEnd;
+        newHideTask.OnTaskCompletedEvent += (TaskBase task) => OnAlertEnd();
         unit.UnitTask.PriorityAddTask(newHideTask);
     }
 
     void StartCombatTask(NavigationUnit possibleEnemy) {
         alertState = AlertState.Combat;
         unit.UnitCombat.StartCombatTask(possibleEnemy);
-        unit.UnitCombat.OnCombatEndEvent += OnCombatEnd;
+        unit.UnitCombat.OnCombatEndEvent += OnAlertEnd;
     }
 
-    public void CalmDown() {
-        alertState = AlertState.Safe;
-    }
-
-    public void ToggleManualDraft() {
+    void ToggleManualDraft() {
         if (alertState == AlertState.Combat) {
             alertState = AlertState.Safe;
         } else {

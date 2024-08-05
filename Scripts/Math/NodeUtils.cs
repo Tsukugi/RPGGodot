@@ -23,4 +23,9 @@ public static class NodeUtils {
         }
         return typedChildren;
     }
+
+    public static async System.Threading.Tasks.Task Wait(this Node caller, float seconds, System.Action callback = null) {
+        await caller.ToSignal(caller.GetTree().CreateTimer(seconds), "timeout");
+        if (callback is System.Action onTimeout) onTimeout();
+    }
 }

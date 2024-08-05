@@ -47,8 +47,7 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
     }
 
     public override void StopInteraction() {
-        base.StopInteraction();
-        currentInteractionType = defaultInterationType;
+        StartInteractionType(defaultInterationType);
     }
 
     void OnSelectUnitsEvent(List<Unit> selectedUnits) {

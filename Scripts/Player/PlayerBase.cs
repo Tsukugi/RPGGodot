@@ -37,14 +37,12 @@ public partial class PlayerBase : Node {
     }
     public void StartInteractionType(PlayerInteractionType type) {
         if (!CanInteract(type)) GD.PrintErr("[CanInteract] Cannot start " + type + ". Already interacting with type " + currentInteractionType);
-        DebugLog("[Interact] " + type, true);
+        DebugLog("[Interact] " + currentInteractionType + " -> " + type, true);
         currentInteractionType = type;
     }
     public virtual void StopInteraction() {
-        currentInteractionType = PlayerInteractionType.None;
-        DebugLog("[StopInteraction]", true);
+        StartInteractionType(PlayerInteractionType.None);
     }
-
 
     protected void LogPerformance() {
         DebugLog("TimeFps: " + Performance.GetMonitor(Performance.Monitor.TimeFps), true);

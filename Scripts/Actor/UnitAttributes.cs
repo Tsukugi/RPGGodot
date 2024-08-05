@@ -18,6 +18,8 @@ public partial class UnitAttributes : Node {
     double attackCastDuration = 0.3;
     [Export]
     float attackRange = 10;
+    [Export]
+    float alertRange = 7f;
 
     public bool CanBeKilled {
         get => hitPoints <= 0 || unit.IsQueuedForDeletion() || unit.IsKilled;
@@ -31,6 +33,7 @@ public partial class UnitAttributes : Node {
     public double AttackCastDuration { get => attackCastDuration; }
     public float AttackRange { get => attackRange; }
     public float MovementSpeed { get => movementSpeed; }
+    public float AlertRange { get => alertRange; }
 
     public override void _Ready() {
         base._Ready();

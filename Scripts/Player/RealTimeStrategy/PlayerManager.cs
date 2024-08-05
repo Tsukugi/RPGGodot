@@ -33,7 +33,7 @@ public partial class PlayerManager : Node {
         player.AddUnit(LocalDatabase.Units["Healer"], player.GetNode<Node3D>("Spawn1").GlobalPosition.AddToX(1f));
         Tsukugi.Attributes.ApplyDamage(100);
 
-        await Wait(1);
+        await this.Wait(1);
         playerRelationship.UpdateRelationship("Neutral", "Hostile", RelationshipType.Hostile);
         playerRelationship.UpdateRelationship("Hostile", "Neutral", RelationshipType.Hostile);
         playerRelationship.UpdateRelationship("Player", "Hostile", RelationshipType.Hostile);
@@ -50,7 +50,7 @@ public partial class PlayerManager : Node {
             if (i % 2 == 0) Hostile.AddUnit(LocalDatabase.Units["Tsuki"], waypoints[i].GlobalPosition);
             else Neutral.AddUnit(LocalDatabase.Units["Tsukita"], waypoints[i].GlobalPosition);
         }
-        await Wait(1);
+        await this.Wait(1);
         DebugMoveToRandomWaypoints(Neutral, waypoints);
         DebugMoveToRandomWaypoints(Hostile, waypoints);
     }
@@ -76,10 +76,6 @@ public partial class PlayerManager : Node {
                 unit.UnitTask.AddTask(new UnitTaskMove(waypoint.GlobalPosition, unit));
             }
         }
-    }
-
-    async System.Threading.Tasks.Task Wait(float seconds) {
-        await ToSignal(GetTree().CreateTimer(seconds), "timeout");
     }
 }
 

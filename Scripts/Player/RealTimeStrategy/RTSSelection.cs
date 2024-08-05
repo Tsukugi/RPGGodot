@@ -31,7 +31,7 @@ public partial class RTSSelection : PlayerSelection {
             if (Input.IsMouseButtonPressed(MouseButton.Left)) {
                 selectionAreaEnd = mousePosition;
                 selectionPanel.ApplySelectionTransform(selectionAreaStart, selectionAreaEnd);
-                UpdateCastArea();
+                UpdateSelectionArea(selectionAreaStart, selectionAreaEnd);
             }
         }
 
@@ -45,11 +45,6 @@ public partial class RTSSelection : PlayerSelection {
                 }
             }
         }
-    }
-
-    public override void StartSelection(Vector2 startPosition) {
-        base.StartSelection(startPosition);
-        UpdateSelectedActors(new List<Unit>());
     }
 
     public override void EndSelection() {

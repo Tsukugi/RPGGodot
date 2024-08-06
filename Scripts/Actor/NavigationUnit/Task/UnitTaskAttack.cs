@@ -11,13 +11,19 @@ public partial class UnitTaskAttack : TaskBase {
         base.StartTask();
         unit.Player.DebugLog("[StartTask] Attacking to " + target.Name);
         OnTaskProcess();
-        unit.UnitCombat.OnCombatEndEvent += () => {
+
+        void onCombatEnd() {
             isForceFinished = true;
-        };
-        unit.UnitCombat.OnAttackFailedEvent += () => {
+        }
+        unit.UnitCombat.OnCombatEndEvent -= onCombatEnd;
+        unit.UnitCombat.OnCombatEndEvent += onCombatEnd;
+
+        void onAttackFailed() {
             if (CheckIfCompleted()) return;
             GetIntoRange();
         };
+        unit.UnitCombat.OnAttackFailedEvent -= onAttackFailed;
+        unit.UnitCombat.OnAttackFailedEvent += onAttackFailed;
     }
     public override bool CheckIfCompleted() {
         return base.CheckIfCompleted() || target.Attributes.CanBeKilled || !unit.UnitCombat.IsInCombat;

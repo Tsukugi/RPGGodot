@@ -2,14 +2,31 @@
 using Godot;
 
 public partial class AbilityBtn : Button {
-    bool isInitialized = false;
+    PlayerBase player;
+
+    bool hasAbilityBound = false;
     Unit linkedUnit = null;
     string linkedAbilityName = null;
 
+    [Export]
+    Key assignedKey;
+
     public override void _Ready() {
         base._Ready();
+        player = this.TryFindParentNodeOfType<PlayerBase>();
         ButtonUp += OnAbilityPressed;
-        isInitialized = true;
+    }
+
+
+
+    public override void _Input(InputEvent @event) {
+        base._Input(@event);
+        // if (!player.CanInteract(PlayerInteractionType.AbilityCast)) return
+        if (@event is InputEventKey keyEvent) {
+            if (keyEvent.Pressed && keyEvent.Keycode == assignedKey) {
+                OnAbilityPressed();
+            }
+        }
     }
 
     public void BindAbility(Unit unit, string abilityName) {
@@ -19,6 +36,7 @@ public partial class AbilityBtn : Button {
 
         Visible = true;
         Text = linkedAbilityName;
+        hasAbilityBound = true;
     }
 
     public void UnbindAbility() {
@@ -27,11 +45,12 @@ public partial class AbilityBtn : Button {
 
         linkedUnit = null;
         linkedAbilityName = null;
+        hasAbilityBound = false;
     }
 
 
     void OnAbilityPressed() {
-        if (!isInitialized) return;
+        if (!hasAbilityBound) return;
         linkedUnit.CastAbility(linkedAbilityName);
     }
 }

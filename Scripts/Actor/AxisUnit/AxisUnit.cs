@@ -24,13 +24,15 @@ public partial class AxisUnit : Unit {
 
     public override void _Ready() {
         base._Ready();
-        Player = (AxisPlayer)GetOwner();
+        Player = (AxisPlayer)unitPlayerBind.Player;
         // Animation Setup
         rotationAnchor = GetNode<Node3D>(AxisNodePaths.RotationAnchor);
         AnimatedSprite3D effectsSprite = GetNode<AnimatedSprite3D>(AxisNodePaths.Effects);
         effectAnimationHandler = new EffectAnimationHandler(effectsSprite);
         attackArea = GetNode<AttackCollisionArea>(AxisNodePaths.MeleeAttackArea);
+        attackArea.AreaEntered -= OnMeleeAttackAreaEnteredHandler;
         attackArea.AreaEntered += OnMeleeAttackAreaEnteredHandler;
+        attackArea.AreaExited -= OnMeleeAttackAreaExitedHandler;
         attackArea.AreaExited += OnMeleeAttackAreaExitedHandler;
     }
 
@@ -50,18 +52,18 @@ public partial class AxisUnit : Unit {
 
         switch (Player.AxisInputHandler.MovementInputState) {
             case InputState.Stop: {
-                    ActorAnimationHandler.AnimationPrefix = Constants.AnimationPrefixIdle;
+                    UnitRender.ActorAnimationHandler.AnimationPrefix = Constants.AnimationPrefixIdle;
                     break;
                 }
             case InputState.Move: {
-                    ActorAnimationHandler.AnimationPrefix = Constants.AnimationPrefixRunning;
+                    UnitRender.ActorAnimationHandler.AnimationPrefix = Constants.AnimationPrefixRunning;
                     MoveAndCollide(Vector2To3(direction), (float)delta);
                     float rotation = VectorUtils.GetRotationFromDirection(direction);
                     RotationAnchor.RotationDegrees = new Vector3(0, rotation - 90, 0);
                     break;
                 }
         }
-        ActorAnimationHandler.ApplyAnimation(Player.AxisInputHandler.RenderDirection);
+        UnitRender.ActorAnimationHandler.ApplyAnimation(Player.AxisInputHandler.RenderDirection);
 
         switch (Player.AxisInputHandler.ActionInputState) {
             case UnitActionState.Attack: {

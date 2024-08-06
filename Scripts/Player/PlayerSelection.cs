@@ -9,6 +9,7 @@ public partial class PlayerSelection : Node {
     protected Vector2 selectionAreaStart = Vector2.Zero;
     protected Vector2 selectionAreaEnd = Vector2.Zero;
     protected float minSelectionAreaForMultiSelection = 35;
+    protected bool isSelecting = false;
 
     public PlayerInteractionType AllowedInteractionType = PlayerInteractionType.None;
     public delegate void SelectionEvent(List<Unit> selectedActors);
@@ -20,7 +21,6 @@ public partial class PlayerSelection : Node {
         selectionShapeCast3D = GetNode<ShapeCast3D>(StaticNodePaths.SelectionCast);
     }
 
-    // TODO I think we can do it event based and NOT physicsProcess based. 
     public void CheckCollisionResult() {
         if (!player.IsFirstPlayer()) return;
         if (AllowedInteractionType == PlayerInteractionType.None) {
@@ -35,11 +35,13 @@ public partial class PlayerSelection : Node {
     }
 
     public virtual void StartSelection(Vector2 startPosition) {
+        if (isSelecting) return;
         selectionShapeCast3D.CollideWithBodies = true;
         selectionAreaStart = startPosition;
         selectionAreaEnd = selectionAreaStart;
         UpdateCastArea();
         CheckCollisionResult();
+        isSelecting = true;
         player.DebugLog("[PlayerSelection]: Start Selection", true);
     }
 
@@ -54,6 +56,7 @@ public partial class PlayerSelection : Node {
         selectionAreaEnd = Vector2.Zero;
         selectionAreaStart = Vector2.Zero;
         selectionShapeCast3D.CollideWithBodies = false;
+        isSelecting = false;
         player.DebugLog("[PlayerSelection]: Selection Finished", true);
     }
 
@@ -85,7 +88,7 @@ public partial class PlayerSelection : Node {
     protected virtual void UpdateSelectedActors(List<Unit> selectedUnits) {
         this.selectedUnits = selectedUnits;
         OnSelectUnitsEvent?.Invoke(this.selectedUnits);
-        player.DebugLog("[UpdateSelectedActors] New actor count: " + this.selectedUnits.Count);
+        player.DebugLog("[UpdateSelectedActors] New actor count: " + this.selectedUnits.Count, true);
     }
 
 }

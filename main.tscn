@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://qpmqc8rwup0u"]
+[gd_scene load_steps=12 format=3 uid="uid://qpmqc8rwup0u"]
 
 [ext_resource type="PackedScene" uid="uid://cgel652x1ajvq" path="res://Templates/GridMaps/TestGridMap.tscn" id="1_71a5p"]
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/PlayerManager.cs" id="2_bpkkl"]
@@ -21,6 +21,9 @@ uv1_scale = Vector3(100, 100, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0cha4"]
 size = Vector2(100, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ppkt4"]
+size = Vector3(100, 0.1, 100)
 
 [node name="World" type="Node3D"]
 
@@ -90,10 +93,17 @@ collision_layer = 4
 collision_mask = 4
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/NavigationRegion3D"]
-layers = 4
 material_override = SubResource("StandardMaterial3D_wt1yj")
 mesh = SubResource("PlaneMesh_0cha4")
 skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="StaticBody3D" parent="Terrain/NavigationRegion3D/MeshInstance3D"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/NavigationRegion3D/MeshInstance3D/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_ppkt4")
 
 [node name="GridMap13" parent="Terrain/NavigationRegion3D" instance=ExtResource("2_h0xul")]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -8.655, -1, -9.595)

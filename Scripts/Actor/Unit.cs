@@ -1,58 +1,40 @@
 using System.Collections.Generic;
 using Godot;
 
-public enum UnitActionState {
-    Idle,
-    Move,
-    Attack,
-    Cast,
-}
+public partial class Unit : CharacterBody3D {
 
-// Ordered counterclock-wise
-public enum UnitRenderDirection {
-    Right,
-    UpRight,
-    Up,
-    UpLeft,
-    Left,
-    DownLeft,
-    Down,
-    DownRight
-}
-
-public partial class Unit : ActorBase {
     bool isKilled = false;
-    ActorAnimationHandler actorAnimationHandler = null;
     Area3D interactionArea = null;
     UnitAttributes attributes;
+    UnitRender unitRender;
     readonly Dictionary<string, AbilityCaster> abilities = new();
+    protected UnitPlayerBind unitPlayerBind;
     protected Label3D overheadLabel;
-    public ActorAnimationHandler ActorAnimationHandler { get => actorAnimationHandler; }
+    public PlayerBase Player { get => unitPlayerBind.Player; }
     public Area3D InteractionArea { get => interactionArea; }
     public UnitAttributes Attributes { get => attributes; }
     public Label3D OverheadLabel { get => overheadLabel; }
-    public bool IsBodyCollisionEnabled { get => !BodyCollision.Disabled; set => BodyCollision.Disabled = !value; }
     public Dictionary<string, AbilityCaster> Abilities { get => abilities; }
     public bool IsKilled { get => isKilled; }
+    public UnitRender UnitRender { get => unitRender; }
 
     public override void _Ready() {
         base._Ready();
+        unitPlayerBind = new(this);
+        unitRender = new(this);
         attributes = GetNode<UnitAttributes>(StaticNodePaths.Attributes);
         overheadLabel = GetNode<Label3D>(StaticNodePaths.OverheadLabel);
         interactionArea = GetNode<Area3D>(StaticNodePaths.InteractionArea);
         interactionArea.BodyEntered += OnInteractionAreaEnteredHandler;
         interactionArea.BodyExited += OnInteractionAreaExitedHandler;
 
-        if (Sprite is not null) {
-            actorAnimationHandler = new ActorAnimationHandler(Sprite) {
-                AnimationPrefix = "idle"
-            };
-            actorAnimationHandler.ApplyAnimation(inputFaceDirection);
-        }
+        attributes.OnKilled -= OnKilledHandler;
         attributes.OnKilled += OnKilledHandler;
     }
 
     void OnKilledHandler(Unit unit) {
+        unitRender.BodyCollision.Disabled = true;
+        unitRender.StaticRotation.Visible = false;
         isKilled = true;
     }
 
@@ -71,19 +53,19 @@ public partial class Unit : ActorBase {
         Player.InteractionPanel.Visible = false;
     }
 
-
-    protected new void MoveAndCollide(Vector3 direction, float delta) {
+    protected void MoveAndCollide(Vector3 direction, float delta) {
         // Apply velocity.
         direction = direction.Normalized() * Attributes.MovementSpeed;
         MoveAndCollide(direction * (float)delta);
     }
 
-    protected new void MoveAndSlide(Vector3 direction) {
+    protected void MoveAndSlide(Vector3 direction) {
         // Apply velocity.
         direction = direction.Normalized() * Attributes.MovementSpeed;
         Velocity = direction;
         MoveAndSlide();
     }
+
     public void AddAbility(AbilityDTO abilityDTO) {
         AbilityCaster abilityCaster = new(this, abilityDTO);
         abilities.Add(abilityDTO.name, abilityCaster);
@@ -93,4 +75,23 @@ public partial class Unit : ActorBase {
         Player.DebugLog("[CastAbility] Casting " + name, true);
         Player.PlayerAbility.StartCastingState(abilities[name]);
     }
+}
+
+public enum UnitActionState {
+    Idle,
+    Move,
+    Attack,
+    Cast,
+}
+
+// Ordered counterclock-wise
+public enum UnitRenderDirection {
+    Right,
+    UpRight,
+    Up,
+    UpLeft,
+    Left,
+    DownLeft,
+    Down,
+    DownRight
 }

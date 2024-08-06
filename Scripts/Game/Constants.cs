@@ -38,16 +38,14 @@ public static class StaticNodePaths {
     /** Player **/
     public const string PlayerSelection = "Selection";
     public const string SelectionCast = "SelectionCast";
+    public const string PlayerCamera = "Camera3D";
+    public const string PlayerAbility = "Ability";
     public const string PlayerRTSCamera = "RTSCamera";
     public const string PlayerRTSSelection = "RTSSelection";
     public const string PlayerRTSNavigation = "RTSNavigation";
-    public const string PlayerCamera = "Camera3D";
-    public const string PlayerAbility = "Ability";
-
+    public const string PlayerRTSUI = "RTSUI";
     public const string PlayerUICanvas = "CanvasLayer";
-
     public const string PlayerUISelectedUnitInfo = "CanvasLayer/Control/SelectedUnitInfo";
-
     public const string PlayerUIAbilityBtn = "CanvasLayer/Control/AbilityBtn";
     public const string PlayerUIAbilityBtn2 = "CanvasLayer/Control/AbilityBtn2";
     public const string PlayerUIAbilityBtn3 = "CanvasLayer/Control/AbilityBtn3";
@@ -79,6 +77,7 @@ public static class EffectPlayerTypes {
 public enum CollisionMasks {
     Terrain = 1,
     Actor = 2,
+    Wall = 3,
     Projectile = 4,
 }
 

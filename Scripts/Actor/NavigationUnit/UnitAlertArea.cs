@@ -1,11 +1,5 @@
 using Godot;
 
-public enum AlertState {
-    Safe,
-    Hide,
-    Combat,
-}
-
 public partial class UnitAlertArea : Area3D {
     NavigationUnit unit = null;
     CollisionShape3D collisionShape;
@@ -42,11 +36,6 @@ public partial class UnitAlertArea : Area3D {
         }).CallDeferred();
     }
 
-    void OnAlertEnd() {
-        EnableAlertAreaScan();
-        unit.Player.DebugLog(unit.Name + " -> [UnitAlertArea.OnAlertEnd] Finished correctly");
-    }
-
     void OnAlertAreaEntered(Node3D body) {
         if (unit is null) return;
         // if (unit.UnitSelection.IsSelected) return;
@@ -71,17 +60,26 @@ public partial class UnitAlertArea : Area3D {
         }
         SetMonitoringEnabled(false);
     }
+
     void StartHideTask(NavigationUnit possibleEnemy) {
         alertState = AlertState.Hide;
         UnitTaskHide newHideTask = new(possibleEnemy, unit);
-        newHideTask.OnTaskCompletedEvent += (TaskBase task) => OnAlertEnd();
+        void onTaskCompletedEvent(TaskBase task) { OnAlertEnd(); }
+        newHideTask.OnTaskCompletedEvent -= onTaskCompletedEvent;
+        newHideTask.OnTaskCompletedEvent += onTaskCompletedEvent;
         unit.UnitTask.PriorityAddTask(newHideTask);
     }
 
     void StartCombatTask(NavigationUnit possibleEnemy) {
         alertState = AlertState.Combat;
         unit.UnitCombat.StartCombatTask(possibleEnemy);
+        unit.UnitCombat.OnCombatEndEvent -= OnAlertEnd;
         unit.UnitCombat.OnCombatEndEvent += OnAlertEnd;
+    }
+
+    void OnAlertEnd() {
+        EnableAlertAreaScan();
+        unit.Player.DebugLog(unit.Name + " -> [UnitAlertArea.OnAlertEnd] Finished correctly");
     }
 
     void ToggleManualDraft() {
@@ -91,4 +89,9 @@ public partial class UnitAlertArea : Area3D {
             alertState = AlertState.Combat;
         }
     }
+}
+public enum AlertState {
+    Safe,
+    Hide,
+    Combat,
 }

@@ -10,14 +10,21 @@ public class AbilityCaster {
     }
 
     public AbilityDTO Ability { get => ability; }
+    public Unit CasterUnit { get => casterUnit; }
 
     public void Cast(AbilityCastContext context) {
         CastedAbility castedAbility = new(ability, context);
         casterUnit.AddChild(castedAbility);
         castedAbility.Cast();
-        castedAbility.OnAllTasksCompleted += () => {
-            GD.Print("[OnAllTasksCompleted] " + castedAbility.Name);
-            castedAbility.QueueFree();
-        };
+
+        void onTargetReached() => OnAllTasksCompleted(castedAbility);
+        castedAbility.OnAllTasksCompleted -= onTargetReached;
+        castedAbility.OnAllTasksCompleted += onTargetReached;
+
+    }
+
+    void OnAllTasksCompleted(CastedAbility castedAbility) {
+        GD.Print("[OnAllTasksCompleted] " + castedAbility.Name);
+        castedAbility.QueueFree();
     }
 }

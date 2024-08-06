@@ -7,10 +7,9 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
     RTSCamera rtsCamera;
     RTSSelection rtsSelection;
     RTSNavigation rtsNavigation;
+    RTSUI rtsUI;
     PackedScene navUnitTemplate = GD.Load<PackedScene>(ResourcePaths.NavigationUnit);
     RichTextLabel selectedUnitInfo;
-    AbilityBtn abilityBtn;
-    AbilityBtn abilityBtn2;
     PlayerInteractionType defaultInterationType = PlayerInteractionType.UnitControl;
 
     public RTSNavigation RTSNavigation { get => rtsNavigation; }
@@ -22,9 +21,9 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         rtsCamera = GetNode<RTSCamera>(StaticNodePaths.PlayerRTSCamera);
         rtsSelection = GetNode<RTSSelection>(StaticNodePaths.PlayerRTSSelection);
         rtsNavigation = GetNode<RTSNavigation>(StaticNodePaths.PlayerRTSNavigation);
+        rtsUI = GetNode<RTSUI>(StaticNodePaths.PlayerRTSUI);
         selectedUnitInfo = GetNode<RichTextLabel>(StaticNodePaths.PlayerUISelectedUnitInfo);
-        abilityBtn = GetNode<AbilityBtn>(StaticNodePaths.PlayerUIAbilityBtn);
-        abilityBtn2 = GetNode<AbilityBtn>(StaticNodePaths.PlayerUIAbilityBtn2);
+        rtsSelection.OnSelectUnitsEvent -= OnSelectUnitsEvent;
         rtsSelection.OnSelectUnitsEvent += OnSelectUnitsEvent;
         if (this.IsFirstPlayer()) StartInteractionType(PlayerInteractionType.UnitControl);
     }
@@ -64,8 +63,10 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
             + "Name: " + unit.Name + "\n"
             + "Abilities: [" + abilities + "] \n";
 
-        if (abilitiesList.Count >= 1) abilityBtn.BindAbility(unit, abilitiesList[0]);
-        if (abilitiesList.Count >= 2) abilityBtn2.BindAbility(unit, abilitiesList[1]);
+        for (int i = 0; i < rtsUI.AbilityButtons.Count; i++) {
+            rtsUI.AbilityButtons[i].UnbindAbility();
+            if (abilitiesList.Count >= i + 1) rtsUI.AbilityButtons[i].BindAbility(unit, abilitiesList[i]);
+        }
         //! DebugEnd
     }
 }

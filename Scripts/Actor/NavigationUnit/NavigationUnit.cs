@@ -27,7 +27,7 @@ public partial class NavigationUnit : Unit {
 
     public override void _Ready() {
         base._Ready();
-        player = (RealTimeStrategyPlayer)GetOwner();
+        player = (RealTimeStrategyPlayer)unitPlayerBind.Player;
 
         aiController = GetNode<AIController>(StaticNodePaths.AIController);
         combatArea = GetNode<UnitCombat>(StaticNodePaths.Combat);
@@ -37,6 +37,7 @@ public partial class NavigationUnit : Unit {
         unitTask = GetNode<UnitTask>(StaticNodePaths.TaskController);
         detectionCast = GetNode<ShapeCast3D>(StaticNodePaths.TaskController_DetectionCast);
 
+        Attributes.OnKilled -= OnKilledHandler;
         Attributes.OnKilled += OnKilledHandler;
     }
 
@@ -54,10 +55,10 @@ public partial class NavigationUnit : Unit {
     }
 
     void UpdateRenderDirection(Vector2 direction) {
-        UnitRenderDirection newUnitDirection = ActorAnimationHandler.GetRenderDirectionFromVector(direction);
+        UnitRenderDirection newUnitDirection = UnitRender.ActorAnimationHandler.GetRenderDirectionFromVector(direction);
         if (newUnitDirection != unitRenderDirectionState) {
             unitRenderDirectionState = newUnitDirection;
-            ActorAnimationHandler.ApplyAnimation(unitRenderDirectionState);
+            UnitRender.ActorAnimationHandler.ApplyAnimation(unitRenderDirectionState);
         }
     }
 }

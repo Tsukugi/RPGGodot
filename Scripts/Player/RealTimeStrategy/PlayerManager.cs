@@ -31,6 +31,7 @@ public partial class PlayerManager : Node {
         RealTimeStrategyPlayer player = GetNode<RealTimeStrategyPlayer>("Player");
         var Tsukugi = player.AddUnit(LocalDatabase.Units["Tsukugi"], player.GetNode<Node3D>("Spawn1").GlobalPosition);
         player.AddUnit(LocalDatabase.Units["Healer"], player.GetNode<Node3D>("Spawn1").GlobalPosition.AddToX(1f));
+        player.AddUnit(LocalDatabase.Units["Guard"], player.GetNode<Node3D>("Spawn1").GlobalPosition.AddToX(-1f));
         Tsukugi.Attributes.ApplyDamage(100);
 
         await this.Wait(1);

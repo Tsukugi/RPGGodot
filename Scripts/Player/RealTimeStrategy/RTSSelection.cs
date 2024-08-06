@@ -8,7 +8,6 @@ public partial class RTSSelection : PlayerSelection {
 
     // Selection
     SelectionPanel selectionPanel;
-    bool isSelecting = false;
     public Array CollisionsOnSelection { get => selectionShapeCast3D.CollisionResult; }
     public List<Unit> SelectedUnits { get => selectedUnits; }
     public ShapeCast3D SelectionShapeCast3D { get => selectionShapeCast3D; }

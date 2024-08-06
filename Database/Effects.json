@@ -34,7 +34,7 @@
         "baseEffect": "Heal",
         "playerTypeAffected": "Friendly",
         "healAmount": 15,
-        "radius": 5,
-        "velocity": 2
+        "radius": 15,
+        "velocity": 3
     }
 ]

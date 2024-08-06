@@ -14,16 +14,18 @@ public partial class EffectMultiProjectileOverHead : EffectBase {
                    projectileTemplate,
                    unit.Player,
                    unit.GlobalPosition.AddToY(0.5f));
-            projectile.SetTargetDirection(unit.GlobalPosition.AddToX(GetHorizontalProjectilePosition(i)).AddToY(1f));
+            projectile.SetTargetPosition(unit.GlobalPosition.AddToX(GetHorizontalProjectilePosition(i)).AddToY(1f));
 
-            projectile.OnCollideEvent += (collider) => {
+            void onCollideEvent(Unit collider) {
                 activeProjectiles--;
                 collider.Attributes.ApplyDamage(attributes.damageAmount);
-            };
+            }
+            projectile.OnCollideEvent -= onCollideEvent;
+            projectile.OnCollideEvent += onCollideEvent;
 
-            projectile.OnTargetReachedEvent += (position) => {
-                projectile.SetTargetDirection(targetPosition);
-            };
+            void onTargetReached(Vector3 position) => projectile.SetTargetPosition(targetPosition);
+            projectile.OnTargetReachedEvent -= onTargetReached;
+            projectile.OnTargetReachedEvent += onTargetReached;
         }
         base.StartTask();
     }

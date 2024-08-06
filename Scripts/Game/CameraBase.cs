@@ -25,7 +25,6 @@ public partial class CameraBase : Camera3D {
      public static readonly Vector3 CameraRotationOffset = new(-30, -45, 0); 
      ProjectionType projectionType = ProjectionType.Orthogonal;*/
     int cameraOrthogonalSize = 10;
-
     int edgeMovementPadding = 50;
 
     public Unit SelectedActor {
@@ -35,7 +34,6 @@ public partial class CameraBase : Camera3D {
             AttachToActor(value);
         }
     }
-
 
     public override void _Ready() {
         base._Ready();

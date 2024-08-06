@@ -3,10 +3,12 @@ using Godot;
 
 public class AbilityCastContext {
     string type;
+    Unit casterUnit;
     Unit? target;
     Vector3? targetPosition;
-    public AbilityCastContext(string type) {
+    public AbilityCastContext(string type, Unit casterUnit) {
         this.type = type;
+        this.casterUnit = casterUnit;
     }
 
     public void AddTarget(Unit target) {
@@ -20,4 +22,5 @@ public class AbilityCastContext {
     public string Type { get => type; }
     public Unit Target { get => target; }
     public Vector3? TargetPosition { get => targetPosition; }
+    public Unit CasterUnit { get => casterUnit; }
 }

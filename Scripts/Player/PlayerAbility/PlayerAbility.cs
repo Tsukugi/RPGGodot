@@ -16,6 +16,7 @@ public partial class PlayerAbility : Node {
         abilityIndicator = GetNode<MeshInstance3D>(StaticNodePaths.AbilityIndicator);
         playerSelection = GetNode<PlayerSelection>(StaticNodePaths.PlayerSelection);
         playerSelection.AllowedInteractionType = PlayerInteractionType.AbilityCast;
+        playerSelection.OnSelectUnitsEvent -= OnSelectedTargetUnits;
         playerSelection.OnSelectUnitsEvent += OnSelectedTargetUnits;
     }
 
@@ -37,7 +38,6 @@ public partial class PlayerAbility : Node {
 
         if (@event is InputEventMouseMotion) {
             abilityIndicator.GlobalPosition = mousePositionInWorld;
-            playerSelection.UpdateSelectionArea(mousePosition, mousePosition);
         }
 
         if (@event is InputEventMouseButton eventMouseButton) {
@@ -89,7 +89,7 @@ public partial class PlayerAbility : Node {
     public void StartCastingState(AbilityCaster abilityCaster) {
         GetTree().Paused = true;
         player.StartInteractionType(PlayerInteractionType.AbilityCast);
-        castContext = new(abilityCaster.Ability.attributes.castType);
+        castContext = new(abilityCaster.Ability.attributes.castType, abilityCaster.CasterUnit);
         this.abilityCaster = abilityCaster;
         castingFinished = false;
         player.DebugLog("[StartCastingState] " + castContext, true);

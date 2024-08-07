@@ -33,5 +33,6 @@ public class EffectBase : TaskBase {
         this.abilityCastContext = abilityCastContext;
         this.attributes = attributes;
     }
+
 }
 

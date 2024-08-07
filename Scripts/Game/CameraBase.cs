@@ -19,11 +19,10 @@ public partial class CameraBase : Camera3D {
     public static readonly int CameraRotationAxisOffset = 45;
     Vector3 currentTransformOffset = CameraTransformOffset;
     Vector3 currentRotationOffset = CameraRotationOffset;
+
+    [Export]
     ProjectionType projectionType = ProjectionType.Orthogonal;
 
-    /* public static readonly Vector3 CameraTransformOffset = new(-8, 7, 8);
-     public static readonly Vector3 CameraRotationOffset = new(-30, -45, 0); 
-     ProjectionType projectionType = ProjectionType.Orthogonal;*/
     int cameraOrthogonalSize = 10;
     int edgeMovementPadding = 50;
 
@@ -39,7 +38,17 @@ public partial class CameraBase : Camera3D {
         base._Ready();
         PlayerBase player = this.TryFindParentNodeOfType<PlayerBase>();
         Current = player.IsFirstPlayer();
-        
+
+        switch (projectionType) {
+            case ProjectionType.Perspective: break;
+            case ProjectionType.Orthogonal: {
+                    cameraVelocity /= 10f;
+                    currentTransformOffset += currentTransformOffset.AddToY(4).Magnitude(7);
+                    Reposition(currentTransformOffset, CameraRotationOffset);
+                    break;
+                }
+        }
+
         UpdateCameraProperties();
         if (findAnyActorOnStartEnabled) {
             Unit newActor = player.GetChildren().OfType<Unit>().FirstOrDefault();
@@ -98,9 +107,19 @@ public partial class CameraBase : Camera3D {
             Position.Z + axis.Y * cameraVelocity * delta);
     }
 
-
     public void Zoom(CameraZoomDirection value, float delta) {
         if (value == 0) return;
+        switch (projectionType) {
+            case ProjectionType.Perspective: PerspectiveZoom(value, delta); return;
+            case ProjectionType.Orthogonal: OrthographicZoom(value, delta); return;
+        }
+    }
+
+    void OrthographicZoom(CameraZoomDirection value, float delta) {
+        Size += (float)value * cameraZoomVelocity * delta;
+    }
+
+    void PerspectiveZoom(CameraZoomDirection value, float delta) {
         Vector3 newOffset = new(
             Position.X,
             Position.Y + (float)value * cameraZoomVelocity * delta,

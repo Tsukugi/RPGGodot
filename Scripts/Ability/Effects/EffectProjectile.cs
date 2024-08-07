@@ -10,9 +10,12 @@ public partial class EffectProjectile : EffectBase {
         projectile = NewEffectActor<ProjectileUnit>(projectileTemplate, unit.Player, unit.GlobalPosition.AddToY(0.5f));
         projectile.SetTargetPosition(targetPosition);
 
-        void onCollideEvent(Unit collider) => OnTaskCompleted();
-        projectile.OnCollideEvent -= onCollideEvent;
-        projectile.OnCollideEvent += onCollideEvent;
+        void onExpireEvent() {
+            abilityCastContext.AddTargetPosition(projectile.GlobalPosition);
+            OnTaskCompleted();
+        }
+        projectile.OnExpireEvent -= onExpireEvent;
+        projectile.OnExpireEvent += onExpireEvent;
 
         base.StartTask();
     }

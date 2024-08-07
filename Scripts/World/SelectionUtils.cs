@@ -9,14 +9,33 @@ public static class SelectionUtils {
         return item.AsGodotDictionary()["collider"].As<Unit>();
     }
 
-    public static void SelectActors(
-        System.Action<List<Unit>> OnSelection, Array collisions) {
-        List<Unit> actors = new();
+    public static List<Unit> GetSelectedActors(Array collisions, string? playerControllerName = null) {
+        List<Unit> units = new();
+        List<Unit> playerUnits = new();
+        List<Unit> firstPickedUnitPlayerUnits = new();
+        string pickedPlayerName = null;
         foreach (Variant item in collisions) {
             if (item.GetColliderUnit() is not Unit unit) continue;
-            actors.Add(unit);
+            pickedPlayerName ??= unit.Player.Name;
+
+            // Add units that are NavUnits
+            units.Add(unit);
+            // Add units that are playerControllerName's
+            if (playerControllerName is string playerName && unit.Player.Name == playerName) {
+                playerUnits.Add(unit);
+            }
+            // Add units that are the same player as the first picked unit
+            if (unit.Player.Name == pickedPlayerName) {
+                firstPickedUnitPlayerUnits.Add(unit);
+            }
         }
-        OnSelection(actors);
+
+        // If we have units that are the Controller Player's we use them, 
+        // if not we will use the units that are the same player as the first picked one. To avoid selecting every NavUnit from different players
+        // Else we use all units.
+        if (playerUnits.Count > 0) return playerUnits;
+        else if (firstPickedUnitPlayerUnits.Count > 0) return firstPickedUnitPlayerUnits;
+        else return units;
     }
 
     public static void SelectActors(

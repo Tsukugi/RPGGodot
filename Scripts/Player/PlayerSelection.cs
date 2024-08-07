@@ -21,35 +21,45 @@ public partial class PlayerSelection : Node {
         selectionShapeCast3D = GetNode<ShapeCast3D>(StaticNodePaths.SelectionCast);
     }
 
-    public void CheckCollisionResult() {
-        if (!player.IsFirstPlayer()) return;
+    List<Unit> TryGetSelectedUnitsFromCollision() {
+        if (!player.IsFirstPlayer()) return null;
         if (AllowedInteractionType == PlayerInteractionType.None) {
             GD.PushWarning("[PlayerSelection] Please set a AllowedInteractionType, ignoring all _PhysicsProcess otherwise.");
-            return;
+            return null;
         } else if (player.CanInteract(AllowedInteractionType)) {
             selectionShapeCast3D.ForceShapecastUpdate();
             if (selectionShapeCast3D.CollisionResult.Count > 0) {
-                SelectionUtils.SelectActors(UpdateSelectedActors, selectionShapeCast3D.CollisionResult, player.Name);
+                return SelectionUtils.GetSelectedActors(selectionShapeCast3D.CollisionResult, player.Name);
             }
         }
+        return null;
     }
 
-    public virtual void StartSelection(Vector2 startPosition) {
-        if (isSelecting) return;
+    public virtual List<Unit>? SimpleSelect(Vector2 position) {
         selectionShapeCast3D.CollideWithBodies = true;
-        selectionAreaStart = startPosition;
-        selectionAreaEnd = selectionAreaStart;
+        selectionAreaStart = position;
+        selectionAreaEnd = position;
         UpdateCastArea();
-        CheckCollisionResult();
-        isSelecting = true;
-        player.DebugLog("[PlayerSelection]: Start Selection", true);
+        List<Unit>? units = TryGetSelectedUnitsFromCollision();
+        selectionShapeCast3D.CollideWithBodies = false;
+        return units;
     }
 
     public virtual void UpdateSelectionArea(Vector2 selectionAreaStart, Vector2 selectionAreaEnd) {
         this.selectionAreaStart = selectionAreaStart;
         this.selectionAreaEnd = selectionAreaEnd;
         UpdateCastArea();
-        CheckCollisionResult();
+        if (TryGetSelectedUnitsFromCollision() is List<Unit> units) {
+            UpdateSelectedActors(units);
+        }
+    }
+
+    public virtual void StartSelection(Vector2 startPosition) {
+        if (isSelecting) return;
+        selectionShapeCast3D.CollideWithBodies = true;
+        UpdateSelectionArea(startPosition, startPosition);
+        isSelecting = true;
+        player.DebugLog("[PlayerSelection]: Start Selection", true);
     }
 
     public virtual void EndSelection() {

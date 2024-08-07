@@ -18,6 +18,7 @@ public partial class ProjectileUnit : EffectUnit {
         base._Ready();
         Area3D area = GetNode<Area3D>(StaticNodePaths.AreaRange);
         void OnBodyEntered(Node3D collider) {
+            GD.Print(collider.Name);
             if (abilityCastContext.CasterUnit.Name == collider.Name) return;
             else if (GetAllowedColliderPlayer(collider) is Unit colliderUnit) {
                 InvokeCollideEvent(colliderUnit);

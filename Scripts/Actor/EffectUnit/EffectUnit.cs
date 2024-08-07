@@ -5,7 +5,7 @@ public abstract partial class EffectUnit : CharacterBody3D {
 
     Timer expireTimer = new() {
         OneShot = true,
-        WaitTime = 60,
+        WaitTime = 10,
     };
 
     protected UnitPlayerBind unitPlayerBind;

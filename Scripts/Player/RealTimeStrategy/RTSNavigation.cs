@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 public partial class RTSNavigation : Node {
@@ -17,20 +18,32 @@ public partial class RTSNavigation : Node {
         base._Input(@event);
         if (!player.IsFirstPlayer()) return;
         if (!player.CanInteract(PlayerInteractionType.UnitControl)) return;
-        if (@event is InputEventMouseButton eventMouseButton) {
-            if (eventMouseButton.ButtonIndex == MouseButton.Right) {
-                if (eventMouseButton.Pressed) {
-                    Vector3? targetPosition = NavigationBase.GetNavigationTargetPosition(player.Camera);
-                    if (targetPosition is not Vector3 targetPositionInWorld) return;
-                    SelectionUtils.ApplyCommandToGroupPosition(
-                        player.RTSSelection.SelectedUnits,
-                        targetPositionInWorld,
-                        navigationGroupGapDistance,
-                        (float)System.Math.Floor(System.Math.Sqrt(player.RTSSelection.SelectedUnits.Count)),
-                        ApplyNavigation);
-                }
+        if (@event is InputEventMouseButton eventMouseButton
+            && eventMouseButton.ButtonIndex == MouseButton.Right
+            && eventMouseButton.Pressed) {
+
+            Vector3? targetPosition = NavigationBase.GetNavigationTargetPosition(player.Camera);
+            if (targetPosition is not Vector3 targetPositionInWorld) return;
+
+            Vector2 mousePosition = player.Camera.GetViewport().GetMousePosition();
+            if (player.RTSSelection.SimpleSelect(mousePosition) is List<Unit> units && units[0].Player.IsHostilePlayer(player)) {
+                player.RTSSelection.SelectedUnits.ForEach(unit => {
+                    if (unit is not NavigationUnit navUnit) return;
+                    navUnit.UnitCombat.StartCombatTask(units[0]);
+                });
+            } else {
+                NavigateTo(targetPositionInWorld);
             }
         }
+    }
+
+    void NavigateTo(Vector3 targetPositionInWorld) {
+        SelectionUtils.ApplyCommandToGroupPosition(
+            player.RTSSelection.SelectedUnits,
+            targetPositionInWorld,
+            navigationGroupGapDistance,
+            (float)System.Math.Floor(System.Math.Sqrt(player.RTSSelection.SelectedUnits.Count)),
+            ApplyNavigation);
     }
 
     static void ApplyNavigation(Unit unit, Vector3 targetPosition) {

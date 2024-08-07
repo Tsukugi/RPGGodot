@@ -34,7 +34,7 @@ public partial class Unit : CharacterBody3D {
 
     void OnKilledHandler(Unit unit) {
         unitRender.BodyCollision.Disabled = true;
-        unitRender.StaticRotation.Visible = false;
+        CollisionLayer = (uint)CollisionMasks.Corpse;
         isKilled = true;
     }
 

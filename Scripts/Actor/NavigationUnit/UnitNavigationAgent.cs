@@ -37,8 +37,7 @@ public partial class UnitNavigationAgent : NavigationAgent3D {
     }
 
     public void StartNewNavigation(Vector3 targetPosition) {
-        // * On Start
-        if (TargetPosition == targetPosition) return;
+        if (TargetPosition == targetPosition || unit.IsKilled) return;
         TargetPosition = targetPosition;
         navigationTarget.Visible = true;
         unit.Player.DebugLog("[StartNewNavigation] " + unit.Name + " navigates to " + targetPosition);

@@ -1,11 +1,18 @@
 using System;
 using System.Collections.Generic;
+using Godot;
 
 public partial class CastedAbility : TaskHandler {
     Unit unit;
     readonly List<string> effectIds;
     readonly AbilityAttributesDTO attributes;
     readonly AbilityCastContext context;
+    
+    new protected Timer taskProcessTimer = new() {
+        OneShot = false,
+        WaitTime = 0.2f,
+    };
+
     public AbilityAttributesDTO Attributes { get => attributes; }
     public AbilityCastContext Context { get => context; }
 

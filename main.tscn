@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cgel652x1ajvq" path="res://Templates/GridMaps/TestGridMap.tscn" id="1_71a5p"]
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/PlayerManager.cs" id="2_bpkkl"]
 [ext_resource type="PackedScene" uid="uid://bmy6h3iwboair" path="res://Templates/GridMaps/TestGridMap2.tscn" id="2_h0xul"]
-[ext_resource type="Texture2D" uid="uid://bfpvlws48hbyl" path="res://Art/Prototype Textures/black.png" id="3_58oob"]
+[ext_resource type="Texture2D" uid="uid://bjxsk2cu8d4wj" path="res://Art/TextureEnvBasic/Cut/Grass/tile000.png" id="3_gpk4t"]
 [ext_resource type="PackedScene" uid="uid://b6ajx743pvfx" path="res://Templates/PlayerBase.tscn" id="3_gsb7g"]
 [ext_resource type="PackedScene" uid="uid://dm1nwk4kpqi34" path="res://Templates/WaypointTest.tscn" id="4_tuo0j"]
 [ext_resource type="PackedScene" uid="uid://euwk4mdeovi5" path="res://Templates/Projectile.tscn" id="8_307ho"]
@@ -16,7 +16,7 @@ cell_height = 0.01
 vertices_per_polygon = 3.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wt1yj"]
-albedo_texture = ExtResource("3_58oob")
+albedo_texture = ExtResource("3_gpk4t")
 uv1_scale = Vector3(100, 100, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0cha4"]
@@ -98,11 +98,11 @@ mesh = SubResource("PlaneMesh_0cha4")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="StaticBody3D" parent="Terrain/NavigationRegion3D/MeshInstance3D"]
-collision_layer = 4
-collision_mask = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/NavigationRegion3D/MeshInstance3D/CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_ppkt4")
 
 [node name="GridMap13" parent="Terrain/NavigationRegion3D" instance=ExtResource("2_h0xul")]

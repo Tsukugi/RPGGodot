@@ -78,7 +78,8 @@ public enum CollisionMasks {
     Terrain = 1,
     Actor = 2,
     Wall = 3,
-    Projectile = 4,
+    Projectile = 4,    
+    Corpse = 32,
 }
 
 public enum CameraZoomDirection {

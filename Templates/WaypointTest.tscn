@@ -7,6 +7,8 @@ emission_energy_multiplier = 2.42
 
 [sub_resource type="SphereMesh" id="SphereMesh_w2l3h"]
 material = SubResource("StandardMaterial3D_oexii")
+radius = 0.1
+height = 0.2
 
 [node name="WaypointTest" type="Node3D"]
 

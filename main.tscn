@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://qpmqc8rwup0u"]
+[gd_scene load_steps=13 format=3 uid="uid://qpmqc8rwup0u"]
 
 [ext_resource type="PackedScene" uid="uid://cgel652x1ajvq" path="res://Templates/GridMaps/TestGridMap.tscn" id="1_71a5p"]
+[ext_resource type="Shader" path="res://Shaders/HideOnPoint.gdshader" id="1_c7u3a"]
+[ext_resource type="Script" path="res://Scripts/UI/HideOnHoverShader.cs" id="2_3vnqn"]
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/PlayerManager.cs" id="2_bpkkl"]
 [ext_resource type="PackedScene" uid="uid://bmy6h3iwboair" path="res://Templates/GridMaps/TestGridMap2.tscn" id="2_h0xul"]
-[ext_resource type="Texture2D" uid="uid://bjxsk2cu8d4wj" path="res://Art/TextureEnvBasic/Cut/Grass/tile000.png" id="3_gpk4t"]
+[ext_resource type="PackedScene" uid="uid://dspxbb6fe0gi8" path="res://Templates/maps/terrain.tscn" id="3_0bs1x"]
 [ext_resource type="PackedScene" uid="uid://b6ajx743pvfx" path="res://Templates/PlayerBase.tscn" id="3_gsb7g"]
 [ext_resource type="PackedScene" uid="uid://dm1nwk4kpqi34" path="res://Templates/WaypointTest.tscn" id="4_tuo0j"]
 [ext_resource type="PackedScene" uid="uid://euwk4mdeovi5" path="res://Templates/Projectile.tscn" id="8_307ho"]
@@ -15,15 +17,17 @@ sample_partition_type = 1
 cell_height = 0.01
 vertices_per_polygon = 3.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wt1yj"]
-albedo_texture = ExtResource("3_gpk4t")
-uv1_scale = Vector3(100, 100, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f7pvt"]
+render_priority = 0
+shader = ExtResource("1_c7u3a")
+shader_parameter/velocityMultiplier = 1.0
+shader_parameter/widthMultiplier = 1.0
+shader_parameter/color1 = Vector3(0, 0, 0)
+shader_parameter/color2 = Vector3(1, 1, 1)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_0cha4"]
-size = Vector2(100, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ppkt4"]
-size = Vector3(100, 0.1, 100)
+[sub_resource type="PlaneMesh" id="PlaneMesh_m4uqu"]
+subdivide_width = 32
+subdivide_depth = 32
 
 [node name="World" type="Node3D"]
 
@@ -31,6 +35,12 @@ size = Vector3(100, 0.1, 100)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="Terrain"]
 navigation_mesh = SubResource("NavigationMesh_a8biy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/NavigationRegion3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0506048, 0, 2.88666)
+material_override = SubResource("ShaderMaterial_f7pvt")
+mesh = SubResource("PlaneMesh_m4uqu")
+script = ExtResource("2_3vnqn")
 
 [node name="GridMap5" parent="Terrain/NavigationRegion3D" instance=ExtResource("1_71a5p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -1, 0)
@@ -92,18 +102,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.28,
 collision_layer = 4
 collision_mask = 4
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/NavigationRegion3D"]
-material_override = SubResource("StandardMaterial3D_wt1yj")
-mesh = SubResource("PlaneMesh_0cha4")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="StaticBody3D" parent="Terrain/NavigationRegion3D/MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/NavigationRegion3D/MeshInstance3D/CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
-shape = SubResource("BoxShape3D_ppkt4")
+[node name="Terrain" parent="Terrain/NavigationRegion3D" instance=ExtResource("3_0bs1x")]
 
 [node name="GridMap13" parent="Terrain/NavigationRegion3D" instance=ExtResource("2_h0xul")]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -8.655, -1, -9.595)
@@ -169,3 +168,5 @@ light_energy = 2.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.0708, 3.44167, 0.0728302)
 light_energy = 2.0
 omni_range = 10.725
+
+[editable path="Terrain/NavigationRegion3D/Terrain"]

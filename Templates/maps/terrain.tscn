@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dspxbb6fe0gi8"]
+
+[ext_resource type="Shader" path="res://Shaders/Water.gdshader" id="1_ivbje"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_21fqs"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k6gda"]
+noise = SubResource("FastNoiseLite_21fqs")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vdseg"]
+render_priority = 0
+shader = ExtResource("1_ivbje")
+shader_parameter/noise = SubResource("NoiseTexture2D_k6gda")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_m4uqu"]
+subdivide_width = 32
+subdivide_depth = 32
+
+[node name="Node" type="Node"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_vdseg")
+mesh = SubResource("PlaneMesh_m4uqu")
+skeleton = NodePath("../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113733, 2.81291, -0.18101)
+omni_attenuation = 0.231705
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.41563, 0.909534, 0, -0.909534, -0.41563, 0, 8, 0)
+light_color = Color(0.584314, 0.709804, 0.827451, 1)

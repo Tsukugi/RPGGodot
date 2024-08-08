@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://yviojn6yvqjl"]
+
+[ext_resource type="Shader" path="res://Shaders/HideOnPoint.gdshader" id="1_hsr44"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vdseg"]
+render_priority = 0
+shader = ExtResource("1_hsr44")
+shader_parameter/velocityMultiplier = 3.7
+shader_parameter/widthMultiplier = 1.0
+shader_parameter/color1 = Vector3(0, 0, 0)
+shader_parameter/color2 = Vector3(1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_m4uqu"]
+subdivide_width = 32
+subdivide_depth = 32
+
+[node name="Node" type="Node"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_vdseg")
+mesh = SubResource("PlaneMesh_m4uqu")
+skeleton = NodePath("../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113733, 2.03787, -0.18101)
+omni_attenuation = 0.231705
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.41563, 0.909534, 0, -0.909534, -0.41563, 0, 8, 0)

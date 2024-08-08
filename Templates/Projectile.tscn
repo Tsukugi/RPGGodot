@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://euwk4mdeovi5"]
+[gd_scene load_steps=7 format=3 uid="uid://euwk4mdeovi5"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/EffectUnit/ProjectileUnit.cs" id="1_lcppc"]
+[ext_resource type="Shader" path="res://Shaders/FireProjectile.gdshader" id="2_dj1v2"]
 [ext_resource type="PackedScene" uid="uid://cilo708fdco00" path="res://Templates/AreaRange.tscn" id="2_jr34q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8kucw"]
@@ -8,13 +9,22 @@ margin = 0.45
 radius = 0.3
 height = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wor3m"]
-emission_enabled = true
-emission = Color(0.418779, 0.976878, 0.944548, 1)
-emission_energy_multiplier = 3.52
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r6wax"]
+render_priority = 0
+shader = ExtResource("2_dj1v2")
+shader_parameter/heightInterval = 22.9
+shader_parameter/heightLimit = 0.0
+shader_parameter/heightDeformation = 2.2
+shader_parameter/colorInterval = 3.5
+shader_parameter/longitude = 0.5
+shader_parameter/redMagnitude = 0.0
+shader_parameter/greenMagnitude = 0.0
+shader_parameter/blueMagnitude = 0.0
+shader_parameter/alphaMagnitude = 35.3
+shader_parameter/darkEffect = 0.7
 
 [sub_resource type="SphereMesh" id="SphereMesh_f0myg"]
-material = SubResource("StandardMaterial3D_wor3m")
+material = SubResource("ShaderMaterial_r6wax")
 
 [node name="Projectile" type="CharacterBody3D"]
 collision_layer = 0

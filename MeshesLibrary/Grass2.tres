@@ -1,4 +1,4 @@
-[gd_resource type="MeshLibrary" load_steps=33 format=3 uid="uid://glq2ja6mit3x"]
+[gd_resource type="MeshLibrary" load_steps=34 format=3 uid="uid://glq2ja6mit3x"]
 
 [ext_resource type="Texture2D" uid="uid://cglbwwof5cb5n" path="res://Art/TextureEnvBasic/Cut/Grass/tile061.png" id="1_e7yak"]
 [ext_resource type="NavigationMesh" uid="uid://dnr003c8sglbx" path="res://MeshesLibrary/navRegionBlock.tres" id="2_mv2sc"]
@@ -8,7 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://de4dmyk87dhum" path="res://Art/TextureEnvBasic/Cut/Grass/tile053.png" id="6_5a5gm"]
 [ext_resource type="Texture2D" uid="uid://bundrgy3ik85u" path="res://Art/TextureEnvBasic/Cut/Grass/tile059.png" id="7_a704p"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u07qt"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lk8f0"]
+next_pass = SubResource("ShaderMaterial_u07qt")
 shading_mode = 2
 albedo_texture = ExtResource("1_e7yak")
 uv1_scale = Vector3(3, 2, 1)

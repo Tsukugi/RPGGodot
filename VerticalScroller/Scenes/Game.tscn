@@ -1,30 +1,100 @@
-[gd_scene load_steps=15 format=3 uid="uid://sey3h77ca1a3"]
+[gd_scene load_steps=24 format=3 uid="uid://sey3h77ca1a3"]
 
 [ext_resource type="Script" path="res://VerticalScroller/Scripts/UI/VSUIMain.cs" id="1_awuim"]
 [ext_resource type="Texture2D" uid="uid://bfpvlws48hbyl" path="res://Art/Prototype Textures/black.png" id="1_ay2vq"]
 [ext_resource type="PackedScene" uid="uid://dyju0jupmqaae" path="res://VerticalScroller/Scenes/VSUIBackButton.tscn" id="3_011mh"]
-[ext_resource type="Texture2D" uid="uid://bbktw1wn1xvhk" path="res://Art/Prototype Textures/Green 3.png" id="4_abdx1"]
-[ext_resource type="Texture2D" uid="uid://dhfxmhlcbnp11" path="res://Art/Prototype Textures/blue 1.png" id="5_ofrlk"]
 [ext_resource type="Script" path="res://Scripts/Player/AxisPlayer.cs" id="6_0xbcq"]
+[ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/PlayerManager.cs" id="6_fcxki"]
 [ext_resource type="PackedScene" uid="uid://emh0fo8pev08" path="res://VerticalScroller/Scenes/VSUnit.tscn" id="7_6y4ic"]
+[ext_resource type="Script" path="res://Scripts/Game/CameraBase.cs" id="9_j1sfo"]
+[ext_resource type="Shader" path="res://VerticalScroller/Shaders/Tube.gdshader" id="10_ble23"]
+[ext_resource type="Shader" path="res://VerticalScroller/Shaders/Kaleidoscope.gdshader" id="10_sl80x"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0wfr"]
-albedo_texture = ExtResource("4_abdx1")
-metallic = 0.23
-uv1_scale = Vector3(1, 100, 1)
+[sub_resource type="Environment" id="Environment_p84j7"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_813h3"]
+size = Vector3(32.665, 2, 1.15)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0foxj"]
+render_priority = 0
+shader = ExtResource("10_sl80x")
+shader_parameter/x_scale = 10.0
+shader_parameter/y_scale = 10.0
+shader_parameter/time = 0.5
+shader_parameter/RTint = 0.9
+shader_parameter/GTint = 0.1
+shader_parameter/BTint = 0.9
+shader_parameter/Emision = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0ori"]
+render_priority = 0
+shader = ExtResource("10_sl80x")
+shader_parameter/x_scale = 10.0
+shader_parameter/y_scale = 10.0
+shader_parameter/time = 0.5
+shader_parameter/RTint = 0.5
+shader_parameter/GTint = 0.5
+shader_parameter/BTint = 0.5
+shader_parameter/Emision = false
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_b8tsk"]
-material = SubResource("StandardMaterial3D_k0wfr")
 size = Vector2(2, 200)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qimw2"]
-albedo_texture = ExtResource("5_ofrlk")
-uv1_scale = Vector3(10, 10000, 1)
+[sub_resource type="Shader" id="Shader_d0bhr"]
+code = "shader_type spatial;
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbpn3"]
+uniform sampler2D img;
+uniform float x_scale = 10.0;
+uniform float y_scale = 10.0;
+uniform float time = 0.5;
+uniform float RTint: hint_range(0.0, 1.0, 0.1) = 0.5;
+uniform float GTint: hint_range(0.0, 1.0, 0.1) = 0.5;
+uniform float BTint: hint_range(0.0, 1.0, 0.1) = 0.5;
+
+void fragment(){
+	float x = mod(UV.x, 1.0/x_scale);
+	float y = mod(UV.y, 1.0/y_scale);
+	ALBEDO = vec3(RTint, GTint, BTint);
+	
+	float direction;
+	if(mod(UV.x, 2.0/x_scale)-mod(x, 1.0/x_scale) == 0.0){
+		direction = -TIME/5.0;
+	}else{
+		direction = TIME/5.0;
+	}
+	
+	vec3 tex = texture(img, vec2(x*x_scale, direction+TIME+y*y_scale)).rgb;
+	float brightness = mod(UV.y - (TIME*time) + y + UV.x-x, 0.7);
+	ALPHA = 0.2 + pow(tex.x * brightness * 0.2, 0.75);
+	if(ALPHA > 0.5){EMISSION = vec3(0.5, 1.0, 0.5);}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sjbs4"]
+render_priority = 0
+shader = SubResource("Shader_d0bhr")
+shader_parameter/x_scale = 50.0
+shader_parameter/y_scale = 50.0
+shader_parameter/time = 0.2
+shader_parameter/RTint = 0.9
+shader_parameter/GTint = 0.0
+shader_parameter/BTint = 1.0
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_3vngg"]
+flip_faces = true
+radius = 71.848
+section_length = 1000.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3u1ny"]
+render_priority = 0
+shader = ExtResource("10_ble23")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/cycle_interval = 2.324
+shader_parameter/shine_speed = 5.0
+shader_parameter/shine_width = 28.412
 
 [sub_resource type="TubeTrailMesh" id="TubeTrailMesh_68v5r"]
-material = SubResource("StandardMaterial3D_tbpn3")
 flip_faces = true
 radius = 2.0
 section_length = 1000.0
@@ -39,27 +109,48 @@ edge_max_error = 0.1
 [sub_resource type="PlaneMesh" id="PlaneMesh_i0bpk"]
 size = Vector2(2, 25)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5gq0e"]
+render_priority = 0
+shader = ExtResource("10_sl80x")
+shader_parameter/x_scale = 10.0
+shader_parameter/y_scale = 10.0
+shader_parameter/time = 0.5
+shader_parameter/RTint = 1.0
+shader_parameter/GTint = 0.5
+shader_parameter/BTint = 0.8
+shader_parameter/Emision = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nobtp"]
+size = Vector2(1000, 100)
+
 [node name="Main" type="Node3D"]
 
-[node name="Terrain" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_b8tsk")
+[node name="PlayerManager" type="Node3D" parent="."]
+script = ExtResource("6_fcxki")
 
-[node name="Tube" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
-material_override = SubResource("StandardMaterial3D_qimw2")
-mesh = SubResource("TubeTrailMesh_68v5r")
+[node name="Player" type="Node3D" parent="PlayerManager"]
+script = ExtResource("6_0xbcq")
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0)
-navigation_mesh = SubResource("NavigationMesh_l0urp")
+[node name="Unit" parent="PlayerManager/Player" instance=ExtResource("7_6y4ic")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.25, 8.67086)
 
-[node name="PlayArea" type="MeshInstance3D" parent="NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -3.198)
-mesh = SubResource("PlaneMesh_i0bpk")
+[node name="Camera3D" type="Camera3D" parent="PlayerManager/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+environment = SubResource("Environment_p84j7")
+fov = 120.0
+script = ExtResource("9_j1sfo")
+findAnyActorOnStartEnabled = true
+transformX = 0.0
+transformY = 1.0
+transformZ = 1.0
+rotationX = -30.0
+rotationY = 0.0
+rotationZ = 0.0
+projectionType = 0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="PlayerManager/Player"]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="PlayerManager/Player/CanvasLayer"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,28 +159,98 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_awuim")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerManager/Player/CanvasLayer/Control"]
 layout_mode = 1
 offset_right = 1151.0
 offset_bottom = 53.0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PlayerManager/Player/CanvasLayer/Control/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("1_ay2vq")
 expand_mode = 2
 
-[node name="Button" parent="CanvasLayer/Control" instance=ExtResource("3_011mh")]
+[node name="Button" parent="PlayerManager/Player/CanvasLayer/Control" instance=ExtResource("3_011mh")]
 layout_mode = 1
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 10)
-fov = 120.0
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.856366, 0.516369, 0, -0.516369, 0.856366, 0, 3.74332, 0)
-
-[node name="Player" type="Node3D" parent="."]
+[node name="Environment" type="Node3D" parent="PlayerManager"]
 script = ExtResource("6_0xbcq")
 
-[node name="Unit" parent="Player" instance=ExtResource("7_6y4ic")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.25, 8)
+[node name="Wall" type="StaticBody3D" parent="PlayerManager/Environment"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerManager/Environment/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.86008)
+shape = SubResource("BoxShape3D_813h3")
+
+[node name="Wall2" type="StaticBody3D" parent="PlayerManager/Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -26.0085)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerManager/Environment/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.86008)
+shape = SubResource("BoxShape3D_813h3")
+
+[node name="Wall3" type="StaticBody3D" parent="PlayerManager/Environment"]
+transform = Transform3D(-0.00720809, 0, -0.999974, 0, 1, 0, 0.999974, 0, -0.00720809, 1.775, 0, 0.42)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerManager/Environment/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.73732, 0, 0.120392)
+shape = SubResource("BoxShape3D_813h3")
+
+[node name="Wall4" type="StaticBody3D" parent="PlayerManager/Environment"]
+transform = Transform3D(-0.00720809, 0, -0.999974, 0, 1, 0, 0.999974, 0, -0.00720809, -5.749, 0, 0.42)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerManager/Environment/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.76903, 0, -4.27826)
+shape = SubResource("BoxShape3D_813h3")
+
+[node name="Spawner" type="Node3D" parent="PlayerManager/Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.475094, 0, -14.7718)
+
+[node name="Spawner2" type="Node3D" parent="PlayerManager/Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.517627, 0, -14.7718)
+
+[node name="Terrain" type="MeshInstance3D" parent="PlayerManager/Environment"]
+material_override = SubResource("ShaderMaterial_0foxj")
+material_overlay = SubResource("ShaderMaterial_i0ori")
+transparency = 1.0
+mesh = SubResource("PlaneMesh_b8tsk")
+skeleton = NodePath("../../..")
+
+[node name="Tube" type="MeshInstance3D" parent="PlayerManager/Environment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
+material_override = SubResource("ShaderMaterial_sjbs4")
+mesh = SubResource("TubeTrailMesh_3vngg")
+skeleton = NodePath("../../..")
+
+[node name="Tube2" type="MeshInstance3D" parent="PlayerManager/Environment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
+material_override = SubResource("ShaderMaterial_3u1ny")
+mesh = SubResource("TubeTrailMesh_68v5r")
+skeleton = NodePath("../../..")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="PlayerManager/Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0)
+navigation_mesh = SubResource("NavigationMesh_l0urp")
+
+[node name="PlayArea" type="MeshInstance3D" parent="PlayerManager/Environment/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -3.198)
+visible = false
+mesh = SubResource("PlaneMesh_i0bpk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="PlayerManager/Environment"]
+transform = Transform3D(1, 0, 0, 0, 0.910857, 0.412723, 0, -0.412723, 0.910857, 0, -2.24054, 0)
+directional_shadow_mode = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerManager/Environment"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -10, 0, 0)
+material_override = SubResource("ShaderMaterial_5gq0e")
+mesh = SubResource("PlaneMesh_nobtp")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="PlayerManager/Environment"]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 10, 0, 0)
+material_override = SubResource("ShaderMaterial_5gq0e")
+mesh = SubResource("PlaneMesh_nobtp")
+
+[node name="Enemy" type="Node3D" parent="PlayerManager"]
+script = ExtResource("6_0xbcq")
+
+[node name="AI" type="Node" parent="PlayerManager/Enemy"]

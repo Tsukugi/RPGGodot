@@ -24,10 +24,7 @@ public partial class Unit : CharacterBody3D {
         unitRender = new(this);
         attributes = GetNode<UnitAttributes>(StaticNodePaths.Attributes);
         overheadLabel = GetNode<Label3D>(StaticNodePaths.OverheadLabel);
-        interactionArea = GetNode<Area3D>(StaticNodePaths.InteractionArea);
-        interactionArea.BodyEntered += OnInteractionAreaEnteredHandler;
-        interactionArea.BodyExited += OnInteractionAreaExitedHandler;
-
+        interactionArea = GetNodeOrNull<Area3D>(StaticNodePaths.InteractionArea);
         attributes.OnKilled -= OnKilledHandler;
         attributes.OnKilled += OnKilledHandler;
     }
@@ -36,21 +33,6 @@ public partial class Unit : CharacterBody3D {
         unitRender.BodyCollision.Disabled = true;
         CollisionLayer = (uint)CollisionMasks.Corpse;
         isKilled = true;
-    }
-
-    void OnInteractionAreaEnteredHandler(Node3D body) {
-        if (!Player.IsFirstPlayer() || body is not Unit unit || unit.Player.IsFirstPlayer()) return;
-        if (unit.Player.Name != "Environment") {
-            Player.InteractionPanel.Message.Text = "Talk to " + body.Name;
-        } else {
-            Player.InteractionPanel.Message.Text = "Interact with " + body.Name;
-        }
-        Player.InteractionPanel.Visible = true;
-    }
-
-    void OnInteractionAreaExitedHandler(Node3D body) {
-        if (!Player.IsFirstPlayer() || body is not Unit unit || unit.Player.IsFirstPlayer()) return;
-        Player.InteractionPanel.Visible = false;
     }
 
     protected void MoveAndCollide(Vector3 direction, float delta) {

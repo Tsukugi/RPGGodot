@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxm2n2www8lb1"]
+
+[ext_resource type="Script" path="res://VerticalScroller/Scripts/UI/VSUIButton.cs" id="1_ao4wk"]
+
+[node name="Button" type="Button"]
+text = "Start Game
+"
+script = ExtResource("1_ao4wk")
+action = 1

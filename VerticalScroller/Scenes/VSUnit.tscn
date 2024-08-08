@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://emh0fo8pev08"]
+
+[ext_resource type="Script" path="res://Scripts/Actor/AxisUnit/AxisUnit.cs" id="1_tyu1i"]
+[ext_resource type="Script" path="res://Scripts/Actor/UnitAttributes.cs" id="2_tnfqe"]
+[ext_resource type="PackedScene" uid="uid://bh5lo8eo1jyfg" path="res://Templates/UnitAreas.tscn" id="3_jeonj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4p3cl"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o7ni1"]
+
+[node name="Unit" type="CharacterBody3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.25, 0)
+script = ExtResource("1_tyu1i")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_4p3cl")
+
+[node name="StaticRotation" type="Node3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="StaticRotation"]
+mesh = SubResource("CapsuleMesh_o7ni1")
+skeleton = NodePath("../..")
+
+[node name="OverheadLabel" type="Label3D" parent="StaticRotation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+outline_modulate = Color(0.341176, 0.709804, 0.972549, 1)
+text = "Test
+"
+
+[node name="Attributes" type="Node" parent="."]
+script = ExtResource("2_tnfqe")
+
+[node name="Areas" parent="." instance=ExtResource("3_jeonj")]

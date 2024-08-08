@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyju0jupmqaae"]
+
+[ext_resource type="PackedScene" uid="uid://dxm2n2www8lb1" path="res://VerticalScroller/Scenes/VSUIButton.tscn" id="1_4r8ws"]
+
+[node name="Button" instance=ExtResource("1_4r8ws")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -107.0
+offset_bottom = 62.0
+grow_horizontal = 0
+text = "Back"
+action = 4

@@ -28,16 +28,8 @@ public partial class AxisUnit : Unit {
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
         if (!player.IsFirstPlayer()) return;
-        OnManualInput(delta);
-    }
-
-    public override void _Input(InputEvent @event) {
-        if (!player.IsFirstPlayer()) return;
-        player.AxisInputHandler.OnInputUpdate();
-    }
-
-    void OnManualInput(double delta) {
-        Vector2 direction = player.AxisInputHandler.GetRotatedAxis(-player.Camera.RotationDegrees.Y);
+        float cameraDegrees = -player.Camera.RotationDegrees.Y;
+        Vector2 direction = player.AxisInputHandler.GetRotatedAxis(cameraDegrees);
 
         switch (player.AxisInputHandler.MovementInputState) {
             case InputState.Stop: {
@@ -48,8 +40,6 @@ public partial class AxisUnit : Unit {
                     break;
                 }
         }
-        UnitRender.ActorAnimationHandler.ApplyAnimation(player.AxisInputHandler.RenderDirection);
-
         switch (player.AxisInputHandler.ActionInputState) {
             case UnitActionState.Attack: {
                     break;
@@ -57,4 +47,8 @@ public partial class AxisUnit : Unit {
         }
     }
 
+    public override void _Input(InputEvent @event) {
+        if (!player.IsFirstPlayer()) return;
+        player.AxisInputHandler.OnInputUpdate();
+    }
 }

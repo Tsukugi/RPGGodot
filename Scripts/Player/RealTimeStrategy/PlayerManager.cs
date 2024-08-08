@@ -15,10 +15,10 @@ public partial class PlayerManager : Node {
     public override void _Ready() {
         players = this.TryGetAllChildOfType<PlayerBase>();
         playerRelationship = new(players);
-        RealTimeStrategyPlayer player = GetNode<RealTimeStrategyPlayer>("Player");
+        PlayerBase player = GetNode<PlayerBase>("Player");
         player.CanvasLayer.Visible = true;
         //! Debug 
-        Callable.From(DebugStart).CallDeferred();
+         // Callable.From(DebugStart).CallDeferred();
         // !EndDebug 
     }
 

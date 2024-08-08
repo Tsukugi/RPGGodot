@@ -30,6 +30,7 @@ public partial class UnitAlertArea : Area3D {
     }
 
     public void SetMonitoringEnabled(bool value) {
+        if (unit is null) return;
         Callable.From(() => {
             Monitoring = value;
             collisionShape.Disabled = !value;

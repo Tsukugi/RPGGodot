@@ -12,13 +12,40 @@ public partial class CameraBase : Camera3D {
     float cameraVelocity = 3;
     [Export]
     float cameraZoomVelocity = 0.5f;
-    public event EventHandler<Vector3> OnRotationChange;
     // Offsets 
-    public static readonly Vector3 CameraTransformOffset = new(-8, 8, 8);
-    public static readonly Vector3 CameraRotationOffset = new(-45, -45, 0);
+    [Export]
+    float transformX = -8;
+    [Export]
+    float transformY = 8;
+    [Export]
+    float transformZ = 8;
+    [Export]
+    float rotationX = -45;
+    [Export]
+    float rotationY = -45;
+    [Export]
+    float rotationZ = 45;
+
+    public Vector3 currentTransformOffset {
+        get => new(transformX, transformY, transformZ);
+        set {
+            transformX = value.X;
+            transformY = value.Y;
+            transformZ = value.Z;
+            Position = value;
+        }
+    }
+    public Vector3 currentRotationOffset {
+        get => new(rotationX, rotationY, rotationZ);
+        set {
+            rotationX = value.X;
+            rotationY = value.Y;
+            rotationZ = value.Z;
+            RotationDegrees = value;
+        }
+    }
     public static readonly int CameraRotationAxisOffset = 45;
-    Vector3 currentTransformOffset = CameraTransformOffset;
-    Vector3 currentRotationOffset = CameraRotationOffset;
+    public event EventHandler<Vector3> OnRotationChange;
 
     [Export]
     ProjectionType projectionType = ProjectionType.Orthogonal;
@@ -44,7 +71,7 @@ public partial class CameraBase : Camera3D {
             case ProjectionType.Orthogonal: {
                     cameraVelocity /= 10f;
                     currentTransformOffset += currentTransformOffset.AddToY(4).Magnitude(7);
-                    Reposition(currentTransformOffset, CameraRotationOffset);
+                    Reposition(currentTransformOffset, currentRotationOffset);
                     break;
                 }
         }
@@ -126,7 +153,7 @@ public partial class CameraBase : Camera3D {
             Position.Z);
 
         Position = newOffset;
-        currentTransformOffset.Y = newOffset.Y;
+        currentTransformOffset = currentTransformOffset.WithY(newOffset.Y);
     }
 
     public void AttachToActor(Unit actor) {

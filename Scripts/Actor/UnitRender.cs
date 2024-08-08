@@ -21,7 +21,7 @@ public partial class UnitRender {
         meshInstance3D = unit.GetNodeOrNull<MeshInstance3D>(StaticNodePaths.ActorMeshInstance);
         bodyCollision = unit.GetNode<CollisionShape3D>(StaticNodePaths.BodyCollision);
         // We are applying rotation on 2d actors only
-        if (meshInstance3D is null) Callable.From(ApplyActorRotation).CallDeferred();
+        if (animatedSprite3D is not null) Callable.From(ApplyActorRotation).CallDeferred();
 
         if (Sprite is not null) {
             actorAnimationHandler = new ActorAnimationHandler(Sprite) {
@@ -32,9 +32,8 @@ public partial class UnitRender {
     }
 
     void ApplyActorRotation() {
-        if (CameraBase.CameraTransformOffset.Normalized() == Vector3.Up) return;
-        StaticRotation.LookAt(unit.GlobalPosition + CameraBase.CameraTransformOffset, Vector3.Up, true);
+        if (unit.Player.Camera.currentRotationOffset.Normalized() == Vector3.Up) return;
+        StaticRotation.LookAt(unit.GlobalPosition + unit.Player.Camera.currentRotationOffset, Vector3.Up, true);
     }
-
 
 }

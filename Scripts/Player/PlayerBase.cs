@@ -20,10 +20,10 @@ public partial class PlayerBase : Node {
         base._Ready();
 
         manager = this.TryFindParentNodeOfType<PlayerManager>();
-        camera = GetNode<CameraBase>(StaticNodePaths.PlayerCamera);
-        interactionPanel = GetNode<InteractionPanel>(StaticNodePaths.PlayerUIInteractionPanel);
-        canvasLayer = GetNode<CanvasLayer>(StaticNodePaths.PlayerUICanvas);
-        playerAbility = GetNode<PlayerAbility>(StaticNodePaths.PlayerAbility);
+        camera = GetNodeOrNull<CameraBase>(StaticNodePaths.PlayerCamera);
+        interactionPanel = GetNodeOrNull<InteractionPanel>(StaticNodePaths.PlayerUIInteractionPanel);
+        canvasLayer = GetNodeOrNull<CanvasLayer>(StaticNodePaths.PlayerUICanvas);
+        playerAbility = GetNodeOrNull<PlayerAbility>(StaticNodePaths.PlayerAbility);
     }
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);

@@ -3,7 +3,7 @@ using Godot;
 
 public class EnvironmentBase {
     public readonly Plane plane = new(0, -1, 0, 0);
-    public Vector3 Get3DWorldPosition(CameraBase camera, Vector2 coordinates) {
+    public Vector3 Get3DWorldPosition(Camera3D camera, Vector2 coordinates) {
         Vector3 origin = camera.ProjectRayOrigin(coordinates);
         Vector3 direction = camera.ProjectRayNormal(coordinates);
         Vector3? position = plane.IntersectsRay(origin, direction);

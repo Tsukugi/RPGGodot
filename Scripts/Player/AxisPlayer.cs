@@ -1,5 +1,7 @@
 
 
 public partial class AxisPlayer : PlayerBase {
-    public AxisInputHandler AxisInputHandler = new();
+    readonly AxisInputHandler axisInputHandler = new();
+
+    public AxisInputHandler AxisInputHandler { get => axisInputHandler; }
 }

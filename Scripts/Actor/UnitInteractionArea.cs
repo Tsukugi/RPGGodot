@@ -11,7 +11,7 @@ public partial class UnitInteractionArea : Area3D {
     }
 
     void OnInteractionAreaEnteredHandler(Node3D body) {
-        if (!unit.Player.IsFirstPlayer() || body is not Unit enteringUnit || enteringUnit.Player.IsFirstPlayer()) return;
+        if (CanInteract(body)) return;
         if (unit.Player.Name != "Environment") {
             unit.Player.InteractionPanel.Message.Text = "Talk to " + body.Name;
         } else {
@@ -21,7 +21,11 @@ public partial class UnitInteractionArea : Area3D {
     }
 
     void OnInteractionAreaExitedHandler(Node3D body) {
-        if (!unit.Player.IsFirstPlayer() || body is not Unit enteringUnit || enteringUnit.Player.IsFirstPlayer()) return;
+        if (CanInteract(body)) return;
         unit.Player.InteractionPanel.Visible = false;
+    }
+
+    bool CanInteract(Node3D body) {
+        return !unit.Player.IsFirstPlayer() || body is not Unit enteringUnit || enteringUnit.Player.IsFirstPlayer() || unit.Player.InteractionPanel is null;
     }
 }

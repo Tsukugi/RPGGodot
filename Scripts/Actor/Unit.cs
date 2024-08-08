@@ -54,6 +54,10 @@ public partial class Unit : CharacterBody3D {
     }
 
     public void CastAbility(string name) {
+        if (Player.PlayerAbility is null) {
+            GD.PrintErr("[CastAbility] Cannot cast " + name + " because Unit's ability module could not be found");
+            return;
+        }
         Player.DebugLog("[CastAbility] Casting " + name, true);
         Player.PlayerAbility.StartCastingState(abilities[name]);
     }

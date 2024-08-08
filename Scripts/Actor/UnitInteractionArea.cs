@@ -1,27 +1,27 @@
 using Godot;
 
 public partial class UnitInteractionArea : Area3D {
-    PlayerBase player;
+    Unit unit;
 
     public override void _Ready() {
         base._Ready();
-        player = this.TryFindParentNodeOfType<PlayerBase>();
+        unit = this.TryFindParentNodeOfType<Unit>();
         BodyEntered += OnInteractionAreaEnteredHandler;
         BodyExited += OnInteractionAreaExitedHandler;
     }
 
     void OnInteractionAreaEnteredHandler(Node3D body) {
-        if (!player.IsFirstPlayer() || body is not Unit unit || unit.Player.IsFirstPlayer()) return;
+        if (!unit.Player.IsFirstPlayer() || body is not Unit enteringUnit || enteringUnit.Player.IsFirstPlayer()) return;
         if (unit.Player.Name != "Environment") {
-            player.InteractionPanel.Message.Text = "Talk to " + body.Name;
+            unit.Player.InteractionPanel.Message.Text = "Talk to " + body.Name;
         } else {
-            player.InteractionPanel.Message.Text = "Interact with " + body.Name;
+            unit.Player.InteractionPanel.Message.Text = "Interact with " + body.Name;
         }
-        player.InteractionPanel.Visible = true;
+        unit.Player.InteractionPanel.Visible = true;
     }
 
     void OnInteractionAreaExitedHandler(Node3D body) {
-        if (!player.IsFirstPlayer() || body is not Unit unit || unit.Player.IsFirstPlayer()) return;
-        player.InteractionPanel.Visible = false;
+        if (!unit.Player.IsFirstPlayer() || body is not Unit enteringUnit || enteringUnit.Player.IsFirstPlayer()) return;
+        unit.Player.InteractionPanel.Visible = false;
     }
 }

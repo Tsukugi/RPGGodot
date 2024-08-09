@@ -1,5 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://sey3h77ca1a3"]
+[gd_scene load_steps=25 format=3 uid="uid://sey3h77ca1a3"]
 
+[ext_resource type="Script" path="res://VerticalScroller/Scripts/VSGameManager.cs" id="1_0ycb4"]
 [ext_resource type="Script" path="res://VerticalScroller/Scripts/UI/VSUIMain.cs" id="1_awuim"]
 [ext_resource type="Texture2D" uid="uid://bfpvlws48hbyl" path="res://Art/Prototype Textures/black.png" id="1_ay2vq"]
 [ext_resource type="PackedScene" uid="uid://dyju0jupmqaae" path="res://VerticalScroller/Scenes/VSUIBackButton.tscn" id="3_011mh"]
@@ -12,7 +13,8 @@
 
 [sub_resource type="Environment" id="Environment_p84j7"]
 background_mode = 1
-background_color = Color(1, 1, 1, 1)
+background_color = Color(0.733333, 0.533333, 0.290196, 1)
+ambient_light_color = Color(0.835294, 0.47451, 0.647059, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_813h3"]
 size = Vector3(32.665, 2, 1.15)
@@ -22,11 +24,11 @@ render_priority = 0
 shader = ExtResource("10_sl80x")
 shader_parameter/x_scale = 10.0
 shader_parameter/y_scale = 10.0
-shader_parameter/time = 0.5
-shader_parameter/RTint = 0.9
-shader_parameter/GTint = 0.1
-shader_parameter/BTint = 0.9
-shader_parameter/Emision = false
+shader_parameter/time = 1.0
+shader_parameter/RTint = 0.0
+shader_parameter/GTint = 0.0
+shader_parameter/BTint = 1.0
+shader_parameter/Emision = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i0ori"]
 render_priority = 0
@@ -124,6 +126,7 @@ shader_parameter/Emision = true
 size = Vector2(1000, 100)
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_0ycb4")
 
 [node name="PlayerManager" type="Node3D" parent="."]
 script = ExtResource("6_fcxki")
@@ -131,15 +134,16 @@ script = ExtResource("6_fcxki")
 [node name="Player" type="Node3D" parent="PlayerManager"]
 script = ExtResource("6_0xbcq")
 
-[node name="Unit" parent="PlayerManager/Player" instance=ExtResource("7_6y4ic")]
+[node name="PlayerUnit" parent="PlayerManager/Player" instance=ExtResource("7_6y4ic")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.25, 8.67086)
 
-[node name="Camera3D" type="Camera3D" parent="PlayerManager/Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="Camera3D" type="Camera3D" parent="PlayerManager/Player" node_paths=PackedStringArray("selectedActor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
 environment = SubResource("Environment_p84j7")
 fov = 120.0
 script = ExtResource("9_j1sfo")
 findAnyActorOnStartEnabled = true
+selectedActor = NodePath("../PlayerUnit")
 transformX = 0.0
 transformY = 1.0
 transformZ = 1.0
@@ -202,12 +206,6 @@ transform = Transform3D(-0.00720809, 0, -0.999974, 0, 1, 0, 0.999974, 0, -0.0072
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.76903, 0, -4.27826)
 shape = SubResource("BoxShape3D_813h3")
 
-[node name="Spawner" type="Node3D" parent="PlayerManager/Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.475094, 0, -14.7718)
-
-[node name="Spawner2" type="Node3D" parent="PlayerManager/Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.517627, 0, -14.7718)
-
 [node name="Terrain" type="MeshInstance3D" parent="PlayerManager/Environment"]
 material_override = SubResource("ShaderMaterial_0foxj")
 material_overlay = SubResource("ShaderMaterial_i0ori")
@@ -254,3 +252,11 @@ mesh = SubResource("PlaneMesh_nobtp")
 script = ExtResource("6_0xbcq")
 
 [node name="AI" type="Node" parent="PlayerManager/Enemy"]
+
+[node name="Spawner" type="Node3D" parent="PlayerManager/Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.475094, 0, -14.7718)
+
+[node name="Spawner2" type="Node3D" parent="PlayerManager/Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.517627, 0, -14.7718)
+
+[editable path="PlayerManager/Player/PlayerUnit"]

@@ -1,12 +1,47 @@
-[gd_scene load_steps=6 format=3 uid="uid://emh0fo8pev08"]
+[gd_scene load_steps=11 format=3 uid="uid://emh0fo8pev08"]
 
 [ext_resource type="Script" path="res://Scripts/Actor/AxisUnit/AxisUnit.cs" id="1_tyu1i"]
+[ext_resource type="Texture2D" uid="uid://7fgk7abkcv1u" path="res://Art/Basic Asset Pack/Basic Humanoid Animations/goblin occultist/GoblinOccultist.png" id="2_c4puo"]
 [ext_resource type="Script" path="res://Scripts/Actor/UnitAttributes.cs" id="2_tnfqe"]
 [ext_resource type="PackedScene" uid="uid://bh5lo8eo1jyfg" path="res://Templates/UnitAreas.tscn" id="3_jeonj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4p3cl"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_o7ni1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3q6a"]
+atlas = ExtResource("2_c4puo")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0csr"]
+atlas = ExtResource("2_c4puo")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_siuas"]
+atlas = ExtResource("2_c4puo")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi6to"]
+atlas = ExtResource("2_c4puo")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ejcnj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3q6a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0csr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_siuas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi6to")
+}],
+"loop": true,
+"name": &"idleDown",
+"speed": 5.0
+}]
 
 [node name="Unit" type="CharacterBody3D"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.25, 0)
@@ -17,15 +52,18 @@ shape = SubResource("CapsuleShape3D_4p3cl")
 
 [node name="StaticRotation" type="Node3D" parent="."]
 
-[node name="Body" type="MeshInstance3D" parent="StaticRotation"]
-mesh = SubResource("CapsuleMesh_o7ni1")
-skeleton = NodePath("../..")
-
 [node name="OverheadLabel" type="Label3D" parent="StaticRotation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 outline_modulate = Color(0.341176, 0.709804, 0.972549, 1)
 text = "Test
 "
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="StaticRotation"]
+pixel_size = 0.1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_ejcnj")
+animation = &"idleDown"
+frame_progress = 0.287407
 
 [node name="Attributes" type="Node" parent="."]
 script = ExtResource("2_tnfqe")

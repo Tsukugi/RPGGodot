@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://dw2iicci6qspw"]
+
+[ext_resource type="PackedScene" uid="uid://emh0fo8pev08" path="res://VerticalScroller/Scenes/VSUnit.tscn" id="1_d3qfs"]
+[ext_resource type="Texture2D" uid="uid://djebmk3gx5oo" path="res://Art/Basic Asset Pack/Basic Humanoid Animations/lizardfolk gladiator/LizardfolkGladiator.png" id="2_5ojrc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_solxp"]
+atlas = ExtResource("2_5ojrc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfmth"]
+atlas = ExtResource("2_5ojrc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_808sh"]
+atlas = ExtResource("2_5ojrc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7k18o"]
+atlas = ExtResource("2_5ojrc")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s1uok"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_solxp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfmth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_808sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7k18o")
+}],
+"loop": true,
+"name": &"idleDown",
+"speed": 5.0
+}]
+
+[node name="Unit" instance=ExtResource("1_d3qfs")]
+
+[node name="AnimatedSprite3D" parent="StaticRotation" index="1"]
+sprite_frames = SubResource("SpriteFrames_s1uok")
+frame_progress = 0.0

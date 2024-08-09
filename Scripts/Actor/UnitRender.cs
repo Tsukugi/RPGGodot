@@ -21,7 +21,7 @@ public partial class UnitRender {
         meshInstance3D = unit.GetNodeOrNull<MeshInstance3D>(StaticNodePaths.ActorMeshInstance);
         bodyCollision = unit.GetNode<CollisionShape3D>(StaticNodePaths.BodyCollision);
         // We are applying rotation on 2d actors only
-        if (animatedSprite3D is not null) Callable.From(ApplyActorRotation).CallDeferred();
+        //if (animatedSprite3D is not null) Callable.From(ApplyActorRotation).CallDeferred();
 
         if (Sprite is not null) {
             actorAnimationHandler = new ActorAnimationHandler(Sprite) {

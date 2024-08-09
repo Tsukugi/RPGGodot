@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chrt7qep2ux5c"
-path.s3tc="res://.godot/imported/Retro Impact Effect Pack 4 F.png-0c81fbeab5c4c9f2ca68c329d7d098ec.s3tc.ctex"
+uid="uid://7fgk7abkcv1u"
+path.s3tc="res://.godot/imported/GoblinOccultist.png-2c8ae350ff0572025dc9da4443cc14d0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Art/Retro Impact Effect Pack ALL/Retro Impact Effect Pack 4 F.png"
-dest_files=["res://.godot/imported/Retro Impact Effect Pack 4 F.png-0c81fbeab5c4c9f2ca68c329d7d098ec.s3tc.ctex"]
+source_file="res://Art/Basic Asset Pack/Basic Humanoid Animations/goblin occultist/GoblinOccultist.png"
+dest_files=["res://.godot/imported/GoblinOccultist.png-2c8ae350ff0572025dc9da4443cc14d0.s3tc.ctex"]
 
 [params]
 

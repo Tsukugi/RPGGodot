@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chrt7qep2ux5c"
-path.s3tc="res://.godot/imported/Retro Impact Effect Pack 4 F.png-0c81fbeab5c4c9f2ca68c329d7d098ec.s3tc.ctex"
+uid="uid://djebmk3gx5oo"
+path.s3tc="res://.godot/imported/LizardfolkGladiator.png-7bd6a9f25c04cb29790b4c75eb6ab87f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Art/Retro Impact Effect Pack ALL/Retro Impact Effect Pack 4 F.png"
-dest_files=["res://.godot/imported/Retro Impact Effect Pack 4 F.png-0c81fbeab5c4c9f2ca68c329d7d098ec.s3tc.ctex"]
+source_file="res://Art/Basic Asset Pack/Basic Humanoid Animations/lizardfolk gladiator/LizardfolkGladiator.png"
+dest_files=["res://.godot/imported/LizardfolkGladiator.png-7bd6a9f25c04cb29790b4c75eb6ab87f.s3tc.ctex"]
 
 [params]
 

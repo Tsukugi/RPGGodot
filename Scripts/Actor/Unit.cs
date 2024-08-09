@@ -48,6 +48,10 @@ public partial class Unit : CharacterBody3D {
         MoveAndSlide();
     }
 
+    public void MoveTowards(Vector3 targetPosition) {
+        MoveAndSlide(GlobalPosition.FullDirectionTo(targetPosition));
+    }
+
     public void AddAbility(AbilityDTO abilityDTO) {
         AbilityCaster abilityCaster = new(this, abilityDTO);
         abilities.Add(abilityDTO.name, abilityCaster);

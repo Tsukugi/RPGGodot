@@ -30,7 +30,7 @@ public partial class Unit : CharacterBody3D {
     }
 
     void OnKilledHandler(Unit unit) {
-        unitRender.BodyCollision.Disabled = true;
+        Callable.From(() => { unitRender.BodyCollision.Disabled = true; }).CallDeferred();
         CollisionLayer = (uint)CollisionMasks.Corpse;
         isKilled = true;
     }

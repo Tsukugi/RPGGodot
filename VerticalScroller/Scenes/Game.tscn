@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://sey3h77ca1a3"]
+[gd_scene load_steps=24 format=3 uid="uid://sey3h77ca1a3"]
 
 [ext_resource type="Script" path="res://VerticalScroller/Scripts/VSGameManager.cs" id="1_0ycb4"]
 [ext_resource type="Script" path="res://VerticalScroller/Scripts/UI/VSUIMain.cs" id="1_awuim"]
@@ -15,9 +15,6 @@
 background_mode = 1
 background_color = Color(0.733333, 0.533333, 0.290196, 1)
 ambient_light_color = Color(0.835294, 0.47451, 0.647059, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_813h3"]
-size = Vector3(32.665, 2, 1.15)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0foxj"]
 render_priority = 0
@@ -140,7 +137,6 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.25, 8.67086)
 [node name="Camera3D" type="Camera3D" parent="PlayerManager/Player" node_paths=PackedStringArray("selectedActor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
 environment = SubResource("Environment_p84j7")
-fov = 120.0
 script = ExtResource("9_j1sfo")
 findAnyActorOnStartEnabled = true
 selectedActor = NodePath("../PlayerUnit")
@@ -178,33 +174,6 @@ layout_mode = 1
 
 [node name="Environment" type="Node3D" parent="PlayerManager"]
 script = ExtResource("6_0xbcq")
-
-[node name="Wall" type="StaticBody3D" parent="PlayerManager/Environment"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerManager/Environment/Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.86008)
-shape = SubResource("BoxShape3D_813h3")
-
-[node name="Wall2" type="StaticBody3D" parent="PlayerManager/Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -26.0085)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerManager/Environment/Wall2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.86008)
-shape = SubResource("BoxShape3D_813h3")
-
-[node name="Wall3" type="StaticBody3D" parent="PlayerManager/Environment"]
-transform = Transform3D(-0.00720809, 0, -0.999974, 0, 1, 0, 0.999974, 0, -0.00720809, 1.775, 0, 0.42)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerManager/Environment/Wall3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.73732, 0, 0.120392)
-shape = SubResource("BoxShape3D_813h3")
-
-[node name="Wall4" type="StaticBody3D" parent="PlayerManager/Environment"]
-transform = Transform3D(-0.00720809, 0, -0.999974, 0, 1, 0, 0.999974, 0, -0.00720809, -5.749, 0, 0.42)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerManager/Environment/Wall4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.76903, 0, -4.27826)
-shape = SubResource("BoxShape3D_813h3")
 
 [node name="Terrain" type="MeshInstance3D" parent="PlayerManager/Environment"]
 material_override = SubResource("ShaderMaterial_0foxj")

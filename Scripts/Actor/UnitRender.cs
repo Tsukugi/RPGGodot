@@ -30,6 +30,11 @@ public partial class UnitRender {
             actorAnimationHandler.ApplyAnimation(inputFaceDirection);
         }
     }
+    
+    public void UpdateSprite(string path) {
+        SpriteFrames spriteFrames = GD.Load<SpriteFrames>(path);
+        animatedSprite3D.SpriteFrames = spriteFrames;
+    }
 
     void ApplyActorRotation() {
         if (unit.Player.Camera.currentRotationOffset.Normalized() == Vector3.Up) return;

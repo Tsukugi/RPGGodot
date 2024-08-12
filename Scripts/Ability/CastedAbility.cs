@@ -7,7 +7,7 @@ public partial class CastedAbility : TaskHandler {
     readonly List<string> effectIds;
     readonly AbilityAttributesDTO attributes;
     readonly AbilityCastContext context;
-    
+
     new protected Timer taskProcessTimer = new() {
         OneShot = false,
         WaitTime = 0.2f,
@@ -41,7 +41,7 @@ public partial class CastedAbility : TaskHandler {
 
     void AddEffectsToTaskQueue() {
         foreach (string effectId in effectIds) {
-            EffectBaseDTO effectBase = LocalDatabase.GetEffect(effectId);
+            EffectBaseDTO effectBase = unit.Player.PlayerManager.Database.GetEffect(effectId);
             Type type = Type.GetType(GetEffectName(effectBase.baseEffect));
             dynamic newEffect = Activator.CreateInstance(type);
             newEffect.UpdateEffectValues(unit, this, context, effectBase);

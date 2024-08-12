@@ -2,46 +2,62 @@ using System.Collections.Generic;
 using System.IO;
 using Godot;
 using Newtonsoft.Json;
-public static class LocalDatabase {
-    static Dictionary<string, NavigationUnitDTO> units = new();
-    static Dictionary<string, AbilityDTO> abilites = new();
-    static Dictionary<string, EffectBaseDTO> effects = new();
+public class LocalDatabase {
+    Dictionary<string, UnitDTO> units = new();
+    Dictionary<string, AbilityDTO> abilites = new();
+    Dictionary<string, EffectBaseDTO> effects = new();
 
-    public static Dictionary<string, AbilityDTO> Abilites { get => abilites; }
-    public static Dictionary<string, NavigationUnitDTO> Units { get => units; }
-    public static Dictionary<string, EffectBaseDTO> Effects { get => effects; }
+    JSONLoader loader = new();
 
-    public static void LoadData() {
-        JSONLoader.LoadUnits().ForEach(unit => units.Add(unit.name, unit));
-        JSONLoader.LoadAbilities().ForEach(ability => abilites.Add(ability.name, ability));
-        JSONLoader.LoadEffects().ForEach(effect => effects.Add(effect.id, effect));
+    public Dictionary<string, AbilityDTO> Abilites { get => abilites; }
+    public Dictionary<string, UnitDTO> Units { get => units; }
+    public Dictionary<string, EffectBaseDTO> Effects { get => effects; }
+    public JSONLoader Loader { get => loader; }
+
+    public void LoadData() {
+        LoadUnits().ForEach(unit => units.Add(unit.name, unit));
+        LoadAbilities().ForEach(ability => abilites.Add(ability.name, ability));
+        LoadEffects().ForEach(effect => effects.Add(effect.id, effect));
     }
 
-    public static EffectBaseDTO GetEffect(string key) {
+    public EffectBaseDTO GetEffect(string key) {
         return effects[key];
     }
-}
-public static class JSONLoader {
-    static readonly string databasePath = "./Database/";
 
-    static string LoadJson(string name) {
+    public Dictionary<string, T> Load<T>(string name) where T : DTOBase {
+        Dictionary<string, T> values = new();
+        loader.GetListFromJson<T>(name).ForEach(value => values.Add(value.id, value));
+        return values;
+    }
+
+    public List<UnitDTO> LoadUnits() {
+        return loader.GetListFromJson<UnitDTO>("Units");
+    }
+    public List<AbilityDTO> LoadAbilities() {
+        return loader.GetListFromJson<AbilityDTO>("Abilities");
+    }
+    public List<EffectBaseDTO> LoadEffects() {
+        return loader.GetListFromJson<EffectBaseDTO>("Effects");
+    }
+}
+
+public class JSONLoader {
+    string databasePath = "./Database/";
+
+
+    string LoadJson(string name) {
         using StreamReader reader = new(databasePath + name + ".json");
         string json = reader.ReadToEnd();
         return json;
     }
-    static List<T> GetListFromJson<T>(string name) {
+    public List<T> GetListFromJson<T>(string name) {
         string json = LoadJson(name);
         List<T> items = JsonConvert.DeserializeObject<List<T>>(json);
         return items;
     }
 
-    public static List<NavigationUnitDTO> LoadUnits() {
-        return GetListFromJson<NavigationUnitDTO>("Units");
-    }
-    public static List<AbilityDTO> LoadAbilities() {
-        return GetListFromJson<AbilityDTO>("Abilities");
-    }
-    public static List<EffectBaseDTO> LoadEffects() {
-        return GetListFromJson<EffectBaseDTO>("Effects");
+    public void UpdateDBPath(string newPath) {
+        GD.Print("[UpdateDBPath] New path is " + newPath);
+        databasePath = newPath;
     }
 }

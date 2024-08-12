@@ -5,8 +5,12 @@ public static class VSScenePaths {
     public const string Enemy1 = "res://VerticalScroller/Scenes/VSEnemy1.tscn";
 };
 
+public static class VSPaths {
+    public const string SpriteFrames = "res://VerticalScroller/SpriteFrames/";
+}
+
 public static class VSNodes {
-    
+
     public const string PlayerManager = "PlayerManager";
     public const string Player = "Player";
 

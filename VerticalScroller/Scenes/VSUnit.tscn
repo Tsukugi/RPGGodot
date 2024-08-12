@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://emh0fo8pev08"]
 
-[ext_resource type="Script" path="res://Scripts/Actor/AxisUnit/AxisUnit.cs" id="1_tyu1i"]
+[ext_resource type="Script" path="res://VerticalScroller/Scripts/VSUnit.cs" id="1_6quad"]
 [ext_resource type="Texture2D" uid="uid://7fgk7abkcv1u" path="res://Art/Basic Asset Pack/Basic Humanoid Animations/goblin occultist/GoblinOccultist.png" id="2_c4puo"]
 [ext_resource type="Script" path="res://Scripts/Actor/UnitAttributes.cs" id="2_tnfqe"]
 [ext_resource type="PackedScene" uid="uid://bh5lo8eo1jyfg" path="res://Templates/UnitAreas.tscn" id="3_jeonj"]
@@ -45,7 +45,14 @@ animations = [{
 
 [node name="Unit" type="CharacterBody3D"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.25, 0)
-script = ExtResource("1_tyu1i")
+collision_layer = 2
+collision_mask = 2
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_6quad")
+PlayAreaLimit = Vector4(10, -1.5, 10, 1.5)
 
 [node name="BodyCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_4p3cl")
@@ -57,13 +64,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 outline_modulate = Color(0.341176, 0.709804, 0.972549, 1)
 text = "Test
 "
+font_size = 84
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="StaticRotation"]
 pixel_size = 0.1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_ejcnj")
 animation = &"idleDown"
-frame_progress = 0.287407
+frame_progress = 0.839854
 
 [node name="Attributes" type="Node" parent="."]
 script = ExtResource("2_tnfqe")

@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://d1war87xvimvn"]
+
+[ext_resource type="Texture2D" uid="uid://y74f8a7eflt4" path="res://Art/Basic Asset Pack/Basic Humanoid Animations/bestial lizardfolk/BestialLizardfolkIdleSide.png" id="1_uy6l8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv6vd"]
+atlas = ExtResource("1_uy6l8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0qgk"]
+atlas = ExtResource("1_uy6l8")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjueg"]
+atlas = ExtResource("1_uy6l8")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hryse"]
+atlas = ExtResource("1_uy6l8")
+region = Rect2(48, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv6vd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0qgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjueg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hryse")
+}],
+"loop": true,
+"name": &"idleDown",
+"speed": 5.0
+}]

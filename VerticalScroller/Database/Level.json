@@ -1,0 +1,163 @@
+[
+    {
+        "id": "Level1",
+        "encounters": [
+            [
+                null,
+                {
+                    "type": "Reward",
+                    "chestEncounter": {
+                        "hp": 100,
+                        "rewards": [
+                            {
+                                "type": "Money",
+                                "moneyAmount": 10
+                            }
+                        ]
+                    }
+                }
+            ],
+            [
+                {
+                    "type": "Enemy",
+                    "enemyEncounter": {
+                        "nOfEnemies": 2,
+                        "unitType": "LizardLv1",
+                        "rewards": [
+                            {
+                                "type": "Money",
+                                "moneyAmount": 2
+                            }
+                        ]
+                    }
+                },
+                null
+            ],
+            [
+                {
+                    "type": "Enemy",
+                    "enemyEncounter": {
+                        "nOfEnemies": 1,
+                        "unitType": "LizardLv1",
+                        "rewards": [
+                            {
+                                "type": "Money",
+                                "moneyAmount": 1
+                            }
+                        ]
+                    }
+                },
+                null
+            ],
+            [
+                {
+                    "type": "Reward",
+                    "chestEncounter": {
+                        "hp": 100,
+                        "rewards": [
+                            {
+                                "type": "Money",
+                                "moneyAmount": 10
+                            }
+                        ]
+                    }
+                },
+                null
+            ],
+            [
+                null,
+                {
+                    "type": "Reward",
+                    "chestEncounter": {
+                        "hp": 100,
+                        "rewards": [
+                            {
+                                "type": "Money",
+                                "moneyAmount": 10
+                            }
+                        ]
+                    }
+                }
+            ],
+            [
+                {
+                    "type": "Enemy",
+                    "enemyEncounter": {
+                        "nOfEnemies": 2,
+                        "unitType": "LizardLv1",
+                        "rewards": [
+                            {
+                                "type": "Money",
+                                "moneyAmount": 2
+                            }
+                        ]
+                    }
+                },
+                null
+            ],
+            [
+                null,
+                {
+                    "type": "Reward",
+                    "chestEncounter": {
+                        "hp": 100,
+                        "rewards": [
+                            {
+                                "type": "Money",
+                                "moneyAmount": 12
+                            }
+                        ]
+                    }
+                }
+            ],
+            [
+                {
+                    "type": "Enemy",
+                    "enemyEncounter": {
+                        "nOfEnemies": 1,
+                        "unitType": "LizardLv1",
+                        "rewards": [
+                            {
+                                "type": "Money",
+                                "moneyAmount": 2
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "Enemy",
+                    "enemyEncounter": {
+                        "nOfEnemies": 1,
+                        "unitType": "LizardLv2",
+                        "rewards": [
+                            {
+                                "type": "Money",
+                                "moneyAmount": 2
+                            }
+                        ]
+                    }
+                }
+            ],
+            [
+                null,
+                null
+            ],
+            [
+                null,
+                {
+                    "type": "Enemy",
+                    "enemyEncounter": {
+                        "nOfEnemies": 1,
+                        "unitType": "LizardLv1Boss",
+                        "rewards": [
+                            {
+                                "type": "Money",
+                                "moneyAmount": 20
+                            }
+                        ]
+                    }
+                }
+            ]
+        ]
+    }
+]

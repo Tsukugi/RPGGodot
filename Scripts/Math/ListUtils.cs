@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public static class ListUtils {
     private static Random rng = new Random();
 
-    public static void Shuffle<T>(this IList<T> list) {
+    public static void Shuffle<T>(this List<T> list) {
         int n = list.Count;
         while (n > 1) {
             n--;
@@ -16,7 +16,7 @@ public static class ListUtils {
         }
     }
 
-    public static IList<T> ShuffleNew<T>(this IList<T> list) {
+    public static List<T> ShuffleNew<T>(this List<T> list) {
         var newList = new List<T>(list);
         int n = newList.Count;
         while (n > 1) {

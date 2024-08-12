@@ -9,17 +9,18 @@ public partial class PlayerBase : Node {
     CanvasLayer canvasLayer;
     bool IsPerformanceLogActive = false;
     protected PlayerInteractionType currentInteractionType = PlayerInteractionType.None;
-    protected PlayerManager manager;
+    protected PlayerManager playerManager;
 
     public CameraBase Camera { get => camera; }
     public InteractionPanel InteractionPanel { get => interactionPanel; }
     public CanvasLayer CanvasLayer { get => canvasLayer; }
     public PlayerAbility PlayerAbility { get => playerAbility; }
+    public PlayerManager PlayerManager { get => playerManager; }
 
     public override void _Ready() {
         base._Ready();
 
-        manager = this.TryFindParentNodeOfType<PlayerManager>();
+        playerManager = this.TryFindParentNodeOfType<PlayerManager>();
         camera = GetNodeOrNull<CameraBase>(StaticNodePaths.PlayerCamera);
         interactionPanel = GetNodeOrNull<InteractionPanel>(StaticNodePaths.PlayerUIInteractionPanel);
         canvasLayer = GetNodeOrNull<CanvasLayer>(StaticNodePaths.PlayerUICanvas);
@@ -58,11 +59,11 @@ public partial class PlayerBase : Node {
     }
 
     public RelationshipType GetRelationship(PlayerBase player) {
-        return manager.PlayerRelationship.GetRelationship(Name, player.Name);
+        return playerManager.PlayerRelationship.GetRelationship(Name, player.Name);
     }
 
     public bool IsHostilePlayer(PlayerBase player) {
-        return manager.PlayerRelationship.GetRelationship(Name, player.Name) == RelationshipType.Hostile;
+        return playerManager.PlayerRelationship.GetRelationship(Name, player.Name) == RelationshipType.Hostile;
     }
 
     public bool IsSamePlayer(PlayerBase player) {

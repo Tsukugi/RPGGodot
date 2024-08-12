@@ -32,14 +32,14 @@ public partial class RealTimeStrategyPlayer : PlayerBase {
         return this.TryGetAllChildOfType<NavigationUnit>();
     }
 
-    public NavigationUnit AddUnit(NavigationUnitDTO unitDTO, Vector3 position) {
+    public NavigationUnit AddUnit(UnitDTO unitDTO, Vector3 position) {
         NavigationUnit navUnit = navUnitTemplate.Instantiate<NavigationUnit>();
         AddChild(navUnit);
         navUnit.Attributes.UpdateValues(unitDTO.attributes);
         navUnit.Name = unitDTO.name;
         navUnit.Position = position;
         foreach (string item in unitDTO.abilities) {
-            navUnit.AddAbility(LocalDatabase.Abilites[item]);
+            navUnit.AddAbility(PlayerManager.Database.Abilites[item]);
         }
 
         return navUnit;

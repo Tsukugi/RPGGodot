@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using Godot;
 public partial class PlayerManager : Node {
+    LocalDatabase database = new();
     List<PlayerBase> players = new();
     PlayerRelationship playerRelationship;
-
     List<Node3D> waypoints = new();
 
     public List<PlayerBase> Players { get => players; }
     public PlayerRelationship PlayerRelationship { get => playerRelationship; }
-
-
+    public LocalDatabase Database { get => database; }
 
     public override void _Ready() {
         players = this.TryGetAllChildOfType<PlayerBase>();
@@ -18,20 +17,20 @@ public partial class PlayerManager : Node {
         PlayerBase player = GetNode<PlayerBase>("Player");
         player.CanvasLayer.Visible = true;
         //! Debug 
-         // Callable.From(DebugStart).CallDeferred();
+        // Callable.From(DebugStart).CallDeferred();
         // !EndDebug 
     }
 
 
     async void DebugStart() {
-        LocalDatabase.LoadData();
-        GD.Print("[DebugStart] Loaded " + LocalDatabase.Units.Count + " units");
-        GD.Print("[DebugStart] Loaded " + LocalDatabase.Abilites.Count + " abilities");
-        GD.Print("[DebugStart] Loaded " + LocalDatabase.Effects.Count + " effects");
+        database.LoadData();
+        GD.Print("[DebugStart] Loaded " + database.Units.Count + " units");
+        GD.Print("[DebugStart] Loaded " + database.Abilites.Count + " abilities");
+        GD.Print("[DebugStart] Loaded " + database.Effects.Count + " effects");
         RealTimeStrategyPlayer player = GetNode<RealTimeStrategyPlayer>("Player");
-        var Tsukugi = player.AddUnit(LocalDatabase.Units["Tsukugi"], player.GetNode<Node3D>("Spawn1").GlobalPosition);
-        player.AddUnit(LocalDatabase.Units["Healer"], player.GetNode<Node3D>("Spawn1").GlobalPosition.AddToX(1f));
-        player.AddUnit(LocalDatabase.Units["Guard"], player.GetNode<Node3D>("Spawn1").GlobalPosition.AddToX(-1f));
+        var Tsukugi = player.AddUnit(database.Units["Tsukugi"], player.GetNode<Node3D>("Spawn1").GlobalPosition);
+        player.AddUnit(database.Units["Healer"], player.GetNode<Node3D>("Spawn1").GlobalPosition.AddToX(1f));
+        player.AddUnit(database.Units["Guard"], player.GetNode<Node3D>("Spawn1").GlobalPosition.AddToX(-1f));
         Tsukugi.Attributes.ApplyDamage(100);
 
         await this.Wait(1);
@@ -48,8 +47,8 @@ public partial class PlayerManager : Node {
         waypoints.Shuffle();
 
         for (int i = 0; i < waypoints.Count; i++) {
-            if (i % 2 == 0) Hostile.AddUnit(LocalDatabase.Units["Tsuki"], waypoints[i].GlobalPosition);
-            else Neutral.AddUnit(LocalDatabase.Units["Tsukita"], waypoints[i].GlobalPosition);
+            if (i % 2 == 0) Hostile.AddUnit(database.Units["Tsuki"], waypoints[i].GlobalPosition);
+            else Neutral.AddUnit(database.Units["Tsukita"], waypoints[i].GlobalPosition);
         }
         await this.Wait(1);
         DebugMoveToRandomWaypoints(Neutral, waypoints);

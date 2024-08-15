@@ -31,7 +31,7 @@ public partial class PlayerManager : Node {
         var Tsukugi = player.AddUnit(database.Units["Tsukugi"], player.GetNode<Node3D>("Spawn1").GlobalPosition);
         player.AddUnit(database.Units["Healer"], player.GetNode<Node3D>("Spawn1").GlobalPosition.AddToX(1f));
         player.AddUnit(database.Units["Guard"], player.GetNode<Node3D>("Spawn1").GlobalPosition.AddToX(-1f));
-        Tsukugi.Attributes.ApplyDamage(100);
+        Tsukugi.UnitAttributes.ApplyDamage(100);
 
         await this.Wait(1);
         playerRelationship.UpdateRelationship("Neutral", "Hostile", RelationshipType.Hostile);

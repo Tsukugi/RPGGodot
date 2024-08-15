@@ -11,7 +11,8 @@ public partial class UnitTaskHide : TaskBase {
         type = TaskType.Hide;
         this.target = target;
         this.unit = unit;
-        safeDistanceToHide = target.Attributes.AttackRange + 1f;
+        AttributesExport attributes = target.GetAttributes();
+        safeDistanceToHide = attributes.AttackRange + 1f;
     }
 
     public override void StartTask() {

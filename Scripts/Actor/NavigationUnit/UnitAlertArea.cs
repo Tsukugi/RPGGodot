@@ -16,7 +16,8 @@ public partial class UnitAlertArea : Area3D {
             collisionShape = GetNode<CollisionShape3D>(StaticNodePaths.Area_CollisionShape);
             BodyEntered += OnAlertAreaEntered;
             Callable.From(() => {
-                collisionShape.Scale = Vector3.One.Magnitude(unit.Attributes.AlertRange);
+                AttributesExport attributes = unit.GetAttributes();
+                collisionShape.Scale = Vector3.One.Magnitude(attributes.AlertRange);
                 SetMonitoringEnabled(true);
             }).CallDeferred();
         } else {

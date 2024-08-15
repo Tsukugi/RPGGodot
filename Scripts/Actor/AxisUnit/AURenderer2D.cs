@@ -44,13 +44,14 @@ public partial class AURenderer2D : Node3D {
                     if (unit.AttackHandler.OnAttackCooldownTimer != null && unit.AttackHandler.OnAttackCooldownTimer.Enabled) break;
                     unit.Player.DebugLog("[StartAttack]", true);
                     Callable.From(() => UpdateAttackAreaMonitoring(true)).CallDeferred();
-                    unit.AttackHandler.StartAttack(AttackAnimationEndHandler, OnAttackCooldownEndHandler, unit.Attributes.AttackCastDuration, unit.Attributes.AttackSpeed);
+                    AttributesExport attributes = unit.GetAttributes();
+                    unit.AttackHandler.StartAttack(AttackAnimationEndHandler, OnAttackCooldownEndHandler, attributes.AttackCastDuration, attributes.AttackSpeed);
                     effectAnimationHandler.ApplyAnimation(unit.Player.AxisInputHandler.ActionInputState);
                     break;
                 }
         }
     }
-    
+
     void UpdateAttackAreaMonitoring(bool value) {
         attackArea.Monitoring = value;
     }

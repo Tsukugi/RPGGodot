@@ -37,8 +37,8 @@ public partial class NavigationUnit : Unit {
         unitTask = GetNode<UnitTask>(StaticNodePaths.TaskController);
         detectionCast = GetNode<ShapeCast3D>(StaticNodePaths.TaskController_DetectionCast);
 
-        Attributes.OnKilled -= OnKilledHandler;
-        Attributes.OnKilled += OnKilledHandler;
+        UnitAttributes.OnKilled -= OnKilledHandler;
+        UnitAttributes.OnKilled += OnKilledHandler;
     }
 
     void OnKilledHandler(Unit unit) {
@@ -49,7 +49,8 @@ public partial class NavigationUnit : Unit {
     }
 
     public void NavigateTo(Vector3 direction) {
-        Vector3 Velocity = GlobalPosition.DirectionTo(direction) * Attributes.MovementSpeed;
+        AttributesExport attributes = GetAttributes();
+        Vector3 Velocity = GlobalPosition.DirectionTo(direction) * attributes.MovementSpeed;
         MoveAndSlide(Velocity);
         UpdateRenderDirection(Velocity.ToVector2().Rotate(RotationDegrees.X));
     }

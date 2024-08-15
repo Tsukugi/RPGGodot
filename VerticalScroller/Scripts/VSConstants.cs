@@ -3,6 +3,7 @@ public static class VSScenePaths {
     public const string Store = "res://VerticalScroller/Scenes/Store.tscn";
     public const string Game = "res://VerticalScroller/Scenes/Game.tscn";
     public const string Enemy1 = "res://VerticalScroller/Scenes/VSEnemy1.tscn";
+    public const string Chest = "res://VerticalScroller/Scenes/VSChest.tscn";
 };
 
 public static class VSPaths {

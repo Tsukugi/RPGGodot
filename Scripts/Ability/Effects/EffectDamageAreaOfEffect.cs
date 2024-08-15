@@ -11,7 +11,7 @@ public partial class EffectDamageAreaOfEffect : EffectBase {
 
         void OnCollide(Unit collider) {
             unit.Player.DebugLog("[EffectDamageAreaOfEffect] Apply damage to" + collider.Name + " at " + collider.GlobalPosition, true);
-            collider.Attributes.ApplyDamage(attributes.damageAmount);
+            collider.UnitAttributes.ApplyDamage(attributes.damageAmount);
         }
         areaOfEffectUnit.OnCollideEvent -= OnCollide;
         areaOfEffectUnit.OnCollideEvent += OnCollide;

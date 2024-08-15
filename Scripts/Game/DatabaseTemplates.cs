@@ -20,6 +20,8 @@ public class UnitAttributesDTO : DTOBase {
     public int baseDamage;
     public double attackCastDuration;
     public float attackRange;
+    public int hitPoints;
+    public float alertRange;
 }
 
 public class AbilityDTO : DTOBase {

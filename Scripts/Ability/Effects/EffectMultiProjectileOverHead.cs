@@ -18,7 +18,7 @@ public partial class EffectMultiProjectileOverHead : EffectBase {
 
             void onCollideEvent(Unit collider) {
                 activeProjectiles--;
-                collider.Attributes.ApplyDamage(attributes.damageAmount);
+                collider.UnitAttributes.ApplyDamage(attributes.damageAmount);
             }
             projectile.OnCollideEvent -= onCollideEvent;
             projectile.OnCollideEvent += onCollideEvent;

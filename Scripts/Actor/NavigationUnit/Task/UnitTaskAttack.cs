@@ -26,7 +26,7 @@ public partial class UnitTaskAttack : TaskBase {
         unit.UnitCombat.OnAttackFailedEvent += onAttackFailed;
     }
     public override bool CheckIfCompleted() {
-        return base.CheckIfCompleted() || target.Attributes.CanBeKilled || !unit.UnitCombat.IsInCombat;
+        return base.CheckIfCompleted() || target.UnitAttributes.CanBeKilled || !unit.UnitCombat.IsInCombat;
     }
 
     public override void OnTaskProcess() {
@@ -48,7 +48,8 @@ public partial class UnitTaskAttack : TaskBase {
     }
 
     bool IsInRange() {
-        return unit.GlobalPosition.DistanceTo(target.GlobalPosition) < unit.Attributes.AttackRange;
+        AttributesExport attributes = unit.GetAttributes();
+        return unit.GlobalPosition.DistanceTo(target.GlobalPosition) < attributes.AttackRange;
     }
 
     public override void OnTaskCompleted() {

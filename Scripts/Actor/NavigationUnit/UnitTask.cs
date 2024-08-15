@@ -11,8 +11,9 @@ public partial class UnitTask : TaskHandler {
     protected override void OnTaskProcess() {
         base.OnTaskProcess();
         //! Debug
+        AttributesExport attributes = unit.GetAttributes();
         string text = unit.Name + " \n "
-            + unit.Attributes.HitPoints + "/" + unit.Attributes.MaxHitPoints + " \n "
+            + attributes.HitPoints + "/" + attributes.MaxHitPoints + " \n "
             + unit.AlertArea.AlertState + " \n ";
         if (currentTask != null) {
             text += currentTask.Type.ToString();

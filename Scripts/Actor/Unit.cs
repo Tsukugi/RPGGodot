@@ -5,28 +5,30 @@ public partial class Unit : CharacterBody3D {
 
     bool isKilled = false;
     Area3D interactionArea = null;
-    UnitAttributes attributes;
+    UnitMutableAttributes unitAtributes;
     UnitRender unitRender;
     readonly Dictionary<string, AbilityCaster> abilities = new();
     protected UnitPlayerBind unitPlayerBind;
     protected Label3D overheadLabel;
     public PlayerBase Player { get => unitPlayerBind.Player; }
     public Area3D InteractionArea { get => interactionArea; }
-    public UnitAttributes Attributes { get => attributes; }
+    public UnitAttributes UnitAttributes { get => unitAtributes; }
     public Label3D OverheadLabel { get => overheadLabel; }
     public Dictionary<string, AbilityCaster> Abilities { get => abilities; }
     public bool IsKilled { get => isKilled; }
     public UnitRender UnitRender { get => unitRender; }
+    public AttributesExport GetAttributes() => UnitAttributes.GetAttributes();
+
 
     public override void _Ready() {
         base._Ready();
         unitPlayerBind = new(this);
         unitRender = new(this);
-        attributes = GetNode<UnitAttributes>(StaticNodePaths.Attributes);
+        unitAtributes = new(this);
         overheadLabel = GetNode<Label3D>(StaticNodePaths.OverheadLabel);
         interactionArea = GetNodeOrNull<Area3D>(StaticNodePaths.InteractionArea);
-        attributes.OnKilled -= OnKilledHandler;
-        attributes.OnKilled += OnKilledHandler;
+        unitAtributes.OnKilled -= OnKilledHandler;
+        unitAtributes.OnKilled += OnKilledHandler;
     }
 
     void OnKilledHandler(Unit unit) {
@@ -37,13 +39,13 @@ public partial class Unit : CharacterBody3D {
 
     protected void MoveAndCollide(Vector3 direction, float delta) {
         // Apply velocity.
-        direction = direction.Normalized() * Attributes.MovementSpeed;
+        direction = direction.Normalized() * GetAttributes().MovementSpeed;
         MoveAndCollide(direction * (float)delta);
     }
 
     protected void MoveAndSlide(Vector3 direction) {
         // Apply velocity.
-        direction = direction.Normalized() * Attributes.MovementSpeed;
+        direction = direction.Normalized() * GetAttributes().MovementSpeed;
         Velocity = direction;
         MoveAndSlide();
     }
@@ -65,6 +67,7 @@ public partial class Unit : CharacterBody3D {
         Player.DebugLog("[CastAbility] Casting " + name, true);
         Player.PlayerAbility.StartCastingState(abilities[name]);
     }
+
 }
 
 public enum UnitActionState {

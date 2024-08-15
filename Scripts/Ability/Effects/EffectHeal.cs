@@ -10,7 +10,7 @@ public partial class EffectHeal : EffectBase {
 
         void CollideEvent(Unit collider) {
             unit.Player.DebugLog("[EffectHeal] Healing to " + collider.Name + " at " + collider.GlobalPosition, true);
-            collider.Attributes.ApplyHeal(attributes.healAmount);
+            collider.UnitAttributes.ApplyHeal(attributes.healAmount);
         }
         areaOfEffectUnit.OnCollideEvent -= CollideEvent;
         areaOfEffectUnit.OnCollideEvent += CollideEvent;

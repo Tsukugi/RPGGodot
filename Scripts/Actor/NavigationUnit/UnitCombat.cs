@@ -24,7 +24,7 @@ public partial class UnitCombat : Node3D {
 
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-        if (target is null || target.Attributes.CanBeKilled) EndCombat();
+        if (target is null || target.UnitAttributes.CanBeKilled) EndCombat();
     }
 
 
@@ -60,7 +60,8 @@ public partial class UnitCombat : Node3D {
             return;
         }
         CastAttack();
-        if (unit.Attributes.AttackCastDuration > 0) TimerUtils.CreateSimpleTimer((s, e) => OnAttackCastEnd(), unit.Attributes.AttackCastDuration);
+        AttributesExport attributes = unit.GetAttributes();
+        if (attributes.AttackCastDuration > 0) TimerUtils.CreateSimpleTimer((s, e) => OnAttackCastEnd(), attributes.AttackCastDuration);
         else OnAttackCastEnd();
     }
 
@@ -95,12 +96,15 @@ public partial class UnitCombat : Node3D {
 
     void OnTargetAttackReached(NavigationUnit targetUnit) {
         OnAttackReachedEvent?.Invoke();
-        int finalDamage = targetUnit.Attributes.ApplyDamage(unit.Attributes.BaseDamage);
+        AttributesExport unitAttributes = unit.GetAttributes();
+        AttributesExport targetUnitAttributes = unit.GetAttributes();
+        int finalDamage = targetUnit.UnitAttributes.ApplyDamage(unitAttributes.BaseDamage);
         unit.Player.DebugLog("[TryStartAttack] " + unit.Name + " dealt " + finalDamage + " of damage. " +
-             " \n Target hitpoints: " + targetUnit.Attributes.HitPoints);
+             " \n Target hitpoints: " + targetUnitAttributes.HitPoints);
     }
     void OnAttackCastEnd() {
-        TimerUtils.CreateSimpleTimer((s, e) => OnAttackCooldownEnd(), unit.Attributes.AttackSpeed);
+        AttributesExport attributes = unit.GetAttributes();
+        TimerUtils.CreateSimpleTimer((s, e) => OnAttackCooldownEnd(), attributes.AttackSpeed);
         unit.Player.DebugLog("[OnAttackCastEnd]");
     }
 

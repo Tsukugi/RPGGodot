@@ -6,6 +6,7 @@ public class VSLevel : DTOBase {
 
 public class VSBuff {
     // TODO implement me
+
 }
 
 public class VSEncounter {
@@ -33,7 +34,7 @@ public class VSReward {
 
 public static class VSEncounterTypes {
     public const string Enemy = "Enemy";
-    public const string Reward = "Reward";
+    public const string Chest = "Chest";
 }
 public static class VSRewardTypes {
     public const string Money = "Money";

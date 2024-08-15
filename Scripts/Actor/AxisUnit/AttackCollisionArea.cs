@@ -22,12 +22,13 @@ public partial class AttackCollisionArea : Area3D {
         if (area.Name != AxisNodeNames.AttackArea) return;
         if (!player.IsFirstPlayer()) return;
         Unit attackedUnit = (Unit)area.GetParent().GetParent();
+        AttributesExport attributes = attackedUnit.GetAttributes();
         GD.Print("[OnMeleeAttackAreaEnteredHandler] " + attackedUnit.Name);
-        GD.Print("[OnMeleeAttackAreaEnteredHandler] Applying " + attackedUnit.Attributes.BaseDamage + " of base damage to " + attackedUnit.Name);
-        attackedUnit.Attributes.ApplyDamage(attackedUnit.Attributes.BaseDamage);
-        GD.Print("[OnMeleeAttackAreaEnteredHandler] HP: " + attackedUnit.Attributes.HitPoints + " / " + attackedUnit.Attributes.MaxHitPoints);
+        GD.Print("[OnMeleeAttackAreaEnteredHandler] Applying " + attributes.BaseDamage + " of base damage to " + attackedUnit.Name);
+        attackedUnit.UnitAttributes.ApplyDamage(attributes.BaseDamage);
+        GD.Print("[OnMeleeAttackAreaEnteredHandler] HP: " + attributes.HitPoints + " / " + attributes.MaxHitPoints);
 
-        if (attackedUnit.Attributes.CanBeKilled) {
+        if (attackedUnit.UnitAttributes.CanBeKilled) {
             attackedUnit.Visible = false;
         }
     }

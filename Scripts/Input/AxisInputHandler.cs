@@ -1,7 +1,6 @@
 
 
 using Godot;
-using System;
 
 
 public partial class AxisInputHandler : InputBase {
@@ -14,6 +13,8 @@ public partial class AxisInputHandler : InputBase {
     public InputState MovementInputState { get => movementInputState; }
     public UnitActionState ActionInputState { get => actionInputState; }
 
+    public AxisType InputAxisType = AxisType.FullAxis;
+
 
     public bool GetAxisChange() {
         Vector2 axis = GetAxis();
@@ -21,15 +22,58 @@ public partial class AxisInputHandler : InputBase {
     }
 
     public Vector2 GetAxis() {
-        Vector2 axis = Vector2.Zero;
-
-        if (Input.IsActionPressed("ui_down")) { axis.Y += 1; renderDirection = UnitRenderDirection.Down; }
-        if (Input.IsActionPressed("ui_up")) { axis.Y -= 1; renderDirection = UnitRenderDirection.Up; }
-        if (Input.IsActionPressed("ui_right")) { axis.X += 1; renderDirection = UnitRenderDirection.Right; }
-        if (Input.IsActionPressed("ui_left")) { axis.X -= 1; renderDirection = UnitRenderDirection.Left; }
-
+        Vector2 axis = InputAxisType switch {
+            AxisType.XAxis => GetXAxis(),
+            AxisType.YAxis => GetYAxis(),
+            AxisType.FourAxis => GetFourAxis(),
+            AxisType.FullAxis => GetFullAxis(),
+            _ => Vector2.Zero,
+        };
+        ApplyUnitRenderDirection(axis);
         return axis;
     }
+
+    Vector2 GetXAxis() {
+        Vector2 axis = Vector2.Zero;
+        if (Input.IsActionPressed("ui_right")) axis.X++;
+        if (Input.IsActionPressed("ui_left")) axis.X--;
+        return axis;
+    }
+    Vector2 GetYAxis() {
+        Vector2 axis = Vector2.Zero;
+        if (Input.IsActionPressed("ui_down")) axis.Y++;
+        if (Input.IsActionPressed("ui_up")) axis.Y--;
+        return axis;
+    }
+    Vector2 GetFourAxis() {
+        Vector2 axis = Vector2.Zero;
+        if (Input.IsActionPressed("ui_right")) return Vector2.Right;
+        if (Input.IsActionPressed("ui_left")) return Vector2.Left;
+        if (Input.IsActionPressed("ui_down")) return Vector2.Down;
+        if (Input.IsActionPressed("ui_up")) return Vector2.Up;
+        return axis;
+    }
+    Vector2 GetFullAxis() {
+        Vector2 axis = Vector2.Zero;
+        if (Input.IsActionPressed("ui_right")) axis.X++;
+        if (Input.IsActionPressed("ui_left")) axis.X--;
+        if (Input.IsActionPressed("ui_down")) axis.Y++;
+        if (Input.IsActionPressed("ui_up")) axis.Y--;
+        return axis;
+    }
+
+
+    void ApplyUnitRenderDirection(Vector2 axis) {
+        switch (axis.X) {
+            case 1: renderDirection = UnitRenderDirection.Right; break;
+            case -1: renderDirection = UnitRenderDirection.Left; break;
+        }
+        switch (axis.Y) {
+            case 1: renderDirection = UnitRenderDirection.Down; break;
+            case -1: renderDirection = UnitRenderDirection.Up; break;
+        }
+    }
+
 
     public bool IsAttacking() {
         return Input.IsActionPressed("Attack");
@@ -50,4 +94,12 @@ public partial class AxisInputHandler : InputBase {
         else movementInputState = InputState.Stop;
     }
 
+}
+
+
+public enum AxisType {
+    XAxis,
+    YAxis,
+    FullAxis,
+    FourAxis,
 }

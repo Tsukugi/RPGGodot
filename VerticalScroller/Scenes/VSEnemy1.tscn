@@ -4,7 +4,6 @@
 [ext_resource type="SpriteFrames" uid="uid://d1war87xvimvn" path="res://VerticalScroller/SpriteFrames/Lizard.tres" id="2_ko0w4"]
 
 [node name="Unit" instance=ExtResource("1_d3qfs")]
-PlayAreaLimit = Vector4(-15, -1.5, 10, 1.5)
 
 [node name="AnimatedSprite3D" parent="StaticRotation" index="1"]
 sprite_frames = ExtResource("2_ko0w4")

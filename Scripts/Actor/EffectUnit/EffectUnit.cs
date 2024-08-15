@@ -78,7 +78,7 @@ public abstract partial class EffectUnit : CharacterBody3D {
         expireTimer.Start();
     }
     protected void ExpireEffect() {
-        Player.DebugLog("[ExpireEffect] " + Name, true);
+        Player.DebugLog("[ExpireEffect] " + Name);
         OnExpireEvent?.Invoke();
         QueueFree();
     }

@@ -2,38 +2,35 @@ using Godot;
 
 public partial class UnitAttributes : Node {
     Unit unit;
-    [Export]
-    float movementSpeed = 3f;
-    [Export]
-    int maxHitPoints = 50;
-    [Export]
-    int hitPoints = 50;
-    [Export]
-    double attackSpeed = 0.5;
-    [Export]
-    int armor = 1;
-    [Export]
-    int baseDamage = 20;
-    [Export]
-    double attackCastDuration = 0.3;
-    [Export]
-    float attackRange = 10;
-    [Export]
-    float alertRange = 7f;
+
+    protected UnitAttributesDTO attributes = new() {
+        movementSpeed = 3f,
+        maxHitPoints = 50,
+        attackSpeed = 0.5,
+        armor = 1,
+        baseDamage = 20,
+        attackCastDuration = 0.3,
+        attackRange = 10,
+    };
+
+    readonly InternalAttributesDTO internalAttributes = new() {
+        hitPoints = 50,
+        alertRange = 7f,
+    };
 
     public bool CanBeKilled {
-        get => hitPoints <= 0 || unit.IsQueuedForDeletion() || unit.IsKilled;
+        get => internalAttributes.hitPoints <= 0 || unit.IsQueuedForDeletion() || unit.IsKilled;
     }
 
-    public int HitPoints { get => hitPoints; }
-    public int MaxHitPoints { get => maxHitPoints; }
-    public double AttackSpeed { get => 1 / attackSpeed; }
-    public int Armor { get => armor; }
-    public int BaseDamage { get => baseDamage; }
-    public double AttackCastDuration { get => attackCastDuration; }
-    public float AttackRange { get => attackRange; }
-    public float MovementSpeed { get => movementSpeed; }
-    public float AlertRange { get => alertRange; }
+    public int HitPoints { get => internalAttributes.hitPoints; }
+    public int MaxHitPoints { get => attributes.maxHitPoints; }
+    public double AttackSpeed { get => 1 / attributes.attackSpeed; }
+    public int Armor { get => attributes.armor; }
+    public int BaseDamage { get => attributes.baseDamage; }
+    public double AttackCastDuration { get => attributes.attackCastDuration; }
+    public float AttackRange { get => attributes.attackRange; }
+    public float MovementSpeed { get => attributes.movementSpeed; }
+    public float AlertRange { get => internalAttributes.alertRange; }
 
     public override void _Ready() {
         base._Ready();
@@ -41,38 +38,39 @@ public partial class UnitAttributes : Node {
     }
 
     // Try to avoid overflowing and underflowing
-    void SetHitPoints(int newHitPoints) {
-        if (newHitPoints > maxHitPoints) hitPoints = maxHitPoints;
-        else if (newHitPoints < 0) hitPoints = 0;
-        else hitPoints = newHitPoints;
+    protected void SetHitPoints(int newHitPoints) {
+        if (newHitPoints > attributes.maxHitPoints) internalAttributes.hitPoints = attributes.maxHitPoints;
+        else if (newHitPoints < 0) internalAttributes.hitPoints = 0;
+        else internalAttributes.hitPoints = newHitPoints;
 
         if (CanBeKilled) OnKilled(unit);
     }
 
     public void UpdateValues(UnitAttributesDTO attributesDTO) {
-        maxHitPoints = attributesDTO.maxHitPoints;
-        armor = attributesDTO.armor;
-        baseDamage = attributesDTO.baseDamage;
-        movementSpeed = attributesDTO.movementSpeed;
-        attackSpeed = attributesDTO.attackSpeed <= 0 ? 0.1 : attributesDTO.attackSpeed;
-        attackCastDuration = attributesDTO.attackCastDuration;
-        attackRange = attributesDTO.attackRange;
-        SetHitPoints(maxHitPoints);
+        if (attributesDTO.attackSpeed <= 0) attributesDTO.attackSpeed = 0.1;
+        attributes = attributesDTO;
+        SetHitPoints(attributes.maxHitPoints);
     }
+
 
     public int ApplyDamage(int damage) {
         int finalDamage = damage - Armor;
         if (finalDamage < 0) finalDamage = 0;
-        SetHitPoints(hitPoints - finalDamage);
+        SetHitPoints(internalAttributes.hitPoints - finalDamage);
         return finalDamage;
     }
 
     public int ApplyHeal(int healAmount) {
-        SetHitPoints(hitPoints + healAmount);
+        SetHitPoints(internalAttributes.hitPoints + healAmount);
         return healAmount;
     }
 
     public delegate void OnKilledEventHandler(Unit unit);
     public event OnKilledEventHandler OnKilled;
 
+}
+
+public class InternalAttributesDTO {
+    public int hitPoints;
+    public float alertRange;
 }

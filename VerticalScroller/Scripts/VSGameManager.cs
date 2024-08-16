@@ -66,6 +66,7 @@ public partial class VSGameManager : Node {
 
     void HandleEncounter(VSEncounter? encounter, Vector3 spawnPosition) {
         if (encounter is null) return;
+        GD.Print("[HandleEncounter] Encounter " + encounter.type);
         switch (encounter.type) {
             case VSEncounterTypes.Enemy:
                 for (int i = 0; i < encounter.enemyEncounter.nOfEnemies; i++) {
@@ -91,19 +92,18 @@ public partial class VSGameManager : Node {
         }
     }
 
+    // TODO Remove duplicate code
     void SpawnChest(VSEncounter encounter, Vector3 position) {
         VSUnit chestUnit = chestScene.Instantiate<VSUnit>();
         enemyPlayer.AddChild(chestUnit);
+        chestUnit.UnitAttributes.ApplyHeal(encounter.chestEncounter.hp);
         chestUnit.GlobalPosition = position;
-        chestUnit.UnitAttributes.OnKilled += (dyingUnit) => {
-            enemyUnits.Remove(dyingUnit.Name);
-            dyingUnit.QueueFree();
-        };
-        AttributesExport enemyUnitAttributes = chestUnit.GetAttributes();
-        chestUnit.OverheadLabel.Text = enemyUnitAttributes.HitPoints + " / " + enemyUnitAttributes.MaxHitPoints;
+        chestUnit.UnitAttributes.OnKilled += OnEnemyUnitKilled;
+        AttributesExport chestUnitAttributes = chestUnit.GetAttributes();
+        chestUnit.OverheadLabel.Text = chestUnitAttributes.HitPoints + " / " + chestUnitAttributes.MaxHitPoints;
 
-        GD.Print("[SpawnEnemy] Spawn " + chestUnit.Name + " as enemy");
-        GD.Print("[SpawnEnemy] Enemy units handled: " + enemyUnits.Count);
+        GD.Print("[SpawnChest] Spawn " + chestUnit.Name + " as chest");
+        GD.Print("[SpawnChest] Enemy units handled: " + enemyUnits.Count);
 
         enemyUnits.Add(chestUnit.Name, chestUnit);
     }
@@ -113,10 +113,7 @@ public partial class VSGameManager : Node {
         enemyPlayer.AddChild(enemyUnit);
         enemyUnit.UpdateUnit(Database.Enemies[unitId]);
         enemyUnit.GlobalPosition = position;
-        enemyUnit.UnitAttributes.OnKilled += (dyingUnit) => {
-            enemyUnits.Remove(dyingUnit.Name);
-            dyingUnit.QueueFree();
-        };
+        enemyUnit.UnitAttributes.OnKilled += OnEnemyUnitKilled;
         AttributesExport enemyUnitAttributes = enemyUnit.GetAttributes();
         enemyUnit.OverheadLabel.Text = enemyUnitAttributes.HitPoints + " / " + enemyUnitAttributes.MaxHitPoints;
 
@@ -124,6 +121,11 @@ public partial class VSGameManager : Node {
         GD.Print("[SpawnEnemy] Enemy units handled: " + enemyUnits.Count);
 
         enemyUnits.Add(enemyUnit.Name, enemyUnit);
+    }
+
+    void OnEnemyUnitKilled(Unit dyingUnit) {
+        enemyUnits.Remove(dyingUnit.Name);
+        dyingUnit.QueueFree();
     }
 
     List<Node3D> GetRandomSpawners() {

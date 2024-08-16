@@ -26,8 +26,8 @@ public partial class VSUnit : AxisUnit {
 
     public override void _Ready() {
         base._Ready();
-        if (!Player.IsFirstPlayer()) return;
         UnitAttributes.InitializeValues(unitAttributesDTO);
+        if (!Player.IsFirstPlayer()) return;
         AttributesExport attributes = GetAttributes();
         Player.AxisInputHandler.InputAxisType = AxisType.XAxis;
         attackTimer.WaitTime = attributes.AttackSpeed;

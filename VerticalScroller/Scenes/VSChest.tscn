@@ -1,11 +1,54 @@
-[gd_scene load_steps=3 format=3 uid="uid://c24qha623qt48"]
+[gd_scene load_steps=9 format=3 uid="uid://c24qha623qt48"]
 
 [ext_resource type="PackedScene" uid="uid://emh0fo8pev08" path="res://VerticalScroller/Scenes/VSUnit.tscn" id="1_4rjul"]
-[ext_resource type="SpriteFrames" uid="uid://d1war87xvimvn" path="res://VerticalScroller/SpriteFrames/Lizard.tres" id="2_0sgvj"]
+[ext_resource type="Texture2D" uid="uid://bwlmwwkb76uoe" path="res://Art/Basic Asset Pack/Destructible Objects Sprite Sheet.png" id="2_qu242"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpumg"]
+atlas = ExtResource("2_qu242")
+region = Rect2(0, 704, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3luj"]
+atlas = ExtResource("2_qu242")
+region = Rect2(64, 704, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm5r2"]
+atlas = ExtResource("2_qu242")
+region = Rect2(128, 704, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_biqr6"]
+atlas = ExtResource("2_qu242")
+region = Rect2(192, 704, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bputk"]
+atlas = ExtResource("2_qu242")
+region = Rect2(256, 704, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_evmfk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpumg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3luj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tm5r2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_biqr6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bputk")
+}],
+"loop": true,
+"name": &"idleDown",
+"speed": 5.0
+}]
 
 [node name="Unit" instance=ExtResource("1_4rjul")]
 safe_margin = 0.5
 
 [node name="AnimatedSprite3D" parent="StaticRotation" index="1"]
-sprite_frames = ExtResource("2_0sgvj")
-frame_progress = 0.0376222
+sprite_frames = SubResource("SpriteFrames_evmfk")
+frame_progress = 0.0

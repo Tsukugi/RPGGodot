@@ -17,9 +17,8 @@
                     }
                 },
                 {
-                    "type": "Reward",
+                    "type": "Chest",
                     "chestEncounter": {
-                        "hp": 100,
                         "rewards": [
                             {
                                 "type": "Money",
@@ -63,7 +62,7 @@
             ],
             [
                 {
-                    "type": "Reward",
+                    "type": "Chest",
                     "chestEncounter": {
                         "hp": 100,
                         "rewards": [
@@ -79,7 +78,7 @@
             [
                 null,
                 {
-                    "type": "Reward",
+                    "type": "Chest",
                     "chestEncounter": {
                         "hp": 100,
                         "rewards": [
@@ -110,7 +109,7 @@
             [
                 null,
                 {
-                    "type": "Reward",
+                    "type": "Chest",
                     "chestEncounter": {
                         "hp": 100,
                         "rewards": [

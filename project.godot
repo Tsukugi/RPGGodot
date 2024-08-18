@@ -15,6 +15,11 @@ run/main_scene="res://VerticalScroller/Scenes/Main.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Store="*res://Scripts/Store/Store.cs"
+VSStore="*res://VerticalScroller/Scripts/VSStore.cs"
+
 [dotnet]
 
 project/assembly_name="Test"

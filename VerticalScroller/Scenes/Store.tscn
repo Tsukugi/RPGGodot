@@ -1,17 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://sey3h77ca1a3"]
+[gd_scene load_steps=5 format=3 uid="uid://sey3h77ca1a3"]
 
-[ext_resource type="Script" path="res://VerticalScroller/Scripts/UI/VSUIMain.cs" id="1_awuim"]
+[ext_resource type="Script" path="res://VerticalScroller/Scripts/UI/VSUIGame.cs" id="1_7qvrj"]
 [ext_resource type="PackedScene" uid="uid://dybeg6rn2gri1" path="res://VerticalScroller/Scenes/VSUIStoreElement.tscn" id="2_s1vil"]
 [ext_resource type="PackedScene" uid="uid://dyju0jupmqaae" path="res://VerticalScroller/Scenes/VSUIBackButton.tscn" id="3_kl86i"]
+[ext_resource type="PackedScene" uid="uid://b3cijg1k8shsl" path="res://VerticalScroller/Scenes/MoneyLabel.tscn" id="4_ttsd7"]
 
-[node name="Control2" type="Control"]
+[node name="Store" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_awuim")
+script = ExtResource("1_7qvrj")
+
+[node name="MoneyLabel" parent="." instance=ExtResource("4_ttsd7")]
+layout_mode = 1
+offset_left = -107.0
+offset_top = 71.0
+offset_right = -10.0
+offset_bottom = 94.0
 
 [node name="GridContainer" parent="." instance=ExtResource("2_s1vil")]
 layout_mode = 0
@@ -27,5 +35,5 @@ offset_bottom = 66.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="Button" parent="." instance=ExtResource("3_kl86i")]
+[node name="BackBtn" parent="." instance=ExtResource("3_kl86i")]
 layout_mode = 1

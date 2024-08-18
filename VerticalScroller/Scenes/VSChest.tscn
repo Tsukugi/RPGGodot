@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c24qha623qt48"]
+[gd_scene load_steps=10 format=3 uid="uid://c24qha623qt48"]
 
 [ext_resource type="PackedScene" uid="uid://emh0fo8pev08" path="res://VerticalScroller/Scenes/VSUnit.tscn" id="1_4rjul"]
+[ext_resource type="Script" path="res://VerticalScroller/Scripts/VSUnits/VSChestUnit.cs" id="2_lgfpq"]
 [ext_resource type="Texture2D" uid="uid://bwlmwwkb76uoe" path="res://Art/Basic Asset Pack/Destructible Objects Sprite Sheet.png" id="2_qu242"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mpumg"]
@@ -46,9 +47,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Unit" instance=ExtResource("1_4rjul")]
-safe_margin = 0.5
+[node name="Chest" instance=ExtResource("1_4rjul")]
+collision_mask = 8
+safe_margin = 0.2
+script = ExtResource("2_lgfpq")
 
 [node name="AnimatedSprite3D" parent="StaticRotation" index="1"]
 sprite_frames = SubResource("SpriteFrames_evmfk")
 frame_progress = 0.0
+
+[editable path="Areas"]

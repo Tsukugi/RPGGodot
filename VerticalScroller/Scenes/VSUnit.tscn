@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://emh0fo8pev08"]
 
-[ext_resource type="Script" path="res://VerticalScroller/Scripts/VSUnit.cs" id="1_6quad"]
+[ext_resource type="Script" path="res://VerticalScroller/Scripts/VSUnits/VSPlayerUnit.cs" id="1_up2pn"]
 [ext_resource type="Texture2D" uid="uid://7fgk7abkcv1u" path="res://Art/Basic Asset Pack/Basic Humanoid Animations/goblin occultist/GoblinOccultist.png" id="2_c4puo"]
 [ext_resource type="PackedScene" uid="uid://bh5lo8eo1jyfg" path="res://Templates/UnitAreas.tscn" id="3_jeonj"]
 
@@ -50,7 +50,7 @@ axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-script = ExtResource("1_6quad")
+script = ExtResource("1_up2pn")
 
 [node name="BodyCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_4p3cl")

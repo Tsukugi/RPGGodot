@@ -10,16 +10,6 @@
         "textureName": "Lizard"
     },
     {
-        "id": "LizardLv1",
-        "name": "Lizard",
-        "attributes": {
-            "movementSpeed": 2,
-            "maxHitPoints": 25,
-            "baseDamage": 3
-        },
-        "textureName": "Lizard"
-    },
-    {
         "id": "LizardLv2",
         "name": "Lizard",
         "attributes": {

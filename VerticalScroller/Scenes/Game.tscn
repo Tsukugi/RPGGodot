@@ -1,10 +1,10 @@
 [gd_scene load_steps=24 format=3 uid="uid://sey3h77ca1a3"]
 
 [ext_resource type="Script" path="res://VerticalScroller/Scripts/VSGameManager.cs" id="1_0ycb4"]
-[ext_resource type="Script" path="res://VerticalScroller/Scripts/UI/VSUIMain.cs" id="1_awuim"]
 [ext_resource type="Texture2D" uid="uid://bfpvlws48hbyl" path="res://Art/Prototype Textures/black.png" id="1_ay2vq"]
 [ext_resource type="PackedScene" uid="uid://dyju0jupmqaae" path="res://VerticalScroller/Scenes/VSUIBackButton.tscn" id="3_011mh"]
 [ext_resource type="Script" path="res://Scripts/Player/AxisPlayer.cs" id="6_0xbcq"]
+[ext_resource type="Script" path="res://VerticalScroller/Scripts/UI/VSUIGame.cs" id="6_alw0w"]
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/PlayerManager.cs" id="6_fcxki"]
 [ext_resource type="PackedScene" uid="uid://emh0fo8pev08" path="res://VerticalScroller/Scenes/VSUnit.tscn" id="7_6y4ic"]
 [ext_resource type="Script" path="res://Scripts/Game/CameraBase.cs" id="9_j1sfo"]
@@ -89,13 +89,13 @@ section_length = 1000.0
 render_priority = 0
 shader = ExtResource("10_ble23")
 shader_parameter/shine_color = Color(1, 1, 1, 1)
-shader_parameter/cycle_interval = 2.324
-shader_parameter/shine_speed = 5.0
-shader_parameter/shine_width = 28.412
+shader_parameter/cycle_interval = 0.5
+shader_parameter/shine_speed = 25.0
+shader_parameter/shine_width = 13.457
 
 [sub_resource type="TubeTrailMesh" id="TubeTrailMesh_68v5r"]
 flip_faces = true
-radius = 2.0
+radius = 15.164
 section_length = 1000.0
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_l0urp"]
@@ -157,7 +157,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_awuim")
+script = ExtResource("6_alw0w")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PlayerManager/Player/CanvasLayer/Control"]
 layout_mode = 1
@@ -169,7 +169,7 @@ layout_mode = 2
 texture = ExtResource("1_ay2vq")
 expand_mode = 2
 
-[node name="Button" parent="PlayerManager/Player/CanvasLayer/Control" instance=ExtResource("3_011mh")]
+[node name="BackBtn" parent="PlayerManager/Player/CanvasLayer/Control" instance=ExtResource("3_011mh")]
 layout_mode = 1
 
 [node name="Environment" type="Node3D" parent="PlayerManager"]

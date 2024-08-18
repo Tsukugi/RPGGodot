@@ -1,10 +1,14 @@
+using Godot;
+
 public partial class UnitAttributes {
     protected readonly Unit unit;
 
     protected UnitAttributesDTO attributes = new();
+
     public bool CanBeKilled {
         get => attributes.hitPoints <= 0 || unit.IsQueuedForDeletion() || unit.IsKilled;
     }
+
 
     public UnitAttributes(Unit unit) {
         this.unit = unit;
@@ -40,6 +44,12 @@ public partial class UnitAttributes {
         else attributes.hitPoints = newHitPoints;
 
         if (CanBeKilled) OnKilled(unit);
+    }
+
+    public void SetMaxHitPoints(int newHitPoints) {
+        if (newHitPoints <= 0) attributes.maxHitPoints = 1;
+        else attributes.maxHitPoints = newHitPoints;
+        SetHitPoints(newHitPoints);
     }
 
     public delegate void OnKilledEventHandler(Unit unit);

@@ -1,22 +1,21 @@
 using Godot;
 using System.Collections.Generic;
-using System.Linq;
 
 public partial class VSGameManager : Node {
+    protected VSStore store;
     VSLocalDatabase vsLocalDatabase;
     [Export]
     string currentLevel = "Level1";
     [Export]
     int currentEncounterIndex = 0;
 
-    readonly PackedScene enemyScene = GD.Load<PackedScene>(VSScenePaths.Enemy1);
+    readonly PackedScene enemyScene = GD.Load<PackedScene>(VSScenePaths.Enemy);
     readonly PackedScene chestScene = GD.Load<PackedScene>(VSScenePaths.Chest);
 
     PlayerManager playerManager;
     AxisPlayer enemyPlayer;
     AxisPlayer userPlayer;
     AxisUnit playerUnit;
-    readonly Dictionary<string, AxisUnit> enemyUnits = new();
 
     Timer spawnTimer = new() {
         OneShot = false,
@@ -24,37 +23,35 @@ public partial class VSGameManager : Node {
     };
 
     public VSLocalDatabase Database { get => vsLocalDatabase; }
+    public AxisUnit PlayerUnit { get => playerUnit; }
 
     public override void _Ready() {
+        store = GetNode<VSStore>(VSNodes.Store);
         vsLocalDatabase = new VSLocalDatabase();
         playerManager = GetNode<PlayerManager>(VSNodes.PlayerManager);
         userPlayer = playerManager.GetNode<AxisPlayer>(VSNodes.Player);
         enemyPlayer = playerManager.GetNode<AxisPlayer>(VSNodes.Enemy);
         playerUnit = userPlayer.GetNode<AxisUnit>("PlayerUnit");
         AddChild(spawnTimer);
-        spawnTimer.Timeout += OnSpawn;
+        spawnTimer.Timeout += OnEncounter;
         spawnTimer.Start();
-        OnSpawn(); // Start immediately
+        OnEncounter(); // Start immediately
     }
 
-    public override void _PhysicsProcess(double delta) {
-        base._PhysicsProcess(delta);
-        enemyUnits.Values.ToList().ForEach(enemyUnit => {
-            if (enemyUnit.GlobalPosition.DistanceTo(playerUnit.GlobalPosition) < 3) {
-                enemyUnit.MoveTowards(playerUnit.GlobalPosition);
-            } else {
-                enemyUnit.MoveTowards(enemyUnit.GlobalPosition.WithZ(1000));
-            }
-        });
+    void OnGameEnd() {
+        GetTree().ChangeSceneToPacked(store.MainScene);
     }
 
-
-    void OnSpawn() {
+    void OnEncounter() {
         if (vsLocalDatabase.Levels[currentLevel].encounters.Count <= currentEncounterIndex) {
-            GD.Print("[OnSpawn] Level complete");
+            GD.Print("[OnEncounter] Level complete");
+            spawnTimer.Stop();
+            OnGameEnd();
             return;
         }
+        
         List<VSEncounter> encounters = vsLocalDatabase.Levels[currentLevel].encounters[currentEncounterIndex];
+        GD.Print("[OnEncounter] Encounter " + currentEncounterIndex);
 
         List<Node3D> spawners = GetRandomSpawners();
         for (int i = 0; i < spawners.Count; i++) {
@@ -70,13 +67,11 @@ public partial class VSGameManager : Node {
         switch (encounter.type) {
             case VSEncounterTypes.Enemy:
                 for (int i = 0; i < encounter.enemyEncounter.nOfEnemies; i++) {
-                    SpawnEnemy(encounter.enemyEncounter.unitType, spawnPosition);
+                    SpawnEnemy(encounter, spawnPosition);
                 }
                 break;
             case VSEncounterTypes.Chest:
                 SpawnChest(encounter, spawnPosition);
-                // TODO spawn chest and give it an id
-                encounter.chestEncounter.rewards.ForEach(reward => GiveReward(reward));
                 break;
         }
     }
@@ -87,7 +82,19 @@ public partial class VSGameManager : Node {
                 GD.Print("[GiveReward] We give an unimplemented buff");
                 break;
             case VSRewardTypes.Money:
-                GD.Print("[GiveReward] We give " + reward.moneyAmount + " money");
+                store.PlayerHandler.EarnMoney(reward.moneyAmount);
+                GD.Print("[GiveReward] We give " + reward.moneyAmount + " meney. Money amount: " + store.PlayerHandler.Money);
+                break;
+        }
+    }
+
+    void GiveRewards(VSEncounter encounter) {
+        switch (encounter.type) {
+            case VSEncounterTypes.Enemy:
+                encounter.enemyEncounter.rewards.ForEach(reward => GiveReward(reward));
+                break;
+            case VSEncounterTypes.Chest:
+                encounter.chestEncounter.rewards.ForEach(reward => GiveReward(reward));
                 break;
         }
     }
@@ -96,37 +103,31 @@ public partial class VSGameManager : Node {
     void SpawnChest(VSEncounter encounter, Vector3 position) {
         VSUnit chestUnit = chestScene.Instantiate<VSUnit>();
         enemyPlayer.AddChild(chestUnit);
-        chestUnit.UnitAttributes.ApplyHeal(encounter.chestEncounter.hp);
+        chestUnit.UnitAttributes.SetMaxHitPoints(encounter.chestEncounter.hp);
+
         chestUnit.GlobalPosition = position;
-        chestUnit.UnitAttributes.OnKilled += OnEnemyUnitKilled;
+        chestUnit.UnitAttributes.OnKilled += (Unit dyingUnit) => GiveRewards(encounter);
+
         AttributesExport chestUnitAttributes = chestUnit.GetAttributes();
         chestUnit.OverheadLabel.Text = chestUnitAttributes.HitPoints + " / " + chestUnitAttributes.MaxHitPoints;
 
         GD.Print("[SpawnChest] Spawn " + chestUnit.Name + " as chest");
-        GD.Print("[SpawnChest] Enemy units handled: " + enemyUnits.Count);
-
-        enemyUnits.Add(chestUnit.Name, chestUnit);
     }
 
-    void SpawnEnemy(string unitId, Vector3 position) {
+    void SpawnEnemy(VSEncounter encounter, Vector3 position) {
         VSUnit enemyUnit = enemyScene.Instantiate<VSUnit>();
         enemyPlayer.AddChild(enemyUnit);
-        enemyUnit.UpdateUnit(Database.Enemies[unitId]);
+        enemyUnit.UpdateUnit(Database.Enemies[encounter.enemyEncounter.unitType]);
+
         enemyUnit.GlobalPosition = position;
-        enemyUnit.UnitAttributes.OnKilled += OnEnemyUnitKilled;
+
+        enemyUnit.UnitAttributes.OnKilled += (Unit dyingUnit) => GiveRewards(encounter);
+
         AttributesExport enemyUnitAttributes = enemyUnit.GetAttributes();
         enemyUnit.OverheadLabel.Text = enemyUnitAttributes.HitPoints + " / " + enemyUnitAttributes.MaxHitPoints;
-
         GD.Print("[SpawnEnemy] Spawn " + enemyUnit.Name + " as enemy");
-        GD.Print("[SpawnEnemy] Enemy units handled: " + enemyUnits.Count);
-
-        enemyUnits.Add(enemyUnit.Name, enemyUnit);
     }
 
-    void OnEnemyUnitKilled(Unit dyingUnit) {
-        enemyUnits.Remove(dyingUnit.Name);
-        dyingUnit.QueueFree();
-    }
 
     List<Node3D> GetRandomSpawners() {
         Node3D spawner1 = enemyPlayer.GetNode<Node3D>("Spawner");

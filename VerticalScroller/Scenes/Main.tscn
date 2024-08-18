@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://byr5auxb2mm8j"]
+[gd_scene load_steps=5 format=3 uid="uid://bkrbisnhucd2y"]
 
 [ext_resource type="Script" path="res://VerticalScroller/Scripts/UI/VSUIMain.cs" id="1_awuim"]
 [ext_resource type="Texture2D" uid="uid://bfpvlws48hbyl" path="res://Art/Prototype Textures/black.png" id="1_ay2vq"]
 [ext_resource type="PackedScene" uid="uid://dxm2n2www8lb1" path="res://VerticalScroller/Scenes/VSUIButton.tscn" id="2_jr4lg"]
+[ext_resource type="PackedScene" uid="uid://b3cijg1k8shsl" path="res://VerticalScroller/Scenes/MoneyLabel.tscn" id="2_wjmh8"]
 
-[node name="Control" type="Control"]
+[node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +13,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_awuim")
+
+[node name="MoneyLabel" parent="." instance=ExtResource("2_wjmh8")]
+layout_mode = 1
+offset_left = -120.0
+offset_top = 28.0
+offset_right = -17.0
+offset_bottom = 51.0
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
@@ -31,16 +39,16 @@ grow_vertical = 2
 layout_mode = 2
 texture = ExtResource("1_ay2vq")
 
-[node name="Button" parent="GridContainer" instance=ExtResource("2_jr4lg")]
+[node name="StartGameBtn" parent="GridContainer" instance=ExtResource("2_jr4lg")]
 layout_mode = 2
 
-[node name="Button2" parent="GridContainer" instance=ExtResource("2_jr4lg")]
+[node name="StoreBtn" parent="GridContainer" instance=ExtResource("2_jr4lg")]
 layout_mode = 2
 text = "Store
 "
 action = 2
 
-[node name="Button3" parent="GridContainer" instance=ExtResource("2_jr4lg")]
+[node name="ExitBtn" parent="GridContainer" instance=ExtResource("2_jr4lg")]
 layout_mode = 2
 text = "Exit"
 action = 3

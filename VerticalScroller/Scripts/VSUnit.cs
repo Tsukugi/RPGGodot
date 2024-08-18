@@ -3,37 +3,22 @@ using Godot;
 
 public partial class VSUnit : AxisUnit {
 
-    readonly PackedScene projectileScene = GD.Load<PackedScene>(ResourcePaths.Projectile);
     [Export]
-    Vector2 PlayAreaLimitX = new(-1.2f, 1.2f);
+    Vector2 PlayAreaLimitX = new(-1, 1f);
 
-    Timer attackTimer = new() {
-        OneShot = false,
-    };
-
-    readonly EffectBaseDTO projectileEffect = new() {
-        velocity = 1f,
-    };
-    readonly UnitAttributesDTO unitAttributesDTO = new() {
-        movementSpeed = 1,
+    readonly UnitAttributesDTO defaultUnitAttributes = new() {
+        movementSpeed = 2,
         maxHitPoints = 100,
-        attackSpeed = 0.5,
-        armor = 1,
-        baseDamage = 20,
+        attackSpeed = 1,
+        armor = 0,
+        baseDamage = 10,
         attackCastDuration = 0,
         attackRange = 25,
     };
 
     public override void _Ready() {
         base._Ready();
-        UnitAttributes.InitializeValues(unitAttributesDTO);
-        if (!Player.IsFirstPlayer()) return;
-        AttributesExport attributes = GetAttributes();
-        Player.AxisInputHandler.InputAxisType = AxisType.XAxis;
-        attackTimer.WaitTime = attributes.AttackSpeed;
-        AddChild(attackTimer);
-        attackTimer.Timeout += OnAttack;
-        attackTimer.Start();
+        UnitAttributes.InitializeValues(defaultUnitAttributes);
     }
 
     public override void _PhysicsProcess(double delta) {
@@ -54,22 +39,8 @@ public partial class VSUnit : AxisUnit {
         return (Math.Abs(limitedValue) - 0.01f) * value.Normalize();
     }
 
-    void OnAttack() {
-        ProjectileUnit projectile = projectileScene.Instantiate<ProjectileUnit>();
-
-        AbilityCastContext context = new(AbilityCastTypes.Position, this);
-        projectile.InitializeEffectUnit(projectileEffect, context);
-        Player.AddChild(projectile);
-        projectile.GlobalPosition = GlobalPosition;
-        projectile.SetTargetPosition(GlobalPosition.WithZ(-1000));
-
-        void OnCollide(Unit enemyUnit) {
-            AttributesExport enemyUnitAttributes = enemyUnit.GetAttributes();
-            enemyUnit.UnitAttributes.ApplyDamage(GetAttributes().BaseDamage);
-            enemyUnit.OverheadLabel.Text = enemyUnitAttributes.HitPoints + " / " + enemyUnitAttributes.MaxHitPoints;
-        }
-
-        projectile.OnCollideEvent -= OnCollide;
-        projectile.OnCollideEvent += OnCollide;
+    public void RemoveUnit() {
+        // TODO Implement a way to remove the unit safely
+        QueueFree();
     }
 }

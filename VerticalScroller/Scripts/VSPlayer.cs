@@ -1,4 +1,4 @@
-public partial class VSPlayerHandler {
+public partial class VSMoneyHandler {
     int money = 0;
 
     public int Money { get => money; }

@@ -1,5 +1,3 @@
-using Godot;
-
 public partial class UnitAttributes {
     protected readonly Unit unit;
 
@@ -8,7 +6,6 @@ public partial class UnitAttributes {
     public bool CanBeKilled {
         get => attributes.hitPoints <= 0 || unit.IsQueuedForDeletion() || unit.IsKilled;
     }
-
 
     public UnitAttributes(Unit unit) {
         this.unit = unit;

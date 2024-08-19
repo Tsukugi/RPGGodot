@@ -17,7 +17,6 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Store="*res://Scripts/Store/Store.cs"
 VSStore="*res://VerticalScroller/Scripts/VSStore.cs"
 
 [dotnet]

@@ -5,8 +5,9 @@ public class VSLevel : DTOBase {
 }
 
 public class VSBuff {
-    // TODO implement me
-
+    public string type; // VSBuffType default is Attribute
+    public string mutator; // Mutator ID
+    // TODO implement further mutator types (e.g notAttribute mutators).
 }
 
 public class VSEncounter {
@@ -39,4 +40,8 @@ public static class VSEncounterTypes {
 public static class VSRewardTypes {
     public const string Money = "Money";
     public const string Buff = "Buff";
+}
+
+public static class VSBuffType {
+    public const string Attribute = "Attribute";
 }

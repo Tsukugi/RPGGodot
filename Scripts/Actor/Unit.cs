@@ -12,13 +12,12 @@ public partial class Unit : CharacterBody3D {
     protected Label3D overheadLabel;
     public PlayerBase Player { get => unitPlayerBind.Player; }
     public Area3D InteractionArea { get => interactionArea; }
-    public UnitAttributes UnitAttributes { get => unitAtributes; }
+    public UnitMutableAttributes UnitAttributes { get => unitAtributes; }
     public Label3D OverheadLabel { get => overheadLabel; }
     public Dictionary<string, AbilityCaster> Abilities { get => abilities; }
     public bool IsKilled { get => isKilled; }
     public UnitRender UnitRender { get => unitRender; }
     public AttributesExport GetAttributes() => UnitAttributes.GetAttributes();
-
 
     public override void _Ready() {
         base._Ready();

@@ -12,7 +12,6 @@ public partial class VSUIBase : Node {
 
     protected void AttachEvents(List<string> btnNames, string path) {
         btnNames.ForEach(action => {
-            GD.Print(action);
             VSUIButton btn = GetNode<VSUIButton>(path + action);
             mainMenuButtons.Add(action, btn);
 
@@ -24,10 +23,10 @@ public partial class VSUIBase : Node {
 
     public void OnAction(VSUIButtonAction action) {
         switch (action) {
-            case VSUIButtonAction.BackToMain: GetTree().ChangeSceneToPacked(store.MainScene); return;
-            case VSUIButtonAction.StartGame: GetTree().ChangeSceneToPacked(store.GameScene); return;
-            case VSUIButtonAction.GoToStore: GetTree().ChangeSceneToPacked(store.StoreScene); return;
-            case VSUIButtonAction.Exit: GetTree().Quit(); return;
+            case VSUIButtonAction.BackToMain: store.GoToScene(store.MainScene); return;
+            case VSUIButtonAction.StartGame: store.GoToScene(store.GameScene); return;
+            case VSUIButtonAction.GoToStore: store.GoToScene(store.StoreScene); return;
+            case VSUIButtonAction.Exit: store.QuitGame(); return;
         }
     }
 }

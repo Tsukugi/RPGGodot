@@ -279,7 +279,7 @@
                     "type": "Enemy",
                     "enemyEncounter": {
                         "nOfEnemies": 1,
-                        "unitType": "LizardLv1",
+                        "unitType": "LizardLv2",
                         "rewards": [
                             {
                                 "type": "Money",

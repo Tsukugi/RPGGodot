@@ -9,6 +9,6 @@ public partial class VSUIMoneyLabel : Label {
     }
     public override void _PhysicsProcess(double delta) {
         base._PhysicsProcess(delta);
-        Text = "Money: " + store.PlayerHandler.Money;
+        Text = "Money: " + store.MoneyHandler.Money;
     }
 }

@@ -46,10 +46,11 @@ public partial class VSGameManager : Node {
         if (vsLocalDatabase.Levels[currentLevel].encounters.Count <= currentEncounterIndex) {
             GD.Print("[OnEncounter] Level complete");
             spawnTimer.Stop();
+            store.SaveLoad.SaveGame();
             OnGameEnd();
             return;
         }
-        
+
         List<VSEncounter> encounters = vsLocalDatabase.Levels[currentLevel].encounters[currentEncounterIndex];
         GD.Print("[OnEncounter] Encounter " + currentEncounterIndex);
 
@@ -82,8 +83,8 @@ public partial class VSGameManager : Node {
                 GD.Print("[GiveReward] We give an unimplemented buff");
                 break;
             case VSRewardTypes.Money:
-                store.PlayerHandler.EarnMoney(reward.moneyAmount);
-                GD.Print("[GiveReward] We give " + reward.moneyAmount + " meney. Money amount: " + store.PlayerHandler.Money);
+                store.MoneyHandler.EarnMoney(reward.moneyAmount);
+                GD.Print("[GiveReward] We give " + reward.moneyAmount + " money. Money amount: " + store.MoneyHandler.Money);
                 break;
         }
     }
@@ -109,7 +110,7 @@ public partial class VSGameManager : Node {
         chestUnit.UnitAttributes.OnKilled += (Unit dyingUnit) => GiveRewards(encounter);
 
         AttributesExport chestUnitAttributes = chestUnit.GetAttributes();
-        chestUnit.OverheadLabel.Text = chestUnitAttributes.HitPoints + " / " + chestUnitAttributes.MaxHitPoints;
+        chestUnit.OverheadLabel.Text = chestUnitAttributes.HitPoints + "";
 
         GD.Print("[SpawnChest] Spawn " + chestUnit.Name + " as chest");
     }
@@ -124,7 +125,7 @@ public partial class VSGameManager : Node {
         enemyUnit.UnitAttributes.OnKilled += (Unit dyingUnit) => GiveRewards(encounter);
 
         AttributesExport enemyUnitAttributes = enemyUnit.GetAttributes();
-        enemyUnit.OverheadLabel.Text = enemyUnitAttributes.HitPoints + " / " + enemyUnitAttributes.MaxHitPoints;
+        enemyUnit.OverheadLabel.Text = enemyUnitAttributes.HitPoints + "";
         GD.Print("[SpawnEnemy] Spawn " + enemyUnit.Name + " as enemy");
     }
 

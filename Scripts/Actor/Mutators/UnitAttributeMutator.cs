@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 
 public class UnitMutableAttributes : UnitAttributes {
-    List<UnitAttributeMutation> mutations = new();
+    List<UnitAttributeMutationDTO> mutations = new();
 
     public UnitMutableAttributes(Unit unit) : base(unit) { }
 
-    public List<UnitAttributeMutation> Mutations { get => mutations; }
+    public List<UnitAttributeMutationDTO> Mutations { get => mutations; }
 
     public new AttributesExport GetAttributes() {
         return ApplyMutations(base.GetAttributes());
@@ -18,13 +18,12 @@ public class UnitMutableAttributes : UnitAttributes {
         return attributes;
     }
 
-    public void AddMutation(UnitAttributeMutation mutation) {
+    public void AddMutation(UnitAttributeMutationDTO mutation) {
         mutations.Add(mutation);
     }
 }
 
-public class UnitAttributeMutation : DTOBase {
-    public string attributeName;
-    public string attributeMutationType;
-    public float value;
+public static class MutationTypes {
+    public const string AddPercentage = "AddPercentage";
+    public const string SubstractPercentage = "SubstractPercentage";
 }

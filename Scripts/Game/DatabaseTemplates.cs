@@ -52,3 +52,9 @@ public class EffectBaseDTO : DTOBase {
     public float radius; // The radius that a effectUnit may use to define the area of effect
     public float velocity; // The velocity that a effectUnit may use to move
 }
+
+public class UnitAttributeMutationDTO : DTOBase {
+    public string attributeName;
+    public string mutationType; // Typed as MutationTypes
+    public float value;
+}

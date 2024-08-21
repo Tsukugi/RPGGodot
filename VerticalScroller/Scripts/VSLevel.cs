@@ -4,12 +4,6 @@ public class VSLevel : DTOBase {
     public List<List<VSEncounter>> encounters = new(); // We use a list of encounters per spawn [[ spawn1Encounter1, spawn2Encounter1 ], [ spawn1Encounter2, spawn2Encounter2]];
 }
 
-public class VSBuff {
-    public string type; // VSBuffType default is Attribute
-    public string mutator; // Mutator ID
-    // TODO implement further mutator types (e.g notAttribute mutators).
-}
-
 public class VSEncounter {
     public string type; // VSEncounterTypes
     public VSEnemyEncounter enemyEncounter;
@@ -30,7 +24,6 @@ public class VSChestEncounter : VSRewardableEncounter {
 public class VSReward {
     public string type; // VSRewardTypes
     public int moneyAmount;
-    public VSBuff buff;
 }
 
 public static class VSEncounterTypes {
@@ -39,9 +32,4 @@ public static class VSEncounterTypes {
 }
 public static class VSRewardTypes {
     public const string Money = "Money";
-    public const string Buff = "Buff";
-}
-
-public static class VSBuffType {
-    public const string Attribute = "Attribute";
 }

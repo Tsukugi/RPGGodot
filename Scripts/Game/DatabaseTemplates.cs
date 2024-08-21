@@ -13,15 +13,15 @@ public class UnitDTO : DTOBase {
 }
 
 public class UnitAttributesDTO : DTOBase {
-    public float movementSpeed;
-    public int maxHitPoints;
+    public double movementSpeed;
+    public double maxHitPoints;
     public double attackSpeed;
-    public int armor;
-    public int baseDamage;
+    public double armor;
+    public double baseDamage;
     public double attackCastDuration;
-    public float attackRange;
-    public int hitPoints;
-    public float alertRange;
+    public double attackRange;
+    public double hitPoints;
+    public double alertRange;
 }
 
 public class AbilityDTO : DTOBase {
@@ -56,5 +56,5 @@ public class EffectBaseDTO : DTOBase {
 public class UnitAttributeMutationDTO : DTOBase {
     public string attributeName;
     public string mutationType; // Typed as MutationTypes
-    public float value;
+    public double value;
 }

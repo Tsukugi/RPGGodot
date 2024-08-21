@@ -87,7 +87,7 @@ public partial class UnitCombatBase : Node3D {
         OnAttackReachedEvent?.Invoke();
         AttributesExport unitAttributes = unit.GetAttributes();
         AttributesExport targetUnitAttributes = unit.GetAttributes();
-        int finalDamage = targetUnit.UnitAttributes.ApplyDamage(unitAttributes.BaseDamage);
+        var finalDamage = targetUnit.UnitAttributes.ApplyDamage(unitAttributes.BaseDamage);
         unit.Player.DebugLog("[TryStartAttack] " + unit.Name + " dealt " + finalDamage + " of damage. " +
              " \n Target hitpoints: " + targetUnitAttributes.HitPoints);
     }

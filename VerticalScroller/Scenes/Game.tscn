@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://sey3h77ca1a3"]
+[gd_scene load_steps=26 format=3 uid="uid://sey3h77ca1a3"]
 
 [ext_resource type="Script" path="res://VerticalScroller/Scripts/VSGameManager.cs" id="1_0ycb4"]
 [ext_resource type="Texture2D" uid="uid://bfpvlws48hbyl" path="res://Art/Prototype Textures/black.png" id="1_ay2vq"]
@@ -8,7 +8,9 @@
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/PlayerManager.cs" id="6_fcxki"]
 [ext_resource type="PackedScene" uid="uid://emh0fo8pev08" path="res://VerticalScroller/Scenes/VSUnit.tscn" id="7_6y4ic"]
 [ext_resource type="Script" path="res://Scripts/Game/CameraBase.cs" id="9_j1sfo"]
+[ext_resource type="PackedScene" uid="uid://dybeg6rn2gri1" path="res://VerticalScroller/Scenes/VSUIStoreElement.tscn" id="9_sv5c7"]
 [ext_resource type="Shader" path="res://VerticalScroller/Shaders/Tube.gdshader" id="10_ble23"]
+[ext_resource type="Script" path="res://VerticalScroller/Scripts/UI/VSUIMutatorSelector.cs" id="10_cdb65"]
 [ext_resource type="Shader" path="res://VerticalScroller/Shaders/Kaleidoscope.gdshader" id="10_sl80x"]
 
 [sub_resource type="Environment" id="Environment_p84j7"]
@@ -171,6 +173,41 @@ expand_mode = 2
 
 [node name="BackBtn" parent="PlayerManager/Player/CanvasLayer/Control" instance=ExtResource("3_011mh")]
 layout_mode = 1
+
+[node name="Attributes" type="Label" parent="PlayerManager/Player/CanvasLayer/Control"]
+layout_mode = 1
+offset_left = 12.0
+offset_top = 72.0
+offset_right = 90.0
+offset_bottom = 95.0
+scale = Vector2(1.00594, 1.01565)
+text = "Attributes
+"
+
+[node name="MutatorSelectionContainer" type="HBoxContainer" parent="PlayerManager/Player/CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -159.0
+offset_bottom = 159.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VSUIStoreElement" parent="PlayerManager/Player/CanvasLayer/Control/MutatorSelectionContainer" instance=ExtResource("9_sv5c7")]
+layout_mode = 2
+script = ExtResource("10_cdb65")
+
+[node name="VSUIStoreElement2" parent="PlayerManager/Player/CanvasLayer/Control/MutatorSelectionContainer" instance=ExtResource("9_sv5c7")]
+layout_mode = 2
+script = ExtResource("10_cdb65")
+
+[node name="VSUIStoreElement3" parent="PlayerManager/Player/CanvasLayer/Control/MutatorSelectionContainer" instance=ExtResource("9_sv5c7")]
+layout_mode = 2
+script = ExtResource("10_cdb65")
 
 [node name="Environment" type="Node3D" parent="PlayerManager"]
 script = ExtResource("6_0xbcq")

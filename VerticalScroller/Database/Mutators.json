@@ -1,0 +1,20 @@
+[
+    {
+        "id": "AddMoney",
+        "attributeName": "Money",
+        "mutationType": "Custom",
+        "value": 10
+    },
+    {
+        "id": "AddAttackSpeed",
+        "attributeName": "attackSpeed",
+        "mutationType": "AddPercentage",
+        "value": 10
+    },
+    {
+        "id": "AddProjectile",
+        "attributeName": "Projectile",
+        "mutationType": "Custom",
+        "value": 1
+    }
+]

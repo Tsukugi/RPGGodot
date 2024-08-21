@@ -1,25 +1,35 @@
-
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Godot;
 
 public static class ClassUtils {
-    public static void SetObjectProperty(this object obj, string attribute, object value) {
-        PropertyInfo propertyInfo = obj.GetType().GetProperty(attribute);
-        if (propertyInfo is PropertyInfo info) {
-            info.SetValue(obj, value, null);
+    public delegate object OnEachField(object field, string attributeName);
+    public static void SetObjectField(this object obj, string attribute, object value) {
+        FieldInfo fieldInfo = obj.GetType().GetField(attribute);
+        if (fieldInfo is FieldInfo info) {
+            info.SetValue(obj, value);
         } else {
-            string[] propertyNames = obj.GetType().GetProperties().Select(p => p.Name).ToArray();
-            GD.PrintErr("[SetObjectProperty] " + obj + " - " + attribute + " - " + value + " - " + string.Join(", ", propertyNames));
+            string[] propertyNames = obj.GetType().GetFields().Select(p => p.Name).ToArray();
+            GD.PrintErr("[SetObjectField] " + obj.GetType() + " - " + attribute + " - " + value + " - " + string.Join(", ", propertyNames));
         }
     }
-    public static object? GetObjectProperty(this object obj, string attribute) {
-        PropertyInfo propertyInfo = obj.GetType().GetProperty(attribute);
-        if (propertyInfo is PropertyInfo info) {
-            return info.GetValue(obj, null);
+    public static object GetObjectField(this object obj, string attribute) {
+        FieldInfo fieldInfo = obj.GetType().GetField(attribute);
+        if (fieldInfo is FieldInfo info) {
+            return info.GetValue(obj);
         } else {
-            GD.PrintErr("[GetObjectProperty] " + obj + " - " + attribute);
-            return null;
+            GD.PrintErr("[GetField] " + obj + " - " + attribute);
+            return default;
         }
+    }
+
+    public static Dictionary<string, dynamic> GetObjectFields(this object obj) {
+        Dictionary<string, dynamic> result = new();
+        var fieldsInfo = obj.GetType().GetFields();
+        foreach (var fieldInfo in fieldsInfo) {
+            result.Add(fieldInfo.Name, obj.GetObjectField(fieldInfo.Name));
+        }
+        return result;
     }
 }

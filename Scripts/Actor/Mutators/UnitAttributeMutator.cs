@@ -1,21 +1,28 @@
 using System.Collections.Generic;
-
 public class UnitMutableAttributes : UnitAttributes {
-    List<UnitAttributeMutationDTO> mutations = new();
+    readonly List<UnitAttributeMutationDTO> mutations = new();
+    public List<UnitAttributeMutationDTO> Mutations => mutations;
+
+    Dictionary<string, dynamic> appliedMutations = new();
 
     public UnitMutableAttributes(Unit unit) : base(unit) { }
 
-    public List<UnitAttributeMutationDTO> Mutations { get => mutations; }
-
-    public new AttributesExport GetAttributes() {
-        return ApplyMutations(base.GetAttributes());
+    public AttributesExport GetMutations() {
+        foreach (var appliedMutation in appliedMutations) {
+            appliedMutations[appliedMutation.Key] = default;
+            foreach (var mutation in mutations) {
+                appliedMutations[appliedMutation.Key] = appliedMutations[appliedMutation.Key] + ApplyMutation(mutation, appliedMutations[appliedMutation.Key]);
+            }
+        }
+        return new();
     }
 
-    public AttributesExport ApplyMutations(AttributesExport attributes) {
-        mutations.ForEach(mutation => {
-            attributes.SetObjectProperty(mutation.attributeName, mutation.value);
-        });
-        return attributes;
+    static double ApplyMutation(UnitAttributeMutationDTO mutation, double value) {
+        return mutation.mutationType switch {
+            MutationTypes.AddFixed => mutation.value,
+            MutationTypes.AddPercentage => value * (100 / mutation.value),
+            _ => value,
+        };
     }
 
     public void AddMutation(UnitAttributeMutationDTO mutation) {
@@ -24,6 +31,7 @@ public class UnitMutableAttributes : UnitAttributes {
 }
 
 public static class MutationTypes {
+    public const string Custom = "Custom"; // This one is really important as it defines that it must be implemented by the mutation id
     public const string AddPercentage = "AddPercentage";
-    public const string SubstractPercentage = "SubstractPercentage";
+    public const string AddFixed = "AddFixed";
 }

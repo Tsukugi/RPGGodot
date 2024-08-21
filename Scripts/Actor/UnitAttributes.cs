@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public partial class UnitAttributes {
     protected readonly Unit unit;
 
@@ -17,13 +19,13 @@ public partial class UnitAttributes {
 
     // * We only modify the base attributes on this method 
     public void InitializeValues(UnitAttributesDTO attributesDTO) {
-        if (attributesDTO.attackSpeed <= 0) attributesDTO.attackSpeed = 0.1;
+        if (attributesDTO.attackSpeed <= 0) attributesDTO.attackSpeed = 0.1f;
         attributes = attributesDTO;
         SetHitPoints(attributesDTO.maxHitPoints);
     }
 
-    public int ApplyDamage(int damage) {
-        int finalDamage = damage - attributes.armor;
+    public double ApplyDamage(double damage) {
+        var finalDamage = damage - attributes.armor;
         if (finalDamage < 0) finalDamage = 0;
         SetHitPoints(attributes.hitPoints - finalDamage);
         return finalDamage;
@@ -35,7 +37,7 @@ public partial class UnitAttributes {
     }
 
     // Try to avoid overflowing and underflowing
-    protected void SetHitPoints(int newHitPoints) {
+    protected void SetHitPoints(double newHitPoints) {
         if (newHitPoints > attributes.maxHitPoints) attributes.hitPoints = attributes.maxHitPoints;
         else if (newHitPoints < 0) attributes.hitPoints = 0;
         else attributes.hitPoints = newHitPoints;
@@ -54,18 +56,36 @@ public partial class UnitAttributes {
 }
 
 public class AttributesExport {
-    UnitAttributesDTO attributes;
-    public AttributesExport(UnitAttributesDTO attributes) {
-        this.attributes = attributes;
+    readonly UnitAttributesDTO attributes = new() { attackSpeed = 1f };
+    readonly Dictionary<string, dynamic> attributesDic = new();
+
+    public AttributesExport() {
+        attributesDic = attributes.GetObjectFields();
+    }
+    public AttributesExport(Dictionary<string, dynamic> attributesDic) {
+        this.attributesDic = attributesDic;
+        attributes.movementSpeed = attributesDic["movementSpeed"];
+        attributes.maxHitPoints = attributesDic["maxHitPoints"];
+        attributes.attackSpeed = attributesDic["attackSpeed"];
+        attributes.armor = attributesDic["armor"];
+        attributes.baseDamage = attributesDic["baseDamage"];
+        attributes.attackCastDuration = attributesDic["attackCastDuration"];
+        attributes.attackRange = attributesDic["attackRange"];
+        attributes.hitPoints = attributesDic["hitPoints"];
+        attributes.alertRange = attributesDic["alertRange"];
+    }
+    public AttributesExport(UnitAttributesDTO attributesDTO) {
+        attributes = attributesDTO;
+        attributesDic = attributes.GetObjectFields();
     }
 
-    public int MaxHitPoints { get => attributes.maxHitPoints; }
+    public int MaxHitPoints { get => (int)attributes.maxHitPoints; }
     public double AttackSpeed { get => 1 / attributes.attackSpeed; }
-    public int Armor { get => attributes.armor; }
-    public int BaseDamage { get => attributes.baseDamage; }
+    public int Armor { get => (int)attributes.armor; }
+    public int BaseDamage { get => (int)attributes.baseDamage; }
     public double AttackCastDuration { get => attributes.attackCastDuration; }
-    public float AttackRange { get => attributes.attackRange; }
-    public float MovementSpeed { get => attributes.movementSpeed; }
-    public int HitPoints { get => attributes.hitPoints; }
-    public float AlertRange { get => attributes.alertRange; }
+    public float AttackRange { get => (float)attributes.attackRange; }
+    public float MovementSpeed { get => (float)attributes.movementSpeed; }
+    public int HitPoints { get => (int)attributes.hitPoints; }
+    public float AlertRange { get => (float)attributes.alertRange; }
 }

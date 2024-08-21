@@ -21,7 +21,7 @@ offset_top = 71.0
 offset_right = -10.0
 offset_bottom = 94.0
 
-[node name="GridContainer" parent="." instance=ExtResource("2_s1vil")]
+[node name="StoreElement" parent="." instance=ExtResource("2_s1vil")]
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
@@ -30,8 +30,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 0.0
 offset_top = 0.0
-offset_right = 96.0
-offset_bottom = 66.0
+offset_right = 256.0
+offset_bottom = 291.0
 grow_horizontal = 1
 grow_vertical = 1
 

@@ -3,12 +3,12 @@ using System.IO;
 using Godot;
 using Newtonsoft.Json;
 public class LocalDatabase {
-    readonly Dictionary<string, UnitDTO> units = new();
-    readonly Dictionary<string, AbilityDTO> abilites = new();
-    readonly Dictionary<string, EffectBaseDTO> effects = new();
-    readonly Dictionary<string, UnitAttributeMutationDTO> mutators = new();
+    protected readonly Dictionary<string, UnitDTO> units = new();
+    protected readonly Dictionary<string, AbilityDTO> abilites = new();
+    protected readonly Dictionary<string, EffectBaseDTO> effects = new();
+    protected readonly Dictionary<string, UnitAttributeMutationDTO> mutators = new();
 
-    JSONLoader loader = new();
+    protected JSONLoader loader = new();
 
     public JSONLoader Loader { get => loader; }
 
@@ -17,7 +17,7 @@ public class LocalDatabase {
     public Dictionary<string, AbilityDTO> Abilites => abilites;
     public Dictionary<string, EffectBaseDTO> Effects => effects;
     public Dictionary<string, UnitAttributeMutationDTO> Mutators => mutators;
-    
+
     public void LoadData() {
         LoadUnits().ForEach(unit => units.Add(unit.name, unit));
         LoadAbilities().ForEach(ability => abilites.Add(ability.name, ability));

@@ -1,14 +1,20 @@
 [
     {
-        "id": "AddMax10",
-        "attributeName": "MaxHitPoints",
+        "id": "AddHP",
+        "attributeName": "maxHitPoints",
         "mutationType": "AddPercentage",
         "value": 10
     },
     {
-        "id": "AddDmg10",
-        "attributeName": "BaseDamage",
+        "id": "AddDmg",
+        "attributeName": "baseDamage",
         "mutationType": "AddPercentage",
         "value": 10
+    },
+    {
+        "id": "AddArmor",
+        "attributeName": "armor",
+        "mutationType": "AddPercentage",
+        "value": 20
     }
 ]

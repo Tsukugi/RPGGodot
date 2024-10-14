@@ -1,4 +1,5 @@
 using Godot;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -50,6 +51,12 @@ public partial class VSGameManager : Node {
         encounterTimer.Timeout += OnEncounter;
         encounterTimer.Start();
         OnEncounter(); // Start immediately
+
+        // Server
+        userPlayer.PlayerWSBind.AddPlayer();
+        playerUnit.UnitWSBind.RegisterUnit();
+        playerUnit.UnitWSBind.CalculateMutations();
+        playerUnit.UnitWSBind.GetMutatedAttributes();
     }
 
     void OnGameEnd() {
@@ -92,20 +99,45 @@ public partial class VSGameManager : Node {
     }
 
     static string GetRandKey(List<string> keyList) => keyList[new Random().Next(keyList.Count)];
+    MutationDTO GetRandomMutator() {
+        int randNumber = new Random().Next(100);
+        // ! Simple random pick
+        // TODO change this if we support more mutationTypes
+        if (randNumber < 50) {
+            List<string> keyList = new(vsLocalDatabase.UnitMutators.Keys);
+            var result = vsLocalDatabase.UnitMutators[GetRandKey(keyList)];
+            result.mutationTarget = MutationTargets.Unit;
+            return result;
+        } else {
+            List<string> keyList = new(vsLocalDatabase.PlayerMutators.Keys);
+            var result = vsLocalDatabase.PlayerMutators[GetRandKey(keyList)];
+            result.mutationTarget = MutationTargets.Player;
+            return result;
+        }
+    }
+
     void BuildMutatorSelectors() {
-        List<string> keyList = new(vsLocalDatabase.Mutators.Keys);
         foreach (var node in mutatorSelectors) {
             if (node is not VSUIMutatorSelector mutatorSelector) continue;
-            var positive = vsLocalDatabase.Mutators[GetRandKey(keyList)];
-            var negative = vsLocalDatabase.Mutators[GetRandKey(keyList)];
+            var positive = GetRandomMutator();
+            var negative = GetRandomMutator();
             mutatorSelector.UpdateMutations(positive, negative);
         }
     }
 
-    void OnSelectMutation(UnitAttributeMutationDTO positive, UnitAttributeMutationDTO negative) {
+    void OnSelectMutation(MutationDTO positive, MutationDTO negative) {
         playerUI.SetMutatorSelectionVisibility(false);
-        playerUnit.UnitAttributes.AddMutation(positive);
-        playerUnit.UnitAttributes.AddMutation(negative);
+
+        switch (positive.mutationTarget) {
+            case MutationTargets.Player: playerUnit.Player.PlayerWSBind.AddMutation(positive); break;
+            case MutationTargets.Unit: playerUnit.UnitAttributes.AddMutation(positive); break;
+            default: GD.PrintErr("No mutationType"); break;
+        }
+        switch (negative.mutationTarget) {
+            case MutationTargets.Player: playerUnit.Player.PlayerWSBind.AddMutation(negative); break;
+            case MutationTargets.Unit: playerUnit.UnitAttributes.AddMutation(negative); break;
+            default: GD.PrintErr("No mutationType"); break;
+        }
     }
 
     void GiveReward(VSReward reward) {

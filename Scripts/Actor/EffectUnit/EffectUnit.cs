@@ -44,7 +44,7 @@ public abstract partial class EffectUnit : CharacterBody3D {
     protected void InvokeCollideEvent(Unit collider) {
         HasCollidedAlready = true;
         OnCollideEvent?.Invoke(collider);
-        Player.DebugLog("[OnCollideEvent] " + collider.Name, true);
+        Player.DebugLog("[OnCollideEvent] " + collider.Name);
     }
 
     protected bool ApplyPlayerAffectedTypeFiltering(Unit unit) {

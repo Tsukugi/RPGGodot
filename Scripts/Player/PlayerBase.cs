@@ -4,9 +4,13 @@ public partial class PlayerBase : Node {
     // Modules
     protected PlayerAbility playerAbility;
 
+    Server server;
+
     CameraBase camera;
     InteractionPanel interactionPanel;
     CanvasLayer canvasLayer;
+    PlayerWSBind playerWSBind;
+
     bool IsPerformanceLogActive = false;
     protected PlayerInteractionType currentInteractionType = PlayerInteractionType.None;
     protected PlayerManager playerManager;
@@ -16,10 +20,13 @@ public partial class PlayerBase : Node {
     public CanvasLayer CanvasLayer { get => canvasLayer; }
     public PlayerAbility PlayerAbility { get => playerAbility; }
     public PlayerManager PlayerManager { get => playerManager; }
+    public Server Server { get => server; }
+    public PlayerWSBind PlayerWSBind { get => playerWSBind; }
 
     public override void _Ready() {
         base._Ready();
-
+        playerWSBind = new(this, GetNode<Server>(StaticNodePaths.Server));
+        server = GetNode<Server>(StaticNodePaths.Server);
         playerManager = this.TryFindParentNodeOfType<PlayerManager>();
         camera = GetNodeOrNull<CameraBase>(StaticNodePaths.PlayerCamera);
         interactionPanel = GetNodeOrNull<InteractionPanel>(StaticNodePaths.PlayerUIInteractionPanel);

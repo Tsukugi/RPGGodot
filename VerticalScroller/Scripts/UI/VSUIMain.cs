@@ -8,5 +8,10 @@ public partial class VSUIMain : VSUIBase {
     public override void _Ready() {
         base._Ready();
         AttachEvents(btnNames, btnPath);
+        GetNode<Button>(btnPath + "TestWS").Pressed += () => {
+            // Server
+            WSClient client = GetNode<Server>(StaticNodePaths.Server).WSClient;
+            client.Initialize();
+        };
     }
 }

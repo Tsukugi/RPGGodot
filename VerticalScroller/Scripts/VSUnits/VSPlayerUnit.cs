@@ -27,6 +27,7 @@ public partial class VSPlayerUnit : VSUnit {
         AbilityCastContext context = new(AbilityCastTypes.Position, this);
         projectile.InitializeEffectUnit(projectileEffect, context);
         Player.AddChild(projectile);
+        projectile.Scale = projectile.Scale.Magnitude(1.5f);
         projectile.GlobalPosition = GlobalPosition;
         projectile.SetTargetPosition(GlobalPosition.WithZ(-1000));
 

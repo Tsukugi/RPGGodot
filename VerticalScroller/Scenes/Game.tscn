@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/AxisPlayer.cs" id="6_0xbcq"]
 [ext_resource type="Script" path="res://VerticalScroller/Scripts/UI/VSUIGame.cs" id="6_alw0w"]
 [ext_resource type="Script" path="res://Scripts/Player/RealTimeStrategy/PlayerManager.cs" id="6_fcxki"]
-[ext_resource type="PackedScene" uid="uid://emh0fo8pev08" path="res://VerticalScroller/Scenes/VSUnit.tscn" id="7_6y4ic"]
+[ext_resource type="PackedScene" uid="uid://dl1nwasv6dlxa" path="res://VerticalScroller/Scenes/VSUnit.tscn" id="7_6y4ic"]
 [ext_resource type="Script" path="res://Scripts/Game/CameraBase.cs" id="9_j1sfo"]
 [ext_resource type="PackedScene" uid="uid://dybeg6rn2gri1" path="res://VerticalScroller/Scenes/VSUIStoreElement.tscn" id="9_sv5c7"]
 [ext_resource type="Shader" path="res://VerticalScroller/Shaders/Tube.gdshader" id="10_ble23"]
@@ -247,11 +247,6 @@ directional_shadow_mode = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerManager/Environment"]
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -10, 0, 0)
-material_override = SubResource("ShaderMaterial_5gq0e")
-mesh = SubResource("PlaneMesh_nobtp")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="PlayerManager/Environment"]
-transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 10, 0, 0)
 material_override = SubResource("ShaderMaterial_5gq0e")
 mesh = SubResource("PlaneMesh_nobtp")
 

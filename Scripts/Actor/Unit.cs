@@ -7,6 +7,7 @@ public partial class Unit : CharacterBody3D {
     Area3D interactionArea = null;
     UnitMutableAttributes unitAtributes;
     UnitRender unitRender;
+    UnitWSBind unitWSBind;
     readonly Dictionary<string, AbilityCaster> abilities = new();
     protected UnitPlayerBind unitPlayerBind;
     protected Label3D overheadLabel;
@@ -17,13 +18,16 @@ public partial class Unit : CharacterBody3D {
     public Dictionary<string, AbilityCaster> Abilities { get => abilities; }
     public bool IsKilled { get => isKilled; }
     public UnitRender UnitRender { get => unitRender; }
+    public UnitWSBind UnitWSBind { get => unitWSBind; }
+
     public AttributesExport GetAttributes() => UnitAttributes.GetAttributes();
 
     public override void _Ready() {
         base._Ready();
         unitPlayerBind = new(this);
+        unitWSBind = new(this, GetNode<Server>(StaticNodePaths.Server));
+        unitAtributes = new(this, unitWSBind);
         unitRender = new(this);
-        unitAtributes = new(this);
         overheadLabel = GetNode<Label3D>(StaticNodePaths.OverheadLabel);
         interactionArea = GetNodeOrNull<Area3D>(StaticNodePaths.InteractionArea);
         unitAtributes.OnKilled -= OnKilledHandler;

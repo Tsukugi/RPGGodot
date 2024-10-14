@@ -1,20 +1,44 @@
 [
     {
-        "id": "AddHP",
+        "id": "AddHP%",
         "attributeName": "maxHitPoints",
         "mutationType": "AddPercentage",
         "value": 10
     },
     {
-        "id": "AddDmg",
+        "id": "AddDmg%",
         "attributeName": "baseDamage",
         "mutationType": "AddPercentage",
         "value": 10
     },
     {
-        "id": "AddArmor",
+        "id": "AddArmor%",
         "attributeName": "armor",
         "mutationType": "AddPercentage",
         "value": 20
+    },
+    {
+        "id": "AddHP",
+        "attributeName": "maxHitPoints",
+        "mutationType": "AddFixed",
+        "value": 5
+    },
+    {
+        "id": "AddDmg",
+        "attributeName": "baseDamage",
+        "mutationType": "AddFixed",
+        "value": 2
+    },
+    {
+        "id": "AddArmor",
+        "attributeName": "armor",
+        "mutationType": "AddFixed",
+        "value": 1
+    },
+    {
+        "id": "AddAttackSpeed",
+        "attributeName": "attackSpeed",
+        "mutationType": "AddPercentage",
+        "value": 10
     }
 ]

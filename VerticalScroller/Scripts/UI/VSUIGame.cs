@@ -25,23 +25,23 @@ public partial class VSUIGame : VSUIBase {
 
 
     void RenderAttributes() {
-        AttributesExport attributes = gameManager.PlayerUnit.GetAttributes();
-        AttributesExport mutations = gameManager.PlayerUnit.UnitAttributes.GetMutations();
+        UnitAttributesDTO attributes = gameManager.PlayerUnit.UnitAttributes.GetMutatedAttributes();
+        UnitAttributesDTO mutations = gameManager.PlayerUnit.UnitAttributes.GetMutations();
 
         var mutationIds = gameManager.PlayerUnit.UnitAttributes.Mutations.Select(m => m.id).ToArray();
         var mutatorsText = string.Join(",", mutationIds);
 
         attributesLabel.Text = $"Attributes: \n" +
-            $"Max HP: {attributes.MaxHitPoints} {GetMutationText(mutations.MaxHitPoints)}\n" +
-            $"HP: {attributes.HitPoints} {GetMutationText(mutations.HitPoints)}\n" +
-            $"Armor: {attributes.Armor} {GetMutationText(mutations.Armor)}\n" +
-            $"Base Damage: {attributes.BaseDamage} {GetMutationText(mutations.BaseDamage)}\n" +
-            $"Attack Speed: {attributes.AttackSpeed} {GetMutationText(mutations.AttackSpeed)}\n" +
+            $"Max HP: {attributes.maxHitPoints} {GetMutationText(mutations.maxHitPoints)}\n" +
+            $"HP: {attributes.hitPoints} {GetMutationText(mutations.hitPoints)}\n" +
+            $"Armor: {attributes.armor} {GetMutationText(mutations.armor)}\n" +
+            $"Base Damage: {attributes.baseDamage} {GetMutationText(mutations.baseDamage)}\n" +
+            $"Attack Speed: {attributes.attackSpeed} {GetMutationText(mutations.attackSpeed)}\n" +
             $"Mutators: {mutatorsText}\n";
     }
 
     public static string GetMutationText(double value) {
-        string result = ".";
+        string result = "0";
         string plusSign = value > 0 ? "+" : ""; // We want to give +N if positive
         if (value == 0) return result;
         else result = $"({plusSign}{value})";

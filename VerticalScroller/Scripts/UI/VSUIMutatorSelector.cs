@@ -1,9 +1,10 @@
+using System;
 using Godot;
 
 public partial class VSUIMutatorSelector : Node {
-    UnitAttributeMutationDTO positiveMutation;
-    UnitAttributeMutationDTO negativeMutation;
-    public delegate void OnMutatorSelect(UnitAttributeMutationDTO positive, UnitAttributeMutationDTO negative);
+    MutationDTO positiveMutation;
+    MutationDTO negativeMutation;
+    public delegate void OnMutatorSelect(MutationDTO positive, MutationDTO negative);
     public event OnMutatorSelect OnMutatorSelected;
 
     bool hasData = false;
@@ -24,13 +25,24 @@ public partial class VSUIMutatorSelector : Node {
         label.Text = $"{GetMutationText(positiveMutation)} \n {GetMutationText(negativeMutation, false)}";
     }
 
-    public void UpdateMutations(UnitAttributeMutationDTO positiveMutation, UnitAttributeMutationDTO negativeMutation) {
-        this.positiveMutation = positiveMutation;
-        this.negativeMutation = new UnitAttributeMutationDTO() {
+    static double GetMutatorVariation() {
+        return 0.5f + new Random().NextDouble(); // Should be from 0.5 to 1.5
+    }
+
+    public void UpdateMutations(MutationDTO positiveMutation, MutationDTO negativeMutation) {
+        this.positiveMutation = new MutationDTO() {
+            id = positiveMutation.id,
+            attributeName = positiveMutation.attributeName,
+            mutationType = positiveMutation.mutationType,
+            mutationTarget = positiveMutation.mutationTarget,
+            value = Math.Round(positiveMutation.value * GetMutatorVariation(), 1)
+        }; ;
+        this.negativeMutation = new MutationDTO() {
             id = negativeMutation.id.Replace("Add", "Sub"),
             attributeName = negativeMutation.attributeName,
             mutationType = negativeMutation.mutationType,
-            value = negativeMutation.value * -1 // ! This makes it to be negative
+            mutationTarget = negativeMutation.mutationTarget,
+            value = Math.Round(negativeMutation.value * GetMutatorVariation() * -1, 1) // ! This makes it to be negative
         };
 
         GD.Print($"+{this.positiveMutation.id} -{this.negativeMutation.id}");
@@ -38,7 +50,7 @@ public partial class VSUIMutatorSelector : Node {
     }
 
     // ! TODO Add i18ns
-    static string GetMutationText(UnitAttributeMutationDTO mutation, bool positive = true) {
+    static string GetMutationText(MutationDTO mutation, bool positive = true) {
         string verb = positive ? "Increases" : "Decreases";
         return mutation.mutationType switch {
             MutationTypes.AddFixed => $"{verb} {mutation.value} to your {mutation.attributeName}.",

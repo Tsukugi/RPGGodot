@@ -1,32 +1,33 @@
 using System.Collections.Generic;
 public class UnitMutableAttributes : UnitAttributes {
-    readonly List<UnitAttributeMutationDTO> mutations = new();
-    public List<UnitAttributeMutationDTO> Mutations => mutations;
-
-    Dictionary<string, dynamic> appliedMutations = new();
-
-    public UnitMutableAttributes(Unit unit) : base(unit) { }
-
-    public AttributesExport GetMutations() {
-        foreach (var appliedMutation in appliedMutations) {
-            appliedMutations[appliedMutation.Key] = default;
-            foreach (var mutation in mutations) {
-                appliedMutations[appliedMutation.Key] = appliedMutations[appliedMutation.Key] + ApplyMutation(mutation, appliedMutations[appliedMutation.Key]);
-            }
-        }
-        return new();
+    readonly UnitWSBind unitWSBind;
+    readonly List<MutationDTO> mutations = new();
+    UnitAttributesDTO mutatedAttributes = new();
+    UnitAttributesDTO appliedMutations = new();
+    public List<MutationDTO> Mutations => mutations;
+    public UnitMutableAttributes(Unit unit, UnitWSBind unitWSBind) : base(unit) {
+        this.unitWSBind = unitWSBind;
     }
 
-    static double ApplyMutation(UnitAttributeMutationDTO mutation, double value) {
-        return mutation.mutationType switch {
-            MutationTypes.AddFixed => mutation.value,
-            MutationTypes.AddPercentage => value * (100 / mutation.value),
-            _ => value,
-        };
+    public void ApplyMutations(UnitAttributesDTO appliedMutations) {
+        this.appliedMutations = appliedMutations;
     }
 
-    public void AddMutation(UnitAttributeMutationDTO mutation) {
+    public void ApplyMutatedAttributes(UnitAttributesDTO mutatedAttributes) {
+        this.mutatedAttributes = mutatedAttributes;
+    }
+
+    public UnitAttributesDTO GetMutations() {
+        return appliedMutations;
+    }
+    public UnitAttributesDTO GetMutatedAttributes() {
+        return mutatedAttributes;
+    }
+
+    public void AddMutation(MutationDTO mutation) {
         mutations.Add(mutation);
+        unitWSBind.AddMutation(mutation);
+        unitWSBind.GetMutatedAttributes();
     }
 }
 
@@ -34,4 +35,8 @@ public static class MutationTypes {
     public const string Custom = "Custom"; // This one is really important as it defines that it must be implemented by the mutation id
     public const string AddPercentage = "AddPercentage";
     public const string AddFixed = "AddFixed";
+}
+public static class MutationTargets {
+    public const string Unit = "Unit";
+    public const string Player = "Player";
 }

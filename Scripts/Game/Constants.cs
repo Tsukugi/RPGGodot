@@ -6,6 +6,10 @@ public static class Constants {
 }
 
 public static class StaticNodePaths {
+    //* Global *//
+    public const string Server = "/root/Server";
+    public const string Store = "/root/Store";
+
     /** Unit **/
     public const string NavigationAgent = "Navigation/NavigationAgent";
     public const string NavigationTarget = "Navigation/NavigationTarget";
@@ -78,7 +82,7 @@ public enum CollisionMasks {
     Terrain = 1,
     Actor = 2,
     Wall = 3,
-    Projectile = 4,    
+    Projectile = 4,
     Corpse = 32,
 }
 

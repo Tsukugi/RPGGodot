@@ -39,6 +39,11 @@ grow_vertical = 2
 layout_mode = 2
 texture = ExtResource("1_ay2vq")
 
+[node name="TestWS" parent="GridContainer" instance=ExtResource("2_jr4lg")]
+layout_mode = 2
+text = "TestWS"
+action = 3
+
 [node name="StartGameBtn" parent="GridContainer" instance=ExtResource("2_jr4lg")]
 layout_mode = 2
 

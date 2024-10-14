@@ -53,8 +53,9 @@ public class EffectBaseDTO : DTOBase {
     public float velocity; // The velocity that a effectUnit may use to move
 }
 
-public class UnitAttributeMutationDTO : DTOBase {
+public class MutationDTO : DTOBase {
     public string attributeName;
     public string mutationType; // Typed as MutationTypes
+    public string mutationTarget;  // Typed as MutationTargets
     public double value;
 }

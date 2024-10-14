@@ -16,11 +16,22 @@ public partial class PlayerManager : Node {
         playerRelationship = new(players);
         PlayerBase player = GetNode<PlayerBase>("Player");
         player.CanvasLayer.Visible = true;
+
+        Server server = GetNode<Server>(StaticNodePaths.Server);
+        server.ProvidePlayerManager(this);
+
         //! Debug 
         // Callable.From(DebugStart).CallDeferred();
         // !EndDebug 
     }
 
+    public PlayerBase FindPlayer(string name) {
+        return GetNode<PlayerBase>(name);
+    }
+
+    public Unit FindUnit(string playerName, string name) {
+        return FindPlayer(playerName).GetNode<Unit>(name);
+    }
 
     async void DebugStart() {
         database.LoadData();

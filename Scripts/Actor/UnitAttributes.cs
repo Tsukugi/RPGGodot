@@ -13,6 +13,10 @@ public partial class UnitAttributes {
         this.unit = unit;
     }
 
+    public Dictionary<string, object> GetAttributesAsDictionary() {
+        return attributes.GetObjectFields();
+    }
+
     public AttributesExport GetAttributes() {
         return new(attributes);
     }
@@ -57,26 +61,10 @@ public partial class UnitAttributes {
 
 public class AttributesExport {
     readonly UnitAttributesDTO attributes = new() { attackSpeed = 1f };
-    readonly Dictionary<string, dynamic> attributesDic = new();
-
     public AttributesExport() {
-        attributesDic = attributes.GetObjectFields();
-    }
-    public AttributesExport(Dictionary<string, dynamic> attributesDic) {
-        this.attributesDic = attributesDic;
-        attributes.movementSpeed = attributesDic["movementSpeed"];
-        attributes.maxHitPoints = attributesDic["maxHitPoints"];
-        attributes.attackSpeed = attributesDic["attackSpeed"];
-        attributes.armor = attributesDic["armor"];
-        attributes.baseDamage = attributesDic["baseDamage"];
-        attributes.attackCastDuration = attributesDic["attackCastDuration"];
-        attributes.attackRange = attributesDic["attackRange"];
-        attributes.hitPoints = attributesDic["hitPoints"];
-        attributes.alertRange = attributesDic["alertRange"];
     }
     public AttributesExport(UnitAttributesDTO attributesDTO) {
         attributes = attributesDTO;
-        attributesDic = attributes.GetObjectFields();
     }
 
     public int MaxHitPoints { get => (int)attributes.maxHitPoints; }

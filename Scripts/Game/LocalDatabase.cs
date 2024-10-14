@@ -6,7 +6,7 @@ public class LocalDatabase {
     protected readonly Dictionary<string, UnitDTO> units = new();
     protected readonly Dictionary<string, AbilityDTO> abilites = new();
     protected readonly Dictionary<string, EffectBaseDTO> effects = new();
-    protected readonly Dictionary<string, UnitAttributeMutationDTO> mutators = new();
+    protected readonly Dictionary<string, MutationDTO> unitMutators = new();
 
     protected JSONLoader loader = new();
 
@@ -16,13 +16,13 @@ public class LocalDatabase {
     public Dictionary<string, UnitDTO> Units => units;
     public Dictionary<string, AbilityDTO> Abilites => abilites;
     public Dictionary<string, EffectBaseDTO> Effects => effects;
-    public Dictionary<string, UnitAttributeMutationDTO> Mutators => mutators;
+    public Dictionary<string, MutationDTO> UnitMutators => unitMutators;
 
     public void LoadData() {
         LoadUnits().ForEach(unit => units.Add(unit.name, unit));
         LoadAbilities().ForEach(ability => abilites.Add(ability.name, ability));
         LoadEffects().ForEach(effect => effects.Add(effect.id, effect));
-        LoadMutators().ForEach(mutator => mutators.Add(mutator.id, mutator));
+        LoadMutators().ForEach(mutator => unitMutators.Add(mutator.id, mutator));
     }
 
     public EffectBaseDTO GetEffect(string key) {
@@ -44,8 +44,8 @@ public class LocalDatabase {
     public List<EffectBaseDTO> LoadEffects() {
         return loader.GetListFromJson<EffectBaseDTO>("Effects");
     }
-    public List<UnitAttributeMutationDTO> LoadMutators() {
-        return loader.GetListFromJson<UnitAttributeMutationDTO>("Mutators");
+    public List<MutationDTO> LoadMutators() {
+        return loader.GetListFromJson<MutationDTO>("Mutators");
     }
 }
 
@@ -77,5 +77,9 @@ public class JSONLoader {
     public void UpdateDBPath(string newPath) {
         GD.Print("[UpdateDBPath] New path is " + newPath);
         databasePath = newPath;
+    }
+
+    public static T ForceToType<T>(object obj) {
+        return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(obj));
     }
 }

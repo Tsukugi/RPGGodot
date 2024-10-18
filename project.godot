@@ -10,19 +10,20 @@ config_version=5
 
 [application]
 
-config/name="Test"
-run/main_scene="res://VerticalScroller/Scenes/Main.tscn"
+config/name="AtsuGame"
+run/main_scene="res://TurnBattle/Scenes/Battle.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
-VSStore="*res://VerticalScroller/Scripts/VSStore.cs"
+VSStore="res://VerticalScroller/Scripts/VSStore.cs"
 Server="*res://Scripts/Server/Server.cs"
+BattleMain="*res://TurnBattle/Scripts/BattleMain.cs"
 
 [dotnet]
 
-project/assembly_name="Test"
+project/assembly_name="AtsuGame"
 
 [input]
 

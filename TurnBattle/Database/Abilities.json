@@ -1,0 +1,51 @@
+[
+    {
+        "name": "ThrowMultiRock",
+        "effects": [
+            "ThrowMultiRockProjectile"
+        ],
+        "attributes": {
+            "castType": "position",
+            "castDuration": 0.5,
+            "cooldown": 15,
+            "range": 20
+        }
+    },
+    {
+        "name": "Fireball",
+        "effects": [
+            "FireballProjectile",
+            "FireballAoEDamage"
+        ],
+        "attributes": {
+            "castType": "position",
+            "castDuration": 0.5,
+            "cooldown": 5,
+            "range": 10
+        }
+    },
+    {
+        "name": "Heal",
+        "effects": [
+            "HealTarget"
+        ],
+        "attributes": {
+            "castType": "target",
+            "castDuration": 0.5,
+            "cooldown": 2,
+            "range": 10
+        }
+    },
+    {
+        "name": "HealArea",
+        "effects": [
+            "HealArea"
+        ],
+        "attributes": {
+            "castType": "target",
+            "castDuration": 0.5,
+            "cooldown": 2,
+            "range": 10
+        }
+    }
+]

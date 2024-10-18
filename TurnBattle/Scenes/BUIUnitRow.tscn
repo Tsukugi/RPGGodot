@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cut5gtqps1p6j"]
+
+[ext_resource type="Script" path="res://TurnBattle/Scripts/BUIUnitRow.cs" id="1_1p5ji"]
+
+[node name="BUIUnitRow" type="HBoxContainer"]
+script = ExtResource("1_1p5ji")
+
+[node name="Name" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Name"
+fit_content = true
+
+[node name="AttackTimer" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "AP"
+fit_content = true

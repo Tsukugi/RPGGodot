@@ -136,12 +136,11 @@ script = ExtResource("6_0xbcq")
 [node name="PlayerUnit" parent="PlayerManager/Player" instance=ExtResource("7_6y4ic")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.25, 8.67086)
 
-[node name="Camera3D" type="Camera3D" parent="PlayerManager/Player" node_paths=PackedStringArray("selectedActor")]
+[node name="Camera3D" type="Camera3D" parent="PlayerManager/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
 environment = SubResource("Environment_p84j7")
 script = ExtResource("9_j1sfo")
 findAnyActorOnStartEnabled = true
-selectedActor = NodePath("../PlayerUnit")
 transformX = 0.0
 transformY = 1.0
 transformZ = 1.0
@@ -149,6 +148,8 @@ rotationX = -30.0
 rotationY = 0.0
 rotationZ = 0.0
 projectionType = 0
+selectedActor = Object(CharacterBody3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.25, 8.67086),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"disable_mode":0,"collision_layer":2,"collision_mask":2,"collision_priority":1.0,"input_ray_pickable":true,"input_capture_on_drag":false,"axis_lock_linear_x":false,"axis_lock_linear_y":true,"axis_lock_linear_z":false,"axis_lock_angular_x":true,"axis_lock_angular_y":true,"axis_lock_angular_z":true,"motion_mode":0,"up_direction":Vector3(0, 1, 0),"slide_on_ceiling":true,"velocity":Vector3(0, 0, 0),"max_slides":6,"wall_min_slide_angle":0.261799,"floor_stop_on_slope":true,"floor_constant_speed":false,"floor_block_on_wall":true,"floor_max_angle":0.785398,"floor_snap_length":0.1,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.001,"script":Resource("res://VerticalScroller/Scripts/VSUnits/VSPlayerUnit.cs"))
+
 
 [node name="CanvasLayer" type="CanvasLayer" parent="PlayerManager/Player"]
 

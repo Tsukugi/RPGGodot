@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dlpilxevbkuse"]
+
+[ext_resource type="Texture2D" uid="uid://djebmk3gx5oo" path="res://Art/Basic Asset Pack/Basic Humanoid Animations/lizardfolk gladiator/LizardfolkGladiator.png" id="1_hrlly"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_solxp"]
+atlas = ExtResource("1_hrlly")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfmth"]
+atlas = ExtResource("1_hrlly")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_808sh"]
+atlas = ExtResource("1_hrlly")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7k18o"]
+atlas = ExtResource("1_hrlly")
+region = Rect2(48, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_solxp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfmth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_808sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7k18o")
+}],
+"loop": true,
+"name": &"idleDown",
+"speed": 5.0
+}]

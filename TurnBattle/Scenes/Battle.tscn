@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://i7pc0shl44lw"]
+
+[ext_resource type="Script" path="res://TurnBattle/Scripts/BUIMain.cs" id="1_1bl8p"]
+[ext_resource type="PackedScene" uid="uid://dhu3sf4a3dcs2" path="res://TurnBattle/Scenes/BUIStatus.tscn" id="1_ldt8f"]
+[ext_resource type="Script" path="res://TurnBattle/Scripts/BUIStatus.cs" id="2_rq20v"]
+[ext_resource type="Script" path="res://TurnBattle/Scripts/PlayerManager.cs" id="4_fh2dr"]
+[ext_resource type="Script" path="res://TurnBattle/Scripts/Player.cs" id="4_u1buu"]
+
+[node name="Main" type="Node"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1bl8p")
+metadata/_edit_use_anchors_ = true
+
+[node name="UIPanel" type="Panel" parent="UI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -183.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PlayerStatus" parent="UI/UIPanel" instance=ExtResource("1_ldt8f")]
+layout_mode = 1
+anchor_bottom = 1.078
+offset_left = 19.0
+offset_top = 12.0
+offset_right = -19.0
+offset_bottom = -26.274
+script = ExtResource("2_rq20v")
+
+[node name="EnemyStatus" parent="UI/UIPanel" instance=ExtResource("1_ldt8f")]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 1.0
+offset_left = 14.0
+offset_right = -24.0
+
+[node name="Players" type="Node2D" parent="."]
+script = ExtResource("4_fh2dr")
+
+[node name="Player" type="Node2D" parent="Players"]
+position = Vector2(264, 237)
+script = ExtResource("4_u1buu")
+
+[node name="Hostile" type="Node2D" parent="Players"]
+position = Vector2(831, 235)
+script = ExtResource("4_u1buu")

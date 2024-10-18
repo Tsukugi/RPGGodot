@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://22note8qg8qx"]
+
+[ext_resource type="SpriteFrames" uid="uid://cw7cg2kdnp0be" path="res://TurnBattle/SpriteFrames/Bard.tres" id="1_n8074"]
+[ext_resource type="Script" path="res://TurnBattle/Scripts/Unit.cs" id="2_v4tlf"]
+
+[node name="Unit" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = ExtResource("1_n8074")
+frame_progress = 0.204587
+script = ExtResource("2_v4tlf")

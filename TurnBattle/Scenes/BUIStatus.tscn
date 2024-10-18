@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhu3sf4a3dcs2"]
+
+[ext_resource type="PackedScene" uid="uid://cut5gtqps1p6j" path="res://TurnBattle/Scenes/BUIUnitRow.tscn" id="1_ijfgl"]
+
+[node name="BUIStatus" type="Panel"]
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = 11.0
+offset_right = -26.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Flex" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = -12.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BUIUnitRow" parent="Flex" instance=ExtResource("1_ijfgl")]
+layout_mode = 2
+
+[node name="BUIUnitRow2" parent="Flex" instance=ExtResource("1_ijfgl")]
+layout_mode = 2

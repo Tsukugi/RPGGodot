@@ -1,0 +1,72 @@
+[
+    {
+        "name": "Tsukugi",
+        "sprite": "Lizard",
+        "attributes": {
+            "movementSpeed": 3,
+            "maxHitPoints": 1313,
+            "attackSpeed": 1,
+            "armor": 2,
+            "baseDamage": 3
+        },
+        "abilities": [
+            "Fireball",
+            "ThrowMultiRock"
+        ]
+    },
+    {
+        "name": "Guard",
+        "sprite": "Lizard",
+        "attributes": {
+            "movementSpeed": 2,
+            "maxHitPoints": 1000,
+            "attackSpeed": 1,
+            "armor": 2,
+            "baseDamage": 3
+        },
+        "abilities": []
+    },
+    {
+        "name": "Healer",
+        "sprite": "Lizard",
+        "attributes": {
+            "movementSpeed": 1,
+            "maxHitPoints": 500,
+            "attackSpeed": 0.2,
+            "armor": 1,
+            "baseDamage": 3
+        },
+        "abilities": [
+            "Heal",
+            "HealArea"
+        ]
+    },
+    {
+        "name": "Squire",
+        "sprite": "Lizard",
+        "attributes": {
+            "movementSpeed": 1,
+            "maxHitPoints": 200,
+            "attackSpeed": 1,
+            "armor": 1,
+            "baseDamage": 3
+        },
+        "abilities": [
+            "Heal"
+        ]
+    },
+    {
+        "name": "Bard",
+        "sprite": "Bard",
+        "attributes": {
+            "movementSpeed": 2,
+            "maxHitPoints": 150,
+            "attackSpeed": 1,
+            "armor": 2,
+            "baseDamage": 3
+        },
+        "abilities": [
+            "Heal"
+        ]
+    }
+]

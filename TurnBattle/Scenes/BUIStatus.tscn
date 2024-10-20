@@ -13,7 +13,7 @@ offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Flex" type="VBoxContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,12 +21,15 @@ anchor_bottom = 1.0
 offset_left = 11.0
 offset_top = 11.0
 offset_right = -12.0
-offset_bottom = -5.0
+offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BUIUnitRow" parent="Flex" instance=ExtResource("1_ijfgl")]
+[node name="Flex" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
 
-[node name="BUIUnitRow2" parent="Flex" instance=ExtResource("1_ijfgl")]
+[node name="BUIUnitRow" parent="ScrollContainer/Flex" instance=ExtResource("1_ijfgl")]
+layout_mode = 2
+
+[node name="BUIUnitRow2" parent="ScrollContainer/Flex" instance=ExtResource("1_ijfgl")]
 layout_mode = 2

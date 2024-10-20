@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -22,6 +23,9 @@ namespace TurnBattle {
         }
 
         public void RegisterUnits(List<UnitDTO> unitDefs) {
+            double magnitudeOffset = 150;
+
+            units = new();
             foreach (var unit in GetChildren()) {
                 unit.QueueFree();
             }
@@ -29,7 +33,13 @@ namespace TurnBattle {
                 Unit newUnit = unitTemplate.Instantiate<Unit>();
                 AddChild(newUnit);
                 newUnit.UpdateUnit(unitDef);
-                this.units.Add(newUnit.UnitInfo);
+                newUnit.Position = new Vector2(
+                    (float)((magnitudeOffset * new Random().NextDouble()) - magnitudeOffset / 2),
+                    (float)((magnitudeOffset * new Random().NextDouble()) - magnitudeOffset / 2)
+                );
+
+                GD.Print(newUnit.Position);
+                units.Add(newUnit.UnitInfo);
             }
         }
     }

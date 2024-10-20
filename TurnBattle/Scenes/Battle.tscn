@@ -43,6 +43,7 @@ anchor_left = 0.5
 anchor_right = 1.0
 offset_left = 14.0
 offset_right = -24.0
+script = ExtResource("2_rq20v")
 
 [node name="Players" type="Node2D" parent="."]
 script = ExtResource("4_fh2dr")

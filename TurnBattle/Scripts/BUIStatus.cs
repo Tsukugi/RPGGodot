@@ -5,11 +5,11 @@ namespace TurnBattle {
     public partial class BUIStatus : Node {
 
         readonly PackedScene rowScene = GD.Load<PackedScene>(ScenePaths.BUIUnitRow);
-        const string rowPath = "./Flex";
+        const string rowPath = "./ScrollContainer/Flex";
 
         public void SetUnits(List<UnitDTO> unitDefs) {
             // Clear them
-            foreach (var item in GetNode("Flex").GetChildren()) {
+            foreach (var item in GetNode(rowPath).GetChildren()) {
                 item.QueueFree();
             }
 

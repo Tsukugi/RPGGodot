@@ -15,5 +15,6 @@ public static class NodePaths {
 }
 
 public static class UIPaths {
-    public const string Status = "UIPanel/PlayerStatus";
+    public const string PlayerStatus = "UIPanel/PlayerStatus";
+    public const string EnemyStatus = "UIPanel/EnemyStatus";
 }

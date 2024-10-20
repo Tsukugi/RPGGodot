@@ -37,12 +37,14 @@ namespace TurnBattle {
                 Player player = GetNode<Player>(NodePaths.Player);
                 Player enemyplayer = GetNode<Player>(NodePaths.Hostile);
 
-                List<UnitDTO> units = new() { playerUnit, playerUnit, playerUnit };
-                bUIMain.StartStatusPanel(units);
+                List<UnitDTO> units = new() { playerUnit, playerUnit, playerUnit,
+                playerUnit, playerUnit, playerUnit,
+                playerUnit, playerUnit, playerUnit };
                 player.RegisterUnits(units);
 
 
                 List<UnitDTO> enemyUnits = new() { enemyUnit };
+                bUIMain.StartStatusPanel(units, enemyUnits);
                 enemyplayer.RegisterUnits(enemyUnits);
 
             }).CallDeferred();
